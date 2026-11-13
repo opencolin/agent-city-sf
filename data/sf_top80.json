@@ -1,0 +1,402 @@
+[
+{
+"slug": "codex",
+"name": "Codex",
+"site": "https://openai.com/codex"
+},
+{
+"slug": "claude-code",
+"name": "Claude Code",
+"site": "https://claude.com/product/claude-code"
+},
+{
+"slug": "sierra",
+"name": "Sierra",
+"site": "https://sierra.ai/product"
+},
+{
+"slug": "cursor-cloud-agents",
+"name": "Cursor",
+"site": "https://cursor.com"
+},
+{
+"slug": "decagon",
+"name": "Decagon",
+"site": "https://decagon.ai"
+},
+{
+"slug": "evenup",
+"name": "EvenUp",
+"site": "https://www.evenuplaw.com"
+},
+{
+"slug": "fin-ai-agent",
+"name": "Fin AI Agent",
+"site": "https://fin.ai/learn/what-is-fin-ai-agent"
+},
+{
+"slug": "resolve-ai",
+"name": "ResolveAI",
+"site": "https://resolve.ai/product/overview"
+},
+{
+"slug": "abridge",
+"name": "Abridge",
+"site": "https://www.abridge.com/product"
+},
+{
+"slug": "kosmos",
+"name": "Kosmos",
+"site": "https://edisonscientific.com"
+},
+{
+"slug": "factory-droids",
+"name": "Factory Droids",
+"site": "https://factory.com/product/droids"
+},
+{
+"slug": "ambience",
+"name": "Ambience",
+"site": "https://www.ambiencehealthcare.com/products"
+},
+{
+"slug": "piper",
+"name": "Piper the AI SDR Agent",
+"site": "https://www.qualified.com/ai-sdr"
+},
+{
+"slug": "momentic",
+"name": "Momentic",
+"site": "https://momentic.ai"
+},
+{
+"slug": "harvey",
+"name": "Harvey",
+"site": "https://www.harvey.ai"
+},
+{
+"slug": "tandem-2",
+"name": "Tandem",
+"site": "https://tandemspace.com/"
+},
+{
+"slug": "bolt-new",
+"name": "Bolt",
+"site": "https://bolt.new"
+},
+{
+"slug": "manicule",
+"name": "Manicule",
+"site": "https://manicule.com"
+},
+{
+"slug": "devin",
+"name": "Devin",
+"site": "https://devin.ai"
+},
+{
+"slug": "v0",
+"name": "v0",
+"site": "https://v0.app"
+},
+{
+"slug": "codeant-ai",
+"name": "CodeAnt AI",
+"site": "https://codeant.ai/"
+},
+{
+"slug": "cyble",
+"name": "Cyble",
+"site": "https://cyble.com/"
+},
+{
+"slug": "standout",
+"name": "Standout",
+"site": "https://standout.work"
+},
+{
+"slug": "agentforce-service-agent",
+"name": "Agentforce Service Agent",
+"site": "https://www.salesforce.com/service/ai/customer-service-agents/"
+},
+{
+"slug": "numeral",
+"name": "Numeral",
+"site": "https://www.numeral.com/"
+},
+{
+"slug": "chatgpt-dots",
+"name": "dots",
+"site": "https://chatgpt.com/features/dots/"
+},
+{
+"slug": "julius",
+"name": "Julius",
+"site": "https://julius.ai"
+},
+{
+"slug": "campfire-2",
+"name": "Campfire",
+"site": "https://campfire.ai"
+},
+{
+"slug": "kinter",
+"name": "Kinter",
+"site": "https://kinter.ai"
+},
+{
+"slug": "contrario",
+"name": "Contrario",
+"site": "https://contrario.ai"
+},
+{
+"slug": "ploy",
+"name": "Ploy",
+"site": "https://ploy.ai"
+},
+{
+"slug": "nowadays",
+"name": "Nowadays",
+"site": "http://nowadays.ai/"
+},
+{
+"slug": "tasklet-2",
+"name": "Tasklet",
+"site": "https://tasklet.ai"
+},
+{
+"slug": "bland-ai",
+"name": "Bland AI",
+"site": "https://bland.com"
+},
+{
+"slug": "comet",
+"name": "Comet",
+"site": "https://www.perplexity.ai/comet"
+},
+{
+"slug": "alice",
+"name": "Alice",
+"site": "https://www.11x.ai/worker/alice"
+},
+{
+"slug": "trellistech",
+"name": "Trellis",
+"site": "https://trellistech.com"
+},
+{
+"slug": "kinro",
+"name": "Kinro",
+"site": "https://www.kinro.com/"
+},
+{
+"slug": "onesignal",
+"name": "OneSignal",
+"site": "https://onesignal.com"
+},
+{
+"slug": "furtherai",
+"name": "FurtherAI",
+"site": "https://www.furtherai.com/"
+},
+{
+"slug": "simple-ai",
+"name": "Simple AI",
+"site": "https://www.usesimple.ai"
+},
+{
+"slug": "emergent",
+"name": "Emergent",
+"site": "https://emergent.sh"
+},
+{
+"slug": "github-copilot-cloud-agent",
+"name": "Copilot cloud agent",
+"site": "https://github.com/features/copilot"
+},
+{
+"slug": "hackerrank",
+"name": "HackerRank",
+"site": "http://hackerrank.com"
+},
+{
+"slug": "monumint",
+"name": "Monumint",
+"site": "https://monumint.com"
+},
+{
+"slug": "outset",
+"name": "Outset",
+"site": "https://outset.ai/"
+},
+{
+"slug": "synthio-labs",
+"name": "Synthio Labs",
+"site": "https://synthiolabs.com/"
+},
+{
+"slug": "cartage",
+"name": "Cartage",
+"site": "https://cartage.ai"
+},
+{
+"slug": "sphere",
+"name": "Sphere",
+"site": "https://www.getsphere.com/"
+},
+{
+"slug": "agentcollect",
+"name": "AgentCollect",
+"site": "https://www.agentcollect.com"
+},
+{
+"slug": "powder",
+"name": "Powder",
+"site": "https://www.powderfi.com/"
+},
+{
+"slug": "instaagent",
+"name": "InstaAgent",
+"site": "https://instaagent.com"
+},
+{
+"slug": "runharbor",
+"name": "Harbor",
+"site": "https://runharbor.com/"
+},
+{
+"slug": "hyperbound",
+"name": "Hyperbound",
+"site": "https://hyperbound.ai"
+},
+{
+"slug": "corgea",
+"name": "Corgea",
+"site": "https://www.corgea.com/"
+},
+{
+"slug": "eloquent-ai",
+"name": "Eloquent AI",
+"site": "https://www.eloquentai.co/"
+},
+{
+"slug": "amboras",
+"name": "Amboras",
+"site": "https://amboras.com"
+},
+{
+"slug": "happyrobot",
+"name": "HappyRobot",
+"site": "https://happyrobot.ai"
+},
+{
+"slug": "aiprise",
+"name": "AiPrise",
+"site": "https://aiprise.com/"
+},
+{
+"slug": "giga",
+"name": "Giga",
+"site": "https://giga.ai/"
+},
+{
+"slug": "uplane",
+"name": "Uplane",
+"site": "https://uplane.com"
+},
+{
+"slug": "pelica",
+"name": "Pelica",
+"site": "https://www.pelica.com/"
+},
+{
+"slug": "fondo",
+"name": "Fondo",
+"site": "https://fondo.com"
+},
+{
+"slug": "lindy",
+"name": "Lindy",
+"site": "https://www.lindy.ai"
+},
+{
+"slug": "avoca-systems",
+"name": "Avoca Systems",
+"site": "https://avocasystems.com"
+},
+{
+"slug": "characterquilt",
+"name": "CharacterQuilt",
+"site": "https://characterquilt.com"
+},
+{
+"slug": "lunabill",
+"name": "LunaBill",
+"site": "https://lunabill.com/"
+},
+{
+"slug": "pumpgtm",
+"name": "PumpGTM",
+"site": "https://pumpgtm.com/"
+},
+{
+"slug": "truewind",
+"name": "Truewind",
+"site": "https://www.trytruewind.com"
+},
+{
+"slug": "wordware",
+"name": "Wordware",
+"site": "https://wordware.ai/"
+},
+{
+"slug": "harper",
+"name": "Harper",
+"site": "https://www.harperinsure.com/"
+},
+{
+"slug": "safetykit",
+"name": "SafetyKit",
+"site": "https://www.safetykit.com/"
+},
+{
+"slug": "edviro",
+"name": "Edviro",
+"site": "https://edviroenergy.com"
+},
+{
+"slug": "aisdr",
+"name": "AiSDR",
+"site": "https://aisdr.com/"
+},
+{
+"slug": "fleetworks",
+"name": "FleetWorks",
+"site": "https://fleetworks.ai"
+},
+{
+"slug": "vesence",
+"name": "Vesence",
+"site": "https://vesence.com"
+},
+{
+"slug": "variance",
+"name": "Variance",
+"site": "https://www.variance.com/"
+},
+{
+"slug": "solidroad",
+"name": "Solidroad",
+"site": "https://solidroad.com"
+},
+{
+"slug": "greptile",
+"name": "Greptile",
+"site": "https://www.greptile.com"
+},
+{
+"slug": "skyvern",
+"name": "Skyvern",
+"site": "https://www.skyvern.com/"
+}
+]

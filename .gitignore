@@ -1,0 +1,9 @@
+data/pages/
+data/osm.json
+data/osm_water.json
+data/*.npy
+data/*.npz
+.DS_Store
+__pycache__/
+public/map.png
+public/labels.json

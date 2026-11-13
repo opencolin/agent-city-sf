@@ -1,0 +1,562 @@
+{
+  "codex": {
+    "address": "1455 3rd Street, San Francisco, CA 94158",
+    "lat": 37.770046,
+    "lon": -122.38879,
+    "precision": "address",
+    "source": "https://openai.com/policies/eu-terms-of-use/"
+  },
+  "claude-code": {
+    "address": "500 Howard Street, San Francisco, CA 94105",
+    "lat": 37.788511,
+    "lon": -122.396738,
+    "precision": "address",
+    "source": "https://therealdeal.com/san-francisco/2026/04/02/anthropic-leases-more-office-space-in-san-francisco/"
+  },
+  "sierra": {
+    "address": "235 2nd Street, San Francisco, CA 94105",
+    "lat": 37.786507,
+    "lon": -122.397066,
+    "precision": "address",
+    "source": "https://www.costar.com/article/1065348164/ai-startup-inks-san-francisco-lease-in-latest-recovery-signal-for-hard-hit-office-market"
+  },
+  "cursor-cloud-agents": {
+    "address": "33 New Montgomery Street, San Francisco, CA 94105",
+    "lat": 37.788542,
+    "lon": -122.401467,
+    "precision": "address",
+    "source": "https://en.wikipedia.org/wiki/Cursor_(company)"
+  },
+  "decagon": {
+    "address": "100 1st Street, San Francisco, CA 94105",
+    "lat": 37.789207,
+    "lon": -122.397587,
+    "precision": "address",
+    "source": "https://therealdeal.com/san-francisco/2026/01/29/decagon-the-latest-ai-company-to-expand-in-san-francisco/"
+  },
+  "evenup": {
+    "address": "353 Sacramento Street, San Francisco, CA 94111",
+    "lat": 37.794163,
+    "lon": -122.399263,
+    "precision": "address",
+    "source": "https://finance.yahoo.com/news/ai-unicorn-evenup-opens-san-153000738.html"
+  },
+  "fin-ai-agent": {
+    "address": "55 2nd Street, San Francisco, CA 94105",
+    "lat": 37.788815,
+    "lon": -122.400334,
+    "precision": "address",
+    "source": "https://fin.ai/about"
+  },
+  "resolve-ai": {
+    "address": "350 Rhode Island Street, San Francisco, CA 94103",
+    "lat": 37.765625,
+    "lon": -122.402908,
+    "precision": "address",
+    "source": "https://www.bizjournals.com/sanfrancisco/news/2025/08/13/resolve-ai-350-rhode-island.html"
+  },
+  "abridge": {
+    "address": "208 Utah Street, San Francisco, CA 94103",
+    "lat": 37.766962,
+    "lon": -122.406814,
+    "precision": "address",
+    "source": "https://news.theregistrysf.com/abridge-ai-leases-79000-sqft-at-208-utah-as-healthcare-ai-fuels-san-francisco-expansion/"
+  },
+  "kosmos": {
+    "address": "Dogpatch, San Francisco",
+    "lat": 37.760698,
+    "lon": -122.389202,
+    "precision": "neighborhood",
+    "source": "https://www.futurehouse.org/about"
+  },
+  "factory-droids": {
+    "address": "475 Brannan Street, San Francisco, CA 94107",
+    "lat": 37.778611,
+    "lon": -122.395041,
+    "precision": "address",
+    "source": "https://factory.com/legal/terms-individual"
+  },
+  "ambience": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "piper": {
+    "address": "415 Mission Street, San Francisco, CA 94105",
+    "lat": 37.789774,
+    "lon": -122.396932,
+    "precision": "address",
+    "source": "https://www.qualified.com/about-us"
+  },
+  "momentic": {
+    "address": "177 Townsend Street, San Francisco, CA 94107",
+    "lat": 37.779132,
+    "lon": -122.392248,
+    "precision": "address",
+    "source": "https://momentic.ai/legal/privacy"
+  },
+  "harvey": {
+    "address": "201 3rd Street, San Francisco, CA 94103",
+    "lat": 37.785075,
+    "lon": -122.399873,
+    "precision": "address",
+    "source": "https://www.harvey.ai/legal/privacy-policy"
+  },
+  "tandem-2": {
+    "address": "128 King Street, San Francisco, CA 94107",
+    "lat": 37.77945,
+    "lon": -122.390435,
+    "precision": "address",
+    "source": "https://www.bloomberg.com/profile/company/2550155D:US"
+  },
+  "bolt-new": {
+    "address": "1160 Battery Street, San Francisco, CA 94111",
+    "lat": 37.801935,
+    "lon": -122.401617,
+    "precision": "address",
+    "source": "https://stackblitz.com/terms-of-service"
+  },
+  "manicule": {
+    "address": "2660 3rd Street, San Francisco, CA 94107",
+    "lat": 37.755977,
+    "lon": -122.387893,
+    "precision": "address",
+    "source": "https://www.linkedin.com/company/manicule"
+  },
+  "devin": {
+    "address": "550 3rd Street, San Francisco, CA 94107",
+    "lat": 37.780468,
+    "lon": -122.394919,
+    "precision": "address",
+    "source": "https://www.sfchronicle.com/realestate/article/new-sf-ai-startup-cognition-takes-cruise-s-office-22406725.php"
+  },
+  "v0": {
+    "address": "201 Mission Street, San Francisco, CA 94105",
+    "lat": 37.791164,
+    "lon": -122.395041,
+    "precision": "address",
+    "source": "https://www.costar.com/article/173427171/ai-startups-chip-away-at-san-franciscos-sublet-availability-with-latest-expansion-deal"
+  },
+  "codeant-ai": {
+    "address": "355 Bryant Street, San Francisco, CA 94107",
+    "lat": 37.783401,
+    "lon": -122.393063,
+    "precision": "address",
+    "source": "https://codeant.ai/about"
+  },
+  "cyble": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "standout": {
+    "address": "1885 Mission Street, San Francisco, CA 94103",
+    "lat": 37.766996,
+    "lon": -122.419753,
+    "precision": "address",
+    "source": "https://pitchbook.com/profiles/company/1367905-96"
+  },
+  "agentforce-service-agent": {
+    "address": "415 Mission Street, San Francisco, CA 94105",
+    "lat": 37.789774,
+    "lon": -122.396932,
+    "precision": "address",
+    "source": "https://www.salesforce.com/company/locations/"
+  },
+  "numeral": {
+    "address": "527 Howard Street, San Francisco, CA 94105",
+    "lat": 37.787832,
+    "lon": -122.396539,
+    "precision": "address",
+    "source": "https://pitchbook.com/profiles/company/517870-09"
+  },
+  "chatgpt-dots": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "julius": {
+    "address": "600 California Street, San Francisco, CA 94108",
+    "lat": 37.792983,
+    "lon": -122.404791,
+    "precision": "address",
+    "source": "https://julius.ai/tos"
+  },
+  "campfire-2": {
+    "address": "300 Montgomery Street, San Francisco, CA 94104",
+    "lat": 37.792524,
+    "lon": -122.402471,
+    "precision": "address",
+    "source": "https://www.linkedin.com/company/meetcampfire"
+  },
+  "kinter": {
+    "address": "330 Townsend Street, San Francisco, CA 94107",
+    "lat": 37.776852,
+    "lon": -122.396112,
+    "precision": "address",
+    "source": "https://linkedin.com/company/kinter-ai"
+  },
+  "contrario": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "ploy": {
+    "address": "2 Embarcadero Center, San Francisco, CA 94111",
+    "lat": 37.794792,
+    "lon": -122.398441,
+    "precision": "address",
+    "source": "https://ploy.ai/privacy"
+  },
+  "nowadays": {
+    "address": "Mission Bay, San Francisco",
+    "lat": 37.770774,
+    "lon": -122.391171,
+    "precision": "neighborhood",
+    "source": "https://www.linkedin.com/company/nowadays-ai"
+  },
+  "tasklet-2": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "bland-ai": {
+    "address": "1155 Battery Street (Levi's Plaza), San Francisco, CA 94111",
+    "lat": 37.801869,
+    "lon": -122.401814,
+    "precision": "address",
+    "source": "https://jobs.ashbyhq.com/bland/65bd2e9d-e5c5-4642-b49f-9cb4ab931e31"
+  },
+  "comet": {
+    "address": "181 Fremont Street, San Francisco, CA 94105",
+    "lat": 37.78963,
+    "lon": -122.395546,
+    "precision": "address",
+    "source": "https://www.gsaelibrary.gsa.gov/ElibMain/home.do/contractorInfo.do?contractNumber=47QTCA26D000N&contractorName=PERPLEXITY+AI%2C+INC&executeQuery=YES"
+  },
+  "alice": {
+    "address": "677 Harrison Street, San Francisco, CA 94107",
+    "lat": 37.782832,
+    "lon": -122.396672,
+    "precision": "address",
+    "source": "https://www.11x.ai/about-us"
+  },
+  "trellistech": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "kinro": {
+    "address": "1885 Mission Street, San Francisco, CA 94103",
+    "lat": 37.766996,
+    "lon": -122.419753,
+    "precision": "address",
+    "source": "https://kinro.com/locations"
+  },
+  "onesignal": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "furtherai": {
+    "address": "Financial District, San Francisco",
+    "lat": 37.793647,
+    "lon": -122.398938,
+    "precision": "neighborhood",
+    "source": "https://www.linkedin.com/posts/furtherai_furtherai-moved-into-a-new-office-in-san-activity-7402093883985428482-n4BF"
+  },
+  "simple-ai": {
+    "address": "500 3rd Street, San Francisco, CA 94107",
+    "lat": 37.780827,
+    "lon": -122.395822,
+    "precision": "address",
+    "source": "https://www.linkedin.com/company/simple-ai-lab"
+  },
+  "emergent": {
+    "address": "255 California Street, San Francisco, CA 94111",
+    "lat": 37.792959,
+    "lon": -122.399598,
+    "precision": "address",
+    "source": "https://emergent.sh/info"
+  },
+  "github-copilot-cloud-agent": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "hackerrank": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "monumint": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "outset": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "synthio-labs": {
+    "address": "128 King Street, San Francisco, CA 94107",
+    "lat": 37.77945,
+    "lon": -122.390435,
+    "precision": "address",
+    "source": "https://synthiolabs.com/terms-and-conditions"
+  },
+  "cartage": {
+    "address": "Potrero Hill, San Francisco",
+    "lat": 37.756583,
+    "lon": -122.399137,
+    "precision": "neighborhood",
+    "source": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=4270273"
+  },
+  "sphere": {
+    "address": "703 Market Street, San Francisco, CA 94103",
+    "lat": 37.787448,
+    "lon": -122.40353,
+    "precision": "address",
+    "source": "https://www.getsphere.com/privacy"
+  },
+  "agentcollect": {
+    "address": "490 Post Street, San Francisco, CA 94102",
+    "lat": 37.788219,
+    "lon": -122.409808,
+    "precision": "address",
+    "source": "https://www.agentcollect.com/"
+  },
+  "powder": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "instaagent": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "runharbor": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "hyperbound": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "corgea": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "eloquent-ai": {
+    "address": "456 Montgomery Street, San Francisco, CA 94104",
+    "lat": 37.793602,
+    "lon": -122.402639,
+    "precision": "address",
+    "source": "https://www.linkedin.com/company/eloquentai"
+  },
+  "amboras": {
+    "address": "118 2nd Street, San Francisco, CA 94105",
+    "lat": 37.787681,
+    "lon": -122.399776,
+    "precision": "address",
+    "source": "https://www.bbb.org/us/ca/san-francisco/profile/ecommerce/amboras-inc--1116-984960"
+  },
+  "happyrobot": {
+    "address": "2325 3rd Street, San Francisco, CA 94107",
+    "lat": 37.759825,
+    "lon": -122.388244,
+    "precision": "address",
+    "source": "https://siliconvalleyinvestclub.com/companies/happyrobot/"
+  },
+  "aiprise": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "giga": {
+    "address": "555 19th Street, San Francisco, CA 94107",
+    "lat": 37.761626,
+    "lon": -122.388238,
+    "precision": "address",
+    "source": "https://giga.ai/terms-of-service"
+  },
+  "uplane": {
+    "address": "500 Sansome Street, San Francisco, CA 94111",
+    "lat": 37.795107,
+    "lon": -122.40121,
+    "precision": "address",
+    "source": "https://uplane.com/about-us/"
+  },
+  "pelica": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "fondo": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "lindy": {
+    "address": "South of Market, San Francisco",
+    "lat": 37.780893,
+    "lon": -122.400952,
+    "precision": "neighborhood",
+    "source": "https://www.builtinsf.com/company/lindyai"
+  },
+  "avoca-systems": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "characterquilt": {
+    "address": "Union Square, San Francisco",
+    "lat": 37.787936,
+    "lon": -122.407517,
+    "precision": "neighborhood",
+    "source": "https://ycombinator.com/companies/characterquilt/jobs/NkPK05W-go-to-market-engineer"
+  },
+  "lunabill": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "pumpgtm": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "truewind": {
+    "address": "577 2nd Street, San Francisco, CA 94107",
+    "lat": 37.782274,
+    "lon": -122.392147,
+    "precision": "address",
+    "source": "https://www.truewind.ai/careers/accounting-agents-solutions"
+  },
+  "wordware": {
+    "address": "1185 Old Mason Street, San Francisco, CA 94129",
+    "lat": 37.804596,
+    "lon": -122.466607,
+    "precision": "neighborhood",
+    "source": "https://www.wordware.ai/story"
+  },
+  "harper": {
+    "address": "425 Market Street, San Francisco, CA 94105",
+    "lat": 37.791204,
+    "lon": -122.398153,
+    "precision": "address",
+    "source": "https://www.harperinsure.com/privacypolicy/"
+  },
+  "safetykit": {
+    "address": "400 Alabama Street, San Francisco, CA 94110",
+    "lat": 37.764064,
+    "lon": -122.412385,
+    "precision": "address",
+    "source": "https://pitchbook.com/profiles/company/534387-52"
+  },
+  "edviro": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "aisdr": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "fleetworks": {
+    "address": "260 Townsend Street, San Francisco, CA 94107",
+    "lat": 37.777756,
+    "lon": -122.394284,
+    "precision": "address",
+    "source": "https://www.fleetworks.ai/contact"
+  },
+  "vesence": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  },
+  "variance": {
+    "address": "564 Market Street, San Francisco, CA 94104",
+    "lat": 37.789737,
+    "lon": -122.401136,
+    "precision": "address",
+    "source": "https://www.linkedin.com/company/variancesafety"
+  },
+  "solidroad": {
+    "address": "55 Francisco Street, San Francisco, CA 94133",
+    "lat": 37.805505,
+    "lon": -122.406206,
+    "precision": "address",
+    "source": "https://www.solidroad.com/legal/privacy-policy"
+  },
+  "greptile": {
+    "address": "55 Francisco Street, San Francisco, CA 94133",
+    "lat": 37.805505,
+    "lon": -122.406206,
+    "precision": "address",
+    "source": "https://pitchbook.com/profiles/company/535365-46"
+  },
+  "skyvern": {
+    "address": null,
+    "lat": null,
+    "lon": null,
+    "precision": null,
+    "source": null
+  }
+}
