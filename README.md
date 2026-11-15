@@ -2,7 +2,7 @@
 
 Every hackathon, demo night and free lunch in San Francisco, ranked for you. Live at [buildweek.ai](https://buildweek.ai).
 
-`public/` is the whole site. `index.html` is the newspaper-style front page (events from `events.json`). `map.html` is the hand-painted map: a Bay Area view (`bay-painted.webp`) with events pinned by city, and a San Francisco view (`sf-painted.webp`) with venues and landmarks. Both paintings were generated with GPT Image 2.5. `api/news.js` is a Vercel function serving Hacker News, YC launches and HackerNoon.
+`public/` is the whole site. `index.html` is the newspaper-style front page (events from `events.json`). `map.html` is a real, north-up MapLibre map (OpenFreeMap vector tiles in a warm cartoon palette with 3D buildings) with hand-painted sprites in `sprites/` for landmarks, venues and sponsor blimps, and pins for every event placed at its real coordinates. `sf-painted.webp` on the front page was painted with GPT Image 2.5 over a real map from `scripts/make_reference.py`. `api/news.js` is a Vercel function serving Hacker News, YC launches and HackerNoon.
 
 Refresh events from [eventhunt.ai](https://eventhunt.ai) (public endpoint, rate limited per hour; re-run to fill skipped queries):
 
@@ -23,4 +23,4 @@ The `scripts/` and `data/` folders still hold the pipeline for the original isom
 
 ## Credits
 
-Events: [eventhunt.ai](https://eventhunt.ai), originally listed on Luma. Weather: Open-Meteo and the National Weather Service. News: Hacker News and HackerNoon.
+Map data © OpenStreetMap contributors, tiles by OpenFreeMap. Events: [eventhunt.ai](https://eventhunt.ai), originally listed on Luma. Weather: Open-Meteo and the National Weather Service. News: Hacker News and HackerNoon.

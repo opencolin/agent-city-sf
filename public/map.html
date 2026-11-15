@@ -4,21 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Build Week Map</title>
-<meta name="description" content="A hand-painted map of San Francisco with the venues, hackathons and sponsors of Build Week.">
+<meta name="description" content="A real, north-up map of San Francisco and the Peninsula with the venues, hackathons and sponsors of Build Week.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <style>
-/* One deliberate light, game-like look over the painted city. */
+/* One deliberate light, game-like look: a warm cartoon street map with painted sprites on top. */
 :root {
-  --sea: #3a9be0;
+  --sea: #4aa8e8;
   --paper: #fffdf6;
   --ink: #141414;
   --mute: #5d6170;
   --gold: #ffd23f;
   --blue: #2457ff;
   --red: #e8433a;
-  --green: #2f9e57;
+  --purple: #7b4bd6;
   --px: "Press Start 2P", "Courier New", monospace;
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -30,36 +32,32 @@ button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+#map { position: fixed; inset: 0; }
+.maplibregl-ctrl-attrib { font-size: 10px; }
 
-#stage { position: fixed; inset: 0; overflow: hidden; touch-action: none; cursor: grab; }
-#stage.dragging { cursor: grabbing; }
-#world { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
-#world img { display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
-
-/* Pins live in image coordinates but counter-scale so they stay readable at any zoom. */
-.pin { position: absolute; transform: translate(-50%, -100%) scale(var(--inv, 1)); transform-origin: 50% 100%; display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; border: 0; padding: 0; }
-.pin .flag { background: var(--paper); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 5px 8px; font-weight: 800; font-size: 13px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
-.pin .flag .e { font-size: 16px; line-height: 1; }
+/* Sprites and pins are MapLibre markers; --s is the zoom scale set on the map container. */
+.sprite { pointer-events: auto; cursor: pointer; }
+.sprite img { display: block; width: calc(var(--w) * var(--s, 1)); height: auto; filter: drop-shadow(0 6px 4px #0004); transition: transform .2s; user-select: none; -webkit-user-drag: none; }
+.sprite:hover img { transform: translateY(-4px) scale(1.04); }
+.pin { display: flex; flex-direction: column; align-items: center; background: none; border: 0; padding: 0; }
+.pin .flag { background: var(--paper); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 4px 8px; font-weight: 800; font-size: 13px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
 .pin .flag .n { font-family: var(--px); font-size: 8px; background: var(--red); color: #fff; padding: 3px 4px; }
-.pin .stem { width: 4px; height: 16px; background: var(--ink); }
-.pin .dot { width: 12px; height: 6px; border-radius: 50%; background: #0006; margin-top: -2px; }
+.pin .stem { width: 3px; height: 14px; background: var(--ink); }
 .pin:hover .flag, .pin[aria-expanded="true"] .flag { background: var(--gold); }
-.pin.landmark .flag { background: #ffffffd9; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); font-size: 11px; padding: 3px 6px; font-weight: 700; }
-.pin.landmark .stem { height: 8px; width: 3px; }
-.pin.city .flag { font-size: 15px; padding: 6px 10px; background: var(--gold); }
-.pin.city:hover .flag, .pin.city[aria-expanded="true"] .flag { background: #fff; }
-.pin.sponsor { transform: translate(-50%, -100%) scale(var(--inv, 1)); }
-.pin.sponsor .board { background: var(--blue); color: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 6px 10px; text-align: center; animation: bob 3.6s ease-in-out infinite; }
-.pin.sponsor .board small { display: block; font-family: var(--px); font-size: 7px; letter-spacing: 1px; opacity: .85; margin-bottom: 4px; }
-.pin.sponsor .board b { font-size: 15px; font-weight: 800; white-space: nowrap; }
-.pin.sponsor .rope { width: 2px; height: 30px; background: var(--ink); }
-@keyframes bob { 50% { transform: translateY(-6px); } }
-body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .pin.landmark, body.hide-city .pin.city, body.hide-spot .pin.spot { display: none; }
-.pin.spot .flag { font-size: 12px; padding: 3px 6px; gap: 3px; background: var(--red); color: #fff; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); font-family: var(--px); font-size: 9px; }
-.pin.spot.area .flag { background: #7b4bd6; }
-.pin.spot .flag .e { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 11px; }
-.pin.spot .stem { height: 10px; width: 3px; }
+.pin.city .flag { background: var(--gold); font-size: 15px; }
+.pin.spot .flag { font-family: var(--px); font-size: 9px; padding: 3px 6px; gap: 4px; background: var(--red); color: #fff; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); }
+.pin.spot.area .flag { background: var(--purple); }
+.pin.spot .stem { height: 10px; }
 .pin.spot:hover .flag, .pin.spot[aria-expanded="true"] .flag { background: var(--gold); color: var(--ink); }
+.blimp { position: relative; pointer-events: auto; cursor: pointer; animation: bob 4s ease-in-out infinite; }
+.blimp img { display: block; width: calc(170px * var(--s, 1)); filter: drop-shadow(0 10px 6px #0003); }
+.blimp b { position: absolute; left: 22%; right: 30%; top: 26%; height: 30%; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: calc(13px * var(--s, 1)); line-height: 1.05; color: var(--ink); overflow: hidden; }
+@keyframes bob { 50% { transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .blimp { animation: none; } }
+
+/* Zoom bands and layer toggles */
+body.far .mid-up, body:not(.far) .far-only, body:not(.close) .close-only { display: none !important; }
+body.hide-venue .venue, body.hide-spot .spot, body.hide-landmark .landmark, body.hide-sponsor .sponsor { display: none !important; }
 
 /* Panels */
 .panel { background: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); }
@@ -85,61 +83,49 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
 .ev .tag { display: inline-block; font-family: var(--px); font-size: 6px; padding: 2px 3px; margin-left: 4px; vertical-align: 2px; background: var(--red); color: #fff; }
 .ev .tag.demo { background: var(--blue); }
 .ev .tag.talk { background: var(--mute); }
-#tools { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+#tools { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; max-width: 760px; }
 
-#zoom { position: fixed; z-index: 4; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 8px; }
-#zoom .btn { width: 44px; height: 44px; padding: 0; font-size: 14px; }
-
-#card { position: fixed; z-index: 6; width: 320px; max-width: calc(100vw - 32px); right: 76px; bottom: 16px; }
-#card .body { padding: 12px; }
+#card { position: fixed; z-index: 6; width: 340px; max-width: calc(100vw - 32px); right: 16px; bottom: 40px; max-height: 70vh; display: flex; flex-direction: column; }
+#card .body { padding: 12px; overflow: auto; }
+#card .art { display: block; max-width: 120px; max-height: 120px; margin: 0 auto 8px; }
 #card h2 { margin: 0 0 4px; font-size: 20px; font-weight: 800; }
-#card .where { color: var(--mute); margin: 0 0 8px; font-weight: 600; }
+#card .where { color: var(--mute); margin: 0 0 6px; font-weight: 600; }
 #card p { margin: 0 0 10px; line-height: 1.45; }
 #card .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
 #card .tags span { font-size: 11px; font-weight: 700; border: 2px solid var(--ink); padding: 2px 6px; }
 #card .evs { border-top: 2px solid #eee; padding-top: 6px; }
 
-#hint { position: fixed; z-index: 3; left: 50%; bottom: 18px; transform: translateX(-50%); font-family: var(--px); font-size: 8px; letter-spacing: 1px; color: #fff; text-shadow: 2px 2px 0 #0008; pointer-events: none; transition: opacity 1s; }
-
 @media (max-width: 720px) {
   #hud { flex-direction: column; }
   #title { width: 100%; max-height: 38vh; }
-  #title.collapsed .body { display: none; }
   #tools { margin-left: 0; justify-content: flex-start; }
-  #card { right: 16px; left: 16px; width: auto; bottom: 76px; }
-  #hint { display: none; }
+  #tools .btn { padding: 8px 9px; font-size: 8px; }
+  #card { left: 16px; right: 16px; width: auto; bottom: 30px; }
 }
 </style>
 </head>
-<body>
-<div id="stage" aria-label="Painted map of San Francisco. Drag to pan, scroll or pinch to zoom.">
-  <div id="world"><img id="art" alt=""><div id="pins"></div></div>
-</div>
+<body class="far">
+<div id="map" aria-label="Map of San Francisco and the Peninsula. Drag to pan, scroll or pinch to zoom."></div>
 
 <div id="hud">
   <section id="title" class="panel">
     <div class="bar"><span>BUILD WEEK · SF</span><button id="fold" aria-expanded="true" aria-label="Collapse panel">▾</button></div>
     <div class="body">
       <h1>THIS WEEK IN THE CITY</h1>
-      <p>Venues, sponsors and every hackathon from San Francisco to San Jose. Tap a city or venue to see what's on there.</p>
+      <p>Venues, sponsors and every hackathon from San Francisco to San Jose. Zoom in for landmarks, then closer for venues and events; tap anything to see what's on.</p>
       <div id="week"></div>
     </div>
   </section>
   <div id="tools">
     <a class="btn" href="/">← THE PAPER</a>
-    <button class="btn" data-view="bay" aria-pressed="true">BAY AREA</button>
-    <button class="btn" data-view="sf" aria-pressed="false">SAN FRANCISCO</button>
+    <button class="btn" data-fly="bay">BAY AREA</button>
+    <button class="btn" data-fly="sf">SAN FRANCISCO</button>
+    <button class="btn" id="tilt" aria-pressed="true">3D</button>
     <button class="btn" data-layer="venue" aria-pressed="true">VENUES</button>
-    <button class="btn" data-layer="sponsor" aria-pressed="true">SPONSORS</button>
-    <button class="btn" data-layer="landmark" aria-pressed="true">LANDMARKS</button>
-    <button class="btn" data-layer="city" aria-pressed="true">CITIES</button>
     <button class="btn" data-layer="spot" aria-pressed="true">EVENTS</button>
+    <button class="btn" data-layer="landmark" aria-pressed="true">LANDMARKS</button>
+    <button class="btn" data-layer="sponsor" aria-pressed="true">SPONSORS</button>
   </div>
-</div>
-
-<div id="zoom">
-  <button class="btn" id="zin" aria-label="Zoom in">+</button>
-  <button class="btn" id="zout" aria-label="Zoom out">−</button>
 </div>
 
 <aside id="card" class="panel" hidden aria-live="polite">
@@ -147,232 +133,215 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
   <div class="body" id="cbody"></div>
 </aside>
 
-<div id="hint">DRAG TO EXPLORE · SCROLL TO ZOOM</div>
-
 <script>
-// Positions are fractions of the painted image (x across, y down), set by eye against landmarks in the art.
-const SF_POIS = [
-  // Builder venues
-  { id: "aws", kind: "venue", name: "AWS Builder Loft", e: "🛠️", x: 0.690, y: 0.545, where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi-Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights.", match: /aws builder loft|525 market/i, lat: 37.7904, lng: -122.3993, address: "First Market Tower, 525 Market St" },
-  { id: "frontier", kind: "venue", name: "Frontier Tower", e: "🏢", x: 0.600, y: 0.585, where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware.", match: /frontier tower|995 market/i, lat: 37.7826, lng: -122.4098, address: "995 Market St" },
-  { id: "shack15", kind: "venue", name: "Shack15", e: "⛴️", x: 0.712, y: 0.615, where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes.", match: /shack ?15/i, lat: 37.7962, lng: -122.3941, address: "Ferry Building, Suite 201" },
-  { id: "ef", kind: "venue", name: "Entrepreneurs First", e: "🚀", x: 0.655, y: 0.665, where: "San Francisco", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company.", match: /entrepreneurs first|\bEF\b/ },
-  { id: "esembassy", kind: "venue", name: "European Startup Embassy", e: "🇪🇺", x: 0.570, y: 0.505, where: "South Park", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay.", match: /startup embassy|461 bryant/i, lat: 37.7819, lng: -122.3949, address: "461 Bryant St, South Park" },
-  { id: "founders", kind: "venue", name: "Founders Inc.", e: "⚓", x: 0.480, y: 0.360, where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders,? inc/i, lat: 37.8066, lng: -122.4318, address: "Fort Mason Center" },
-  { id: "hf0", kind: "venue", name: "HF0", e: "🏠", x: 0.540, y: 0.660, where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks.", match: /\bhf0\b/i },
-  { id: "alamo", kind: "venue", name: "Hacker Hotel Alamo Square", e: "🛏️", x: .330, y: .600, where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square house|hacker (hotel|home)/i, lat: 37.7764, lng: -122.4346, address: "Alamo Square" },
-  // Landmarks
-  { id: "ggb", kind: "landmark", name: "Golden Gate Bridge", e: "🌉", x: 0.530, y: 0.200 },
-  { id: "salesforce", kind: "landmark", name: "Salesforce Tower", e: "🏙️", x: 0.661, y: 0.430 },
-  { id: "coit", kind: "landmark", name: "Coit Tower", e: "🗼", x: 0.638, y: 0.325 },
-  { id: "ggpark", kind: "landmark", name: "Golden Gate Park", e: "🌳", x: 0.325, y: 0.480 },
-  { id: "alcatraz", kind: "landmark", name: "Alcatraz", e: "🏝️", x: 0.888, y: 0.320 },
-  { id: "oracle", kind: "landmark", name: "Oracle Park", e: "⚾", x: 0.580, y: 0.740 },
-  { id: "ferry", kind: "landmark", name: "Ferry Building", e: "🕰️", x: .712, y: .585 },
-  { id: "transamerica", kind: "landmark", name: "Transamerica Pyramid", e: "🔺", x: .725, y: .430 },
-  { id: "baybridge", kind: "landmark", name: "Bay Bridge", e: "🌁", x: .830, y: .560 },
-  { id: "palace", kind: "landmark", name: "Palace of Fine Arts", e: "🏛️", x: .392, y: .300 },
-  { id: "sutro", kind: "landmark", name: "Sutro Tower", e: "📡", x: .275, y: .180 },
-  { id: "ladies", kind: "landmark", name: "Painted Ladies", e: "🏘️", x: .310, y: .570 },
-  { id: "chinatown", kind: "landmark", name: "Chinatown", e: "🏮", x: .520, y: .505 },
+// ── Data: everything is placed by real latitude/longitude ──
+const LANDMARKS = [
+  { id: "ggb", name: "Golden Gate Bridge", lat: 37.8199, lng: -122.4783, w: 120 },
+  { id: "alcatraz", name: "Alcatraz", lat: 37.8267, lng: -122.4230, w: 130 },
+  { id: "palace", name: "Palace of Fine Arts", lat: 37.8029, lng: -122.4484, w: 120 },
+  { id: "coit", name: "Coit Tower", lat: 37.8024, lng: -122.4058, w: 80 },
+  { id: "transamerica", name: "Transamerica Pyramid", lat: 37.7952, lng: -122.4028, w: 80 },
+  { id: "salesforce", name: "Salesforce Tower", lat: 37.7897, lng: -122.3972, w: 90 },
+  { id: "ferry", name: "Ferry Building", lat: 37.7955, lng: -122.3937, w: 120 },
+  { id: "cablecar", name: "Cable car", lat: 37.7920, lng: -122.4087, w: 70 },
+  { id: "oracle", name: "Oracle Park", lat: 37.7786, lng: -122.3893, w: 130 },
+  { id: "ladies", name: "Painted Ladies", lat: 37.7762, lng: -122.4328, w: 120 },
+  { id: "conservatory", name: "Conservatory of Flowers", lat: 37.7718, lng: -122.4600, w: 100 },
+  { id: "sutro", name: "Sutro Tower", lat: 37.7552, lng: -122.4528, w: 90 },
+  { id: "campanile", name: "Berkeley Campanile", lat: 37.8721, lng: -122.2578, w: 80 },
+  { id: "hoover", name: "Stanford's Hoover Tower", lat: 37.4275, lng: -122.1697, w: 90 },
+  { id: "hangar", name: "Hangar One, Moffett Field", lat: 37.4155, lng: -122.0496, w: 150 },
+  { id: "ring", name: "Apple Park", lat: 37.3349, lng: -122.0090, w: 150 },
 ];
 
-// Bay Area view: cities carry the events (eventhunt only gives a city), plus regional landmarks.
-const BAY_POIS = [
-  { id: "c-sf", kind: "city", name: "San Francisco", e: "🌁", x: .262, y: .150, loc: /san francisco/i, goto: "sf", note: "Most of the week happens here. Open the detailed city map for venues and landmarks." },
-  { id: "c-oak", kind: "city", name: "Oakland", e: "🌳", x: .690, y: .150, loc: /oakland/i },
-  { id: "c-berk", kind: "city", name: "Berkeley", e: "🐻", x: .885, y: .085, loc: /berkeley/i },
-  { id: "c-rwc", kind: "city", name: "San Mateo & Redwood City", e: "🌲", x: .375, y: .390, loc: /redwood city|san mateo|burlingame|san carlos|foster city/i },
-  { id: "c-mp", kind: "city", name: "Menlo Park", e: "🏡", x: .490, y: .460, loc: /menlo park/i },
-  { id: "c-pa", kind: "city", name: "Palo Alto", e: "🌲", x: .600, y: .500, loc: /palo alto|stanford/i },
-  { id: "c-mv", kind: "city", name: "Mountain View", e: "🎈", x: .690, y: .615, loc: /mountain view/i },
-  { id: "c-sv", kind: "city", name: "Sunnyvale & Cupertino", e: "☀️", x: .750, y: .690, loc: /sunnyvale|cupertino|santa clara/i },
-  { id: "c-sj", kind: "city", name: "San Jose", e: "🌴", x: .925, y: .825, loc: /san jose/i },
-  { id: "b-ggb", kind: "landmark", name: "Golden Gate Bridge", e: "🌉", x: .125, y: .060 },
-  { id: "b-alcatraz", kind: "landmark", name: "Alcatraz", e: "🏝️", x: .363, y: .055 },
-  { id: "b-baybridge", kind: "landmark", name: "Bay Bridge", e: "🌁", x: .450, y: .145 },
-  { id: "b-merritt", kind: "landmark", name: "Lake Merritt", e: "💧", x: .846, y: .215 },
-  { id: "b-port", kind: "landmark", name: "Port of Oakland", e: "🏗️", x: .770, y: .285 },
-  { id: "b-sfo", kind: "landmark", name: "SFO", e: "✈️", x: .425, y: .300 },
-  { id: "b-smbridge", kind: "landmark", name: "San Mateo Bridge", e: "🌉", x: .690, y: .380 },
-  { id: "b-dumbarton", kind: "landmark", name: "Dumbarton Bridge", e: "🌉", x: .820, y: .450 },
-  { id: "b-crystal", kind: "landmark", name: "Crystal Springs", e: "🏞️", x: .390, y: .560 },
-  { id: "b-stanford", kind: "landmark", name: "Stanford", e: "🎓", x: .572, y: .545 },
-  { id: "b-moffett", kind: "landmark", name: "Hangar One", e: "🛩️", x: .778, y: .585 },
-  { id: "b-ring", kind: "landmark", name: "Apple Park", e: "⭕", x: .640, y: .745 },
-  { id: "b-hmb", kind: "landmark", name: "Half Moon Bay", e: "🌊", x: .190, y: .665 },
-  { id: "b-light", kind: "landmark", name: "Point Montara Light", e: "🗼", x: .075, y: .520 },
+const VENUES = [
+  { id: "aws", sprite: "v_aws", name: "AWS Builder Loft", lat: 37.7904, lng: -122.3993, address: "First Market Tower, 525 Market St", where: "Financial District", tags: ["Co-working", "Workshops", "Fast Wi-Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights.", match: /aws builder loft|525 market/i },
+  { id: "frontier", sprite: "v_frontier", name: "Frontier Tower", lat: 37.7826, lng: -122.4098, address: "995 Market St", where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware.", match: /frontier tower|995 market/i },
+  { id: "shack15", name: "Shack15", lat: 37.7962, lng: -122.3941, address: "Ferry Building, Suite 201", where: "Embarcadero", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes.", match: /shack ?15/i },
+  { id: "ef", sprite: "v_ef", name: "Entrepreneurs First", lat: 37.7870, lng: -122.3945, address: "501 Folsom St, floors 1 & 2", where: "SoMa", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company.", match: /entrepreneurs first|501 folsom/i },
+  { id: "esembassy", sprite: "v_esembassy", name: "European Startup Embassy", lat: 37.7819, lng: -122.3949, address: "461 Bryant St", where: "South Park", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay.", match: /startup embassy|461 bryant/i },
+  { id: "founders", sprite: "v_founders", name: "Founders Inc.", lat: 37.8066, lng: -122.4318, address: "Fort Mason Center", where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders,? inc/i },
+  { id: "hf0", sprite: "v_hf0", name: "HF0", lat: 37.7769, lng: -122.4318, address: "1000 Fulton St (the Archbishop's Mansion)", where: "Alamo Square", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks, in a historic mansion across from Alamo Square Park.", match: /\bhf0\b|1000 fulton/i },
+  { id: "alamo", sprite: "v_alamo", name: "Hacker Hotel Alamo Square", lat: 37.7764, lng: -122.4352, address: "Alamo Square", where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square house|hacker (hotel|home)/i },
 ];
 
-const GEO = {
-  sf: [
-    [37.8199, -122.4783, .530, .200], [37.8029, -122.4484, .392, .300], [37.8024, -122.4058, .638, .325],
-    [37.7897, -122.3972, .661, .430], [37.7955, -122.3937, .712, .585], [37.7786, -122.3893, .580, .740],
-    [37.7762, -122.4328, .310, .570], [37.7694, -122.4862, .325, .480], [37.7941, -122.4078, .520, .505],
-    [37.8066, -122.4318, .480, .360],
-  ],
-  bay: [
-    [37.7900, -122.4000, .262, .130], [37.8199, -122.4783, .125, .060], [37.8044, -122.2712, .690, .150],
-    [37.8721, -122.2578, .890, .070], [37.6213, -122.3790, .425, .300], [37.4275, -122.1697, .572, .540],
-    [37.4155, -122.0496, .778, .585], [37.3349, -122.0090, .640, .745], [37.3337, -121.8907, .925, .830],
-    [37.4636, -122.4286, .190, .665], [37.5300, -122.3600, .390, .560], [37.5850, -122.2000, .690, .380],
-  ],
-};
-// Affine fit from lat/lng to image fractions, plus inverse-distance-weighted residuals so landmarks land exactly.
-function projector(cps) {
-  const solve = (A, b) => { const n = 3, M = A.map((r, i) => [...r, b[i]]);
-    for (let c = 0; c < n; c++) { let piv = c; for (let r = c + 1; r < n; r++) if (Math.abs(M[r][c]) > Math.abs(M[piv][c])) piv = r;
-      [M[c], M[piv]] = [M[piv], M[c]]; for (let r = 0; r < n; r++) if (r !== c) { const f = M[r][c] / M[c][c]; for (let k = c; k <= n; k++) M[r][k] -= f * M[c][k]; } }
-    return M.map((r, i) => r[n] / r[i]); };
-  const rows = cps.map(([la, ln]) => [ln, la, 1]);
-  const ata = [0, 1, 2].map(i => [0, 1, 2].map(j => rows.reduce((t, r) => t + r[i] * r[j], 0)));
-  const fit = k => solve(ata, [0, 1, 2].map(i => rows.reduce((t, r, n) => t + r[i] * cps[n][k], 0)));
-  const ax = fit(2), ay = fit(3);
-  const base = (la, ln) => [ax[0] * ln + ax[1] * la + ax[2], ay[0] * ln + ay[1] * la + ay[2]];
-  const res = cps.map(([la, ln, x, y]) => { const [bx, by] = base(la, ln); return [la, ln, x - bx, y - by]; });
-  return (la, ln) => {
-    const [bx, by] = base(la, ln); let wx = 0, wy = 0, w = 0;
-    for (const [rl, rn, dx, dy] of res) { const d2 = (la - rl) ** 2 + ((ln - rn) * .79) ** 2, k = 1 / (d2 + 1e-6); wx += k * dx; wy += k * dy; w += k; }
-    return [bx + wx / w, by + wy / w];
-  };
-}
-const PROJ = { sf: projector(GEO.sf), bay: projector(GEO.bay) };
-const IN_SF = e => e.lat > 37.70 && e.lat < 37.835 && e.lng > -122.52 && e.lng < -122.35;
+const CITIES = [
+  { id: "c-sf", name: "San Francisco", lat: 37.7749, lng: -122.4194, loc: /san francisco/i, fly: "sf" },
+  { id: "c-oak", name: "Oakland", lat: 37.8044, lng: -122.2712, loc: /oakland/i },
+  { id: "c-berk", name: "Berkeley", lat: 37.8716, lng: -122.2727, loc: /berkeley/i },
+  { id: "c-sm", name: "San Mateo & Redwood City", lat: 37.5300, lng: -122.2700, loc: /redwood city|san mateo|burlingame|san carlos|foster city/i },
+  { id: "c-mp", name: "Menlo Park", lat: 37.4530, lng: -122.1817, loc: /menlo park/i },
+  { id: "c-pa", name: "Palo Alto", lat: 37.4419, lng: -122.1430, loc: /palo alto|stanford/i },
+  { id: "c-mv", name: "Mountain View", lat: 37.3861, lng: -122.0839, loc: /mountain view/i },
+  { id: "c-sv", name: "Sunnyvale & Cupertino", lat: 37.3688, lng: -122.0363, loc: /sunnyvale|cupertino|santa clara/i },
+  { id: "c-sj", name: "San Jose", lat: 37.3382, lng: -121.8863, loc: /san jose/i },
+];
 
-const VIEWS = {
-  bay: { img: "bay-painted.webp", label: "Hand-painted map of the San Francisco Peninsula and Bay Area", pois: BAY_POIS, focus: [.50, .42],
-         spots: [[.520, .060], [.560, .260], [.935, .530], [.090, .790], [.280, .950]] },
-  sf:  { img: "sf-painted.webp", label: "Hand-painted isometric map of San Francisco", pois: SF_POIS, focus: [.55, .42],
-         spots: [[.800, .170], [.905, .760], [.200, .870], [.775, .905], [.080, .140]] },
-};
-let VIEW = "bay";
+// Blimps float over open water; the most active hosts on the calendar ride on them.
+const BLIMP_SPOTS = [[37.815, -122.37], [37.77, -122.52], [37.70, -122.30], [37.60, -122.21], [37.86, -122.43]];
+const VIEWS = { bay: [[-122.62, 37.30], [-121.80, 37.92]], sf: [[-122.52, 37.705], [-122.355, 37.835]] };
+// The painted overview (bay-painted.webp) lives on the front page; the map itself stays true to the street data.
+const PAINTINGS = [];
 
+// ── Helpers ──
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pad = n => String(n).padStart(2, "0");
 const isoLocal = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 const parseDay = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
 const kindOf = e => /hack|build (night|day)|buildathon|jam\b|map-a-thon/i.test(e.name) ? "hack" : /demo|pitch|shark|\bvc|fund|founder|investor/i.test(e.name) ? "demo" : e.kind === "hackathon" ? "hack" : e.kind === "demo" ? "demo" : "talk";
 const KTAG = { hack: "HACK", demo: "DEMO", talk: "TALK" };
+const evHtml = (e, withDate) => `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${withDate ? esc(parseDay(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })) + "<br>" : ""}${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`;
+const venueText = e => [e.venue, e.address, e.name].join(" ");
+let EVENTS = [];
 
-// ── Pan & zoom ──
-const stage = $("#stage"), world = $("#world"), art = $("#art"), pins = $("#pins");
-let W = 0, H = 0, s = 1, tx = 0, ty = 0, minS = .2, maxS = 3;
-function apply() {
-  world.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
-  world.style.setProperty("--inv", Math.min(1.6, 1 / s));
-}
-function clamp() {
-  const vw = innerWidth, vh = innerHeight, w = W * s, h = H * s;
-  tx = w <= vw ? (vw - w) / 2 : Math.min(0, Math.max(vw - w, tx));
-  ty = h <= vh ? (vh - h) / 2 : Math.min(0, Math.max(vh - h, ty));
-}
-function zoomAt(f, cx, cy) {
-  const ns = Math.min(maxS, Math.max(minS, s * f));
-  tx = cx - (cx - tx) * (ns / s); ty = cy - (cy - ty) * (ns / s); s = ns; clamp(); apply();
-}
-function fit() {
-  minS = Math.max(innerWidth / W, innerHeight / H);   // cover the screen, no sea gaps
-  maxS = Math.max(minS * 4, 1.5);
-  s = Math.max(minS, Math.min(1, minS * 1.6));
-  const [fx, fy] = VIEWS[VIEW].focus;
-  tx = innerWidth / 2 - W * fx * s; ty = innerHeight / 2 - H * fy * s; clamp(); apply();
-}
-const pts = new Map(); let last = null, moved = 0;
-stage.addEventListener("pointerdown", e => { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, e); moved = 0; stage.classList.add("dragging"); });
-stage.addEventListener("pointermove", e => {
-  if (!pts.has(e.pointerId)) return;
-  const prev = pts.get(e.pointerId); pts.set(e.pointerId, e);
-  if (pts.size === 1) { tx += e.clientX - prev.clientX; ty += e.clientY - prev.clientY; moved += Math.abs(e.clientX - prev.clientX) + Math.abs(e.clientY - prev.clientY); clamp(); apply(); }
-  else if (pts.size === 2) {
-    const [a, b] = [...pts.values()], d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-    if (last) zoomAt(d / last, (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2);
-    last = d; moved = 99;
+// ── Map ──
+const map = new maplibregl.Map({
+  container: "map",
+  style: "https://tiles.openfreemap.org/styles/liberty",
+  bounds: VIEWS.bay, fitBoundsOptions: { padding: 30 },
+  pitch: 45, bearing: 0, maxPitch: 65, minZoom: 8, maxZoom: 18.5,
+  attributionControl: { compact: true },
+});
+map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-left");
+
+// Warm cartoon palette over the Liberty style.
+const PAINT = {
+  background: { "background-color": "#f4ead2" },
+  water: { "fill-color": "#4aa8e8" },
+  park: { "fill-color": "#9ed67c", "fill-opacity": 0.9 },
+  landcover_wood: { "fill-color": "#6dbb5a", "fill-opacity": 0.7 },
+  landcover_grass: { "fill-color": "#b7e08f", "fill-opacity": 0.7 },
+  landcover_sand: { "fill-color": "#f6dc9a" },
+  landuse_residential: { "fill-color": "#f2e2c4", "fill-opacity": 0.7 },
+  road_minor: { "line-color": "#ffffff" },
+  road_secondary_tertiary: { "line-color": "#fff3c4" },
+  road_trunk_primary: { "line-color": "#ffd77a" },
+  road_motorway: { "line-color": "#ff9d5c" },
+  "building-3d": {
+    "fill-extrusion-color": ["interpolate", ["linear"], ["get", "render_height"], 0, "#f8c9a6", 12, "#f4a7a0", 30, "#d6b3ef", 80, "#9ccaf3", 200, "#7fb2ee"],
+    "fill-extrusion-opacity": 0.95,
+  },
+  building: { "fill-color": "#f3c9a8" },
+};
+const HIDE = /^(poi_|road_one_way|highway-shield|road_shield|natural_earth)/;
+
+map.on("style.load", () => {
+  for (const l of map.getStyle().layers) {
+    if (HIDE.test(l.id)) map.setLayoutProperty(l.id, "visibility", "none");
+    for (const [k, v] of Object.entries(PAINT[l.id] || {})) { try { map.setPaintProperty(l.id, k, v); } catch (e) { /* layer lacks this property */ } }
+  }
+  // Painted overview on top of the street map, fading out as you zoom in.
+  for (const p of PAINTINGS) {
+    const [w, n, e, s] = p.bounds;
+    map.addSource("paint-" + p.id, { type: "image", url: p.url, coordinates: [[w, n], [e, n], [e, s], [w, s]] });
+    map.addLayer({ id: "paint-" + p.id, type: "raster", source: "paint-" + p.id,
+      paint: { "raster-opacity": ["interpolate", ["linear"], ["zoom"], p.fade[0], 1, p.fade[1], 0], "raster-fade-duration": 0 } }, "label_other");
   }
 });
-const up = e => { pts.delete(e.pointerId); if (pts.size < 2) last = null; if (!pts.size) stage.classList.remove("dragging"); };
-stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
-stage.addEventListener("wheel", e => { e.preventDefault(); zoomAt(Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0015)), e.clientX, e.clientY); hideHint(); }, { passive: false });
-$("#zin").onclick = () => zoomAt(1.4, innerWidth / 2, innerHeight / 2);
-$("#zout").onclick = () => zoomAt(1 / 1.4, innerWidth / 2, innerHeight / 2);
-addEventListener("resize", () => { if (W) { minS = Math.max(innerWidth / W, innerHeight / H); s = Math.max(s, minS); clamp(); apply(); } });
-let hinted = false; const hideHint = () => { if (!hinted) { hinted = true; $("#hint").style.opacity = 0; } };
-stage.addEventListener("pointerdown", hideHint);
 
-// ── Pins & cards ──
-let EVENTS = [];
-function eventsAt(p) { if (p.events) return p.events; if (p.loc) return EVENTS.filter(e => p.loc.test(e.location || "")); return p.match ? EVENTS.filter(e => p.match.test(e.name + " " + (e.hosts || []).join(" ") + " " + e.source)) : []; }
-function evHtml(e, withDate) { return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${withDate ? esc(parseDay(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })) + "<br>" : ""}${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`; }
-// Group events by venue (public address) or by neighborhood when the address is for guests only.
-function eventSpots() {
-  if (VIEW !== "sf") return [];
-  const venues = VIEWS.sf.pois.filter(p => p.kind === "venue");
+// Zoom scale for sprites (shrink gently when zoomed out) and near/far bands.
+function onZoom() {
+  const z = map.getZoom();
+  map.getContainer().style.setProperty("--s", Math.max(0.35, Math.min(1.7, 2 ** ((z - 14.5) * 0.55))).toFixed(3));
+  // far: cities only · mid: sprites · close (zoom 13+): venue names and event pins too
+  document.body.classList.toggle("far", z < 11.2);
+  document.body.classList.toggle("close", z >= 13);
+}
+map.on("zoom", onZoom);
+
+// ── Markers ──
+function marker(el, lat, lng, anchor = "bottom") {
+  return new maplibregl.Marker({ element: el, anchor, pitchAlignment: "viewport", rotationAlignment: "viewport" }).setLngLat([lng, lat]).addTo(map);
+}
+function spriteEl(src, w, cls, label) {
+  const el = document.createElement("div");
+  el.className = "sprite " + cls; el.style.setProperty("--w", w + "px"); el.title = label;
+  el.innerHTML = `<img src="${src}" alt="${esc(label)}" loading="lazy">`;
+  return el;
+}
+function pinEl(cls, html, label) {
+  const el = document.createElement("button");
+  el.className = "pin " + cls; el.setAttribute("aria-label", label); el.setAttribute("aria-expanded", "false");
+  el.innerHTML = `<span class="flag">${html}</span><span class="stem"></span>`;
+  return el;
+}
+function bindCard(el, data) { el.addEventListener("click", ev => { ev.stopPropagation(); openCard(data, el); }); }
+
+function placeAll() {
+  for (const l of LANDMARKS) bindCard(marker(spriteEl(`sprites/${l.id}.webp`, l.w, "landmark" + (l.lat > 37.70 && l.lng < -122.35 ? " mid-up" : ""), l.name), l.lat, l.lng).getElement(), { kind: "landmark", ...l });
+
+  for (const v of VENUES) {
+    const evs = EVENTS.filter(e => v.match.test(venueText(e)));
+    const data = { kind: "venue", ...v, events: evs, art: v.sprite ? `sprites/${v.sprite}.webp` : null };
+    if (v.sprite) bindCard(marker(spriteEl(`sprites/${v.sprite}.webp`, 90, "venue mid-up", v.name), v.lat, v.lng).getElement(), data);
+    const pin = pinEl("venue close-only", `${esc(v.name)}${evs.length ? `<span class="n">${evs.length}</span>` : ""}`, v.name);
+    if (v.sprite) pin.style.marginBottom = "calc(80px * var(--s, 1))";
+    bindCard(marker(pin, v.lat, v.lng).getElement(), data);
+  }
+
+  // Events not at a curated venue: group by public venue, or by neighborhood when the address is for guests only.
   const groups = {};
   for (const e of EVENTS) {
-    if (!e.lat || !IN_SF(e)) continue;
-    const text = [e.venue, e.address, e.name].join(" ");
-    if (venues.some(v => v.match && v.match.test(text))) continue;   // shown on the curated venue pin
+    if (!e.lat || VENUES.some(v => v.match.test(venueText(e)))) continue;
     const pub = e.venue_visibility === "public" && e.venue;
-    const key = pub ? "v:" + (e.place_id || e.venue) : "n:" + (e.neighborhood || "San Francisco");
-    (groups[key] ||= { pub, name: pub ? e.venue : (e.neighborhood || "San Francisco"), address: pub ? e.address : "", events: [] }).events.push(e);
+    const key = pub ? "v:" + (e.place_id || e.venue) : "n:" + (e.neighborhood || e.city || e.location);
+    (groups[key] ||= { pub, name: pub ? e.venue : (e.neighborhood || e.city || "Bay Area"), address: pub ? e.address : "", events: [] }).events.push(e);
   }
-  return Object.entries(groups).map(([key, g], i) => {
-    const la = g.events.reduce((t, e) => t + e.lat, 0) / g.events.length, ln = g.events.reduce((t, e) => t + e.lng, 0) / g.events.length;
-    const [x, y] = PROJ.sf(la, ln);
-    return { id: "spot" + i, kind: "spot", pub: g.pub, name: g.name, address: g.address, events: g.events, x, y,
-      where: g.pub ? (g.events[0].neighborhood || "") : "Exact address shared after you RSVP" };
+  for (const g of Object.values(groups)) {
+    const lat = g.events.reduce((t, e) => t + e.lat, 0) / g.events.length, lng = g.events.reduce((t, e) => t + e.lng, 0) / g.events.length;
+    const n = g.events.length;
+    const pin = pinEl(`spot close-only${g.pub ? "" : " area"}`, `${g.pub ? "●" : "◆"} ${n}`, `${g.name}, ${n} event${n > 1 ? "s" : ""}`);
+    pin.title = g.name;
+    bindCard(marker(pin, lat, lng).getElement(), { kind: "spot", ...g, where: g.pub ? (g.events[0].neighborhood || "") : "Exact address shared after you RSVP" });
+  }
+
+  for (const c of CITIES) {
+    const evs = EVENTS.filter(e => c.loc.test(e.location || ""));
+    const pin = pinEl("city far-only", `${esc(c.name)}${evs.length ? `<span class="n">${evs.length}</span>` : ""}`, c.name);
+    bindCard(marker(pin, c.lat, c.lng).getElement(), { kind: "city", ...c, events: evs });
+  }
+
+  sponsorsFrom(EVENTS).forEach((sp, i) => {
+    const el = document.createElement("div");
+    el.className = "blimp sponsor"; el.style.animationDelay = (i * 0.7) + "s";
+    el.innerHTML = `<img src="sprites/blimp.webp" alt=""><b>${esc(sp.name)}</b>`;
+    el.title = `Sponsor: ${sp.name}`;
+    bindCard(marker(el, BLIMP_SPOTS[i][0], BLIMP_SPOTS[i][1], "center").getElement(), { kind: "sponsor", ...sp });
   });
 }
-function renderPins() {
-  const pois = VIEWS[VIEW].pois.map(p => {
-    if (p.lat == null) return p;
-    const [x, y] = PROJ[VIEW](p.lat, p.lng);
-    const evs = EVENTS.filter(e => p.match.test([e.venue, e.address, e.name].join(" ")));
-    return { ...p, x, y, events: evs };
-  });
-  const all = [...pois, ...eventSpots(), ...sponsorsFrom(EVENTS, VIEWS[VIEW].spots)];
-  pins.innerHTML = all.map(p => {
-    const left = (p.x * 100).toFixed(2) + "%", top = (p.y * 100).toFixed(2) + "%";
-    if (p.kind === "sponsor") return `<button class="pin sponsor" data-id="${p.id}" style="left:${left};top:${top}" aria-label="Sponsor ${esc(p.name)}"><div class="board"><small>SPONSOR</small><b>${esc(p.name)}</b></div><div class="rope"></div></button>`;
-    const n = eventsAt(p).length;
-    if (p.kind === "spot") return `<button class="pin spot${p.pub ? "" : " area"}" data-id="${p.id}" style="left:${left};top:${top}" title="${esc(p.name)}" aria-label="${esc(p.name)}, ${n} event${n > 1 ? "s" : ""}" aria-expanded="false"><span class="flag"><span class="e">${p.pub ? "●" : "◆"}</span>${n}</span><span class="stem"></span></button>`;
-    return `<button class="pin ${p.kind}" data-id="${p.id}" style="left:${left};top:${top}" aria-expanded="false"><span class="flag"><span class="e">${p.e}</span>${esc(p.name)}${n ? `<span class="n">${n}</span>` : ""}</span><span class="stem"></span><span class="dot"></span></button>`;
-  }).join("");
-  pins.style.cssText = `position:absolute;inset:0;width:${W}px;height:${H}px`;
-  pins.querySelectorAll(".pin").forEach(b => {
-    b.addEventListener("pointerdown", e => e.stopPropagation());
-    b.addEventListener("click", () => openCard(all.find(p => p.id === b.dataset.id), b));
-  });
+
+function sponsorsFrom(events) {
+  const skip = /^(personal|bond ai.*|hacklist.*|.*community|.*events? calendar|.*events)$/i;
+  const c = {};
+  events.forEach(e => new Set([...(e.hosts || []), e.source]).forEach(h => { if (h && !skip.test(h.trim())) (c[h] ||= []).push(e); }));
+  return Object.entries(c).filter(([, es]) => es.length > 1).sort((a, b) => b[1].length - a[1].length).slice(0, BLIMP_SPOTS.length).map(([name, events]) => ({ name, events }));
 }
-function openCard(p, btn) {
-  pins.querySelectorAll('.pin[aria-expanded="true"]').forEach(x => x.setAttribute("aria-expanded", "false"));
-  btn?.setAttribute("aria-expanded", "true");
-  $("#ckind").textContent = p.kind === "spot" ? (p.pub ? "EVENT VENUE" : "NEIGHBORHOOD") : p.kind.toUpperCase();
-  const evs = p.kind === "sponsor" ? p.events : eventsAt(p);
-  $("#cbody").innerHTML = `<h2>${p.e ? p.e + " " : ""}${esc(p.name)}</h2>
+
+// ── Card ──
+function openCard(p, el) {
+  document.querySelectorAll('.pin[aria-expanded="true"]').forEach(x => x.setAttribute("aria-expanded", "false"));
+  if (el.classList.contains("pin")) el.setAttribute("aria-expanded", "true");
+  const kinds = { venue: "VENUE", landmark: "LANDMARK", city: "CITY", sponsor: "SPONSOR", spot: p.pub ? "EVENT VENUE" : "NEIGHBORHOOD" };
+  $("#ckind").textContent = kinds[p.kind];
+  const evs = p.events || [];
+  const art = p.art || (p.kind === "landmark" ? `sprites/${p.id}.webp` : null);
+  $("#cbody").innerHTML = `${art ? `<img class="art" src="${art}" alt="">` : ""}<h2>${esc(p.name)}</h2>
     ${p.address ? `<p class="where">${esc(p.address)}</p>` : ""}
     ${p.where ? `<p class="where">${esc(p.where)}</p>` : ""}
     ${p.note ? `<p>${esc(p.note)}</p>` : ""}
     ${p.tags ? `<div class="tags">${p.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
     ${p.url ? `<p><a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">VISIT ${esc(new URL(p.url).hostname.toUpperCase())} →</a></p>` : ""}
-    ${p.goto ? `<p><button class="btn blue" data-goto="${p.goto}">EXPLORE THE CITY MAP →</button></p>` : ""}
-    ${p.kind === "sponsor" ? `<p>Hosting or sponsoring ${evs.length} event${evs.length > 1 ? "s" : ""} on the calendar.</p>` : ""}
-    ${evs?.length ? `<div class="evs">${evs.slice(0, 12).map(e => evHtml(e, true)).join("")}</div>` : p.kind === "venue" ? `<p style="color:var(--mute)">Nothing on the calendar here yet.</p>` : ""}`;
+    ${p.fly ? `<p><button class="btn blue" data-fly-card="${p.fly}">ZOOM INTO THE CITY →</button></p>` : ""}
+    ${p.kind === "sponsor" ? `<p>Hosting or sponsoring ${evs.length} events on the calendar.</p>` : ""}
+    ${evs.length ? `<div class="evs">${evs.slice(0, 12).map(e => evHtml(e, true)).join("")}</div>` : p.kind === "venue" ? `<p style="color:var(--mute)">Nothing on the calendar here yet.</p>` : ""}`;
   $("#card").hidden = false;
-  $("#cbody [data-goto]")?.addEventListener("click", e => loadView(e.currentTarget.dataset.goto));
+  $("#cbody [data-fly-card]")?.addEventListener("click", e => fly(e.currentTarget.dataset.flyCard));
 }
-$("#cclose").onclick = () => { $("#card").hidden = true; pins.querySelectorAll(".pin").forEach(x => x.setAttribute("aria-expanded", "false")); };
+$("#cclose").onclick = () => { $("#card").hidden = true; document.querySelectorAll(".pin").forEach(x => x.setAttribute("aria-expanded", "false")); };
 
-// Sponsor billboards float over open water and parks: the most active hosts on the calendar.
-function sponsorsFrom(events, SPONSOR_SPOTS) {
-  const skip = /^(personal|bond ai.*|hacklist.*|.*community|.*events? calendar|.*events)$/i;
-  const c = {};
-  events.forEach(e => new Set([...(e.hosts || []), e.source]).forEach(h => { if (h && !skip.test(h.trim())) (c[h] ||= []).push(e); }));
-  return Object.entries(c).filter(([, es]) => es.length > 1).sort((a, b) => b[1].length - a[1].length).slice(0, SPONSOR_SPOTS.length)
-    .map(([name, es], i) => ({ id: "sp" + i, kind: "sponsor", name, events: es, x: SPONSOR_SPOTS[i][0], y: SPONSOR_SPOTS[i][1] }));
-}
-
-// ── This week panel ──
+// ── Panel & controls ──
 function renderWeek() {
   const today = isoLocal(new Date()), end = isoLocal(new Date(Date.now() + 6 * 864e5));
   let up = EVENTS.filter(e => e.date >= today && e.date <= end);
@@ -380,38 +349,22 @@ function renderWeek() {
   const days = {}; up.forEach(e => (days[e.date] ||= []).push(e));
   $("#week").innerHTML = Object.entries(days).map(([d, es]) => `<div class="day"><h3>${d === today ? "TODAY" : parseDay(d).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }).toUpperCase()} · ${es.length}</h3>${es.map(e => evHtml(e)).join("")}</div>`).join("");
 }
-$("#fold").onclick = () => { const t = $("#title"), c = t.classList.toggle("collapsed"); $("#fold").textContent = c ? "▸" : "▾"; $("#fold").setAttribute("aria-expanded", !c); t.querySelector(".body").hidden = c; };
-
+function fly(v) { map.fitBounds(VIEWS[v], { padding: 40, pitch: map.getPitch(), duration: 1800 }); history.replaceState(null, "", "#" + v); }
+document.querySelectorAll("[data-fly]").forEach(b => b.onclick = () => fly(b.dataset.fly));
+$("#tilt").onclick = () => { const on = map.getPitch() < 10; map.easeTo({ pitch: on ? 45 : 0, duration: 800 }); $("#tilt").setAttribute("aria-pressed", on); };
+$("#fold").onclick = () => { const b = $("#title .body"); b.hidden = !b.hidden; $("#fold").textContent = b.hidden ? "▸" : "▾"; $("#fold").setAttribute("aria-expanded", !b.hidden); };
 document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
   const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", on);
   document.body.classList.toggle("hide-" + b.dataset.layer, !on);
 });
 
-// ── Views & boot ──
-const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
-const eventsReady = fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
+// ── Boot ──
+fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
   EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
   renderWeek();
+  const start = () => { placeAll(); onZoom(); if (location.hash === "#sf") map.jumpTo(map.cameraForBounds(VIEWS.sf, { padding: 40 })); };
+  map.loaded() ? start() : map.once("load", start);
 });
-async function loadView(v) {
-  VIEW = VIEWS[v] ? v : "bay";
-  document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === VIEW));
-  // Only show layer toggles that exist in this view.
-  const kinds = new Set(VIEWS[VIEW].pois.map(p => p.kind));
-  if (VIEW === "sf") kinds.add("spot");
-  document.querySelectorAll("[data-layer]").forEach(b => b.hidden = b.dataset.layer !== "sponsor" && !kinds.has(b.dataset.layer));
-  $("#card").hidden = true;
-  history.replaceState(null, "", "#" + VIEW);
-  const cfg = VIEWS[VIEW];
-  art.alt = cfg.label;
-  await new Promise(r => { art.onload = r; art.onerror = r; art.src = cfg.img; if (art.complete && art.naturalWidth && art.src.endsWith(cfg.img)) r(); });
-  await eventsReady;
-  W = art.naturalWidth; H = art.naturalHeight;
-  world.style.width = W + "px"; world.style.height = H + "px";
-  fit(); renderPins();
-}
-document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => loadView(b.dataset.view));
-loadView(location.hash.slice(1) || "bay");
 </script>
 </body>
 </html>
