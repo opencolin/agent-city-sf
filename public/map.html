@@ -49,10 +49,10 @@ button { cursor: pointer; }
 .pin.spot.area .flag { background: var(--purple); }
 .pin.spot .stem { height: 10px; }
 .pin.spot:hover .flag, .pin.spot[aria-expanded="true"] .flag { background: var(--gold); color: var(--ink); }
-.blimp { position: relative; pointer-events: auto; cursor: pointer; animation: bob 4s ease-in-out infinite; }
+.blimp { position: relative; pointer-events: auto; cursor: pointer; animation: bob 14s ease-in-out infinite; }
 .blimp img { display: block; width: calc(170px * var(--s, 1)); filter: drop-shadow(0 10px 6px #0003); }
 .blimp b { position: absolute; left: 22%; right: 30%; top: 26%; height: 30%; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: calc(13px * var(--s, 1)); line-height: 1.05; color: var(--ink); overflow: hidden; }
-@keyframes bob { 50% { transform: translateY(-8px); } }
+@keyframes bob { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(6px, -3px); } 50% { transform: translate(10px, -5px); } 75% { transform: translate(4px, -2px); } }
 @media (prefers-reduced-motion: reduce) { .blimp { animation: none; } }
 
 /* Zoom bands and layer toggles */
@@ -163,6 +163,8 @@ const VENUES = [
   { id: "founders", sprite: "v_founders", name: "Founders Inc.", lat: 37.8066, lng: -122.4318, address: "Fort Mason Center", where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders,? inc/i },
   { id: "hf0", sprite: "v_hf0", name: "HF0", lat: 37.7769, lng: -122.4318, address: "1000 Fulton St (the Archbishop's Mansion)", where: "Alamo Square", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks, in a historic mansion across from Alamo Square Park.", match: /\bhf0\b|1000 fulton/i },
   { id: "alamo", sprite: "v_alamo", name: "Hacker Hotel Alamo Square", lat: 37.7764, lng: -122.4352, address: "Alamo Square", where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square house|hacker (hotel|home)/i },
+  { id: "spc", sprite: "v_spc", name: "South Park Commons", lat: 37.7806, lng: -122.3940, address: "380 Brannan St", where: "South Beach", tags: ["Founder community", "Firesides", "Members"], note: "A community for technologists in the -1 to 0 stage, figuring out what to build next. Runs its own fund and a steady line of firesides and forums.", url: "https://lu.ma/southparkcommons-events", host: /south park commons/i, match: /south park commons|380 brannan|\bspc\b/i },
+  { id: "accelr8", sprite: "v_accelr8", name: "Accelr8", lat: 37.7834, lng: -122.4190, address: "712 Polk St", where: "Tenderloin", tags: ["Hacker house", "Co-living", "Cowork club"], note: "A hacker house on Polk Street for founders and builders, with a cowork club on Floor 7 of Frontier Tower for non-residents.", url: "https://lu.ma/accelr8", host: /accelr8/i, match: /accelr8|712 polk/i },
 ];
 
 const CITIES = [
@@ -193,7 +195,7 @@ const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ?
 const kindOf = e => /hack|build (night|day)|buildathon|jam\b|map-a-thon/i.test(e.name) ? "hack" : /demo|pitch|shark|\bvc|fund|founder|investor/i.test(e.name) ? "demo" : e.kind === "hackathon" ? "hack" : e.kind === "demo" ? "demo" : "talk";
 const KTAG = { hack: "HACK", demo: "DEMO", talk: "TALK" };
 const evHtml = (e, withDate) => `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${withDate ? esc(parseDay(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })) + "<br>" : ""}${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`;
-const venueText = e => [e.venue, e.address, e.name].join(" ");
+const venueText = e => [e.venue, e.address, e.name, e.source, ...(e.hosts || [])].join(" ");
 let EVENTS = [];
 
 // ── Map ──
@@ -313,10 +315,14 @@ function placeAll() {
 }
 
 function sponsorsFrom(events) {
-  const skip = /^(personal|bond ai.*|hacklist.*|.*community|.*events? calendar|.*events)$/i;
+  const skip = /^(personal|hacklist.*|.*community|.*events? calendar|.*events)$/i;
+  const isVenue = h => VENUES.some(v => v.host && v.host.test(h));
+  // Only organizations ride blimps: names that run a calendar of their own, not individual hosts.
+  const org = h => h && (/\bbond ai\b/i.test(h) ? "Bond AI" : h.trim());
+  const orgs = new Set(events.map(e => org(e.source)));
   const c = {};
-  events.forEach(e => new Set([...(e.hosts || []), e.source]).forEach(h => { if (h && !skip.test(h.trim())) (c[h] ||= []).push(e); }));
-  return Object.entries(c).filter(([, es]) => es.length > 1).sort((a, b) => b[1].length - a[1].length).slice(0, BLIMP_SPOTS.length).map(([name, events]) => ({ name, events }));
+  events.forEach(e => new Set([...(e.hosts || []), e.source]).forEach(h => { h = org(h); if (h && !skip.test(h) && !isVenue(h)) (c[h] ||= []).push(e); }));
+  return Object.entries(c).filter(([n, es]) => es.length > 1 && orgs.has(n)).sort((a, b) => b[1].length - a[1].length).slice(0, BLIMP_SPOTS.length).map(([name, events]) => ({ name, events }));
 }
 
 // ── Card ──

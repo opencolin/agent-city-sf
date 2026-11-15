@@ -9,6 +9,7 @@ Refresh events from [eventhunt.ai](https://eventhunt.ai) (public endpoint, rate 
 ```bash
 python3 scripts/fetch_events.py   # public/events.json
 python3 scripts/fetch_venues.py   # adds venue, address, neighborhood and coordinates from each Luma page
+python3 scripts/fetch_calendars.py  # adds events from host Luma calendars (South Park Commons, AI Collective, Bond AI, Accelr8)
 ```
 
 ## Run locally
