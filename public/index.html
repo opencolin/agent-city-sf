@@ -222,6 +222,13 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
 .wx-facts { font-family: var(--sans); font-size: 13px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
 .wx-facts dt { color: var(--mute); }
 .wx-facts dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fog { display: grid; grid-template-columns: minmax(0, 520px) 1fr; gap: 24px; align-items: start; margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--hair); }
+.fog img { width: 100%; height: auto; display: block; border: 1px solid var(--hair); background: var(--chip); }
+.fog figcaption { font-family: var(--body); font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.fog figcaption b { color: var(--ink); }
+.fog .more, .fog .credit { display: block; margin-top: 10px; font-family: var(--sans); font-size: 12px; }
+.fog .credit { color: var(--mute); }
+@media (max-width: 720px) { .fog { grid-template-columns: 1fr; } }
 .days { display: grid; grid-template-columns: repeat(10, minmax(74px, 1fr)); overflow-x: auto; scrollbar-width: thin; }
 .dcell { padding: 6px 8px 10px; border-left: 1px solid var(--hair); text-align: center; font-family: var(--sans); font-size: 12px; display: flex; flex-direction: column; gap: 3px; align-items: center; }
 .dcell:first-child { border-left: 0; }
@@ -433,6 +440,14 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
         <div class="wx-today" id="wxToday"><div class="empty" style="font-style:italic;color:var(--mute)">Checking the sky…</div></div>
         <div class="days" id="wxDays" aria-label="10-day forecast"></div>
       </div>
+      <figure class="fog" id="fog">
+        <img src="/api/fog" width="720" height="580" loading="lazy" alt="Satellite loop of fog and low clouds over the Bay Area for the last two hours" onerror="this.closest('figure').hidden = true">
+        <figcaption>
+          <b>The fog, live.</b> The last two hours of fog and low clouds over the Bay, from NOAA's GOES-West satellite: Point Reyes at upper left, the Golden Gate and the Bay in the middle, San Jose at lower right. White lines are coastlines and county lines. Refreshed every ten minutes.
+          <span class="more">Neighborhood by neighborhood: <a href="https://microclimates.today/" target="_blank" rel="noopener">microclimates.today</a> · <a href="https://www.sfbayweather.com/bay-area-fog-forecast" target="_blank" rel="noopener">SFBayWeather fog forecast</a></span>
+          <span class="credit">Imagery: NOAA/NESDIS/STAR, GOES-West GeoColor</span>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="band" id="todayBand">
