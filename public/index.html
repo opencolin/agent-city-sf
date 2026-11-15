@@ -23,6 +23,7 @@
   --hot: #a8231b;         /* breaking red */
   --ad: #e6dbc2;
   --chip: #e2d6bb;
+  --grain: .55;           /* newsprint grain, light mode only */
   --mast: "Pirata One", "Old English Text MT", serif;
   --head: "Playfair Display", Georgia, serif;
   --body: "Source Serif 4", Georgia, serif;
@@ -33,17 +34,20 @@
   :root:not([data-theme="light"]) {
     --paper: #1e1c19; --ink: #d8d2c4; --ink-2: #b2ab9c; --mute: #8b8578;
     --rule: #a9a293; --hair: #3a3731; --accent: #8fb8d8; --hot: #ff7a6e;
-    --ad: #26231f; --chip: #2d2a25; color-scheme: dark;
+    --ad: #26231f; --chip: #2d2a25; --grain: 0; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #1e1c19; --ink: #d8d2c4; --ink-2: #b2ab9c; --mute: #8b8578;
   --rule: #a9a293; --hair: #3a3731; --accent: #8fb8d8; --hot: #ff7a6e;
-  --ad: #26231f; --chip: #2d2a25; color-scheme: dark;
+  --ad: #26231f; --chip: #2d2a25; --grain: 0; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: var(--grain); mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .43 0 0 0 0 .4 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media print { body::before { display: none; } }
 a { color: inherit; text-decoration: none; }
 a:hover .hl, a.hl:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 button, input { font: inherit; color: inherit; }
