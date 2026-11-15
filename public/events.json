@@ -11,7 +11,12 @@
   "link": "https://luma.com/cqedho6j",
   "source": "GDG Stanford",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Downtown Berkeley",
+  "city": "Berkeley",
+  "lat": 37.87552258582758,
+  "lng": -122.26586354747,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Hive Mind: Building Agent Teams",
@@ -27,7 +32,12 @@
   "link": "https://luma.com/cognee-alq6",
   "source": "cognee",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "lat": 37.765084351517444,
+  "lng": -122.41798280583596,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "SearchHack: Build the next layer of AI search",
@@ -43,7 +53,12 @@
   "link": "https://luma.com/e13wf1bd",
   "source": "Telem AI Events",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Sunnyvale West",
+  "city": "Sunnyvale",
+  "lat": 37.38966435669871,
+  "lng": -122.03643137496734,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "She Builds: A Women in AI × Lovable Hackathon",
@@ -54,7 +69,12 @@
   "link": "https://luma.com/lw202zjx",
   "source": "Bond AI SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Rincon Hill",
+  "city": "San Francisco",
+  "lat": 37.786341571473166,
+  "lng": -122.3932589631275,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Boat Hackathon Code Aboard The Historic Klamath",
@@ -70,7 +90,16 @@
   "link": "https://luma.com/boathackathon",
   "source": "Boat Hackathon",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "Klamath (Historic Ship)",
+  "address": "Klamath (Historic Ship), Pier 9, San Francisco, CA 94111, USA",
+  "short_address": "Pier 9, San Francisco",
+  "neighborhood": "Northern Waterfront",
+  "city": "San Francisco",
+  "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
+  "lat": 37.8000361,
+  "lng": -122.39758849999998,
+  "venue_visibility": "public"
  },
  {
   "name": "Boat Hackathon Christening & Kickoff",
@@ -81,7 +110,16 @@
   "link": "https://luma.com/BoatHackathonChristening",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "Klamath (Historic Ship)",
+  "address": "Klamath (Historic Ship), Pier 9, San Francisco, CA 94111, USA",
+  "short_address": "Pier 9, San Francisco",
+  "neighborhood": "Northern Waterfront",
+  "city": "San Francisco",
+  "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
+  "lat": 37.8000361,
+  "lng": -122.39758849999998,
+  "venue_visibility": "public"
  },
  {
   "name": "AI Research Hackathon",
@@ -92,7 +130,12 @@
   "link": "https://luma.com/sht6n8du",
   "source": "Bond AI SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "lat": 37.76792150696761,
+  "lng": -122.4208402300517,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "DNAForge & MTC Berkeley: AI × Biology Hackathon",
@@ -108,7 +151,12 @@
   "link": "https://luma.com/xdzhu4tn",
   "source": "MTC Berkeley",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Downtown Berkeley",
+  "city": "Berkeley",
+  "lat": 37.86210035241771,
+  "lng": -122.2640920714793,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "VexoHacks: An AI Wearables Hackathon",
@@ -119,7 +167,12 @@
   "link": "https://luma.com/chgfm6ec",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Central Waterfront",
+  "city": "San Francisco",
+  "lat": 37.76304565335417,
+  "lng": -122.38611887296597,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Drexathon: Nace AI's Decision Model Hackathon x Adobe EDU (win Mac Mini!!)",
@@ -133,7 +186,12 @@
   "link": "https://luma.com/nace-drexathon",
   "source": "Nace AI",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Mid-Market",
+  "city": "San Francisco",
+  "lat": 37.78088588907551,
+  "lng": -122.40899590795978,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Stanford vs Berkeley · The Big Hack Game · Up to $10,000 in Cash Prizes · Kickoffs on Both Campuses",
@@ -144,7 +202,11 @@
   "link": "https://luma.com/t2598jt6",
   "source": "Bond AI SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "city": "Berkeley",
+  "lat": 37.87134037905941,
+  "lng": -122.25973066014615,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Clips & Cocktails: AI Marketing Happy Hour with OpusClip & Marina Mogilko (aka Silicon Valley Girl)",
@@ -155,7 +217,16 @@
   "link": "https://luma.com/4xcuvbn7",
   "source": "Bond AI SF",
   "score": 54,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "ZOË",
+  "address": "ZOË, 579 Howard St, San Francisco, CA 94105, USA",
+  "short_address": "579 Howard St, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJl1L3AAqBhYARfrEds4G_pEU",
+  "lat": 37.7870655,
+  "lng": -122.39749160000001,
+  "venue_visibility": "public"
  },
  {
   "name": "Agentic Web #02 — The Browser as an Agent Runtime",
@@ -170,7 +241,16 @@
   "link": "https://luma.com/agentic-web-browser-runtime-nov16-2026",
   "source": "[SF] HackerSquad",
   "score": 0,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "625 2nd St",
+  "address": "625 2nd St, San Francisco, CA 94107, USA",
+  "short_address": "625 2nd St, San Francisco",
+  "neighborhood": "South Beach",
+  "city": "San Francisco",
+  "place_id": "ChIJSXZKEXiAhYARFJlgQCdiLP0",
+  "lat": 37.7816889,
+  "lng": -122.3908867,
+  "venue_visibility": "public"
  },
  {
   "name": "Women & Non Binary Hack and do whatever night",
@@ -181,7 +261,14 @@
   "link": "https://luma.com/op5lcwm8",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "sudoroom",
+  "address": "sudoroom, 549 48th St, Oakland, CA 94609, USA",
+  "city": "Oakland",
+  "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
+  "lat": 37.8350548,
+  "lng": -122.2642563,
+  "venue_visibility": "public"
  },
  {
   "name": "PortCon 2026 | The AI Software Factory Summit",
@@ -192,7 +279,12 @@
   "link": "https://luma.com/Portcon.port.io",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Embarcadero",
+  "city": "San Francisco",
+  "lat": 37.79447024095587,
+  "lng": -122.39342102783151,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Zero to Hundred: GTM Vibe Coding Hackathon",
@@ -203,7 +295,12 @@
   "link": "https://luma.com/sml53r17",
   "source": "HackList SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.7869973717594,
+  "lng": -122.40051152054495,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "AI Infrastructure Night",
@@ -214,7 +311,12 @@
   "link": "https://luma.com/1ihtxydc",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79173524308819,
+  "lng": -122.40059896335711,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Builder Night San Francisco | n8n x Vercel x Arize AI",
@@ -230,7 +332,12 @@
   "link": "https://luma.com/0qn71c42",
   "source": "n8n Community Events",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79289220174035,
+  "lng": -122.3959284205836,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "ElevenCreative After Hours: San Francisco",
@@ -243,7 +350,12 @@
   "link": "https://luma.com/sfafterhours",
   "source": "ElevenLabs",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79303096875511,
+  "lng": -122.40342464952315,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Product & AI - The Un-Conference",
@@ -254,7 +366,15 @@
   "link": "https://luma.com/ooc8bij0",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "ERGO NEXT (NEXT Insurance)",
+  "address": "ERGO NEXT (NEXT Insurance), 975 California Ave, Palo Alto, CA 94304, USA",
+  "short_address": "Google Building 975, 975 California Ave, Palo Alto",
+  "city": "Palo Alto",
+  "place_id": "ChIJ84Ok5-W6j4AROlY2H7PCdR0",
+  "lat": 37.421174799999996,
+  "lng": -122.1480823,
+  "venue_visibility": "public"
  },
  {
   "name": "In Production: OpenRouter x ElevenLabs",
@@ -269,7 +389,12 @@
   "link": "https://luma.com/wvw8xwsi",
   "source": "OpenRouter Events",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Yerba Buena",
+  "city": "San Francisco",
+  "lat": 37.788622311472785,
+  "lng": -122.40552851084097,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "AI Builders Night with Convex, Daytona, Photon & CopilotKit",
@@ -280,7 +405,16 @@
   "link": "https://luma.com/convex-llhe",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "Convex",
+  "address": "Convex, 444 De Haro St #218, San Francisco, CA 94107, USA",
+  "short_address": "444 De Haro St #218, San Francisco",
+  "neighborhood": "Potrero Hill",
+  "city": "San Francisco",
+  "place_id": "ChIJa2KUfb5_j4AR4dlHTEnoXN0",
+  "lat": 37.764288900000004,
+  "lng": -122.40174909999999,
+  "venue_visibility": "public"
  },
  {
   "name": "Build Night: Parallel x AssemblyAI",
@@ -295,7 +429,12 @@
   "link": "https://luma.com/5b3cjgix",
   "source": "AssemblyAI",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Northern Waterfront",
+  "city": "San Francisco",
+  "lat": 37.80054049184829,
+  "lng": -122.39853353365538,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Physical AI Industry Night: San Francisco",
@@ -311,7 +450,12 @@
   "link": "https://luma.com/foxglove-mxml",
   "source": "Foxglove",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.78310689688452,
+  "lng": -122.39964231363619,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "The Build Boutique: Base44 x AI Valley Women's Build Night",
@@ -322,7 +466,12 @@
   "link": "https://luma.com/aivalley-8ysz",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Chinatown",
+  "city": "San Francisco",
+  "lat": 37.792857999900086,
+  "lng": -122.40848054497742,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "San Francisco | Claude Impact Lab: AI Trust & Safety",
@@ -333,7 +482,12 @@
   "link": "https://luma.com/claude-sf-impact-lab",
   "source": "Claude Community",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "China Basin",
+  "city": "San Francisco",
+  "lat": 37.78110918399043,
+  "lng": -122.3942914667079,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Agent Night Out: Full Stack, Real Costs 🔥 StepFun × TinyFish × Featherless × Monid × MatrAIx",
@@ -344,7 +498,12 @@
   "link": "https://luma.com/stepfun-624j",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.77596537326936,
+  "lng": -122.40442001203253,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Build Your First Phone Voice Agent — Deepgram × Vapi Workshop",
@@ -355,7 +514,16 @@
   "link": "https://luma.com/deepgram-2jm5",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "505 Howard St",
+  "address": "505 Howard St, San Francisco, CA 94105, USA",
+  "short_address": "505 Howard St, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJKaK-s2OAhYARFRfYhG5JE3o",
+  "lat": 37.7882676,
+  "lng": -122.3961811,
+  "venue_visibility": "public"
  },
  {
   "name": "Hardware Hack Night & Fixit Clinic",
@@ -366,7 +534,16 @@
   "link": "https://luma.com/in7dkph2",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "sudoroom",
+  "address": "sudoroom, 549 48th St, Oakland, CA 94609, USA",
+  "short_address": "549 48th St, Oakland",
+  "neighborhood": "Temescal",
+  "city": "Oakland",
+  "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
+  "lat": 37.8350548,
+  "lng": -122.2642563,
+  "venue_visibility": "public"
  },
  {
   "name": "Backprop Summit",
@@ -382,7 +559,12 @@
   "link": "https://luma.com/backprop",
   "source": "tokens&",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.78824620820655,
+  "lng": -122.39824489684986,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Bay Area Search 2026",
@@ -393,7 +575,16 @@
   "link": "https://luma.com/d8tc595x",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "Manny’s",
+  "address": "Manny’s, 3092 16th St, San Francisco, CA 94103, USA",
+  "short_address": "3092 16th St, San Francisco",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "place_id": "ChIJUyUsp7x_j4ARKw-v8RRNaqI",
+  "lat": 37.7650923,
+  "lng": -122.42170440000001,
+  "venue_visibility": "public"
  },
  {
   "name": "SPC Energy Forum: Fireside with Garth Sheldon-Coulson, Co-Founder and CEO of Panthalassa",
@@ -407,7 +598,12 @@
   "link": "https://luma.com/spc-garth",
   "source": "South Park Commons",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "South Beach",
+  "city": "San Francisco",
+  "lat": 37.781563368580755,
+  "lng": -122.39599093390414,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Food Biz + AI Coworking Day",
@@ -418,7 +614,12 @@
   "link": "https://luma.com/5chb737c",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Downtown",
+  "city": "Oakland",
+  "lat": 37.81110446271188,
+  "lng": -122.26445314036563,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "DevRev Leadership Circle Bay Area 2026",
@@ -429,7 +630,12 @@
   "link": "https://luma.com/devrev-lc-bay-area-2026",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.78379638609611,
+  "lng": -122.40907753961143,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Fireside Chat with Abhinav Gupta, Skild.ai",
@@ -442,7 +648,12 @@
   "link": "https://luma.com/skild-spc",
   "source": "South Park Commons",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "South Beach",
+  "city": "San Francisco",
+  "lat": 37.78149965996673,
+  "lng": -122.39149629029,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Reading Group (+🍕): Reimagining Research Papers As Interactive and Reliable AI Agents",
@@ -453,7 +664,12 @@
   "link": "https://luma.com/d7u92w1l",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.78888269628286,
+  "lng": -122.40020558708106,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "AI Demo Series: November Edition - Startup Grind",
@@ -464,7 +680,11 @@
   "link": "https://luma.com/cde3rzu8",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "city": "Menlo Park",
+  "lat": 37.486516807127146,
+  "lng": -122.17503180815598,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Founder's Table : A Candlelight Dinner",
@@ -475,7 +695,12 @@
   "link": "https://luma.com/sprinto-dinner",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.794765506723145,
+  "lng": -122.40062863886862,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "GTM Workflows in Practice: Roundtable Discussion & Dinner",
@@ -486,7 +711,12 @@
   "link": "https://luma.com/29i0mwzf",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.78821524513466,
+  "lng": -122.40096770595594,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Agents You Can Verify - Infrastructure and standards for sovereign enterprise AI",
@@ -497,7 +727,16 @@
   "link": "https://luma.com/rnwggh3f",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "Ecosystem Coworking",
+  "address": "Ecosystem Coworking, 540 Howard St 2nd floor, San Francisco, CA 94105, USA",
+  "short_address": "540 Howard St 2nd floor, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJD-06tHyAhYARmdxj7hO2v5c",
+  "lat": 37.7879261,
+  "lng": -122.39727500000001,
+  "venue_visibility": "public"
  },
  {
   "name": "Fireside chat with You Liang, Co-Founder of Dream Labs",
@@ -512,7 +751,12 @@
   "link": "https://luma.com/joaw545m",
   "source": "Savant VC",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "lat": 37.76200272174205,
+  "lng": -122.41031352037572,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "On-Device Agents with Liquid AI x AI Socratic",
@@ -523,7 +767,12 @@
   "link": "https://luma.com/on-device-agents",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.78714704842624,
+  "lng": -122.3977175976322,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Walk Out With a Working AI Tool: SF Founders Build Night w/ Michael Tiffany.",
@@ -534,7 +783,16 @@
   "link": "https://luma.com/r7lcrqwl",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "Little Raven Gallery",
+  "address": "Little Raven Gallery, 1015 Howard St, San Francisco, CA 94103, USA",
+  "short_address": "1015 Howard St, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJQ0Ql54OAhYAR7LTxqx6YJiE",
+  "lat": 37.7792847,
+  "lng": -122.40739459999998,
+  "venue_visibility": "public"
  },
  {
   "name": "In-person (Hybrid) Civic Hack Night & MapTime GIS Day Map-a-thon",
@@ -545,7 +803,16 @@
   "link": "https://luma.com/qmjkurys",
   "source": "HackList SF",
   "score": 0,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "1885 Mission St",
+  "address": "1885 Mission St, San Francisco, CA 94103, USA",
+  "short_address": "1885 Mission St, San Francisco",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "place_id": "ChIJ_Xnp5iN-j4ARvdyHCcNDgNI",
+  "lat": 37.766869,
+  "lng": -122.4196054,
+  "venue_visibility": "public"
  },
  {
   "name": "Vertical Agent Meetup",
@@ -559,7 +826,12 @@
   "link": "https://luma.com/monaco-cdlb",
   "source": "Monaco",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.77369585279047,
+  "lng": -122.41147552287642,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "A Short Run for Long-Running Agents (Fort Mason)",
@@ -570,7 +842,16 @@
   "link": "https://luma.com/9dhq2w7z",
   "source": "HackList SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "Equator Coffees",
+  "address": "Equator Coffees, 2 Marina Blvd, San Francisco, CA 94123, USA",
+  "short_address": "Fort Mason Center, 2 Marina Blvd, San Francisco",
+  "neighborhood": "Fort Mason",
+  "city": "San Francisco",
+  "place_id": "ChIJA_rvjdiAhYARb0vVE-Pyauk",
+  "lat": 37.8053187,
+  "lng": -122.4318777,
+  "venue_visibility": "public"
  },
  {
   "name": "Notion Build Bar SF",
@@ -583,7 +864,12 @@
   "link": "https://luma.com/buildbar-sf-nov",
   "source": "Notion",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Yerba Buena",
+  "city": "San Francisco",
+  "lat": 37.78823869431504,
+  "lng": -122.40457513238286,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Agentic + AI Night: AI Agents Across the App Stack",
@@ -594,7 +880,16 @@
   "link": "https://luma.com/Agentic_AI_Night-11-19",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "Terra Gallery & Event Venue",
+  "address": "Terra Gallery & Event Venue, 511 Harrison St, San Francisco, CA 94105, USA",
+  "short_address": "511 Harrison St, San Francisco",
+  "neighborhood": "Rincon Hill",
+  "city": "San Francisco",
+  "place_id": "ChIJN7hCzHuAhYARq5V3nMtb-_U",
+  "lat": 37.785673599999996,
+  "lng": -122.3932373,
+  "venue_visibility": "public"
  },
  {
   "name": "Airwallex AI Meetup: Agentic Banking Hackathon Demo Day",
@@ -605,7 +900,16 @@
   "link": "https://luma.com/0h2spivq",
   "source": "HackList SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "Airwallex San Francisco",
+  "address": "Airwallex San Francisco, 188 Spear St 9th Floor, San Francisco, CA 94105, USA",
+  "short_address": "188 Spear St 9th Floor, San Francisco",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "place_id": "ChIJB2BdKEqBhYARIuoRMgCGpwQ",
+  "lat": 37.7914037,
+  "lng": -122.3929787,
+  "venue_visibility": "public"
  },
  {
   "name": "Multiplayer AI for HR: Show-and-Tell + MIXER",
@@ -616,7 +920,16 @@
   "link": "https://luma.com/promptql-HR-showandtell",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "576 Folsom St floor 3",
+  "address": "576 Folsom St floor 3, San Francisco, CA 94105, USA",
+  "short_address": "576 Folsom St floor 3, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "EjM1NzYgRm9sc29tIFN0IGZsb29yIDMsIFNhbiBGcmFuY2lzY28sIENBIDk0MTA1LCBVU0EiIxohChYKFAoSCXu78Hx8gIWAEZLPBcng02hKEgdmbG9vciAz",
+  "lat": 37.7861654,
+  "lng": -122.39626829999999,
+  "venue_visibility": "public"
  },
  {
   "name": "Coffeehouse by Ode with Anthropic",
@@ -631,7 +944,16 @@
   "link": "https://luma.com/ode-coffeehouse",
   "source": "Ode with Anthropic",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "Shack15",
+  "address": "Shack15, 1, Ferry Building, Ste 201, San Francisco, CA 94111, USA",
+  "short_address": "Ferry Building, 1, Ste 201, San Francisco",
+  "neighborhood": "Embarcadero",
+  "city": "San Francisco",
+  "place_id": "ChIJbwnGIm2BhYARSfZaonob-q4",
+  "lat": 37.7962299,
+  "lng": -122.39413929999999,
+  "venue_visibility": "public"
  },
  {
   "name": "Edge Cases by AGI, Inc. #004 with Coleman Hooper @ UC Berkeley (BAIR)",
@@ -642,7 +964,12 @@
   "link": "https://luma.com/edge-cases-004",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Eureka Valley",
+  "city": "San Francisco",
+  "lat": 37.757681915498324,
+  "lng": -122.43441951517282,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Hydrogen, Reimagined: From Critical Missions to Global Markets",
@@ -658,7 +985,12 @@
   "link": "https://luma.com/hzj3bnuw",
   "source": "Berkeley Gateway Accelerator",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Downtown Berkeley",
+  "city": "Berkeley",
+  "lat": 37.87165002116429,
+  "lng": -122.26965691560355,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "AI Summit 2027: A Conversation Before Geneva",
@@ -672,7 +1004,16 @@
   "link": "https://luma.com/fy8teprf",
   "source": "Swissnex in San Francisco",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "House of AI",
+  "address": "House of AI, 40 Boardman Pl, San Francisco, CA 94103, USA",
+  "short_address": "40 Boardman Pl, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJW2d9v5B_j4ARRUKYIZBKZx8",
+  "lat": 37.774522999999995,
+  "lng": -122.40312300000001,
+  "venue_visibility": "public"
  },
  {
   "name": "AI Infra for Physical AI: Mind Robotics x Anyscale",
@@ -683,7 +1024,16 @@
   "link": "https://luma.com/anyscale-gbln",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "Anyscale",
+  "address": "Anyscale, 600 Harrison St, San Francisco, CA 94107, USA",
+  "short_address": "600 Harrison St, San Francisco",
+  "neighborhood": "Yerba Buena",
+  "city": "San Francisco",
+  "place_id": "ChIJUY3cSzeBhYAREICXprT7fKw",
+  "lat": 37.7841915,
+  "lng": -122.39589810000001,
+  "venue_visibility": "public"
  },
  {
   "name": "GTM Series #04: Tomer Chernia (x-Head of GTM at Cursor)",
@@ -697,7 +1047,12 @@
   "link": "https://luma.com/gtm-series-tomer",
   "source": "Granola",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Yerba Buena",
+  "city": "San Francisco",
+  "lat": 37.78215678533239,
+  "lng": -122.40446536563044,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "How can AI kill us all? Eight existential risk scenarios with Prof. Geoffrey Hinton",
@@ -710,7 +1065,16 @@
   "link": "https://luma.com/zcbrxhsr",
   "source": "Personal",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "The Commonwealth Club",
+  "address": "The Commonwealth Club, 110 The Embarcadero, San Francisco, CA 94105, USA",
+  "short_address": "110 The Embarcadero, San Francisco",
+  "neighborhood": "Embarcadero",
+  "city": "San Francisco",
+  "place_id": "ChIJ75fLhWKAhYARDxivfRW3Vr4",
+  "lat": 37.7933452,
+  "lng": -122.3925028,
+  "venue_visibility": "public"
  },
  {
   "name": "GTM & AI Dinner",
@@ -721,7 +1085,16 @@
   "link": "https://luma.com/gtm-ai-sf",
   "source": "The AI Collective",
   "score": 54,
-  "kind": "demo"
+  "kind": "demo",
+  "venue": "Palio",
+  "address": "Palio, 640 Sacramento St, San Francisco, CA 94111, USA",
+  "short_address": "640 Sacramento St, San Francisco",
+  "neighborhood": "Chinatown",
+  "city": "San Francisco",
+  "place_id": "ChIJkdko-oqAhYARt4ZpvCrKkao",
+  "lat": 37.7938689,
+  "lng": -122.40367440000001,
+  "venue_visibility": "public"
  },
  {
   "name": "Speech to Ship Hackathon: Speak It, Build It, Ship It.",
@@ -732,7 +1105,12 @@
   "link": "https://luma.com/1netrne6",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79375381533998,
+  "lng": -122.4016319173363,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Personal Agents Hackathon",
@@ -743,7 +1121,12 @@
   "link": "https://luma.com/personalagenthack",
   "source": "HackList SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79042969139524,
+  "lng": -122.39653989351216,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Embodied AI Hackathon 🦾 [with X Square Robot]",
@@ -754,7 +1137,12 @@
   "link": "https://luma.com/21palhfw",
   "source": "Bond AI SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Clarendon Heights",
+  "city": "San Francisco",
+  "lat": 37.75800159925836,
+  "lng": -122.45343475210592,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Boat Hackathon - Show Boat Demo Day",
@@ -765,7 +1153,16 @@
   "link": "https://luma.com/BoatHackathonDemos",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "Klamath (Historic Ship)",
+  "address": "Klamath (Historic Ship), Pier 9, San Francisco, CA 94111, USA",
+  "short_address": "Pier 9, San Francisco",
+  "neighborhood": "Northern Waterfront",
+  "city": "San Francisco",
+  "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
+  "lat": 37.8000361,
+  "lng": -122.39758849999998,
+  "venue_visibility": "public"
  },
  {
   "name": "Durable AI Meetup (November Edition)",
@@ -776,7 +1173,12 @@
   "link": "https://luma.com/durable-ai-november",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Union Square",
+  "city": "San Francisco",
+  "lat": 37.78917685954514,
+  "lng": -122.40971094760691,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Women & Non Binary Hack and do whatever night",
@@ -787,7 +1189,14 @@
   "link": "https://luma.com/u2odsqs4",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "sudoroom",
+  "address": "sudoroom, 549 48th St, Oakland, CA 94609, USA",
+  "city": "Oakland",
+  "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
+  "lat": 37.8350548,
+  "lng": -122.2642563,
+  "venue_visibility": "public"
  },
  {
   "name": "Multiplayer AI Hackathon (Thanksgiving Special) | 2K+ Prizes",
@@ -798,7 +1207,16 @@
   "link": "https://luma.com/finch-jd7i",
   "source": "Bond AI SF",
   "score": 100,
-  "kind": "talk"
+  "kind": "talk",
+  "venue": "AWS Builder Loft",
+  "address": "AWS Builder Loft, First Market Tower, 525 Market St Entrance, San Francisco, CA 94105, USA",
+  "short_address": "First Market Tower, 525 Market St Entrance, San Francisco",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "place_id": "ChIJYU1rSACBhYAR8gX_suu-tiA",
+  "lat": 37.7904122,
+  "lng": -122.39934480000001,
+  "venue_visibility": "public"
  },
  {
   "name": "Festiverse 2026: Diwali Hackathon",
@@ -809,7 +1227,16 @@
   "link": "https://luma.com/8z6smxkc",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "AWS Builder Loft",
+  "address": "AWS Builder Loft, First Market Tower, 525 Market St Entrance, San Francisco, CA 94105, USA",
+  "short_address": "First Market Tower, 525 Market St Entrance, San Francisco",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "place_id": "ChIJYU1rSACBhYAR8gX_suu-tiA",
+  "lat": 37.7904122,
+  "lng": -122.39934480000001,
+  "venue_visibility": "public"
  },
  {
   "name": "GGW Sharks. Startup Pitch & Networking",
@@ -820,7 +1247,12 @@
   "link": "https://luma.com/ggw-fx64",
   "source": "Bond AI SF",
   "score": 54,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Downtown Menlo Park",
+  "city": "Menlo Park",
+  "lat": 37.45410730129746,
+  "lng": -122.18523309319751,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "SF Non-Slop Hackathon | Pangram x Kino x Capy x Paper",
@@ -836,7 +1268,12 @@
   "link": "https://luma.com/32d8mqid",
   "source": "Pangram",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "lat": 37.772757154685664,
+  "lng": -122.40875815431436,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "ITCH - Businesses share what needs to be built (Waste Industry)",
@@ -847,7 +1284,16 @@
   "link": "https://luma.com/qby4olpj",
   "source": "Bond AI SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "European Startup Embassy",
+  "address": "European Startup Embassy, 461 Bryant St, San Francisco, CA 94107, USA",
+  "short_address": "461 Bryant St, San Francisco",
+  "neighborhood": "China Basin",
+  "city": "San Francisco",
+  "place_id": "ChIJo_EkkOqBhYAR4Lh5mt5syWY",
+  "lat": 37.7819145,
+  "lng": -122.39486069999998,
+  "venue_visibility": "public"
  },
  {
   "name": "Hardware Hack Night & Fixit Clinic",
@@ -858,7 +1304,16 @@
   "link": "https://luma.com/jmukm34y",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "venue": "sudoroom",
+  "address": "sudoroom, 549 48th St, Oakland, CA 94609, USA",
+  "short_address": "549 48th St, Oakland",
+  "neighborhood": "Temescal",
+  "city": "Oakland",
+  "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
+  "lat": 37.8350548,
+  "lng": -122.2642563,
+  "venue_visibility": "public"
  },
  {
   "name": "HackwithBay 4.0",
@@ -869,7 +1324,12 @@
   "link": "https://luma.com/x05cmrqh",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.78827971708466,
+  "lng": -122.39808551982846,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Physical AI Hack",
@@ -880,7 +1340,12 @@
   "link": "https://luma.com/physicalhack",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Dogpatch",
+  "city": "San Francisco",
+  "lat": 37.765364743656264,
+  "lng": -122.3910022078558,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "SF × MIT Hack Day: Peptides",
@@ -891,7 +1356,12 @@
   "link": "https://luma.com/sfxmit-peptides-staged",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon"
+  "kind": "hackathon",
+  "neighborhood": "Clarendon Heights",
+  "city": "San Francisco",
+  "lat": 37.757203148151845,
+  "lng": -122.44900618972218,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Fund or Fold: How VCs Actually Decide",
@@ -902,7 +1372,12 @@
   "link": "https://luma.com/fundorfold",
   "source": "The AI Collective",
   "score": 50,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79170495537573,
+  "lng": -122.39802501722016,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Batter Up San Francisco!",
@@ -915,7 +1390,12 @@
   "link": "https://luma.com/fczznfvg",
   "source": "Hustle Fund Events",
   "score": 54,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "lat": 37.76720645054898,
+  "lng": -122.41807308168401,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "YC Mixer: Demo Day Afterparty 🕺",
@@ -926,6 +1406,11 @@
   "link": "https://luma.com/or7e3ihp",
   "source": "Bond AI SF",
   "score": 50,
-  "kind": "demo"
+  "kind": "demo",
+  "neighborhood": "Union Square",
+  "city": "San Francisco",
+  "lat": 37.788902124436106,
+  "lng": -122.40601781532138,
+  "venue_visibility": "guests-only"
  }
 ]

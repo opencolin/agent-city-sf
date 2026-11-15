@@ -576,14 +576,14 @@ function classify(e) {
 }
 
 const VENUES = [
-  { name: "AWS Builder Loft", where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi‑Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights." },
-  { name: "Frontier Tower", where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware." },
-  { name: "Shack15", where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes." },
-  { name: "Entrepreneurs First", where: "San Francisco", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company." },
-  { name: "European Startup Embassy", where: "San Francisco", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay." },
-  { name: "Founders Inc.", where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront." },
-  { name: "HF0", where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks." },
-  { name: "Hacker Hotel Alamo Square", where: "Alamo Square", url: "https://alamosquare.house", tags: ["Co-living", "Dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, with a Sunday night dinner and demos every week." },
+  { name: "AWS Builder Loft", match: /aws builder loft|525 market/i, where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi‑Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights." },
+  { name: "Frontier Tower", match: /frontier tower|995 market/i, where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware." },
+  { name: "Shack15", match: /shack ?15/i, where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes." },
+  { name: "Entrepreneurs First", match: /entrepreneurs first/i, where: "San Francisco", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company." },
+  { name: "European Startup Embassy", match: /startup embassy|461 bryant/i, where: "South Park", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay." },
+  { name: "Founders Inc.", match: /founders,? inc/i, where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront." },
+  { name: "HF0", match: /\bhf0\b/i, where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks." },
+  { name: "Hacker Hotel Alamo Square", match: /alamo square house|hacker (hotel|home)/i, where: "Alamo Square", url: "https://alamosquare.house", tags: ["Co-living", "Dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, with a Sunday night dinner and demos every week." },
 ];
 
 let EVENTS = [];
@@ -651,6 +651,9 @@ function render() {
     ${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener"><h3 class="hl">${esc(v.name)} ↗</h3></a>` : `<h3 class="hl">${esc(v.name)}</h3>`}
     <p class="dek">${esc(v.note)}</p>
     <div class="tags">${v.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    ${(() => { const evs = up.filter(e => v.match.test([e.venue, e.address, e.name].join(" "))); return evs.length
+      ? `<ul class="mini">${evs.slice(0, 3).map(miniHtml).join("")}</ul><div class="byline">${evs.length} upcoming event${evs.length > 1 ? "s" : ""} here</div>`
+      : `<div class="byline">No events on the calendar here yet</div>`; })()}
   </article>`).join("");
 
   // Credits chips: most frequent named hosts/companies

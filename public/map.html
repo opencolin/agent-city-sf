@@ -54,7 +54,12 @@ button { cursor: pointer; }
 .pin.sponsor .board b { font-size: 15px; font-weight: 800; white-space: nowrap; }
 .pin.sponsor .rope { width: 2px; height: 30px; background: var(--ink); }
 @keyframes bob { 50% { transform: translateY(-6px); } }
-body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .pin.landmark, body.hide-city .pin.city { display: none; }
+body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .pin.landmark, body.hide-city .pin.city, body.hide-spot .pin.spot { display: none; }
+.pin.spot .flag { font-size: 12px; padding: 3px 6px; gap: 3px; background: var(--red); color: #fff; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); font-family: var(--px); font-size: 9px; }
+.pin.spot.area .flag { background: #7b4bd6; }
+.pin.spot .flag .e { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 11px; }
+.pin.spot .stem { height: 10px; width: 3px; }
+.pin.spot:hover .flag, .pin.spot[aria-expanded="true"] .flag { background: var(--gold); color: var(--ink); }
 
 /* Panels */
 .panel { background: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); }
@@ -128,6 +133,7 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
     <button class="btn" data-layer="sponsor" aria-pressed="true">SPONSORS</button>
     <button class="btn" data-layer="landmark" aria-pressed="true">LANDMARKS</button>
     <button class="btn" data-layer="city" aria-pressed="true">CITIES</button>
+    <button class="btn" data-layer="spot" aria-pressed="true">EVENTS</button>
   </div>
 </div>
 
@@ -147,14 +153,14 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
 // Positions are fractions of the painted image (x across, y down), set by eye against landmarks in the art.
 const SF_POIS = [
   // Builder venues
-  { id: "aws", kind: "venue", name: "AWS Builder Loft", e: "🛠️", x: 0.690, y: 0.545, where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi-Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights.", match: /aws|builder loft/i },
-  { id: "frontier", kind: "venue", name: "Frontier Tower", e: "🏢", x: 0.600, y: 0.585, where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware.", match: /frontier tower/i },
-  { id: "shack15", kind: "venue", name: "Shack15", e: "⛴️", x: 0.712, y: 0.615, where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes.", match: /shack ?15/i },
+  { id: "aws", kind: "venue", name: "AWS Builder Loft", e: "🛠️", x: 0.690, y: 0.545, where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi-Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights.", match: /aws builder loft|525 market/i, lat: 37.7904, lng: -122.3993, address: "First Market Tower, 525 Market St" },
+  { id: "frontier", kind: "venue", name: "Frontier Tower", e: "🏢", x: 0.600, y: 0.585, where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware.", match: /frontier tower|995 market/i, lat: 37.7826, lng: -122.4098, address: "995 Market St" },
+  { id: "shack15", kind: "venue", name: "Shack15", e: "⛴️", x: 0.712, y: 0.615, where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes.", match: /shack ?15/i, lat: 37.7962, lng: -122.3941, address: "Ferry Building, Suite 201" },
   { id: "ef", kind: "venue", name: "Entrepreneurs First", e: "🚀", x: 0.655, y: 0.665, where: "San Francisco", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company.", match: /entrepreneurs first|\bEF\b/ },
-  { id: "esembassy", kind: "venue", name: "European Startup Embassy", e: "🇪🇺", x: 0.570, y: 0.505, where: "San Francisco", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay.", match: /startup embassy/i },
-  { id: "founders", kind: "venue", name: "Founders Inc.", e: "⚓", x: 0.480, y: 0.360, where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders inc|fort mason/i },
+  { id: "esembassy", kind: "venue", name: "European Startup Embassy", e: "🇪🇺", x: 0.570, y: 0.505, where: "South Park", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay.", match: /startup embassy|461 bryant/i, lat: 37.7819, lng: -122.3949, address: "461 Bryant St, South Park" },
+  { id: "founders", kind: "venue", name: "Founders Inc.", e: "⚓", x: 0.480, y: 0.360, where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders,? inc/i, lat: 37.8066, lng: -122.4318, address: "Fort Mason Center" },
   { id: "hf0", kind: "venue", name: "HF0", e: "🏠", x: 0.540, y: 0.660, where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks.", match: /\bhf0\b/i },
-  { id: "alamo", kind: "venue", name: "Hacker Hotel Alamo Square", e: "🛏️", x: .330, y: .600, where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square|hacker (hotel|home)/i },
+  { id: "alamo", kind: "venue", name: "Hacker Hotel Alamo Square", e: "🛏️", x: .330, y: .600, where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square house|hacker (hotel|home)/i, lat: 37.7764, lng: -122.4346, address: "Alamo Square" },
   // Landmarks
   { id: "ggb", kind: "landmark", name: "Golden Gate Bridge", e: "🌉", x: 0.530, y: 0.200 },
   { id: "salesforce", kind: "landmark", name: "Salesforce Tower", e: "🏙️", x: 0.661, y: 0.430 },
@@ -197,6 +203,41 @@ const BAY_POIS = [
   { id: "b-hmb", kind: "landmark", name: "Half Moon Bay", e: "🌊", x: .190, y: .665 },
   { id: "b-light", kind: "landmark", name: "Point Montara Light", e: "🗼", x: .075, y: .520 },
 ];
+
+const GEO = {
+  sf: [
+    [37.8199, -122.4783, .530, .200], [37.8029, -122.4484, .392, .300], [37.8024, -122.4058, .638, .325],
+    [37.7897, -122.3972, .661, .430], [37.7955, -122.3937, .712, .585], [37.7786, -122.3893, .580, .740],
+    [37.7762, -122.4328, .310, .570], [37.7694, -122.4862, .325, .480], [37.7941, -122.4078, .520, .505],
+    [37.8066, -122.4318, .480, .360],
+  ],
+  bay: [
+    [37.7900, -122.4000, .262, .130], [37.8199, -122.4783, .125, .060], [37.8044, -122.2712, .690, .150],
+    [37.8721, -122.2578, .890, .070], [37.6213, -122.3790, .425, .300], [37.4275, -122.1697, .572, .540],
+    [37.4155, -122.0496, .778, .585], [37.3349, -122.0090, .640, .745], [37.3337, -121.8907, .925, .830],
+    [37.4636, -122.4286, .190, .665], [37.5300, -122.3600, .390, .560], [37.5850, -122.2000, .690, .380],
+  ],
+};
+// Affine fit from lat/lng to image fractions, plus inverse-distance-weighted residuals so landmarks land exactly.
+function projector(cps) {
+  const solve = (A, b) => { const n = 3, M = A.map((r, i) => [...r, b[i]]);
+    for (let c = 0; c < n; c++) { let piv = c; for (let r = c + 1; r < n; r++) if (Math.abs(M[r][c]) > Math.abs(M[piv][c])) piv = r;
+      [M[c], M[piv]] = [M[piv], M[c]]; for (let r = 0; r < n; r++) if (r !== c) { const f = M[r][c] / M[c][c]; for (let k = c; k <= n; k++) M[r][k] -= f * M[c][k]; } }
+    return M.map((r, i) => r[n] / r[i]); };
+  const rows = cps.map(([la, ln]) => [ln, la, 1]);
+  const ata = [0, 1, 2].map(i => [0, 1, 2].map(j => rows.reduce((t, r) => t + r[i] * r[j], 0)));
+  const fit = k => solve(ata, [0, 1, 2].map(i => rows.reduce((t, r, n) => t + r[i] * cps[n][k], 0)));
+  const ax = fit(2), ay = fit(3);
+  const base = (la, ln) => [ax[0] * ln + ax[1] * la + ax[2], ay[0] * ln + ay[1] * la + ay[2]];
+  const res = cps.map(([la, ln, x, y]) => { const [bx, by] = base(la, ln); return [la, ln, x - bx, y - by]; });
+  return (la, ln) => {
+    const [bx, by] = base(la, ln); let wx = 0, wy = 0, w = 0;
+    for (const [rl, rn, dx, dy] of res) { const d2 = (la - rl) ** 2 + ((ln - rn) * .79) ** 2, k = 1 / (d2 + 1e-6); wx += k * dx; wy += k * dy; w += k; }
+    return [bx + wx / w, by + wy / w];
+  };
+}
+const PROJ = { sf: projector(GEO.sf), bay: projector(GEO.bay) };
+const IN_SF = e => e.lat > 37.70 && e.lat < 37.835 && e.lng > -122.52 && e.lng < -122.35;
 
 const VIEWS = {
   bay: { img: "bay-painted.webp", label: "Hand-painted map of the San Francisco Peninsula and Bay Area", pois: BAY_POIS, focus: [.50, .42],
@@ -260,14 +301,41 @@ stage.addEventListener("pointerdown", hideHint);
 
 // ── Pins & cards ──
 let EVENTS = [];
-function eventsAt(p) { if (p.loc) return EVENTS.filter(e => p.loc.test(e.location || "")); return p.match ? EVENTS.filter(e => p.match.test(e.name + " " + (e.hosts || []).join(" ") + " " + e.source)) : []; }
-function evHtml(e) { return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`; }
+function eventsAt(p) { if (p.events) return p.events; if (p.loc) return EVENTS.filter(e => p.loc.test(e.location || "")); return p.match ? EVENTS.filter(e => p.match.test(e.name + " " + (e.hosts || []).join(" ") + " " + e.source)) : []; }
+function evHtml(e, withDate) { return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${withDate ? esc(parseDay(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })) + "<br>" : ""}${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`; }
+// Group events by venue (public address) or by neighborhood when the address is for guests only.
+function eventSpots() {
+  if (VIEW !== "sf") return [];
+  const venues = VIEWS.sf.pois.filter(p => p.kind === "venue");
+  const groups = {};
+  for (const e of EVENTS) {
+    if (!e.lat || !IN_SF(e)) continue;
+    const text = [e.venue, e.address, e.name].join(" ");
+    if (venues.some(v => v.match && v.match.test(text))) continue;   // shown on the curated venue pin
+    const pub = e.venue_visibility === "public" && e.venue;
+    const key = pub ? "v:" + (e.place_id || e.venue) : "n:" + (e.neighborhood || "San Francisco");
+    (groups[key] ||= { pub, name: pub ? e.venue : (e.neighborhood || "San Francisco"), address: pub ? e.address : "", events: [] }).events.push(e);
+  }
+  return Object.entries(groups).map(([key, g], i) => {
+    const la = g.events.reduce((t, e) => t + e.lat, 0) / g.events.length, ln = g.events.reduce((t, e) => t + e.lng, 0) / g.events.length;
+    const [x, y] = PROJ.sf(la, ln);
+    return { id: "spot" + i, kind: "spot", pub: g.pub, name: g.name, address: g.address, events: g.events, x, y,
+      where: g.pub ? (g.events[0].neighborhood || "") : "Exact address shared after you RSVP" };
+  });
+}
 function renderPins() {
-  const all = [...VIEWS[VIEW].pois, ...sponsorsFrom(EVENTS, VIEWS[VIEW].spots)];
+  const pois = VIEWS[VIEW].pois.map(p => {
+    if (p.lat == null) return p;
+    const [x, y] = PROJ[VIEW](p.lat, p.lng);
+    const evs = EVENTS.filter(e => p.match.test([e.venue, e.address, e.name].join(" ")));
+    return { ...p, x, y, events: evs };
+  });
+  const all = [...pois, ...eventSpots(), ...sponsorsFrom(EVENTS, VIEWS[VIEW].spots)];
   pins.innerHTML = all.map(p => {
     const left = (p.x * 100).toFixed(2) + "%", top = (p.y * 100).toFixed(2) + "%";
     if (p.kind === "sponsor") return `<button class="pin sponsor" data-id="${p.id}" style="left:${left};top:${top}" aria-label="Sponsor ${esc(p.name)}"><div class="board"><small>SPONSOR</small><b>${esc(p.name)}</b></div><div class="rope"></div></button>`;
     const n = eventsAt(p).length;
+    if (p.kind === "spot") return `<button class="pin spot${p.pub ? "" : " area"}" data-id="${p.id}" style="left:${left};top:${top}" title="${esc(p.name)}" aria-label="${esc(p.name)}, ${n} event${n > 1 ? "s" : ""}" aria-expanded="false"><span class="flag"><span class="e">${p.pub ? "●" : "◆"}</span>${n}</span><span class="stem"></span></button>`;
     return `<button class="pin ${p.kind}" data-id="${p.id}" style="left:${left};top:${top}" aria-expanded="false"><span class="flag"><span class="e">${p.e}</span>${esc(p.name)}${n ? `<span class="n">${n}</span>` : ""}</span><span class="stem"></span><span class="dot"></span></button>`;
   }).join("");
   pins.style.cssText = `position:absolute;inset:0;width:${W}px;height:${H}px`;
@@ -279,16 +347,17 @@ function renderPins() {
 function openCard(p, btn) {
   pins.querySelectorAll('.pin[aria-expanded="true"]').forEach(x => x.setAttribute("aria-expanded", "false"));
   btn?.setAttribute("aria-expanded", "true");
-  $("#ckind").textContent = p.kind.toUpperCase();
+  $("#ckind").textContent = p.kind === "spot" ? (p.pub ? "EVENT VENUE" : "NEIGHBORHOOD") : p.kind.toUpperCase();
   const evs = p.kind === "sponsor" ? p.events : eventsAt(p);
   $("#cbody").innerHTML = `<h2>${p.e ? p.e + " " : ""}${esc(p.name)}</h2>
+    ${p.address ? `<p class="where">${esc(p.address)}</p>` : ""}
     ${p.where ? `<p class="where">${esc(p.where)}</p>` : ""}
     ${p.note ? `<p>${esc(p.note)}</p>` : ""}
     ${p.tags ? `<div class="tags">${p.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
     ${p.url ? `<p><a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">VISIT ${esc(new URL(p.url).hostname.toUpperCase())} →</a></p>` : ""}
     ${p.goto ? `<p><button class="btn blue" data-goto="${p.goto}">EXPLORE THE CITY MAP →</button></p>` : ""}
     ${p.kind === "sponsor" ? `<p>Hosting or sponsoring ${evs.length} event${evs.length > 1 ? "s" : ""} on the calendar.</p>` : ""}
-    ${evs?.length ? `<div class="evs">${evs.slice(0, 6).map(evHtml).join("")}</div>` : p.kind === "venue" ? `<p style="color:var(--mute)">Nothing on the calendar here yet.</p>` : ""}`;
+    ${evs?.length ? `<div class="evs">${evs.slice(0, 12).map(e => evHtml(e, true)).join("")}</div>` : p.kind === "venue" ? `<p style="color:var(--mute)">Nothing on the calendar here yet.</p>` : ""}`;
   $("#card").hidden = false;
   $("#cbody [data-goto]")?.addEventListener("click", e => loadView(e.currentTarget.dataset.goto));
 }
@@ -309,7 +378,7 @@ function renderWeek() {
   let up = EVENTS.filter(e => e.date >= today && e.date <= end);
   if (!up.length) up = EVENTS.slice(0, 30);
   const days = {}; up.forEach(e => (days[e.date] ||= []).push(e));
-  $("#week").innerHTML = Object.entries(days).map(([d, es]) => `<div class="day"><h3>${d === today ? "TODAY" : parseDay(d).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }).toUpperCase()} · ${es.length}</h3>${es.map(evHtml).join("")}</div>`).join("");
+  $("#week").innerHTML = Object.entries(days).map(([d, es]) => `<div class="day"><h3>${d === today ? "TODAY" : parseDay(d).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }).toUpperCase()} · ${es.length}</h3>${es.map(e => evHtml(e)).join("")}</div>`).join("");
 }
 $("#fold").onclick = () => { const t = $("#title"), c = t.classList.toggle("collapsed"); $("#fold").textContent = c ? "▸" : "▾"; $("#fold").setAttribute("aria-expanded", !c); t.querySelector(".body").hidden = c; };
 
@@ -329,6 +398,7 @@ async function loadView(v) {
   document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === VIEW));
   // Only show layer toggles that exist in this view.
   const kinds = new Set(VIEWS[VIEW].pois.map(p => p.kind));
+  if (VIEW === "sf") kinds.add("spot");
   document.querySelectorAll("[data-layer]").forEach(b => b.hidden = b.dataset.layer !== "sponsor" && !kinds.has(b.dataset.layer));
   $("#card").hidden = true;
   history.replaceState(null, "", "#" + VIEW);
