@@ -13,16 +13,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
 <style>
 :root {
-  --paper: #fbfaf6;
-  --ink: #121212;
-  --ink-2: #363636;
-  --mute: #6b6b6b;
-  --rule: #121212;
-  --hair: #d9d6cc;
-  --accent: #326891;      /* link blue */
-  --hot: #b3261e;         /* breaking red */
-  --ad: #f1ede1;
-  --chip: #ece8dc;
+  --paper: #efe6d2;       /* newsprint */
+  --ink: #1a1712;
+  --ink-2: #3b352b;
+  --mute: #6e6556;
+  --rule: #1a1712;
+  --hair: #cfc3a8;
+  --accent: #2c5d82;      /* link blue */
+  --hot: #a8231b;         /* breaking red */
+  --ad: #e6dbc2;
+  --chip: #e2d6bb;
   --mast: "UnifrakturCook", "Old English Text MT", serif;
   --head: "Playfair Display", Georgia, serif;
   --body: "Source Serif 4", Georgia, serif;
@@ -659,54 +659,101 @@ function renderToday() {
 }
 const evMins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
 
-// ── Weather (Open-Meteo, no key) ──
+// ── Weather: Open-Meteo first, National Weather Service as fallback. Sun times are computed locally. ──
+const LAT = 37.7749, LNG = -122.4194;
 const WMO = c => c === 0 ? ["☀️", "Clear"] : c <= 2 ? ["🌤️", "Partly cloudy"] : c === 3 ? ["☁️", "Overcast"]
   : c <= 48 ? ["🌫️", "Fog"] : c <= 57 ? ["🌦️", "Drizzle"] : c <= 67 ? ["🌧️", "Rain"] : c <= 77 ? ["🌨️", "Snow"]
   : c <= 82 ? ["🌦️", "Showers"] : ["⛈️", "Thunderstorms"];
-const hhmm = s => new Date(s).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-async function loadWeather() {
-  const url = "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194"
+const NWS_ICON = s => /thunder/i.test(s) ? "⛈️" : /snow/i.test(s) ? "🌨️" : /rain|shower/i.test(s) ? (/chance|slight|light/i.test(s) ? "🌦️" : "🌧️")
+  : /drizzle/i.test(s) ? "🌦️" : /fog|haze|smoke/i.test(s) ? "🌫️" : /mostly cloudy|overcast|^cloudy/i.test(s) ? "☁️"
+  : /partly|mostly sunny|mostly clear/i.test(s) ? "🌤️" : /sunny|clear/i.test(s) ? "☀️" : "🌤️";
+const tFmt = d => d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles" });
+
+// NOAA sunrise/sunset approximation, accurate to about a minute.
+function sunTimes(day) {
+  const rad = Math.PI / 180, d = parseDay(day);
+  const J = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12) / 864e5 + 2440587.5;
+  const n = Math.round(J - 2451545.0009 + LNG / 360), Js = 2451545.0009 - LNG / 360 + n;
+  const M = (357.5291 + 0.98560028 * (Js - 2451545)) % 360;
+  const C = 1.9148 * Math.sin(M * rad) + 0.02 * Math.sin(2 * M * rad) + 0.0003 * Math.sin(3 * M * rad);
+  const L = (M + 102.9372 + C + 180) % 360;
+  const Jt = Js + 0.0053 * Math.sin(M * rad) - 0.0069 * Math.sin(2 * L * rad);
+  const dec = Math.asin(Math.sin(L * rad) * Math.sin(23.44 * rad));
+  const w = Math.acos((Math.sin(-0.833 * rad) - Math.sin(LAT * rad) * Math.sin(dec)) / (Math.cos(LAT * rad) * Math.cos(dec))) / rad;
+  const toDate = j => new Date((j - 2440587.5) * 864e5);
+  return { rise: toDate(Jt - w / 360), set: toDate(Jt + w / 360) };
+}
+
+const withTimeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
+
+async function fromOpenMeteo() {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LNG}`
     + "&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m"
-    + "&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max"
+    + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
     + "&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FLos_Angeles&forecast_days=10";
-  try {
-    const w = await (await fetch(url)).json();
-    const c = w.current, d = w.daily;
-    const [ico, cond] = WMO(c.weather_code);
-    const t = Math.round(c.temperature_2m);
-    $("#wxNow").textContent = `${ico} ${t}°F ${cond}`;
-    $("#wxSun").textContent = `☀︎ ${hhmm(d.sunrise[0])} · ☾ ${hhmm(d.sunset[0])}`;
-    const dayLen = (new Date(d.sunset[0]) - new Date(d.sunrise[0])) / 6e4;
-    $("#wxToday").innerHTML = `
-      <div class="wx-temp"><span class="ico">${ico}</span>${t}°</div>
-      <div class="wx-cond">${esc(cond)}, feels like ${Math.round(c.apparent_temperature)}°</div>
-      <dl class="wx-facts">
-        <dt>High / Low</dt><dd>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°</dd>
-        <dt>Sunrise</dt><dd>${hhmm(d.sunrise[0])}</dd>
-        <dt>Sunset</dt><dd>${hhmm(d.sunset[0])}</dd>
-        <dt>Daylight</dt><dd>${Math.floor(dayLen / 60)}h ${Math.round(dayLen % 60)}m</dd>
-        <dt>Wind</dt><dd>${Math.round(c.wind_speed_10m)} mph</dd>
-        <dt>Humidity</dt><dd>${c.relative_humidity_2m}%</dd>
-      </dl>`;
-    const today = isoLocal(new Date());
-    $("#wxDays").innerHTML = d.time.map((day, i) => {
-      const [di, dc] = WMO(d.weather_code[i]);
-      const n = EVENTS.filter(e => e.date === day).length;
-      const p = d.precipitation_probability_max[i];
-      return `<div class="dcell${day === today ? " is-today" : ""}" title="${esc(dc)}">
-        <span class="dn">${i === 0 ? "Today" : parseDay(day).toLocaleDateString("en-US", { weekday: "short" })}</span>
-        <span class="dd">${parseDay(day).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
-        <span class="di" aria-label="${esc(dc)}">${di}</span>
-        <span class="hi">${Math.round(d.temperature_2m_max[i])}°</span>
-        <span class="lo">${Math.round(d.temperature_2m_min[i])}°</span>
-        <span class="rain">${p >= 20 ? "💧 " + p + "%" : ""}</span>
-        <span class="dd">↑${hhmm(d.sunrise[i]).replace(" AM", "")} ↓${hhmm(d.sunset[i]).replace(" PM", "")}</span>
-        ${n ? `<a class="ev" href="#listings">${n} event${n > 1 ? "s" : ""}</a>` : ""}
-      </div>`;
-    }).join("");
-  } catch (err) {
-    $("#wxToday").innerHTML = `<div style="font-style:italic;color:var(--mute)">Weather is unavailable right now.</div>`;
+  const w = await (await withTimeout(fetch(url), 6000)).json();
+  const c = w.current, d = w.daily, [ico, cond] = WMO(c.weather_code);
+  return {
+    now: { t: c.temperature_2m, feels: c.apparent_temperature, ico, cond, wind: c.wind_speed_10m, hum: c.relative_humidity_2m },
+    days: d.time.map((date, i) => { const [di, dc] = WMO(d.weather_code[i]); return { date, ico: di, cond: dc, hi: d.temperature_2m_max[i], lo: d.temperature_2m_min[i], rain: d.precipitation_probability_max[i] }; }),
+  };
+}
+
+async function fromNWS() {
+  const base = "https://api.weather.gov/gridpoints/MTR/85,105";
+  const [daily, hourly] = await Promise.all([`${base}/forecast`, `${base}/forecast/hourly`].map(u => withTimeout(fetch(u), 8000).then(r => r.json())));
+  const h = hourly.properties.periods[0];
+  const days = {};
+  for (const p of daily.properties.periods) {
+    const date = p.startTime.slice(0, 10), x = (days[date] ||= { date, rain: 0 });
+    if (p.isDaytime) { x.hi = p.temperature; x.ico = NWS_ICON(p.shortForecast); x.cond = p.shortForecast; }
+    else { x.lo = p.temperature; if (!x.ico) { x.ico = NWS_ICON(p.shortForecast); x.cond = p.shortForecast; } }
+    x.rain = Math.max(x.rain, p.probabilityOfPrecipitation?.value || 0);
   }
+  const wind = parseInt(h.windSpeed) || 0;
+  return {
+    now: { t: h.temperature, feels: null, ico: NWS_ICON(h.shortForecast), cond: h.shortForecast, wind, hum: h.relativeHumidity?.value },
+    days: Object.values(days),
+  };
+}
+
+async function loadWeather() {
+  const today = isoLocal(new Date()), sun = sunTimes(today);
+  $("#wxSun").textContent = `☀︎ ${tFmt(sun.rise)} · ☾ ${tFmt(sun.set)}`;
+  let w = null;
+  for (const src of [fromOpenMeteo, fromNWS]) { try { w = await src(); break; } catch (e) { /* try the next source */ } }
+  const dayLen = (sun.set - sun.rise) / 6e4;
+  const sunFacts = `<dt>Sunrise</dt><dd>${tFmt(sun.rise)}</dd><dt>Sunset</dt><dd>${tFmt(sun.set)}</dd>
+    <dt>Daylight</dt><dd>${Math.floor(dayLen / 60)}h ${Math.round(dayLen % 60)}m</dd>`;
+  if (!w) {
+    $("#wxToday").innerHTML = `<div class="wx-cond">The forecast is unavailable right now.</div><dl class="wx-facts">${sunFacts}</dl>`;
+    return;
+  }
+  const n = w.now, t0 = w.days[0] || {}, t = Math.round(n.t);
+  $("#wxNow").textContent = `${n.ico} ${t}°F ${n.cond}`;
+  $("#wxToday").innerHTML = `
+    <div class="wx-temp"><span class="ico">${n.ico}</span>${t}°</div>
+    <div class="wx-cond">${esc(n.cond)}${n.feels != null ? `, feels like ${Math.round(n.feels)}°` : ""}</div>
+    <dl class="wx-facts">
+      ${t0.hi != null || t0.lo != null ? `<dt>High / Low</dt><dd>${t0.hi != null ? Math.round(t0.hi) + "°" : "–"} / ${t0.lo != null ? Math.round(t0.lo) + "°" : "–"}</dd>` : ""}
+      ${sunFacts}
+      <dt>Wind</dt><dd>${Math.round(n.wind)} mph</dd>
+      ${n.hum != null ? `<dt>Humidity</dt><dd>${Math.round(n.hum)}%</dd>` : ""}
+    </dl>`;
+  $("#wxDays").innerHTML = w.days.slice(0, 10).map((x, i) => {
+    const s = sunTimes(x.date), ev = EVENTS.filter(e => e.date === x.date).length;
+    return `<div class="dcell${x.date === today ? " is-today" : ""}" title="${esc(x.cond)}">
+      <span class="dn">${x.date === today ? "Today" : parseDay(x.date).toLocaleDateString("en-US", { weekday: "short" })}</span>
+      <span class="dd">${parseDay(x.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+      <span class="di" aria-label="${esc(x.cond)}">${x.ico}</span>
+      <span class="hi">${x.hi != null ? Math.round(x.hi) + "°" : "–"}</span>
+      <span class="lo">${x.lo != null ? Math.round(x.lo) + "°" : "–"}</span>
+      <span class="rain">${x.rain >= 20 ? "💧 " + x.rain + "%" : ""}</span>
+      <span class="dd">↑${tFmt(s.rise).replace(" AM", "")} ↓${tFmt(s.set).replace(" PM", "")}</span>
+      ${ev ? `<a class="ev" href="#listings">${ev} event${ev > 1 ? "s" : ""}</a>` : ""}
+    </div>`;
+  }).join("");
+  $("#wxDays").setAttribute("aria-label", `${w.days.length}-day forecast`);
 }
 
 // ── #buildswag / #brunchlife galleries (public/social.json, filled by a scraper) ──
