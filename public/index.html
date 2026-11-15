@@ -65,7 +65,17 @@ button, input { font: inherit; color: inherit; }
 .btn:hover { filter: brightness(.95); }
 
 /* ── Masthead ── */
-.mast { text-align: center; padding: 6px 0 4px; }
+.mast { text-align: center; padding: 6px 0 4px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.mast > .mid { grid-column: 2; }
+.ear { font-family: var(--sans); font-size: 12px; line-height: 1.4; color: var(--ink-2); text-decoration: none; border: 1px solid var(--hair); padding: 8px 12px; width: 150px; box-sizing: border-box; white-space: nowrap; }
+.ear:hover { border-color: var(--ink); }
+.ear.l { justify-self: start; text-align: left; }
+.ear.r { justify-self: end; text-align: right; }
+.ear .k { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+.ear .big { display: block; font-family: var(--head); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--ink); margin: 2px 0; }
+.ear .big .ico { font-size: 20px; margin-right: 6px; vertical-align: 3px; }
+.mast .mid h1 { font-size: clamp(46px, 6.4vw, 96px); }
+@media (max-width: 1000px) { .mast { display: block; } .ear { display: none; } .mast .mid h1 { font-size: clamp(46px, 8.6vw, 104px); } }
 .mast h1 { font-family: var(--mast); font-weight: 400; font-size: clamp(46px, 8.6vw, 104px); line-height: 1; margin: 6px 0 4px; letter-spacing: 0; }
 .mast .motto { font-family: var(--body); font-style: italic; font-size: 14px; color: var(--ink-2); }
 .dateline { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 10px; padding: 7px 0; font-family: var(--sans); font-size: 12px; font-weight: 600; }
@@ -339,8 +349,12 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
   </div>
 
   <header class="mast">
-    <h1>San Francisco Build Week</h1>
-    <div class="motto">Every hackathon, demo night, and free lunch in San Francisco, ranked for you.</div>
+    <a class="ear l" id="earToday" href="#todayBand" aria-label="Today's events"><span class="k">Today</span><span class="big" id="earTodayN">–</span><span id="earTodayTxt">events on the calendar</span><br><span>See what's on →</span></a>
+    <div class="mid">
+      <h1>San Francisco Build Week</h1>
+      <div class="motto">Every hackathon, demo night, and free lunch in San Francisco, ranked for you.</div>
+    </div>
+    <a class="ear r" id="earWx" href="#weather" aria-label="Weather"><span class="k">San Francisco</span><span class="big" id="earWxT">–</span><span id="earWxTxt">Checking the sky…</span></a>
   </header>
 
   <div class="dateline">
@@ -702,6 +716,8 @@ function renderToday() {
   const now = new Date(), today = isoLocal(now);
   const mins = now.getHours() * 60 + now.getMinutes();
   const todays = EVENTS.filter(e => e.date === today);
+  $("#earTodayN").textContent = todays.length;
+  $("#earTodayTxt").textContent = todays.length === 1 ? "event in the Bay today" : "events in the Bay today";
   $("#todayHl").textContent = todays.length ? `${todays.length} Things Happening in San Francisco Today` : "A Quiet Day in San Francisco";
   $("#todayLede").textContent = todays.length
     ? `${todays.filter(e => e.k === "hack").length} hackathons, ${todays.filter(e => e.k === "demo").length} demo and pitch nights, and ${todays.filter(e => e.k === "talk").length} talks on ${fmtDay(today)}.`
@@ -780,11 +796,14 @@ async function loadWeather() {
   const sunFacts = `<dt>Sunrise</dt><dd>${tFmt(sun.rise)}</dd><dt>Sunset</dt><dd>${tFmt(sun.set)}</dd>
     <dt>Daylight</dt><dd>${Math.floor(dayLen / 60)}h ${Math.round(dayLen % 60)}m</dd>`;
   if (!w) {
+    $("#earWxTxt").textContent = `Sunset ${tFmt(sun.set)}.`;
     $("#wxToday").innerHTML = `<div class="wx-cond">The forecast is unavailable right now.</div><dl class="wx-facts">${sunFacts}</dl>`;
     return;
   }
   const n = w.now, t0 = w.days[0] || {}, t = Math.round(n.t);
   $("#wxNow").textContent = `${n.ico} ${t}°F ${n.cond}`;
+  $("#earWxT").innerHTML = `<span class="ico">${n.ico}</span>${t}°`;
+  $("#earWxTxt").innerHTML = `${esc(n.cond)}<br>${t0.hi != null ? `H ${Math.round(t0.hi)}° · L ${Math.round(t0.lo)}°<br>` : ""}Sunset ${tFmt(sun.set)}`;
   $("#wxToday").innerHTML = `
     <div class="wx-temp"><span class="ico">${n.ico}</span>${t}°</div>
     <div class="wx-cond">${esc(n.cond)}${n.feels != null ? `, feels like ${Math.round(n.feels)}°` : ""}</div>
