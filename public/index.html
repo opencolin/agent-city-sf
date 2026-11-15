@@ -1,687 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Agent City SF</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Agent City Dispatch</title>
+<meta name="description" content="Every hackathon, demo night, pitch night and free lunch in San Francisco, ranked for you.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: the isometric city fills the screen; white arcade panels with hard black shadows float over it. One deliberate light look. */
 :root {
-  --sea: #2e93dc;      /* page ground behind the city */
-  --paper: #ffffff;    /* panels and signboards */
-  --ink: #111111;      /* borders, text */
-  --mute: #5b6070;     /* secondary text */
-  --gold: #ffd400;     /* buttons, selection */
-  --blue: #1f4fff;     /* primary action */
-  --red: #e8333a;      /* close */
-  --px: "Press Start 2P", "Courier New", monospace;
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --paper: #fbfaf6;
+  --ink: #121212;
+  --ink-2: #363636;
+  --mute: #6b6b6b;
+  --rule: #121212;
+  --hair: #d9d6cc;
+  --accent: #326891;      /* link blue */
+  --hot: #b3261e;         /* breaking red */
+  --ad: #f1ede1;
+  --chip: #ece8dc;
+  --mast: "UnifrakturMaguntia", "Old English Text MT", serif;
+  --head: "Playfair Display", Georgia, serif;
+  --body: "Source Serif 4", Georgia, serif;
+  --sans: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
-html, body { height: 100%; }
-[hidden] { display: none !important; }
-body { margin: 0; background: var(--sea); color: var(--ink); font-family: var(--sans); font-size: 14px; overflow: hidden; }
-#map { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
-#map.dragging { cursor: grabbing; }
-#map.hovering { cursor: pointer; }
-button, input { font: inherit; color: inherit; }
-button { cursor: pointer; }
-:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
-
-.panel { background: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); }
-.bar { background: var(--ink); color: var(--paper); font-family: var(--px); font-size: 10px; letter-spacing: 1px; padding: 9px 12px; display: flex; align-items: center; gap: 10px; }
-.btn { font-family: var(--px); font-size: 9px; letter-spacing: 1px; padding: 10px 12px; background: var(--gold); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
-.btn.blue { background: var(--blue); color: #fff; }
-.btn:hover { filter: brightness(1.06); }
-.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
-.btn[aria-pressed="true"] { background: var(--ink); color: var(--gold); }
-
-#hud { position: fixed; z-index: 5; top: calc(14px + env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px));
-  right: max(16px, env(safe-area-inset-right, 0px)); display: flex; gap: 12px; align-items: flex-start; pointer-events: none; }
-#hud > * { pointer-events: auto; }
-#title { width: 300px; }
-#title .body { padding: 10px 12px 12px; display: grid; gap: 6px; }
-#title p { margin: 0; line-height: 1.4; }
-#title .stats { font-family: var(--px); font-size: 8px; line-height: 1.6; color: var(--mute); }
-#title .hint { color: var(--mute); font-size: 12px; }
-#title .fine { color: var(--mute); font-size: 11px; border-top: 2px solid #eee; padding-top: 6px; }
-#title .fine a { color: var(--ink); }
-#tools { margin-left: auto; display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; }
-#searchwrap { position: relative; }
-#search { width: 220px; height: 39px; box-sizing: border-box; padding: 0 10px; background: var(--paper); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font-weight: 500; }
-#results { position: absolute; top: calc(100% + 8px); right: 0; width: 290px; max-height: 50vh; overflow: auto; margin: 0; padding: 0; list-style: none; }
-#results button { display: flex; gap: 8px; align-items: center; width: 100%; text-align: left; padding: 8px 10px; background: none; border: 0; border-bottom: 2px solid #eee; font-weight: 700; }
-#results button:hover, #results button:focus-visible { background: #fff5b8; outline: none; }
-#results small { color: var(--mute); margin-left: auto; font-weight: 500; white-space: nowrap; }
-#results .none { padding: 8px 10px; color: var(--mute); }
-
-#legend { position: fixed; z-index: 4; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-  right: max(80px, calc(64px + env(safe-area-inset-right, 0px))); display: flex; flex-wrap: wrap; gap: 6px; pointer-events: none; }
-#legend button { pointer-events: auto; display: flex; align-items: center; gap: 6px; padding: 4px 8px 4px 5px; background: var(--paper);
-  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font-size: 12px; font-weight: 700; line-height: 1; }
-#legend button i { width: 11px; height: 11px; border: 2px solid var(--ink); display: block; }
-#legend button b { font-weight: 500; color: var(--mute); }
-#legend button[aria-pressed="false"] { opacity: .5; }
-
-#zoom { position: fixed; z-index: 4; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 8px; }
-#zoom .btn { width: 44px; height: 44px; padding: 0; font-size: 14px; }
-
-#credits { position: fixed; z-index: 3; left: max(16px, env(safe-area-inset-left, 0px)); top: calc(14px + env(safe-area-inset-top, 0px)); transform: translateY(var(--below, 200px));
-  font-size: 11px; color: #fff; text-shadow: 1px 1px 0 #0006; max-width: 300px; line-height: 1.4; }
-#credits a { color: #fff; }
-
-#tip { position: fixed; z-index: 6; pointer-events: none; background: var(--paper); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
-  padding: 8px 10px; max-width: 260px; line-height: 1.3; }
-#tip::after { content: ""; position: absolute; left: 18px; bottom: -11px; width: 14px; height: 14px; background: var(--paper);
-  border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink); transform: rotate(45deg) skew(8deg, 8deg); }
-#tip b { display: block; font-size: 15px; }
-#tip span { display: block; font-size: 13px; }
-#tip small { display: block; margin-top: 4px; font-family: var(--px); font-size: 7px; color: var(--mute); letter-spacing: .5px; }
-
-#card { position: fixed; z-index: 7; top: calc(72px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); width: 330px;
-  max-height: calc(100% - 100px); display: flex; flex-direction: column; }
-#card .bar button { margin-left: auto; background: var(--red); color: #fff; border: 2px solid #fff; width: 26px; height: 26px; font-family: var(--px); font-size: 10px; padding: 0; }
-#card .body { padding: 14px; overflow: auto; display: grid; gap: 10px; }
-#card .head { display: flex; gap: 12px; align-items: center; }
-#card canvas { width: 64px; height: 64px; border: 3px solid var(--ink); flex: none; background: #fff; }
-#card h2 { font-size: 20px; font-weight: 800; margin: 0 0 2px; line-height: 1.15; overflow-wrap: anywhere; text-wrap: balance; }
-#card .job { margin: 0; color: var(--mute); }
-#card .score { display: flex; align-items: center; gap: 8px; }
-#card .score > span { font-family: var(--px); font-size: 8px; }
-#card .meter { display: flex; gap: 2px; }
-#card .meter i { width: 14px; height: 14px; border: 2px solid var(--ink); background: #eee; display: block; }
-#card .meter i.on { background: var(--gold); }
-#card .meter i.half { background: linear-gradient(90deg, var(--gold) 50%, #eee 50%); }
-#card .num { font-family: var(--px); font-size: 11px; }
-#card .rank { margin: 0; font-family: var(--px); font-size: 8px; color: var(--mute); }
-#card .line { margin: 0; line-height: 1.45; }
-#card dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
-#card dt { font-family: var(--px); font-size: 7px; color: var(--mute); padding-top: 3px; }
-#card dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
-#card .links { display: flex; gap: 10px; flex-wrap: wrap; }
-#card .links a { text-decoration: none; color: var(--ink); }
-
-#elsewhere { position: fixed; z-index: 8; inset: calc(64px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
-  max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; }
-#elsewhere .bar button { margin-left: auto; background: var(--red); color: #fff; border: 2px solid #fff; width: 26px; height: 26px; font-family: var(--px); font-size: 10px; padding: 0; }
-#elsewhere .intro { padding: 12px 16px; border-bottom: 3px solid var(--ink); display: grid; gap: 8px; }
-#elsewhere .intro p { margin: 0; color: var(--mute); }
-#elsefilter { padding: 8px 10px; border: 3px solid var(--ink); background: #fff; }
-#elselist { overflow: auto; padding: 4px 16px 16px; min-height: 0; }
-#elselist h3 { font-family: var(--px); font-size: 9px; margin: 18px 0 8px; display: flex; gap: 8px; align-items: baseline; }
-#elselist h3 small { font-family: var(--sans); font-size: 12px; color: var(--mute); }
-#elselist ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 4px 18px; }
-#elselist a { color: var(--ink); text-decoration: none; display: flex; gap: 8px; font-weight: 700; }
-#elselist a:hover { color: var(--blue); }
-#elselist a small { color: var(--mute); margin-left: auto; font-weight: 500; font-variant-numeric: tabular-nums; }
-
-#loading { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: var(--sea); }
-#loading div { font-family: var(--px); font-size: 11px; padding: 16px 18px; }
-
-@media (max-width: 680px) {
-  #hud { flex-direction: column; }
-  #title { width: 100%; box-sizing: border-box; }
-  #title .hint, #title .stats, #title .fine { display: none; }
-  #tools { margin-left: 0; width: 100%; flex-wrap: nowrap; justify-content: flex-start; }
-  #searchwrap { flex: 1; min-width: 0; }
-  #search { width: 100%; }
-  #results { left: 0; right: auto; width: calc(100vw - 32px); }
-  #legend, #credits { display: none; }
-  #card { left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); top: auto;
-    bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 58%; }
-  body.card-open #zoom { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141413; --ink: #ecebe6; --ink-2: #c9c7c0; --mute: #979590;
+    --rule: #ecebe6; --hair: #3a3936; --accent: #8fb8d8; --hot: #ff7a6e;
+    --ad: #1f1e1b; --chip: #26251f; color-scheme: dark;
+  }
 }
-@media (prefers-reduced-motion: reduce) { .btn:active { transform: none; } }
+:root[data-theme="dark"] {
+  --paper: #141413; --ink: #ecebe6; --ink-2: #c9c7c0; --mute: #979590;
+  --rule: #ecebe6; --hair: #3a3936; --accent: #8fb8d8; --hot: #ff7a6e;
+  --ad: #1f1e1b; --chip: #26251f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+a:hover .hl, a.hl:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Top bar ── */
+.util { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0 0; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+.util .left { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.util .right { display: flex; gap: 8px; }
+.btn { border: 1px solid var(--ink); background: transparent; padding: 7px 12px; border-radius: 3px; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+.btn.solid { background: var(--accent); border-color: var(--accent); color: #fff; }
+:root[data-theme="dark"] .btn.solid { color: #111; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.solid { color: #111; } }
+.btn:hover { filter: brightness(.95); }
+
+/* ── Masthead ── */
+.mast { text-align: center; padding: 6px 0 4px; }
+.mast h1 { font-family: var(--mast); font-weight: 400; font-size: clamp(40px, 7.4vw, 86px); line-height: 1; margin: 6px 0 4px; letter-spacing: -.005em; }
+.mast .motto { font-family: var(--body); font-style: italic; font-size: 14px; color: var(--ink-2); }
+.dateline { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 10px; padding: 7px 0; font-family: var(--sans); font-size: 12px; font-weight: 600; }
+.dateline .c { text-align: center; }
+.dateline .r { text-align: right; }
+nav.sections { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 22px; padding: 10px 0; border-bottom: 3px double var(--rule); font-family: var(--sans); font-size: 13px; font-weight: 500; }
+nav.sections a { white-space: nowrap; }
+nav.sections a:hover { text-decoration: underline; }
+
+/* ── Ticker ── */
+.ticker { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--hair); font-family: var(--sans); font-size: 12px; scrollbar-width: none; }
+.ticker::-webkit-scrollbar { display: none; }
+.ticker div { padding: 9px 18px; border-right: 1px solid var(--hair); white-space: nowrap; }
+.ticker div:first-child { padding-left: 0; }
+.ticker b { font-weight: 800; }
+.ticker .up { color: #2e7d32; font-weight: 700; }
+:root[data-theme="dark"] .ticker .up { color: #7cc882; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ticker .up { color: #7cc882; } }
+
+/* ── Story primitives ── */
+.kicker { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+.kicker.live { color: var(--hot); }
+.kicker.live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--hot); margin-right: 6px; vertical-align: 1px; animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+.hl { font-family: var(--head); font-weight: 700; line-height: 1.15; margin: 0; }
+.dek { font-family: var(--body); color: var(--ink-2); font-size: 15px; line-height: 1.45; margin: 6px 0 0; }
+.byline { font-family: var(--sans); font-size: 11px; color: var(--mute); margin-top: 6px; letter-spacing: .02em; }
+.story { padding: 14px 0; border-bottom: 1px solid var(--hair); }
+.story:last-child { border-bottom: 0; }
+.story .hl { font-size: 19px; }
+.sec-title { font-family: var(--sans); font-weight: 800; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; border-top: 2px solid var(--rule); padding-top: 8px; margin: 0 0 4px; display: flex; justify-content: space-between; align-items: baseline; }
+.sec-title a { font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--accent); font-size: 12px; }
+
+/* ── Front page grid ── */
+.front { display: grid; grid-template-columns: 1fr 2.1fr 1fr; gap: 0; padding: 18px 0 26px; }
+.front > section { padding: 0 20px; }
+.front > section:first-child { padding-left: 0; }
+.front > section:last-child { padding-right: 0; }
+.front > section + section { border-left: 1px solid var(--hair); }
+.lead .hl { font-size: clamp(30px, 3.6vw, 46px); font-weight: 800; letter-spacing: -.01em; line-height: 1.06; }
+.lead .dek { font-size: 18px; margin-top: 10px; }
+.figure { display: block; margin: 16px 0 6px; position: relative; overflow: hidden; background: #2e93dc; aspect-ratio: 16 / 9; }
+.figure img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 40%; display: block; transform: scale(1.35); transition: transform 8s ease-out; image-rendering: pixelated; }
+.figure:hover img { transform: scale(1.5); }
+.figure .open { position: absolute; right: 12px; bottom: 12px; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 3px; box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+.caption { font-family: var(--sans); font-size: 12px; color: var(--mute); }
+.lead-sub { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin-top: 16px; border-top: 1px solid var(--hair); }
+.lead-sub .story .hl { font-size: 18px; }
+.mini { list-style: none; padding: 0; margin: 8px 0 0; font-family: var(--sans); font-size: 13px; }
+.mini li { padding: 5px 0; border-top: 1px dotted var(--hair); display: flex; gap: 8px; }
+.mini li span:first-child { color: var(--mute); min-width: 62px; font-variant-numeric: tabular-nums; }
+.mini a:hover { text-decoration: underline; }
+
+.ad { background: var(--ad); border: 1px solid var(--hair); padding: 16px; margin: 18px 0 4px; text-align: center; }
+.ad .tag { font-family: var(--sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.ad .big { font-family: var(--head); font-size: 24px; font-weight: 900; line-height: 1.05; margin: 8px 0; }
+.ad p { font-family: var(--sans); font-size: 13px; margin: 0 0 12px; color: var(--ink-2); }
+
+/* ── Bands ── */
+.band { border-top: 3px double var(--rule); padding: 22px 0 30px; }
+.band h2.banner { font-family: var(--head); font-weight: 900; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 4px; letter-spacing: -.01em; }
+.band .lede { font-size: 16px; color: var(--ink-2); max-width: 720px; margin: 0 0 18px; }
+
+/* Credits desk */
+.desk { display: grid; grid-template-columns: 1fr 1.6fr; gap: 28px; align-items: start; }
+.search { display: flex; border: 2px solid var(--ink); background: var(--paper); }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 12px 14px; font-family: var(--sans); font-size: 16px; outline: none; }
+.search button { border: 0; background: var(--ink); color: var(--paper); padding: 0 18px; font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip { background: var(--chip); border: 1px solid transparent; border-radius: 999px; padding: 5px 11px; font-family: var(--sans); font-size: 12px; font-weight: 600; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.results { min-height: 160px; }
+.results .empty { font-style: italic; color: var(--mute); padding: 18px 0; }
+
+/* Opinion / personas */
+.personas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.persona { padding: 0 18px; border-left: 1px solid var(--hair); display: flex; flex-direction: column; }
+.persona:first-child { border-left: 0; padding-left: 0; }
+.persona:last-child { padding-right: 0; }
+.persona .face { width: 64px; height: 64px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; font-size: 30px; margin-bottom: 10px; filter: grayscale(.2); }
+.persona .who { font-family: var(--sans); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--hot); }
+.persona .hl { font-size: 21px; font-style: italic; font-weight: 600; margin: 6px 0; }
+.persona p { font-size: 15px; color: var(--ink-2); margin: 0 0 12px; flex: 1; }
+.persona .btn { align-self: flex-start; }
+
+/* Venues */
+.venues { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0; border-top: 1px solid var(--hair); }
+.venue { padding: 14px 16px 16px 0; border-bottom: 1px solid var(--hair); }
+.venue .hl { font-size: 20px; }
+.tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.tags span { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; border: 1px solid var(--hair); padding: 2px 6px; border-radius: 2px; color: var(--ink-2); }
+
+/* Listings */
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.listings { columns: 2; column-gap: 36px; column-rule: 1px solid var(--hair); }
+.day { break-inside: avoid; margin-bottom: 14px; }
+.day h3 { font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--ink); padding-bottom: 4px; margin: 0 0 2px; }
+.row { display: grid; grid-template-columns: 64px 1fr auto; gap: 10px; padding: 6px 0; border-bottom: 1px dotted var(--hair); font-family: var(--sans); font-size: 13px; align-items: baseline; }
+.row .t { color: var(--mute); font-variant-numeric: tabular-nums; }
+.row .n { font-family: var(--body); font-size: 15px; line-height: 1.3; }
+.row .n small { display: block; font-family: var(--sans); font-size: 11.5px; color: var(--mute); margin-top: 2px; }
+.badge { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; white-space: nowrap; }
+.badge.hack { background: #fde2dc; color: #8a1c12; }
+.badge.demo { background: #dfeaf3; color: #1d4a6e; }
+.badge.talk { background: var(--chip); color: var(--ink-2); }
+:root[data-theme="dark"] .badge.hack { background: #4a1f19; color: #ffb4a8; }
+:root[data-theme="dark"] .badge.demo { background: #1b3346; color: #b6d4ec; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .badge.hack { background: #4a1f19; color: #ffb4a8; }
+  :root:not([data-theme="light"]) .badge.demo { background: #1b3346; color: #b6d4ec; }
+}
+
+/* Artifacts */
+.letters { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; }
+.pull { font-family: var(--head); font-style: italic; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; border-left: 4px solid var(--ink); padding-left: 18px; margin: 0; }
+.how { list-style: none; padding: 0; margin: 18px 0 0; counter-reset: s; }
+.how li { counter-increment: s; padding: 10px 0 10px 44px; position: relative; border-top: 1px solid var(--hair); font-size: 15px; }
+.how li::before { content: counter(s); position: absolute; left: 0; top: 8px; font-family: var(--head); font-weight: 900; font-size: 26px; line-height: 1; }
+.submit-box { border: 1px solid var(--hair); padding: 18px; background: var(--ad); }
+.submit-box label { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.submit-box .search { margin-top: 8px; }
+.submit-box .note { font-family: var(--sans); font-size: 12px; color: var(--mute); margin-top: 10px; }
+
+footer { border-top: 3px double var(--rule); padding: 18px 0 40px; font-family: var(--sans); font-size: 12px; color: var(--mute); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) { .figure img { transition: none; } .kicker.live::before { animation: none; } }
+
+/* ── Responsive ── */
+@media (max-width: 1000px) {
+  .front { grid-template-columns: 1fr 1fr; }
+  .front > section.lead { grid-column: 1 / -1; order: -1; padding: 0 0 18px; border-left: 0; border-bottom: 1px solid var(--hair); margin-bottom: 14px; }
+  .front > section:nth-child(1) { padding-left: 0; border-left: 0; }
+  .personas { grid-template-columns: 1fr 1fr; gap: 22px 0; }
+  .persona:nth-child(3) { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 16px; }
+  .util .left .hide-s, .dateline .r, .dateline .l { display: none; }
+  .dateline { grid-template-columns: 1fr; }
+  nav.sections { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; gap: 18px; scrollbar-width: none; }
+  .front { grid-template-columns: 1fr; }
+  .front > section { padding: 0 !important; border-left: 0 !important; }
+  .front > section + section { border-top: 1px solid var(--hair); margin-top: 14px; padding-top: 6px !important; }
+  .lead-sub, .desk, .letters { grid-template-columns: 1fr; }
+  .personas { grid-template-columns: 1fr; }
+  .persona { border-left: 0; padding: 0 0 18px; border-bottom: 1px solid var(--hair); }
+  .listings { columns: 1; }
+  .row { grid-template-columns: 56px 1fr; }
+  .row .badge { grid-column: 2; justify-self: start; }
+}
 </style>
+</head>
+<body>
+<div class="wrap">
 
-<canvas id="map" aria-label="Isometric pixel-art map of San Francisco with AI agent company signboards"></canvas>
-
-<div id="hud">
-  <div id="title" class="panel">
-    <div class="bar">AGENT CITY SF</div>
-    <div class="body">
-      <p>Every San Francisco company on The Agent Benchmark, with a sign on its block.</p>
-      <p class="stats" id="stats">LOADING…</p>
-      <p class="hint">Drag to move, scroll or pinch to zoom, click a sign or flag.</p>
-      <p class="fine" id="fine"></p>
+  <div class="util">
+    <div class="left">
+      <span>SAN FRANCISCO</span>
+    </div>
+    <div class="right">
+      <a class="btn" href="#host">Host an event</a>
+      <a class="btn solid" href="#personas">Sign up free</a>
     </div>
   </div>
-  <div id="tools">
-    <div id="searchwrap">
-      <input id="search" type="search" placeholder="Find an agent…" autocomplete="off" aria-label="Find an agent">
-      <ul id="results" class="panel" hidden></ul>
+
+  <header class="mast">
+    <h1>The Agent City Dispatch</h1>
+    <div class="motto">Every hackathon, demo night, and free lunch in San Francisco, ranked for you.</div>
+  </header>
+
+  <div class="dateline">
+    <span class="l" id="vol">Vol. I · No. 1</span>
+    <span class="c" id="today"></span>
+    <span class="r">Events by <a href="https://eventhunt.ai" style="text-decoration:underline">eventhunt.ai</a></span>
+  </div>
+
+  <nav class="sections" aria-label="Sections">
+    <a href="#front">Front Page</a>
+    <a href="#hackathons">Hackathons</a>
+    <a href="#demos">Demo Days &amp; Pitch Nights</a>
+    <a href="#credits">Free Credits</a>
+    <a href="#venues">Where to Work</a>
+    <a href="#listings">Calendar</a>
+    <a href="#artifacts">#buildweek</a>
+    <a href="map.html">The Map</a>
+  </nav>
+
+  <div class="ticker" id="ticker" aria-label="This week in numbers"></div>
+
+  <main id="front">
+    <div class="front">
+      <section id="hackathons">
+        <h2 class="sec-title">Hackathons <a href="#listings" data-filter="hack">All →</a></h2>
+        <div id="hackList"></div>
+      </section>
+
+      <section class="lead">
+        <div class="kicker live">This Week in San Francisco</div>
+        <a href="#listings"><h2 class="hl" id="leadHl">San Francisco's Week, Ranked</h2></a>
+        <p class="dek" id="leadDek"></p>
+        <a class="figure" href="map.html" aria-label="Open the live map of San Francisco">
+          <img src="city.png" alt="Isometric pixel-art map of San Francisco with signboards for AI companies" loading="eager">
+          <span class="open">Open the live map →</span>
+        </a>
+        <div class="caption">The city as of this morning, with a sign for every AI company in town. Venues, hackathons and sponsor banners land here next.</div>
+
+        <div class="lead-sub">
+          <div class="story">
+            <div class="kicker">For the Broke Hacker</div>
+            <h3 class="hl">Free Food, Free Wi‑Fi, and a Prize at the End</h3>
+            <p class="dek">All-day hackathons and dinner events this week, where showing up is the price of admission.</p>
+            <ul class="mini" id="brokeList"></ul>
+          </div>
+          <div class="story">
+            <div class="kicker">For the Busy Founder</div>
+            <h3 class="hl">Three Rooms Worth Your Evening</h3>
+            <p class="dek">The highest-ranked nights on eventhunt's radar, so you skip the 10%-turnout events.</p>
+            <ul class="mini" id="founderList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="demos">
+        <h2 class="sec-title">Demo Days &amp; Pitch Nights <a href="#listings" data-filter="demo">All →</a></h2>
+        <div id="demoList"></div>
+        <aside class="ad" id="sponsor">
+          <div class="tag">Advertisement</div>
+          <div class="big">Your Banner Here.</div>
+          <p>Sponsor a hackathon and your banner rides on the map and in this paper, right next to your event.</p>
+          <a class="btn solid" href="#host">Sponsor a hackathon</a>
+        </aside>
+      </section>
     </div>
-    <button class="btn" id="topbtn" aria-pressed="false" title="Show only the 50 highest-ranked">TOP 50</button>
-    <button class="btn blue" id="elsebtn">NOT IN SF</button>
-  </div>
+
+    <section class="band rv" id="credits">
+      <div class="kicker">The Free Credits Desk</div>
+      <h2 class="banner">Want Credits? Find Their Hackathon.</h2>
+      <p class="lede">Companies hand out credits at the events they sponsor. Search a company and we'll show you where they're showing up next.</p>
+      <div class="desk">
+        <div>
+          <form class="search" id="creditForm" role="search">
+            <input id="creditQ" type="search" placeholder="ElevenLabs, Anthropic, Vercel…" aria-label="Search by company">
+            <button type="submit">Search</button>
+          </form>
+          <div class="chips" id="creditChips"></div>
+        </div>
+        <div class="results" id="creditResults" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="band rv" id="personas">
+      <div class="kicker">Opinion · Sign Up</div>
+      <h2 class="banner">Who Are You This Week?</h2>
+      <p class="lede">Build your persona in a minute. Everything is optional. The more you share, the better we match you to the rooms you'll like and actually get into.</p>
+      <div class="personas">
+        <article class="persona">
+          <div class="face" aria-hidden="true">🍕</div>
+          <div class="who">The Broke Hacker</div>
+          <h3 class="hl">“I need dinner, Wi‑Fi, and a couch.”</h3>
+          <p>Engineers who build all weekend. We surface the hackathons with food, prizes, and a place to crash.</p>
+          <a class="btn solid" href="#personas">I'm a hacker</a>
+        </article>
+        <article class="persona">
+          <div class="face" aria-hidden="true">⏱️</div>
+          <div class="who">The Busy Founder</div>
+          <h3 class="hl">“Don't waste my Tuesday night.”</h3>
+          <p>CTOs and founders who want high-signal rooms: real turnout, real prizes, the right people.</p>
+          <a class="btn solid" href="#personas">I'm a founder</a>
+        </article>
+        <article class="persona" id="host">
+          <div class="face" aria-hidden="true">🎤</div>
+          <div class="who">The Host</div>
+          <h3 class="hl">“Luma banned me again.”</h3>
+          <p>Create your event here, reach your contacts, and let us put it in front of the people who should come.</p>
+          <a class="btn solid" href="#host">Create an event</a>
+        </article>
+        <article class="persona">
+          <div class="face" aria-hidden="true">📈</div>
+          <div class="who">The Investor &amp; Sponsor</div>
+          <h3 class="hl">“Was it worth the money, time, and merch?”</h3>
+          <p>Investors and enterprise partners giving out credits and swag. See who showed up and what got built.</p>
+          <a class="btn solid" href="#host">I sponsor events</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="band rv" id="venues">
+      <div class="kicker">Where to Work · For Nomads</div>
+      <h2 class="banner">The Rooms Where It Happens</h2>
+      <p class="lede">In town for a week? These are the spaces where builders work, eat, and keep running into each other.</p>
+      <div class="venues" id="venueGrid"></div>
+    </section>
+
+    <section class="band rv" id="listings">
+      <div class="kicker">The Listings</div>
+      <h2 class="banner">The Calendar</h2>
+      <p class="lede" id="listLede"></p>
+      <div class="filters" id="filters" role="group" aria-label="Filter by type"></div>
+      <div class="listings" id="listings-body"></div>
+    </section>
+
+    <section class="band rv" id="artifacts">
+      <div class="kicker">Letters · #buildweek</div>
+      <h2 class="banner">Shipped Something? Show the City.</h2>
+      <div class="letters">
+        <div>
+          <p class="pull">“Post a demo video with #buildweek anywhere, and it lands on this page.”</p>
+          <ol class="how">
+            <li>Build something at a hackathon, or on your own.</li>
+            <li>Post it on X or LinkedIn with <b>#buildweek</b>. We pick it up automatically.</li>
+            <li>Or drop the link here and it goes straight to the Artifacts page.</li>
+          </ol>
+        </div>
+        <form class="submit-box" id="artifactForm">
+          <label for="artifactUrl">Submit your artifact</label>
+          <div class="search">
+            <input id="artifactUrl" type="url" placeholder="https://x.com/you/status/…" required>
+            <button type="submit">Submit</button>
+          </div>
+          <div class="note" id="artifactNote">Demo videos, repos, decks, and posts all count. This week's page is still empty, so yours could be first.</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="fm">The Agent City Dispatch</span>
+    <span>Events from <a href="https://eventhunt.ai" style="text-decoration:underline">eventhunt.ai</a>, originally listed on Luma. Map © OpenStreetMap contributors.</span>
+  </footer>
 </div>
-
-<div id="credits" hidden>
-  Data: <a href="https://theagentbenchmark.com/" target="_blank" rel="noopener">The Agent Benchmark</a>, Oct 2026.
-  Streets © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors and DataSF.
-  <span id="precnote"></span>
-</div>
-
-<div id="legend" aria-label="Filter by category"></div>
-<div id="zoom">
-  <button class="btn" id="zin" aria-label="Zoom in">+</button>
-  <button class="btn" id="zout" aria-label="Zoom out">−</button>
-</div>
-
-<div id="tip" hidden></div>
-
-<aside id="card" class="panel" hidden aria-live="polite">
-  <div class="bar"><span id="cbar">AGENT</span><button id="cardclose" aria-label="Close">X</button></div>
-  <div class="body">
-    <div class="head">
-      <canvas id="cardlogo" width="32" height="32"></canvas>
-      <div><h2 id="cname"></h2><p class="job" id="cjob"></p></div>
-    </div>
-    <div class="score"><span>SCORE</span><div class="meter" id="cmeter"></div><b class="num" id="cscore"></b></div>
-    <p class="rank" id="crank"></p>
-    <p class="line" id="cline"></p>
-    <dl id="cdl"></dl>
-    <div class="links" id="clinks"></div>
-  </div>
-</aside>
-
-<section id="elsewhere" class="panel" hidden aria-label="Agents outside San Francisco">
-  <div class="bar"><span id="elsetitle">NOT IN SF</span><button id="elseclose" aria-label="Close">X</button></div>
-  <div class="intro">
-    <p>These companies list a home base outside San Francisco, so they have no sign in the city.</p>
-    <input id="elsefilter" type="search" placeholder="Filter by name or city…" aria-label="Filter companies outside SF">
-  </div>
-  <div id="elselist"></div>
-</section>
-
-<div id="loading"><div class="panel">LOADING THE CITY…</div></div>
 
 <script>
-(() => {
-const BENCH = 'https://theagentbenchmark.com/agents/';
-const CATS = {
-  sales: ['Sales & marketing', '#ff5c8a'], finance: ['Finance', '#1fbf5b'], software: ['Software', '#1f8fff'],
-  operations: ['People & ops', '#ff9a1f'], horizontal: ['General', '#9aa0aa'], engineering: ['Industry', '#a0522d'],
-  healthcare: ['Healthcare', '#e8333a'], support: ['Support', '#ffd400'], office: ['Office', '#f2b48a'],
-  legal: ['Legal', '#7a5cc4'], creative: ['Design & media', '#c2408f'], security: ['Security', '#25324d'],
-  data: ['Data & science', '#0f8a6a'], education: ['Education', '#6b5f53'],
-};
-const catOf = c => CATS[c] || [c, '#9aa0aa'];
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const cv = document.getElementById('map'), ctx = cv.getContext('2d');
-let W = 3960, H = 2186, dpr = 1, vw = 0, vh = 0, z = 1.5, ox = 0, oy = 0;
-let city, atlas, iso, agents = [], others = [], labels = [], walkers = [], boats = [], gulls = [], clouds = [];
-let hover = null, selected = null, activeCats = new Set(), topOnly = false, layoutZ = -1, shown = new Set();
-const ZMIN = () => Math.max(0.2, Math.min(vw / W, vh / H)), ZMAX = 5;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pad = n => String(n).padStart(2, "0");
+const isoLocal = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const parseDay = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const fmtDay = s => parseDay(s).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+const fmtShort = s => parseDay(s).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+const city = l => (l || "").replace(/,\s*(CA|California)$/i, "");
 
-// ---------- camera
-function resize() {
-  dpr = Math.min(devicePixelRatio || 1, 2.5); vw = innerWidth; vh = innerHeight;
-  cv.width = Math.round(vw * dpr); cv.height = Math.round(vh * dpr); clamp(); layoutZ = -1;
-}
-function clamp() {
-  z = Math.max(ZMIN(), Math.min(ZMAX, z));
-  const mw = vw / z, mh = vh / z;
-  ox = mw > W ? (W - mw) / 2 : Math.max(0, Math.min(W - mw, ox));
-  oy = mh > H ? (H - mh) / 2 : Math.max(0, Math.min(H - mh, oy));
-}
-const S = (x, y) => [(x - ox) * z, (y - oy) * z];
-const Mx = (sx, sy) => [sx / z + ox, sy / z + oy];
-function zoomAt(nz, sx, sy) { const [mx, my] = Mx(sx, sy); z = Math.max(ZMIN(), Math.min(ZMAX, nz)); ox = mx - sx / z; oy = my - sy / z; clamp(); }
-let fly = null;
-function flyTo(x, y, nz, ms = 650) {
-  const f = { x: ox + vw / z / 2, y: oy + vh / z / 2, z }, t0 = performance.now(); if (reduce) ms = 1;
-  fly = t => {
-    let k = Math.min(1, (t - t0) / ms); k = k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
-    z = f.z * Math.pow(nz / f.z, k);
-    ox = f.x + (x - f.x) * k - vw / z / 2; oy = f.y + (y - f.y) * k - vh / z / 2; clamp();
-    if (k >= 1) fly = null;
-  };
-}
-const isoXY = (gx, gy) => [(gx - gy) * iso.TW / 2 + iso.OX, (gx + gy) * iso.TH / 2 + iso.OY];
-
-// ---------- signboards: size + declutter depend only on zoom
-const boardH = () => Math.round(Math.max(18, Math.min(34, 15 * z)));
-function measure() {
-  const h = boardH(); ctx.font = `700 ${Math.round(h * .5)}px Inter, system-ui, sans-serif`;
-  for (const a of agents) a.bw = Math.ceil(h + 4 + ctx.measureText(a.name).width + 8);
-}
-function visible(a) { return (!topOnly || a.rank <= 50) && (!activeCats.size || activeCats.has(a.cat)); }
-function layout() {
-  layoutZ = z; measure(); shown = new Set();
-  const cap = z < .5 ? 20 : z < .8 ? 45 : z < 1.2 ? 80 : z < 2 ? 140 : 9999;
-  const h = boardH(), placed = [], post = Math.max(4, Math.round(4 * Math.min(z, 2)));
-  for (const a of agents.slice().sort((p, q) => p.rank - q.rank)) {
-    if (!visible(a)) continue;
-    const x = a.wx * z - a.bw / 2, y = a.wy * z - post - h;
-    const r = [x - 16, y - 14, x + a.bw + 16, y + h + post + 14];
-    if (placed.length >= cap) break;
-    if (placed.some(p => r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1])) continue;
-    placed.push(r); shown.add(a);
-  }
-}
-function boardRect(a) {
-  const h = boardH(), post = Math.max(4, Math.round(4 * Math.min(z, 2)));
-  const [sx, sy] = S(a.wx, a.wy);
-  return [Math.round(sx - a.bw / 2), Math.round(sy - post - h), a.bw, h, post];
+const KIND = { hack: "Hackathon", demo: "Demo & Pitch", talk: "Talk & Meetup" };
+function classify(e) {
+  const n = e.name;
+  if (/hack|build (night|day)|buildathon|jam\b|map-a-thon|build bar|build boutique/i.test(n)) return "hack";
+  if (/demo|pitch|shark|\bvc|fund|founder|investor|batter up/i.test(n)) return "demo";
+  return e.kind === "hackathon" ? "hack" : e.kind === "demo" ? "demo" : "talk";
 }
 
-// ---------- ambient life
-const SKIN = ['#f1c27d', '#e0ac69', '#c68642', '#8d5524', '#ffdbac'], SHIRT = ['#e8333a', '#1f8fff', '#ffd400', '#1fbf5b', '#7a5cc4', '#ffffff', '#222222', '#ff9a1f'], HAIR = ['#2b1d14', '#5a3825', '#d4a017', '#111', '#a52a2a', '#888'];
-let roadAt, majAt, depth, DW = 0;
-function readDepth(im) {
-  const c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
-  const g = c.getContext('2d'); g.drawImage(im, 0, 0); depth = g.getImageData(0, 0, im.width, im.height).data; DW = im.width;
+const VENUES = [
+  { name: "AWS Builder Loft", where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi‑Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights." },
+  { name: "Frontier Tower", where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware." },
+  { name: "Shack15", where: "Ferry Building", tags: ["Members club", "Bay views", "Food"], note: "A founders' club over the water. Not always a hackathon, but sometimes." },
+  { name: "Entrepreneurs First", where: "San Francisco", tags: ["Talent investor", "Demo days"], note: "Where people come to find a co-founder before they have a company." },
+  { name: "European Startup Embassy", where: "San Francisco", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay." },
+  { name: "Founders Inc.", where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront." },
+  { name: "HF0", where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks." },
+];
+
+let EVENTS = [];
+let filter = "all";
+
+function storyHtml(e) {
+  const hosts = e.hosts?.length ? e.hosts.slice(0, 2).join(", ") : e.source;
+  return `<article class="story">
+    <div class="kicker">${esc(fmtShort(e.date))} · ${esc(e.time || "")}</div>
+    <a href="${esc(e.link)}" target="_blank" rel="noopener"><h3 class="hl">${esc(e.name)}</h3></a>
+    <div class="byline">${esc(city(e.location))}${hosts ? " · By " + esc(hosts) : ""}</div>
+  </article>`;
 }
-function hidden_(wx, wy, sv) {           // is a building or tree in front of this world point?
-  const bx = (wx / iso.DB) | 0, by = (wy / iso.DB) | 0, i = (by * DW + bx) * 4;
-  if (!depth || i < 0 || i >= depth.length) return false;
-  return ((depth[i] << 8) | depth[i + 1]) > sv + 1;
+function miniHtml(e) {
+  return `<li><span>${esc(fmtShort(e.date).split(",")[0])}</span><a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.name)}</a></li>`;
 }
-const bitmap = b64 => { const bytes = atob(b64); return (cx, cy) => { if (cx < 0 || cy < 0 || cx >= iso.CW || cy >= iso.CH) return false; const i = cy * iso.CW + cx; return (bytes.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1; }; };
-let cars = [], blimp = { t: 0 };
-function buildLife() {
-  const CW = iso.CW, CH = iso.CH;
-  roadAt = bitmap(iso.roads); majAt = bitmap(iso.majors);
-  const mcells = [];
-  for (let cy = 0; cy < CH; cy++) for (let cx = 0; cx < CW; cx++) if (majAt(cx, cy)) mcells.push([cx, cy]);
-  const CARC = ['#e8333a', '#ffd400', '#1f8fff', '#ffffff', '#222222', '#1fbf5b', '#ff9a1f', '#9aa0aa'];
-  for (let n = 0; n < 420; n++) { const c = mcells[(Math.random() * mcells.length) | 0];
-    cars.push({ cx: c[0], cy: c[1], nx: c[0], ny: c[1], t: 1, v: 1.2 + Math.random() * 1.4, ox: 0, oy: 0, col: CARC[n % 8], road: majAt }); }
-  // seed walkers densest downtown
-  const [sx0, sy0] = iso.start, cells = [];
-  for (let cy = 0; cy < CH; cy++) for (let cx = 0; cx < CW; cx++) if (roadAt(cx, cy)) cells.push([cx, cy]);
-  for (let n = 0; n < 900; n++) {
-    let c;
-    for (let tries = 0; tries < 6; tries++) {
-      c = cells[(Math.random() * cells.length) | 0];
-      const [x, y] = isoXY(c[0] + .5, c[1] + .5);
-      if (Math.hypot(x - sx0, y - sy0) < 700 || Math.random() < .25) break;
-    }
-    walkers.push({ cx: c[0], cy: c[1], nx: c[0], ny: c[1], t: 1, v: .25 + Math.random() * .35, ox: Math.random() * .6 - .3, oy: Math.random() * .6 - .3,
-      skin: SKIN[n % 5], shirt: SHIRT[(n * 7) % 8], hair: HAIR[(n * 3) % 6], ph: Math.random() * 10 });
-  }
-  boats = iso.boats.map((b, i) => ({ ...b, t: i * .27, v: b.kind === 'sail' ? .006 : .009 }));
-  for (let i = 0; i < 14; i++) gulls.push({ x: Math.random() * W, y: Math.random() * H * .6, v: 10 + Math.random() * 14, ph: Math.random() * 6 });
-  for (let i = 0; i < 9; i++) clouds.push(makeCloud());
-}
-function stepWalker(w, dt) {
-  w.t += w.v * dt;
-  if (w.t >= 1) {
-    w.cx = w.nx; w.cy = w.ny; w.t = 0;
-    const at = w.road || roadAt; const opts = [[1, 0], [-1, 0], [0, 1], [0, -1]].filter(([dx, dy]) => at(w.cx + dx, w.cy + dy));
-    const fwd = opts.filter(([dx, dy]) => !(w.cx + dx === w.px && w.cy + dy === w.py));
-    const pick = (fwd.length ? fwd : opts)[(Math.random() * (fwd.length || opts.length)) | 0] || [0, 0];
-    w.px = w.cx; w.py = w.cy; w.nx = w.cx + pick[0]; w.ny = w.cy + pick[1];
-  }
-}
-function makeCloud() {
-  const w = 120 + Math.random() * 160 | 0, h = 50 + Math.random() * 40 | 0, c = document.createElement('canvas');
-  c.width = w; c.height = h; const g = c.getContext('2d'), pts = [];
-  for (let i = 0; i < 7; i++) pts.push([20 + Math.random() * (w - 40), h * .55 + Math.random() * h * .2, 14 + Math.random() * h * .35]);
-  const cell = 4;
-  for (let y = 0; y < h; y += cell) for (let x = 0; x < w; x += cell) {
-    const d = Math.min(...pts.map(([cx, cy, r]) => Math.hypot(x - cx, (y - cy) * 1.5) / r));
-    if (d < 1) { g.fillStyle = d < .55 ? '#ffffff' : d < .8 ? '#f1f5fa' : '#dfe7f1'; g.fillRect(x, y, cell, cell); }
-  }
-  return { img: c, x: Math.random() * W, y: Math.random() * H, v: 6 + Math.random() * 8 };
+function rowHtml(e) {
+  const hosts = e.hosts?.length ? e.hosts.slice(0, 3).join(", ") : e.source;
+  return `<div class="row">
+    <span class="t">${esc(e.time || "")}</span>
+    <a class="n" href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.name)}<small>${esc(city(e.location))}${hosts ? " · " + esc(hosts) : ""}</small></a>
+    <span class="badge ${e.k}">${KIND[e.k]}</span>
+  </div>`;
 }
 
-// ---------- draw
-let last = performance.now();
-function draw(t) {
-  const dt = Math.min(.1, (t - last) / 1000); last = t; const sec = t / 1000;
-  if (layoutZ !== z) layout();
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = false;
-  ctx.fillStyle = '#2e93dc'; ctx.fillRect(0, 0, vw, vh);
-  // city: blit just the visible part
-  const sx0 = Math.max(0, Math.floor(ox)), sy0 = Math.max(0, Math.floor(oy));
-  const sw = Math.min(W - sx0, Math.ceil(vw / z) + 2), sh = Math.min(H - sy0, Math.ceil(vh / z) + 2);
-  const [dx0, dy0] = S(sx0, sy0);
-  ctx.drawImage(city, sx0, sy0, sw, sh, Math.round(dx0 * dpr) / dpr, Math.round(dy0 * dpr) / dpr, sw * z, sh * z);
-  const px = Math.max(1, z);
+function render() {
+  const now = new Date();
+  $("#today").textContent = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  const today = isoLocal(now);
+  let up = EVENTS.filter(e => e.date >= today);
+  if (!up.length) up = EVENTS;
+  const weekEnd = isoLocal(new Date(now.getTime() + 7 * 864e5));
+  const week = up.filter(e => e.date <= weekEnd);
+  const by = k => up.filter(e => e.k === k);
 
-  // water sparkles
-  if (!reduce) for (const [x, y] of iso.sparks) {
-    const ph = (sec * .8 + x * .013 + y * .007) % 5; if (ph > .6) continue;
-    const [a, b] = S(x, y); if (a < 0 || b < 0 || a > vw || b > vh) continue;
-    ctx.fillStyle = ph < .3 ? '#ffffff' : '#c9ecff'; ctx.fillRect(a - px, b, px * 3, px);
-  }
-  // boats
-  for (const b of boats) {
-    if (!reduce) b.t = (b.t + b.v * dt) % 1;
-    const n = b.path.length, f = b.t * n, i = f | 0, k = f - i, [x0, y0] = b.path[i], [x1, y1] = b.path[(i + 1) % n];
-    drawBoat(x0 + (x1 - x0) * k, y0 + (y1 - y0) * k, Math.sign(x1 - x0) || 1, b.kind, sec);
-  }
-  // sea lions on the pier
-  if (iso.sealions) for (let i = 0; i < 5; i++) {
-    const [x, y] = iso.sealions[0], bob = reduce ? 0 : Math.round(Math.sin(sec * 2 + i) * .6);
-    sprite(x - 10 + i * 5, y - 2 + (i % 2) * 3 + bob, i % 2 ? 1 : -1, ['..kk..', '.kbbk.', 'kbbbbk', 'bbbbbb'], { k: '#3b2a1f', b: '#7a5a3f' });
-  }
-  // cars
-  if (z >= .5) for (const c of cars) {
-    if (!reduce) stepWalker(c, dt);
-    const gx = c.cx + (c.nx - c.cx) * c.t + .5, gy = c.cy + (c.ny - c.cy) * c.t + .5;
-    const [wx, wy] = isoXY(gx, gy), [a, b] = S(wx, wy);
-    if (a < -20 || b < -20 || a > vw + 20 || b > vh + 20 || hidden_(wx, wy - 2, gx + gy)) continue;
-    const u = Math.max(1, z), alongX = c.nx !== c.cx, d = alongX ? 1 : -1;   // grid x runs down-right, grid y down-left
-    for (let i = -3; i <= 3; i++) {
-      const xx = a - i * u * d, yy = b - i * u * .5;
-      ctx.fillStyle = '#1b1b22'; ctx.fillRect(xx, yy, u, u * 1.5);
-      ctx.fillStyle = Math.abs(i) <= 1 ? '#bfe3ff' : c.col; ctx.fillRect(xx, yy - u * 1.5, u, u * 1.5);
-    }
-  }
-  // walkers
-  if (z >= .7) for (const w of walkers) {
-    if (!reduce) stepWalker(w, dt);
-    const gx = w.cx + (w.nx - w.cx) * w.t + .5 + w.ox, gy = w.cy + (w.ny - w.cy) * w.t + .5 + w.oy;
-    const [wx, wy] = isoXY(gx, gy), [a, b] = S(wx, wy);
-    if (a < -10 || b < -20 || a > vw + 10 || b > vh + 10) continue;
-    if (hidden_(wx, wy - 3, gx + gy)) continue;
-    const step = reduce ? 0 : Math.floor(sec * 6 + w.ph) % 2;
-    const u = Math.max(1, Math.round(z * 1.1));
-    ctx.fillStyle = '#2d3047'; ctx.fillRect(a, b - 2 * u, u, 2 * u - (step ? u : 0)); ctx.fillRect(a + u, b - 2 * u, u, 2 * u - (step ? 0 : u));
-    ctx.fillStyle = w.shirt; ctx.fillRect(a, b - 5 * u, 2 * u, 3 * u);
-    ctx.fillStyle = w.skin; ctx.fillRect(a, b - 7 * u, 2 * u, 2 * u);
-    ctx.fillStyle = w.hair; ctx.fillRect(a, b - 8 * u, 2 * u, u);
-  }
-  // signs and flags
-  drawSigns(sec);
-  // labels
-  drawLabels();
-  // gulls
-  for (const g of gulls) {
-    if (!reduce) { g.x += g.v * dt; if (g.x > W) { g.x = -20; g.y = Math.random() * H * .6; } }
-    const [a, b] = S(g.x, g.y + Math.sin(sec + g.ph) * 6), f = Math.floor(sec * 4 + g.ph) % 2, u = Math.max(1, Math.round(z));
-    ctx.fillStyle = '#ffffff'; ctx.fillRect(a, b, u, u);
-    ctx.fillRect(a - 2 * u, b - (f ? u : 0), 2 * u, u); ctx.fillRect(a + u, b - (f ? u : 0), 2 * u, u);
-    ctx.fillStyle = '#5b6070'; ctx.fillRect(a - 3 * u, b - (f ? 2 * u : 0), u, u); ctx.fillRect(a + 3 * u, b - (f ? 2 * u : 0), u, u);
-  }
-  // blimp with a banner
-  if (iso.blimp) {
-    if (!reduce) blimp.t = (blimp.t + dt * .004) % 1;
-    const P = iso.blimp, n = P.length, f = blimp.t * n, i = f | 0, k = f - i, [x0, y0] = P[i], [x1, y1] = P[(i + 1) % n];
-    const bx = x0 + (x1 - x0) * k, by = y0 + (y1 - y0) * k - 150 + Math.sin(sec) * 3, dir = Math.sign(x1 - x0) || 1;
-    const [a, b] = S(bx, by), u = Math.max(1, z * 1.2);
-    ctx.fillStyle = 'rgba(0,0,0,.18)'; ctx.beginPath(); ctx.ellipse(a, b + 150 * z, 26 * u, 6 * u, 0, 0, 7); ctx.fill();
-    for (let yy = -9; yy <= 9; yy++) {
-      const w = Math.round(30 * Math.sqrt(1 - (yy / 10) ** 2));
-      ctx.fillStyle = yy < -5 ? '#ffffff' : yy < 3 ? '#e9edf3' : '#c7cfdb'; ctx.fillRect(a - w * u, b + yy * u, w * 2 * u, u + .5);
-    }
-    ctx.fillStyle = '#111'; ctx.fillRect(a - 8 * u, b + 10 * u, 16 * u, 4 * u);
-    ctx.fillStyle = '#ffd400'; ctx.fillRect(a - 7 * u, b + 11 * u, 14 * u, 2 * u);
-    ctx.fillStyle = '#e8333a'; ctx.fillRect(a - dir * 30 * u - (dir > 0 ? 5 * u : 0), b - 6 * u, 5 * u, 12 * u);
-    ctx.font = `${Math.max(6, Math.round(6 * u))}px "Press Start 2P"`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#111'; ctx.fillText('AGENT CITY', a + u, b + u);
-    ctx.fillStyle = '#1f4fff'; ctx.fillText('AGENT CITY', a, b);
-  }
-  // fog clouds, thinning as you zoom in
-  const ca = Math.max(0, Math.min(.75, (1.6 - z) / 1.2));
-  if (ca > .02) for (const c of clouds) {
-    if (!reduce) { c.x += c.v * dt; if (c.x > W + 50) { c.x = -c.img.width; c.y = Math.random() * H; } }
-    const [a, b] = S(c.x, c.y);
-    ctx.globalAlpha = ca * .5; ctx.drawImage(c.img, a, b, c.img.width * z, c.img.height * z);
-  }
-  ctx.globalAlpha = 1;
-  // selection marker
-  if (selected) {
-    const [x, y, w, h] = shown.has(selected) ? boardRect(selected) : flagRect(selected);
-    const bob = reduce ? 0 : Math.round(Math.sin(sec * 6) * 3), cx = x + w / 2, u = 3;
-    const arrow = ['kkkkkkk', 'kyyyyyk', '.kyyyk.', '..kyk..', '...k...'];
-    arrow.forEach((r, j) => [...r].forEach((ch, i) => { if (ch === '.') return; ctx.fillStyle = ch === 'k' ? '#111' : '#ffd400'; ctx.fillRect(cx + (i - 3.5) * u, y - 22 + j * u + bob, u, u); }));
-  }
-}
-function sprite(wx, wy, dir, rows, pal) {
-  const u = Math.max(1, z), [a, b] = S(wx, wy);
-  rows.forEach((r, j) => [...r].forEach((ch, i) => {
-    if (ch === '.') return; ctx.fillStyle = pal[ch];
-    const ii = dir > 0 ? i : r.length - 1 - i;
-    ctx.fillRect(a + (ii - r.length / 2) * u, b + (j - rows.length) * u, u + .5, u + .5);
-  }));
-}
-function drawBoat(x, y, dir, kind, sec) {
-  const [a, b] = S(x, y), u = Math.max(1, z);
-  ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fillRect(a - dir * 14 * u - (dir < 0 ? 0 : 0), b + u, 10 * u, u);
-  if (kind === 'sail') sprite(x, y, dir, ['....w...', '...ww...', '..www...', '.wwww...', '...k....', 'rrrrrrrr', '.rrrrrr.'], { w: '#ffffff', k: '#333', r: '#e8333a' });
-  else sprite(x, y, dir, ['.....rk.......', '....kkkk......', '..kwwwwwwwk...', '.kwbwbwbwbwk..', 'kkkkkkkkkkkkkk', 'rrrrrrrrrrrrr.', '.wwwwwwwwwww..'],
-    { r: kind === 'ferry' ? '#e8333a' : '#1fbf5b', k: '#2b2b33', w: '#ffffff', b: '#5aa0e6' });
-}
-function flagRect(a) {
-  const u = Math.max(1, Math.round(z * 1.2)), [sx, sy] = S(a.wx, a.wy);
-  return [Math.round(sx), Math.round(sy - 9 * u), 6 * u, 9 * u];
-}
-function drawSigns(sec) {
-  const h = boardH(), fs = Math.round(h * .5);
-  ctx.font = `700 ${fs}px Inter, system-ui, sans-serif`; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-  // flags for companies whose board does not fit at this zoom
-  for (const a of agents) {
-    if (shown.has(a)) continue;
-    const vis = visible(a); if (!vis && !(topOnly || activeCats.size)) continue;
-    const [x, y] = flagRect(a), u = Math.max(1, Math.round(z * 1.2));
-    if (x < -20 || y < -20 || x > vw + 20 || y > vh + 20) continue;
-    ctx.globalAlpha = vis ? 1 : .2;
-    ctx.fillStyle = '#111'; ctx.fillRect(x, y, u, 9 * u);
-    const wave = reduce ? 0 : (Math.floor(sec * 3 + a.rank) % 2) * u;
-    ctx.fillStyle = '#111'; ctx.fillRect(x + u, y, 5 * u, 4 * u + wave);
-    ctx.fillStyle = a === hover ? '#ffd400' : catOf(a.cat)[1]; ctx.fillRect(x + u, y + u * .0, 4 * u, 3 * u + wave);
-  }
-  ctx.globalAlpha = 1;
-  // boards, lowest rank number drawn last (on top)
-  const list = [...shown].sort((p, q) => q.rank - p.rank);
-  for (const a of list) {
-    const [x, y, w, bh, post] = boardRect(a);
-    if (x > vw || y > vh || x + w < 0 || y + bh + post < 0) continue;
-    const hi = a === hover || a === selected, top = a.rank <= 10;
-    ctx.fillStyle = '#111';
-    ctx.fillRect(x + 6, y + bh, 2, post); ctx.fillRect(x + w - 8, y + bh, 2, post);
-    ctx.fillRect(x + 3, y + 3, w, bh);                                           // hard shadow
-    ctx.fillStyle = top ? '#ffd400' : '#111'; ctx.fillRect(x - 2, y - 2, w + 1, bh + 1);
-    ctx.fillStyle = hi ? '#fff5b8' : '#ffffff'; ctx.fillRect(x, y, w - 3, bh - 3);
-    const ls = bh - 7;
-    ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(atlas, (a.i % 32) * 32, ((a.i / 32) | 0) * 32, 32, 32, x + 3, y + 2, ls, ls);
-    ctx.imageSmoothingEnabled = false;
-    ctx.fillStyle = '#111'; ctx.fillText(a.name, x + ls + 7, y + (bh - 3) / 2 + 1);
-    if (top && h >= 18) {
-      const t = '#' + a.rank; ctx.font = `8px "Press Start 2P"`;
-      const tw = ctx.measureText(t).width + 6;
-      ctx.fillStyle = '#e8333a'; ctx.fillRect(x + w - tw - 2, y - 12, tw, 11);
-      ctx.fillStyle = '#fff'; ctx.fillText(t, x + w - tw + 1, y - 6);
-      ctx.font = `700 ${fs}px Inter, system-ui, sans-serif`;
-    }
-  }
-}
-function outlined(text, x, y, size, fill, stroke) {
-  ctx.font = `${size}px "Press Start 2P"`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.lineWidth = 4; ctx.strokeStyle = stroke; ctx.lineJoin = 'round'; ctx.strokeText(text, x, y);
-  ctx.fillStyle = fill; ctx.fillText(text, x, y);
-}
-function drawLabels() {
-  if (z > .9) return;                         // up close the signs do the talking
-  for (const l of labels) {
-    if (l.landmark) continue;
-    if (l.area < (z < .45 ? 900 : z < .7 ? 300 : 60)) continue;
-    const [a, b] = S(l.x, l.y); if (a < -120 || b < -20 || a > vw + 120 || b > vh + 20) continue;
-    outlined(l.name.toUpperCase(), a, b, z < .5 ? 8 : 9, '#ffffff', 'rgba(17,17,17,.85)');
-  }
+  // Ticker
+  const c = { hack: by("hack").length, demo: by("demo").length, talk: by("talk").length };
+  const free = up.filter(e => /🍕|pizza|dinner|happy hour|cocktail|coffee|mixer|after ?hours|social/i.test(e.name)).length;
+  $("#ticker").innerHTML = [
+    `<b>${c.hack}</b> hackathons <span class="up">▲</span>`,
+    `<b>${c.demo}</b> demo &amp; pitch nights`,
+    `<b>${c.talk}</b> talks &amp; meetups`,
+    `<b>${free}</b> with dinner or drinks <span class="up">▲</span>`,
+    `<b>${VENUES.length}</b> builder venues`,
+    `<b>${new Set(up.flatMap(e => e.hosts || [])).size}</b> hosts &amp; sponsors`,
+  ].map(s => `<div>${s}</div>`).join("");
+
+  // Lead
+  const n = (week.length || up.length);
+  $("#leadHl").textContent = `San Francisco Has ${n} Builder Events This Week. Here Are the Ones Worth Your Night.`;
+  $("#leadDek").textContent = `${c.hack} hackathons, ${c.demo} demo days and pitch nights, and ${c.talk} talks across the Bay, pulled from Luma and ranked by eventhunt. Pick your persona and we'll tell you which rooms you'll like and actually get into.`;
+
+  // Columns
+  $("#hackList").innerHTML = by("hack").slice(0, 6).map(storyHtml).join("");
+  $("#demoList").innerHTML = by("demo").slice(0, 4).map(storyHtml).join("");
+
+  const broke = up.filter(e => (e.k === "hack" && /AM/.test(e.time || "")) || /🍕|pizza|dinner|coffee/i.test(e.name)).slice(0, 5);
+  $("#brokeList").innerHTML = broke.map(miniHtml).join("");
+  const founder = [...up].filter(e => e.k !== "hack").sort((a, b) => (b.score || 0) - (a.score || 0) || a.date.localeCompare(b.date)).slice(0, 3);
+  $("#founderList").innerHTML = founder.map(miniHtml).join("");
+
+  // Venues
+  $("#venueGrid").innerHTML = VENUES.map(v => `<article class="venue">
+    <div class="kicker">${esc(v.where)}</div>
+    <h3 class="hl">${esc(v.name)}</h3>
+    <p class="dek">${esc(v.note)}</p>
+    <div class="tags">${v.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+  </article>`).join("");
+
+  // Credits chips: most frequent named hosts/companies
+  const counts = {};
+  up.forEach(e => [...(e.hosts || []), e.source].forEach(h => { if (h && !/personal|bond ai|hacklist|community$/i.test(h) && /[A-Z]/.test(h)) counts[h] = (counts[h] || 0) + 1; }));
+  const picks = ["ElevenLabs", "Claude", "Vercel", "Deepgram", "OpenRouter", "Notion", "Modal", "Nebius", "Google DeepMind", "AssemblyAI"]
+    .filter(p => up.some(e => (e.name + " " + (e.hosts || []).join(" ") + " " + e.source).toLowerCase().includes(p.toLowerCase())));
+  $("#creditChips").innerHTML = picks.map(p => `<button type="button" class="chip" data-q="${esc(p)}">${esc(p)}</button>`).join("");
+  searchCredits(picks[0] || "");
+
+  renderListings();
 }
 
-// ---------- hit testing
-function hit(sx, sy) {
-  const list = [...shown].sort((p, q) => p.rank - q.rank);
-  for (const a of list) { const [x, y, w, h, post] = boardRect(a); if (sx >= x - 2 && sx <= x + w && sy >= y - 2 && sy <= y + h + post) return a; }
-  let best = null, bd = 1e9;
-  for (const a of agents) {
-    if (shown.has(a) || !visible(a)) continue;
-    const [x, y, w, h] = flagRect(a);
-    if (sx >= x - 4 && sx <= x + w + 4 && sy >= y - 4 && sy <= y + h + 4) { const d = Math.abs(sx - x) + Math.abs(sy - y); if (d < bd) { bd = d; best = a; } }
-  }
-  return best;
-}
-function landmarkAt(sx, sy) {
-  let best = null, bd = 40;
-  for (const l of labels) if (l.landmark) { const [a, b] = S(l.x, l.y); const d = Math.hypot(a - sx, (b - sy) * .5); if (d < bd * Math.max(1, z)) { bd = d; best = l; } }
-  return best;
-}
-const tip = document.getElementById('tip');
-function showTip(a, lm, sx, sy) {
-  if (!a && !lm) { tip.hidden = true; return; }
-  tip.innerHTML = '';
-  const b = document.createElement('b'); b.textContent = a ? a.name : lm.name; tip.append(b);
-  if (a) {
-    const s = document.createElement('span'); s.textContent = a.line || a.job; tip.append(s);
-    const sm = document.createElement('small'); sm.textContent = `#${a.rank} · ${a.job.toUpperCase()}`; tip.append(sm);
-  }
-  tip.hidden = false;
-  const r = tip.getBoundingClientRect();
-  tip.style.left = Math.max(8, Math.min(vw - r.width - 8, sx - 24)) + 'px';
-  tip.style.top = Math.max(8, sy - r.height - 22) + 'px';
+function searchCredits(q) {
+  $("#creditQ").value = q;
+  document.querySelectorAll("#creditChips .chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.q === q));
+  const t = q.trim().toLowerCase();
+  const hits = !t ? [] : EVENTS.filter(e => (e.name + " " + (e.hosts || []).join(" ") + " " + e.source).toLowerCase().includes(t));
+  $("#creditResults").innerHTML = !t ? `<div class="empty">Type a company to see its upcoming events.</div>`
+    : hits.length ? `<div class="sec-title">${hits.length} event${hits.length > 1 ? "s" : ""} with ${esc(q)}</div>` + hits.slice(0, 6).map(rowHtml).join("")
+    : `<div class="empty">Nothing on the calendar for “${esc(q)}” yet. Sign up and we'll tell you when they post one.</div>`;
 }
 
-// ---------- card
-const card = document.getElementById('card');
-function batchText(a) {
-  if (!a.batch) return a.maker === 'big_company' ? 'Big company' : 'Startup';
-  if (/^[WSFX]\d\d$/.test(a.batch)) return `Y Combinator ${{ W: 'Winter', S: 'Summer', F: 'Fall', X: 'Spring' }[a.batch[0]]} 20${a.batch.slice(1)}`;
-  return a.batch.replace(/^by /, 'Built by ');
+function renderListings() {
+  const today = isoLocal(new Date());
+  let up = EVENTS.filter(e => e.date >= today);
+  if (!up.length) up = EVENTS;
+  const opts = [["all", "Everything"], ["hack", "Hackathons"], ["demo", "Demo & Pitch"], ["talk", "Talks & Meetups"]];
+  $("#filters").innerHTML = opts.map(([k, l]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${filter === k}">${l} <span style="opacity:.6">${k === "all" ? up.length : up.filter(e => e.k === k).length}</span></button>`).join("");
+  const list = filter === "all" ? up : up.filter(e => e.k === filter);
+  const days = {};
+  list.forEach(e => (days[e.date] ||= []).push(e));
+  $("#listings-body").innerHTML = Object.entries(days).map(([d, es]) => `<div class="day"><h3>${esc(fmtDay(d))}</h3>${es.map(rowHtml).join("")}</div>`).join("");
+  $("#listLede").textContent = `${up.length} Bay Area events from ${fmtShort(up[0]?.date || today)} to ${fmtShort(up.at(-1)?.date || today)}. Filter by what you came for.`;
 }
-function openCard(a) {
-  selected = a; document.body.classList.add('card-open');
-  document.getElementById('cbar').textContent = catOf(a.cat)[0].toUpperCase();
-  document.getElementById('cname').textContent = a.name;
-  document.getElementById('cjob').textContent = a.job;
-  const m = document.getElementById('cmeter'); m.innerHTML = '';
-  for (let i = 1; i <= 10; i++) { const el = document.createElement('i'); if (a.score >= i) el.className = 'on'; else if (a.score >= i - .5) el.className = 'half'; m.append(el); }
-  document.getElementById('cscore').textContent = a.score.toFixed(1);
-  document.getElementById('crank').textContent = `RANKED #${a.rank} OF 999`;
-  document.getElementById('cline').textContent = a.line || '';
-  const dl = document.getElementById('cdl'); dl.innerHTML = '';
-  const where = a.prec === 'address' && a.addr ? a.addr : a.prec === 'neighborhood' ? `${a.nhood || 'San Francisco'} (neighborhood)` : `${a.nhood || 'San Francisco'} (approximate)`;
-  for (const [k, v] of [['BACKING', batchText(a)], ['WHERE', where]]) { const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); }
-  const links = document.getElementById('clinks'); links.innerHTML = '';
-  const link = (href, txt, cls) => { const el = document.createElement('a'); el.href = href; el.target = '_blank'; el.rel = 'noopener'; el.className = 'btn ' + cls; el.textContent = txt; links.append(el); };
-  link(BENCH + a.slug + '/', 'BENCHMARK ↗', 'blue'); if (a.site) link(a.site, 'WEBSITE ↗', '');
-  const lc = document.getElementById('cardlogo').getContext('2d'); lc.clearRect(0, 0, 32, 32);
-  lc.drawImage(atlas, (a.i % 32) * 32, ((a.i / 32) | 0) * 32, 32, 32, 0, 0, 32, 32);
-  card.hidden = false; tip.hidden = true;
-  const nz = Math.max(z, 1.8), off = vw > 680 ? 170 / nz : 0, offy = vw <= 680 ? 160 / nz : 0;
-  flyTo(a.wx + off, a.wy + offy, nz);
-}
-function closeCard() { card.hidden = true; selected = null; document.body.classList.remove('card-open'); }
-document.getElementById('cardclose').onclick = closeCard;
 
-// ---------- input
-const ptrs = new Map(); let drag = null, pinch = null, moved = 0;
-cv.addEventListener('pointerdown', e => {
-  cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); fly = null;
-  if (ptrs.size === 1) { drag = { x: e.clientX, y: e.clientY, ox, oy }; moved = 0; }
-  if (ptrs.size === 2) { const [[a, b], [c, d]] = [...ptrs.values()]; pinch = { d: Math.hypot(c - a, d - b), z }; drag = null; }
+// Interactions
+document.addEventListener("click", ev => {
+  const chip = ev.target.closest("#creditChips .chip");
+  if (chip) return searchCredits(chip.dataset.q);
+  const f = ev.target.closest("#filters .chip");
+  if (f) { filter = f.dataset.k; return renderListings(); }
+  const jump = ev.target.closest("[data-filter]");
+  if (jump) { filter = jump.dataset.filter; renderListings(); }
 });
-cv.addEventListener('pointermove', e => {
-  if (ptrs.has(e.pointerId)) ptrs.set(e.pointerId, [e.clientX, e.clientY]);
-  if (pinch && ptrs.size === 2) { const [[a, b], [c, d]] = [...ptrs.values()]; zoomAt(pinch.z * Math.hypot(c - a, d - b) / pinch.d, (a + c) / 2, (b + d) / 2); moved = 99; return; }
-  if (drag) {
-    const dx = e.clientX - drag.x, dy = e.clientY - drag.y; moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
-    if (moved > 5) { cv.classList.add('dragging'); ox = drag.ox - dx / z; oy = drag.oy - dy / z; clamp(); tip.hidden = true; }
-    return;
-  }
-  if (e.pointerType === 'mouse') {
-    const a = hit(e.clientX, e.clientY), lm = a ? null : landmarkAt(e.clientX, e.clientY);
-    hover = a; cv.classList.toggle('hovering', !!a); showTip(a, lm, e.clientX, e.clientY);
-  }
+$("#creditForm").addEventListener("submit", ev => { ev.preventDefault(); searchCredits($("#creditQ").value); });
+$("#creditQ").addEventListener("input", ev => searchCredits(ev.target.value));
+$("#artifactForm").addEventListener("submit", ev => {
+  ev.preventDefault();
+  $("#artifactNote").textContent = "Got it. Your artifact is in the queue for this week's page.";
+  ev.target.reset();
 });
-const end = e => {
-  ptrs.delete(e.pointerId); cv.classList.remove('dragging'); if (ptrs.size < 2) pinch = null;
-  if (drag && moved <= 5 && e.type === 'pointerup') { const a = hit(e.clientX, e.clientY); if (a) openCard(a); else if (selected) closeCard(); }
-  if (!ptrs.size) drag = null;
-};
-cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
-cv.addEventListener('pointerleave', () => { hover = null; tip.hidden = true; });
-cv.addEventListener('wheel', e => { e.preventDefault(); fly = null; zoomAt(z * Math.exp(-e.deltaY * (e.deltaMode === 1 ? 30 : 1) * .0016), e.clientX, e.clientY); }, { passive: false });
-document.getElementById('zin').onclick = () => flyTo(ox + vw / z / 2, oy + vh / z / 2, Math.min(ZMAX, z * 1.6), 260);
-document.getElementById('zout').onclick = () => flyTo(ox + vw / z / 2, oy + vh / z / 2, Math.max(ZMIN(), z / 1.6), 260);
-addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT') { if (e.key === 'Escape') e.target.blur(); return; }
-  const st = 80 / z;
-  if (e.key === 'Escape') { closeCard(); elsewhere.hidden = true; }
-  else if (e.key === '+' || e.key === '=') zoomAt(z * 1.25, vw / 2, vh / 2);
-  else if (e.key === '-') zoomAt(z / 1.25, vw / 2, vh / 2);
-  else if (e.key.startsWith('Arrow')) { ox += e.key === 'ArrowLeft' ? -st : e.key === 'ArrowRight' ? st : 0; oy += e.key === 'ArrowUp' ? -st : e.key === 'ArrowDown' ? st : 0; clamp(); }
-});
-addEventListener('resize', resize);
 
-// ---------- search, filters, elsewhere
-const search = document.getElementById('search'), results = document.getElementById('results');
-function row(label, sub, fn) {
-  const li = document.createElement('li'), b = document.createElement('button'); b.append(label);
-  const s = document.createElement('small'); s.textContent = sub; b.append(s); b.onclick = fn; li.append(b); results.append(li);
-}
-search.addEventListener('input', () => {
-  const q = search.value.trim().toLowerCase(); results.innerHTML = '';
-  if (!q) { results.hidden = true; return; }
-  const sf = agents.filter(a => a.name.toLowerCase().includes(q) || a.job.toLowerCase().includes(q)).sort((p, r) => p.rank - r.rank).slice(0, 8);
-  const ot = others.filter(a => a.name.toLowerCase().includes(q)).slice(0, 4);
-  sf.forEach(a => row(a.name, a.nhood || 'SF', () => { results.hidden = true; search.value = ''; openCard(a); }));
-  ot.forEach(a => row(a.name, a.location, () => { results.hidden = true; openElsewhere(a.name); }));
-  if (!sf.length && !ot.length) { const li = document.createElement('li'); li.className = 'none'; li.textContent = 'No agent by that name'; results.append(li); }
-  results.hidden = false;
-});
-search.addEventListener('keydown', e => { if (e.key === 'Enter') results.querySelector('button')?.click(); });
-document.addEventListener('pointerdown', e => { if (!e.target.closest('#searchwrap')) results.hidden = true; });
-document.getElementById('topbtn').onclick = e => { topOnly = !topOnly; e.currentTarget.setAttribute('aria-pressed', topOnly); layoutZ = -1; };
-function buildLegend() {
-  const counts = {}; agents.forEach(a => counts[a.cat] = (counts[a.cat] || 0) + 1);
-  const lg = document.getElementById('legend');
-  Object.entries(counts).sort((a, b) => b[1] - a[1]).forEach(([cat, n]) => {
-    const b = document.createElement('button'); b.setAttribute('aria-pressed', 'true'); b.title = 'Show only ' + catOf(cat)[0];
-    const i = document.createElement('i'); i.style.background = catOf(cat)[1]; const nb = document.createElement('b'); nb.textContent = n;
-    b.append(i, catOf(cat)[0], nb);
-    b.onclick = () => {
-      if (activeCats.size === 1 && activeCats.has(cat)) activeCats.clear(); else { activeCats.clear(); activeCats.add(cat); }
-      lg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', !activeCats.size || x === b)); layoutZ = -1;
-    };
-    lg.append(b);
-  });
-}
-const elsewhere = document.getElementById('elsewhere');
-function renderElse(q = '') {
-  q = q.toLowerCase(); const list = document.getElementById('elselist'); list.innerHTML = ''; const groups = {};
-  for (const a of others) { if (q && !a.name.toLowerCase().includes(q) && !a.location.toLowerCase().includes(q)) continue; (groups[a.location] ||= []).push(a); }
-  Object.entries(groups).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0])).forEach(([loc, arr]) => {
-    const h = document.createElement('h3'); h.textContent = loc.toUpperCase(); const s = document.createElement('small'); s.textContent = arr.length; h.append(s);
-    const ul = document.createElement('ul');
-    for (const a of arr) {
-      const li = document.createElement('li'), l = document.createElement('a'); l.href = BENCH + a.slug + '/'; l.target = '_blank'; l.rel = 'noopener'; l.title = a.job;
-      l.append(a.name); const sm = document.createElement('small'); sm.textContent = a.score.toFixed(1); l.append(sm); li.append(l); ul.append(li);
-    }
-    list.append(h, ul);
-  });
-  if (!list.children.length) list.textContent = 'No matches.';
-}
-function openElsewhere(q = '') { closeCard(); elsewhere.hidden = false; const f = document.getElementById('elsefilter'); f.value = q; renderElse(q); f.focus(); }
-document.getElementById('elsebtn').onclick = () => openElsewhere();
-document.getElementById('elseclose').onclick = () => elsewhere.hidden = true;
-document.getElementById('elsefilter').addEventListener('input', e => renderElse(e.target.value));
-
-// ---------- boot
-const img = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
-Promise.all([
-  img('city.png'), img('logo-atlas.png'), img('depth.png'),
-  fetch('agents.json').then(r => r.json()), fetch('iso.json').then(r => r.json()), fetch('others.json').then(r => r.json()),
-  document.fonts ? Promise.all([document.fonts.load('10px "Press Start 2P"'), document.fonts.load('700 12px Inter')]).catch(() => {}) : 0,
-]).then(([c, at, dp, data, is, oth]) => {
-  city = c; atlas = at; iso = is; readDepth(dp); W = is.W; H = is.H; agents = data.agents; others = oth; labels = is.labels;
-  const exact = agents.filter(a => a.prec === 'address').length;
-  document.getElementById('stats').textContent = `${agents.length} IN SF · ${others.length} ELSEWHERE`;
-  document.getElementById('elsetitle').textContent = `NOT IN SF · ${others.length}`;
-  document.getElementById('precnote').textContent = `${exact} signs sit on the company's real block; the rest are placed in their neighborhood.`;
-  document.getElementById('fine').innerHTML = document.getElementById('credits').innerHTML;
-  buildLegend(); buildLife(); resize();
-  z = vw <= 680 ? 1.1 : 1.5; ox = is.start[0] - vw / z / 2; oy = is.start[1] - vh / z / 2; clamp();
-  document.getElementById('loading').remove();
-  const loop = t => { if (fly) fly(t); draw(t); requestAnimationFrame(loop); };
-  requestAnimationFrame(loop);
-}).catch(err => { document.querySelector('#loading .panel').textContent = 'COULD NOT LOAD THE CITY. RELOAD TO TRY AGAIN.'; console.error(err); });
-})();
+fetch("events.json").then(r => r.json()).then(rows => {
+  const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
+  EVENTS = rows.map(e => ({ ...e, k: classify(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
+  render();
+}).catch(() => { $("#leadDek").textContent = "Events are loading slowly. Refresh in a moment."; });
 </script>
+</body>
+</html>

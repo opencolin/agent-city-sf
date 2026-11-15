@@ -2,7 +2,13 @@
 
 An isometric pixel-art San Francisco with a signboard for every SF-based company on [The Agent Benchmark](https://theagentbenchmark.com/). Companies based elsewhere are listed in a side panel.
 
-`public/` is the whole site: a static page that draws `city.png` on a canvas and overlays signs, flags, walkers, cars, boats and fog.
+`public/` is the whole site. `index.html` is the newspaper-style landing page (events from `events.json`); `map.html` draws `city.png` on a canvas and overlays signs, flags, walkers, cars, boats and fog.
+
+Refresh events from [eventhunt.ai](https://eventhunt.ai) (public endpoint, rate limited per hour; re-run to fill skipped queries):
+
+```bash
+python3 scripts/fetch_events.py   # public/events.json
+```
 
 ## Run locally
 
