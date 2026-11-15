@@ -46,13 +46,15 @@ button { cursor: pointer; }
 .pin:hover .flag, .pin[aria-expanded="true"] .flag { background: var(--gold); }
 .pin.landmark .flag { background: #ffffffd9; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); font-size: 11px; padding: 3px 6px; font-weight: 700; }
 .pin.landmark .stem { height: 8px; width: 3px; }
+.pin.city .flag { font-size: 15px; padding: 6px 10px; background: var(--gold); }
+.pin.city:hover .flag, .pin.city[aria-expanded="true"] .flag { background: #fff; }
 .pin.sponsor { transform: translate(-50%, -100%) scale(var(--inv, 1)); }
 .pin.sponsor .board { background: var(--blue); color: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 6px 10px; text-align: center; animation: bob 3.6s ease-in-out infinite; }
 .pin.sponsor .board small { display: block; font-family: var(--px); font-size: 7px; letter-spacing: 1px; opacity: .85; margin-bottom: 4px; }
 .pin.sponsor .board b { font-size: 15px; font-weight: 800; white-space: nowrap; }
 .pin.sponsor .rope { width: 2px; height: 30px; background: var(--ink); }
 @keyframes bob { 50% { transform: translateY(-6px); } }
-body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .pin.landmark { display: none; }
+body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .pin.landmark, body.hide-city .pin.city { display: none; }
 
 /* Panels */
 .panel { background: var(--paper); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); }
@@ -106,7 +108,7 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
 </head>
 <body>
 <div id="stage" aria-label="Painted map of San Francisco. Drag to pan, scroll or pinch to zoom.">
-  <div id="world"><img id="art" src="sf-painted.webp" alt="Hand-painted isometric map of San Francisco"><div id="pins"></div></div>
+  <div id="world"><img id="art" alt=""><div id="pins"></div></div>
 </div>
 
 <div id="hud">
@@ -114,15 +116,18 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
     <div class="bar"><span>BUILD WEEK · SF</span><button id="fold" aria-expanded="true" aria-label="Collapse panel">▾</button></div>
     <div class="body">
       <h1>THIS WEEK IN THE CITY</h1>
-      <p>Venues, sponsors and every hackathon in San Francisco. Tap a pin to see what's on there.</p>
+      <p>Venues, sponsors and every hackathon from San Francisco to San Jose. Tap a city or venue to see what's on there.</p>
       <div id="week"></div>
     </div>
   </section>
   <div id="tools">
     <a class="btn" href="/">← THE PAPER</a>
+    <button class="btn" data-view="bay" aria-pressed="true">BAY AREA</button>
+    <button class="btn" data-view="sf" aria-pressed="false">SAN FRANCISCO</button>
     <button class="btn" data-layer="venue" aria-pressed="true">VENUES</button>
     <button class="btn" data-layer="sponsor" aria-pressed="true">SPONSORS</button>
     <button class="btn" data-layer="landmark" aria-pressed="true">LANDMARKS</button>
+    <button class="btn" data-layer="city" aria-pressed="true">CITIES</button>
     <a class="btn blue" href="classic.html" title="The original pixel map with every AI company">CLASSIC MAP</a>
   </div>
 </div>
@@ -141,7 +146,7 @@ body.hide-venue .pin.venue, body.hide-sponsor .pin.sponsor, body.hide-landmark .
 
 <script>
 // Positions are fractions of the painted image (x across, y down), set by eye against landmarks in the art.
-const POIS = [
+const SF_POIS = [
   // Builder venues
   { id: "aws", kind: "venue", name: "AWS Builder Loft", e: "🛠️", x: 0.690, y: 0.545, where: "SoMa", tags: ["Co-working", "Workshops", "Fast Wi-Fi"], note: "Free space for builders on AWS, with a steady run of workshops and hack nights.", match: /aws|builder loft/i },
   { id: "frontier", kind: "venue", name: "Frontier Tower", e: "🏢", x: 0.600, y: 0.585, where: "Mid-Market", tags: ["Co-working", "Community", "Events"], note: "A whole tower of builder floors, from AI to biotech to hardware.", match: /frontier tower/i },
@@ -150,6 +155,7 @@ const POIS = [
   { id: "esembassy", kind: "venue", name: "European Startup Embassy", e: "🇪🇺", x: 0.570, y: 0.505, where: "San Francisco", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay.", match: /startup embassy/i },
   { id: "founders", kind: "venue", name: "Founders Inc.", e: "⚓", x: 0.480, y: 0.360, where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront.", match: /founders inc|fort mason/i },
   { id: "hf0", kind: "venue", name: "HF0", e: "🏠", x: 0.540, y: 0.660, where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks.", match: /\bhf0\b/i },
+  { id: "alamo", kind: "venue", name: "Hacker Hotel Alamo Square", e: "🛏️", x: .330, y: .600, where: "Alamo Square", tags: ["Co-living", "Sunday dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, a block from the park. Furnished rooms, month-to-month or short stays, and a weekly Sunday night dinner and demos.", url: "https://alamosquare.house", match: /alamo square|hacker (hotel|home)/i },
   // Landmarks
   { id: "ggb", kind: "landmark", name: "Golden Gate Bridge", e: "🌉", x: 0.530, y: 0.200 },
   { id: "salesforce", kind: "landmark", name: "Salesforce Tower", e: "🏙️", x: 0.661, y: 0.430 },
@@ -165,6 +171,41 @@ const POIS = [
   { id: "ladies", kind: "landmark", name: "Painted Ladies", e: "🏘️", x: .310, y: .570 },
   { id: "chinatown", kind: "landmark", name: "Chinatown", e: "🏮", x: .520, y: .505 },
 ];
+
+// Bay Area view: cities carry the events (eventhunt only gives a city), plus regional landmarks.
+const BAY_POIS = [
+  { id: "c-sf", kind: "city", name: "San Francisco", e: "🌁", x: .262, y: .150, loc: /san francisco/i, goto: "sf", note: "Most of the week happens here. Open the detailed city map for venues and landmarks." },
+  { id: "c-oak", kind: "city", name: "Oakland", e: "🌳", x: .690, y: .150, loc: /oakland/i },
+  { id: "c-berk", kind: "city", name: "Berkeley", e: "🐻", x: .885, y: .085, loc: /berkeley/i },
+  { id: "c-rwc", kind: "city", name: "San Mateo & Redwood City", e: "🌲", x: .375, y: .390, loc: /redwood city|san mateo|burlingame|san carlos|foster city/i },
+  { id: "c-mp", kind: "city", name: "Menlo Park", e: "🏡", x: .490, y: .460, loc: /menlo park/i },
+  { id: "c-pa", kind: "city", name: "Palo Alto", e: "🌲", x: .600, y: .500, loc: /palo alto|stanford/i },
+  { id: "c-mv", kind: "city", name: "Mountain View", e: "🎈", x: .690, y: .615, loc: /mountain view/i },
+  { id: "c-sv", kind: "city", name: "Sunnyvale & Cupertino", e: "☀️", x: .750, y: .690, loc: /sunnyvale|cupertino|santa clara/i },
+  { id: "c-sj", kind: "city", name: "San Jose", e: "🌴", x: .925, y: .825, loc: /san jose/i },
+  { id: "b-ggb", kind: "landmark", name: "Golden Gate Bridge", e: "🌉", x: .125, y: .060 },
+  { id: "b-alcatraz", kind: "landmark", name: "Alcatraz", e: "🏝️", x: .363, y: .055 },
+  { id: "b-baybridge", kind: "landmark", name: "Bay Bridge", e: "🌁", x: .450, y: .145 },
+  { id: "b-merritt", kind: "landmark", name: "Lake Merritt", e: "💧", x: .846, y: .215 },
+  { id: "b-port", kind: "landmark", name: "Port of Oakland", e: "🏗️", x: .770, y: .285 },
+  { id: "b-sfo", kind: "landmark", name: "SFO", e: "✈️", x: .425, y: .300 },
+  { id: "b-smbridge", kind: "landmark", name: "San Mateo Bridge", e: "🌉", x: .690, y: .380 },
+  { id: "b-dumbarton", kind: "landmark", name: "Dumbarton Bridge", e: "🌉", x: .820, y: .450 },
+  { id: "b-crystal", kind: "landmark", name: "Crystal Springs", e: "🏞️", x: .390, y: .560 },
+  { id: "b-stanford", kind: "landmark", name: "Stanford", e: "🎓", x: .572, y: .545 },
+  { id: "b-moffett", kind: "landmark", name: "Hangar One", e: "🛩️", x: .778, y: .585 },
+  { id: "b-ring", kind: "landmark", name: "Apple Park", e: "⭕", x: .640, y: .745 },
+  { id: "b-hmb", kind: "landmark", name: "Half Moon Bay", e: "🌊", x: .190, y: .665 },
+  { id: "b-light", kind: "landmark", name: "Point Montara Light", e: "🗼", x: .075, y: .520 },
+];
+
+const VIEWS = {
+  bay: { img: "bay-painted.webp", label: "Hand-painted map of the San Francisco Peninsula and Bay Area", pois: BAY_POIS, focus: [.50, .42],
+         spots: [[.520, .060], [.560, .260], [.935, .530], [.090, .790], [.280, .950]] },
+  sf:  { img: "sf-painted.webp", label: "Hand-painted isometric map of San Francisco", pois: SF_POIS, focus: [.55, .42],
+         spots: [[.800, .170], [.905, .760], [.200, .870], [.775, .905], [.080, .140]] },
+};
+let VIEW = "bay";
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -194,7 +235,8 @@ function fit() {
   minS = Math.max(innerWidth / W, innerHeight / H);   // cover the screen, no sea gaps
   maxS = Math.max(minS * 4, 1.5);
   s = Math.max(minS, Math.min(1, minS * 1.6));
-  tx = innerWidth / 2 - W * .55 * s; ty = innerHeight / 2 - H * .42 * s; clamp(); apply();
+  const [fx, fy] = VIEWS[VIEW].focus;
+  tx = innerWidth / 2 - W * fx * s; ty = innerHeight / 2 - H * fy * s; clamp(); apply();
 }
 const pts = new Map(); let last = null, moved = 0;
 stage.addEventListener("pointerdown", e => { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, e); moved = 0; stage.classList.add("dragging"); });
@@ -219,10 +261,10 @@ stage.addEventListener("pointerdown", hideHint);
 
 // ── Pins & cards ──
 let EVENTS = [];
-function eventsAt(p) { return p.match ? EVENTS.filter(e => p.match.test(e.name + " " + (e.hosts || []).join(" ") + " " + e.source)) : []; }
+function eventsAt(p) { if (p.loc) return EVENTS.filter(e => p.loc.test(e.location || "")); return p.match ? EVENTS.filter(e => p.match.test(e.name + " " + (e.hosts || []).join(" ") + " " + e.source)) : []; }
 function evHtml(e) { return `<a class="ev" href="${esc(e.link)}" target="_blank" rel="noopener"><time>${esc(e.time || "")}</time><span><b>${esc(e.name)}</b><span class="tag ${e.k}">${KTAG[e.k]}</span></span></a>`; }
-function renderPins(sponsors) {
-  const all = [...POIS, ...sponsors];
+function renderPins() {
+  const all = [...VIEWS[VIEW].pois, ...sponsorsFrom(EVENTS, VIEWS[VIEW].spots)];
   pins.innerHTML = all.map(p => {
     const left = (p.x * 100).toFixed(2) + "%", top = (p.y * 100).toFixed(2) + "%";
     if (p.kind === "sponsor") return `<button class="pin sponsor" data-id="${p.id}" style="left:${left};top:${top}" aria-label="Sponsor ${esc(p.name)}"><div class="board"><small>SPONSOR</small><b>${esc(p.name)}</b></div><div class="rope"></div></button>`;
@@ -244,15 +286,17 @@ function openCard(p, btn) {
     ${p.where ? `<p class="where">${esc(p.where)}</p>` : ""}
     ${p.note ? `<p>${esc(p.note)}</p>` : ""}
     ${p.tags ? `<div class="tags">${p.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+    ${p.url ? `<p><a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">VISIT ${esc(new URL(p.url).hostname.toUpperCase())} →</a></p>` : ""}
+    ${p.goto ? `<p><button class="btn blue" data-goto="${p.goto}">EXPLORE THE CITY MAP →</button></p>` : ""}
     ${p.kind === "sponsor" ? `<p>Hosting or sponsoring ${evs.length} event${evs.length > 1 ? "s" : ""} on the calendar.</p>` : ""}
     ${evs?.length ? `<div class="evs">${evs.slice(0, 6).map(evHtml).join("")}</div>` : p.kind === "venue" ? `<p style="color:var(--mute)">Nothing on the calendar here yet.</p>` : ""}`;
   $("#card").hidden = false;
+  $("#cbody [data-goto]")?.addEventListener("click", e => loadView(e.currentTarget.dataset.goto));
 }
 $("#cclose").onclick = () => { $("#card").hidden = true; pins.querySelectorAll(".pin").forEach(x => x.setAttribute("aria-expanded", "false")); };
 
 // Sponsor billboards float over open water and parks: the most active hosts on the calendar.
-const SPONSOR_SPOTS = [[.800, .170], [.905, .760], [.200, .870], [.775, .905], [.080, .140]];
-function sponsorsFrom(events) {
+function sponsorsFrom(events, SPONSOR_SPOTS) {
   const skip = /^(personal|bond ai.*|hacklist.*|.*community|.*events? calendar|.*events)$/i;
   const c = {};
   events.forEach(e => new Set([...(e.hosts || []), e.source]).forEach(h => { if (h && !skip.test(h.trim())) (c[h] ||= []).push(e); }));
@@ -275,15 +319,30 @@ document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
   document.body.classList.toggle("hide-" + b.dataset.layer, !on);
 });
 
-// ── Boot ──
-const ready = new Promise(r => { if (art.complete && art.naturalWidth) r(); else art.onload = r; });
-Promise.all([ready, fetch("events.json").then(r => r.json()).catch(() => [])]).then(([, rows]) => {
+// ── Views & boot ──
+const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
+const eventsReady = fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
+  EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
+  renderWeek();
+});
+async function loadView(v) {
+  VIEW = VIEWS[v] ? v : "bay";
+  document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === VIEW));
+  // Only show layer toggles that exist in this view.
+  const kinds = new Set(VIEWS[VIEW].pois.map(p => p.kind));
+  document.querySelectorAll("[data-layer]").forEach(b => b.hidden = b.dataset.layer !== "sponsor" && !kinds.has(b.dataset.layer));
+  $("#card").hidden = true;
+  history.replaceState(null, "", "#" + VIEW);
+  const cfg = VIEWS[VIEW];
+  art.alt = cfg.label;
+  await new Promise(r => { art.onload = r; art.onerror = r; art.src = cfg.img; if (art.complete && art.naturalWidth && art.src.endsWith(cfg.img)) r(); });
+  await eventsReady;
   W = art.naturalWidth; H = art.naturalHeight;
   world.style.width = W + "px"; world.style.height = H + "px";
-  const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
-  EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
-  fit(); renderPins(sponsorsFrom(EVENTS)); renderWeek();
-});
+  fit(); renderPins();
+}
+document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => loadView(b.dataset.view));
+loadView(location.hash.slice(1) || "bay");
 </script>
 </body>
 </html>

@@ -583,6 +583,7 @@ const VENUES = [
   { name: "European Startup Embassy", where: "San Francisco", tags: ["Community", "Events"], note: "A landing pad for European founders arriving in the Bay." },
   { name: "Founders Inc.", where: "Fort Mason", tags: ["Co-working", "Demo nights", "Bay views"], note: "Builder campus and showcase space on the northern waterfront." },
   { name: "HF0", where: "San Francisco", tags: ["Residency", "Live-in"], note: "A residency where founders live and build together for twelve weeks." },
+  { name: "Hacker Hotel Alamo Square", where: "Alamo Square", url: "https://alamosquare.house", tags: ["Co-living", "Dinner & demos", "Short stays"], note: "A Victorian hacker home for founders and builders, with a Sunday night dinner and demos every week." },
 ];
 
 let EVENTS = [];
@@ -647,7 +648,7 @@ function render() {
   // Venues
   $("#venueGrid").innerHTML = VENUES.map(v => `<article class="venue">
     <div class="kicker">${esc(v.where)}</div>
-    <h3 class="hl">${esc(v.name)}</h3>
+    ${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener"><h3 class="hl">${esc(v.name)} ↗</h3></a>` : `<h3 class="hl">${esc(v.name)}</h3>`}
     <p class="dek">${esc(v.note)}</p>
     <div class="tags">${v.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
   </article>`).join("");
