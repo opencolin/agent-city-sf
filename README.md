@@ -1,8 +1,8 @@
-# Agent City SF
+# San Francisco Build Week
 
-An isometric pixel-art San Francisco with a signboard for every SF-based company on [The Agent Benchmark](https://theagentbenchmark.com/). Companies based elsewhere are listed in a side panel.
+Every hackathon, demo night and free lunch in San Francisco, ranked for you. Live at [buildweek.ai](https://buildweek.ai).
 
-`public/` is the whole site. `index.html` is the newspaper-style landing page (events from `events.json`). `map.html` is the hand-painted map (`sf-painted.webp`, generated with GPT Image 2.5 from the classic map's layout) with venue, landmark and sponsor pins. `classic.html` draws `city.png` on a canvas and overlays signs, flags, walkers, cars, boats and fog. `api/news.js` is a Vercel function serving Hacker News, YC launches and HackerNoon.
+`public/` is the whole site. `index.html` is the newspaper-style front page (events from `events.json`). `map.html` is the hand-painted map: a Bay Area view (`bay-painted.webp`) with events pinned by city, and a San Francisco view (`sf-painted.webp`) with venues and landmarks. Both paintings were generated with GPT Image 2.5. `api/news.js` is a Vercel function serving Hacker News, YC launches and HackerNoon.
 
 Refresh events from [eventhunt.ai](https://eventhunt.ai) (public endpoint, rate limited per hour; re-run to fill skipped queries):
 
@@ -16,22 +16,10 @@ python3 scripts/fetch_events.py   # public/events.json
 python3 -m http.server 5173 -d public
 ```
 
-## Rebuild the data and the city
+## Earlier pixel map
 
-Requires Python 3 with Pillow and NumPy.
-
-```bash
-python3 scripts/scrape_list.py path/to/theagentbenchmark.html   # data/list.json
-python3 scripts/scrape_details.py                                # data/agents.json, public/logos/
-python3 scripts/render_map.py                                     # masks from OSM + DataSF
-python3 scripts/place_logos.py                                    # public/agents.json, logo atlas
-python3 scripts/render_iso.py                                     # public/city.png, depth.png, iso.json
-```
-
-`render_map.py` also needs `data/osm.json` and `data/osm_water.json`, Overpass API extracts (not checked in) of highways, parks, woods, beaches, piers and `natural=water` inside the bounding box 37.70,-122.53,37.84,-122.35. `data/neighborhoods.geojson` is DataSF's Analysis Neighborhoods.
-
-`data/sf_addresses.json` holds hand-researched street addresses for the top 80 SF companies (47 exact, 7 neighborhood-level). Everyone else is placed within a typical startup neighborhood, so their block is approximate.
+The `scripts/` and `data/` folders still hold the pipeline for the original isometric pixel map (company data from The Agent Benchmark, streets from OpenStreetMap). Its page was removed from the site; it is in git history before the commit that removed `public/classic.html`.
 
 ## Credits
 
-Company data: The Agent Benchmark (October 2026). Streets and parks © OpenStreetMap contributors. Neighborhood boundaries: DataSF.
+Events: [eventhunt.ai](https://eventhunt.ai), originally listed on Luma. Weather: Open-Meteo and the National Weather Service. News: Hacker News and HackerNoon.
