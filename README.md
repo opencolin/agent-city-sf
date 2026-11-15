@@ -2,7 +2,7 @@
 
 An isometric pixel-art San Francisco with a signboard for every SF-based company on [The Agent Benchmark](https://theagentbenchmark.com/). Companies based elsewhere are listed in a side panel.
 
-`public/` is the whole site. `index.html` is the newspaper-style landing page (events from `events.json`); `map.html` draws `city.png` on a canvas and overlays signs, flags, walkers, cars, boats and fog.
+`public/` is the whole site. `index.html` is the newspaper-style landing page (events from `events.json`). `map.html` is the hand-painted map (`sf-painted.webp`, generated with GPT Image 2.5 from the classic map's layout) with venue, landmark and sponsor pins. `classic.html` draws `city.png` on a canvas and overlays signs, flags, walkers, cars, boats and fog. `api/news.js` is a Vercel function serving Hacker News, YC launches and HackerNoon.
 
 Refresh events from [eventhunt.ai](https://eventhunt.ai) (public endpoint, rate limited per hour; re-run to fill skipped queries):
 
