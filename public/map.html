@@ -43,17 +43,25 @@ button { cursor: pointer; }
 .pin .flag { background: var(--paper); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 4px 8px; font-weight: 800; font-size: 13px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
 .pin .flag .n { font-family: var(--px); font-size: 8px; background: var(--red); color: #fff; padding: 3px 4px; }
 .pin .stem { width: 3px; height: 14px; background: var(--ink); }
+/* Venue names sit above everything; event pins under them, then sprites. */
+.maplibregl-marker.pin.venue { z-index: 6; }
+.maplibregl-marker.pin.spot { z-index: 4; }
+.maplibregl-marker.pin.city { z-index: 5; }
+.maplibregl-marker.blimp { z-index: 7; }
+.pin.tucked { visibility: hidden; }
+.pin .flag { transition: transform .15s; }
 .pin:hover .flag, .pin[aria-expanded="true"] .flag { background: var(--gold); }
 .pin.city .flag { background: var(--gold); font-size: 15px; }
 .pin.spot .flag { font-family: var(--px); font-size: 9px; padding: 3px 6px; gap: 4px; background: var(--red); color: #fff; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); }
 .pin.spot.area .flag { background: var(--purple); }
 .pin.spot .stem { height: 10px; }
 .pin.spot:hover .flag, .pin.spot[aria-expanded="true"] .flag { background: var(--gold); color: var(--ink); }
-.blimp { position: relative; pointer-events: auto; cursor: pointer; animation: bob 14s ease-in-out infinite; }
+.blimp { pointer-events: auto; cursor: pointer; }
+.blimp .body { position: relative; animation: bob 14s ease-in-out infinite; }  /* drift the inside: the marker's own transform positions it */
 .blimp img { display: block; width: calc(170px * var(--s, 1)); filter: drop-shadow(0 10px 6px #0003); }
 .blimp b { position: absolute; left: 22%; right: 30%; top: 26%; height: 30%; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: calc(13px * var(--s, 1)); line-height: 1.05; color: var(--ink); overflow: hidden; }
 @keyframes bob { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(6px, -3px); } 50% { transform: translate(10px, -5px); } 75% { transform: translate(4px, -2px); } }
-@media (prefers-reduced-motion: reduce) { .blimp { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .blimp .body { animation: none; } }
 
 /* Zoom bands and layer toggles */
 body.far .mid-up, body:not(.far) .far-only, body:not(.close) .close-only { display: none !important; }
@@ -253,6 +261,40 @@ function onZoom() {
 }
 map.on("zoom", onZoom);
 
+// ── Decluttering ──
+// Venue names win: a venue label that hits another is nudged below its sprite, and an
+// event pin that would cover a venue label (or a busier pin) is tucked away until you zoom in.
+function declutter() {
+  const pins = [...document.querySelectorAll(".pin.venue, .pin.spot")];
+  pins.forEach(p => { p.classList.remove("tucked"); p.querySelector(".flag").style.transform = ""; });
+  const vis = p => p.getClientRects().length && getComputedStyle(p).display !== "none";
+  const hit = (a, b, pad = 3) => a.left < b.right + pad && b.left < a.right + pad && a.top < b.bottom + pad && b.top < a.bottom + pad;
+  const placed = [];
+  for (const p of pins.filter(p => p.classList.contains("venue") && vis(p))) {
+    const f = p.querySelector(".flag"), r = f.getBoundingClientRect();
+    const tries = [0, r.height + 8, -(r.height + 8), 2 * (r.height + 8)];
+    let dy = 0;
+    for (const t of tries) {
+      const rr = { left: r.left, right: r.right, top: r.top + t, bottom: r.bottom + t };
+      if (!placed.some(q => hit(q, rr))) { dy = t; break; }
+    }
+    if (dy) f.style.transform = `translateY(${dy}px)`;
+    placed.push({ left: r.left, right: r.right, top: r.top + dy, bottom: r.bottom + dy });
+  }
+  const spots = pins.filter(p => p.classList.contains("spot") && vis(p)).sort((a, b) => (+b.dataset.n || 0) - (+a.dataset.n || 0));
+  for (const p of spots) {
+    const r = p.querySelector(".flag").getBoundingClientRect();
+    if (placed.some(q => hit(q, r))) p.classList.add("tucked");
+    else placed.push(r);
+  }
+}
+let declutterTimer;
+const declutterSoon = () => { clearTimeout(declutterTimer); declutterTimer = setTimeout(declutter, 60); };
+map.on("moveend", declutterSoon);
+map.on("zoomend", declutterSoon);
+map.on("pitchend", declutterSoon);
+addEventListener("resize", declutterSoon);
+
 // ── Markers ──
 function marker(el, lat, lng, anchor = "bottom") {
   return new maplibregl.Marker({ element: el, anchor, pitchAlignment: "viewport", rotationAlignment: "viewport" }).setLngLat([lng, lat]).addTo(map);
@@ -295,7 +337,7 @@ function placeAll() {
     const lat = g.events.reduce((t, e) => t + e.lat, 0) / g.events.length, lng = g.events.reduce((t, e) => t + e.lng, 0) / g.events.length;
     const n = g.events.length;
     const pin = pinEl(`spot close-only${g.pub ? "" : " area"}`, `${g.pub ? "●" : "◆"} ${n}`, `${g.name}, ${n} event${n > 1 ? "s" : ""}`);
-    pin.title = g.name;
+    pin.title = g.name; pin.dataset.n = n;
     bindCard(marker(pin, lat, lng).getElement(), { kind: "spot", ...g, where: g.pub ? (g.events[0].neighborhood || "") : "Exact address shared after you RSVP" });
   }
 
@@ -307,8 +349,8 @@ function placeAll() {
 
   sponsorsFrom(EVENTS).forEach((sp, i) => {
     const el = document.createElement("div");
-    el.className = "blimp sponsor"; el.style.animationDelay = (i * 0.7) + "s";
-    el.innerHTML = `<img src="sprites/blimp.webp" alt=""><b>${esc(sp.name)}</b>`;
+    el.className = "blimp sponsor";
+    el.innerHTML = `<div class="body" style="animation-delay:-${i * 5}s"><img src="sprites/blimp.webp" alt=""><b>${esc(sp.name)}</b></div>`;
     el.title = `Sponsor: ${sp.name}`;
     bindCard(marker(el, BLIMP_SPOTS[i][0], BLIMP_SPOTS[i][1], "center").getElement(), { kind: "sponsor", ...sp });
   });
@@ -361,15 +403,15 @@ $("#tilt").onclick = () => { const on = map.getPitch() < 10; map.easeTo({ pitch:
 $("#fold").onclick = () => { const b = $("#title .body"); b.hidden = !b.hidden; $("#fold").textContent = b.hidden ? "▸" : "▾"; $("#fold").setAttribute("aria-expanded", !b.hidden); };
 document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
   const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", on);
-  document.body.classList.toggle("hide-" + b.dataset.layer, !on);
+  document.body.classList.toggle("hide-" + b.dataset.layer, !on); declutterSoon();
 });
 
 // ── Boot ──
 fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
   EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
   renderWeek();
-  const start = () => { placeAll(); onZoom(); if (location.hash === "#sf") map.jumpTo(map.cameraForBounds(VIEWS.sf, { padding: 40 })); };
-  map.loaded() ? start() : map.once("load", start);
+  const start = () => { placeAll(); onZoom(); if (location.hash === "#sf") map.jumpTo(map.cameraForBounds(VIEWS.sf, { padding: 40 })); declutterSoon(); };
+  start(); // markers don't need tiles, so don't wait for them
 });
 </script>
 </body>
