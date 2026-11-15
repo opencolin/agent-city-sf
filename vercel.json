@@ -5,6 +5,7 @@
   "redirects": [
     { "source": "/:path*", "has": [{ "type": "host", "value": "buildweek.org" }], "destination": "https://build-week.com/:path*", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "www.buildweek.org" }], "destination": "https://build-week.com/:path*", "permanent": true },
-    { "source": "/:path*", "has": [{ "type": "host", "value": "www.build-week.com" }], "destination": "https://build-week.com/:path*", "permanent": true }
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.build-week.com" }], "destination": "https://build-week.com/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.buildweek.ai" }], "destination": "https://buildweek.ai/:path*", "permanent": true }
   ]
 }
