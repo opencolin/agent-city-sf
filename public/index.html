@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>San Francisco Build Week</title>
 <meta name="description" content="Every hackathon, demo night, pitch night and free lunch in San Francisco, ranked for you.">
+<script>
+  try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
@@ -185,6 +188,81 @@ nav.sections a:hover { text-decoration: underline; }
 footer { border-top: 3px double var(--rule); padding: 18px 0 40px; font-family: var(--sans); font-size: 12px; color: var(--mute); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
 
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Theme toggle */
+.theme { display: inline-flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden; }
+.theme button { border: 0; background: transparent; width: 30px; height: 29px; font-size: 14px; line-height: 1; cursor: pointer; color: var(--ink); }
+.theme button + button { border-left: 1px solid var(--ink); }
+.theme button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.wx-now { font-weight: 700; }
+.wx-now:hover { text-decoration: underline; }
+.wx-sun { color: var(--mute); font-weight: 500; }
+
+/* Weather band */
+.wx { display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: stretch; }
+.wx-today { border-right: 1px solid var(--hair); padding-right: 24px; }
+.wx-temp { font-family: var(--head); font-weight: 900; font-size: 64px; line-height: 1; display: flex; align-items: center; gap: 12px; }
+.wx-temp .ico { font-size: 44px; }
+.wx-cond { font-family: var(--head); font-style: italic; font-size: 20px; margin: 6px 0 12px; }
+.wx-facts { font-family: var(--sans); font-size: 13px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+.wx-facts dt { color: var(--mute); }
+.wx-facts dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.days { display: grid; grid-template-columns: repeat(10, minmax(74px, 1fr)); overflow-x: auto; scrollbar-width: thin; }
+.dcell { padding: 6px 8px 10px; border-left: 1px solid var(--hair); text-align: center; font-family: var(--sans); font-size: 12px; display: flex; flex-direction: column; gap: 3px; align-items: center; }
+.dcell:first-child { border-left: 0; }
+.dcell .dn { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.dcell .dd { color: var(--mute); font-size: 11px; }
+.dcell .di { font-size: 26px; line-height: 1.2; }
+.dcell .hi { font-family: var(--head); font-weight: 800; font-size: 18px; }
+.dcell .lo { color: var(--mute); }
+.dcell .rain { color: var(--accent); font-size: 11px; min-height: 14px; }
+.dcell .ev { margin-top: 4px; font-size: 10.5px; font-weight: 700; background: var(--chip); border-radius: 999px; padding: 2px 7px; }
+.dcell.is-today { background: var(--ad); }
+
+/* Today band */
+.today-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
+.today-grid .row { grid-template-columns: 64px 1fr; }
+.today-grid .row .badge { grid-column: 2; justify-self: start; margin-top: -2px; }
+.now-tag { color: var(--hot); font-weight: 800; }
+
+/* Galleries: #buildswag and #brunchlife */
+.gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 200px; gap: 12px; }
+.gallery .tile { position: relative; overflow: hidden; border-radius: 2px; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; color: #fff; text-decoration: none; isolation: isolate; }
+.gallery .tile:first-child { grid-row: span 2; }
+.gallery .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.gallery .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,.65)); z-index: -1; }
+.gallery .tile .emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 64px; z-index: -1; opacity: .9; transition: transform .4s ease; }
+.gallery .tile:first-child .emoji { font-size: 110px; }
+.gallery .tile:hover .emoji { transform: translate(-50%, -66%) rotate(-6deg) scale(1.06); }
+.gallery .tile .cap { font-family: var(--head); font-weight: 700; font-size: 18px; line-height: 1.15; }
+.gallery .tile:first-child .cap { font-size: 26px; }
+.gallery .tile .by { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .85; margin-top: 4px; }
+.g-swag .tile:nth-child(6n+1) { background: linear-gradient(135deg, #1b1b1b, #4b2c6f); }
+.g-swag .tile:nth-child(6n+2) { background: linear-gradient(135deg, #b3261e, #ef8354); }
+.g-swag .tile:nth-child(6n+3) { background: linear-gradient(135deg, #1d4a6e, #4fa3d1); }
+.g-swag .tile:nth-child(6n+4) { background: linear-gradient(135deg, #2f5d3a, #a3c76d); }
+.g-swag .tile:nth-child(6n+5) { background: linear-gradient(135deg, #3a3a3a, #9a9a9a); }
+.g-brunch .tile:nth-child(6n+1) { background: linear-gradient(135deg, #f4a259, #e76f51); }
+.g-brunch .tile:nth-child(6n+2) { background: linear-gradient(135deg, #f6d365, #fda085); }
+.g-brunch .tile:nth-child(6n+3) { background: linear-gradient(135deg, #84a98c, #354f52); }
+.g-brunch .tile:nth-child(6n+4) { background: linear-gradient(135deg, #e9c46a, #a26769); }
+.g-brunch .tile:nth-child(6n+5) { background: linear-gradient(135deg, #cdb4db, #6d597a); }
+.tag-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-family: var(--sans); font-size: 13px; color: var(--ink-2); }
+.tag-cta b { font-family: var(--head); font-size: 18px; color: var(--ink); }
+
+@media (max-width: 1000px) {
+  .wx { grid-template-columns: 1fr; }
+  .wx-today { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--hair); padding-bottom: 14px; }
+  .today-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .hide-xs { display: none; }
+  .today-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+  .gallery .tile:first-child { grid-column: 1 / -1; grid-row: span 2; }
+}
+
 @media (prefers-reduced-motion: reduce) { .figure img { transition: none; } .kicker.live::before { animation: none; } }
 
 /* ── Responsive ── */
@@ -219,9 +297,16 @@ footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
   <div class="util">
     <div class="left">
       <span>SAN FRANCISCO</span>
+      <a class="hide-s wx-now" id="wxNow" href="#weather"></a>
+      <span class="hide-s wx-sun" id="wxSun"></span>
     </div>
     <div class="right">
-      <a class="btn" href="#host">Host an event</a>
+      <div class="theme" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="light" title="Light">☀︎<span class="sr">Light</span></button>
+        <button type="button" data-theme-set="dark" title="Dark">☾<span class="sr">Dark</span></button>
+        <button type="button" data-theme-set="system" title="Match system">◐<span class="sr">System</span></button>
+      </div>
+      <a class="btn hide-xs" href="#host">Host an event</a>
       <a class="btn solid" href="#personas">Sign up free</a>
     </div>
   </div>
@@ -243,7 +328,11 @@ footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
     <a href="#demos">Demo Days &amp; Pitch Nights</a>
     <a href="#credits">Free Credits</a>
     <a href="#venues">Where to Work</a>
-    <a href="#listings">Calendar</a>
+    <a href="#weather">Weather</a>
+    <a href="#todayBand">Today</a>
+    <a href="#listings">Next 10 Days</a>
+    <a href="#style">Style</a>
+    <a href="#brunch">Brunch</a>
     <a href="#artifacts">#buildweek</a>
     <a href="map.html">The Map</a>
   </nav>
@@ -294,6 +383,22 @@ footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
         </aside>
       </section>
     </div>
+
+    <section class="band" id="weather">
+      <div class="kicker">Weather · San Francisco</div>
+      <h2 class="banner">Fog, Sun, and Where to Be</h2>
+      <div class="wx">
+        <div class="wx-today" id="wxToday"><div class="empty" style="font-style:italic;color:var(--mute)">Checking the sky…</div></div>
+        <div class="days" id="wxDays" aria-label="10-day forecast"></div>
+      </div>
+    </section>
+
+    <section class="band" id="todayBand">
+      <div class="kicker live">Today</div>
+      <h2 class="banner" id="todayHl">Today in San Francisco</h2>
+      <p class="lede" id="todayLede"></p>
+      <div class="today-grid" id="todayList"></div>
+    </section>
 
     <section class="band rv" id="credits">
       <div class="kicker">The Free Credits Desk</div>
@@ -356,10 +461,26 @@ footer .fm { font-family: var(--mast); font-size: 26px; color: var(--ink); }
 
     <section class="band rv" id="listings">
       <div class="kicker">The Listings</div>
-      <h2 class="banner">The Calendar</h2>
+      <h2 class="banner">The Next 10 Days</h2>
       <p class="lede" id="listLede"></p>
       <div class="filters" id="filters" role="group" aria-label="Filter by type"></div>
       <div class="listings" id="listings-body"></div>
+    </section>
+
+    <section class="band" id="style">
+      <div class="kicker">Style · #buildswag</div>
+      <h2 class="banner">On the Street: Hackathon Swag</h2>
+      <p class="lede">The hoodies, tees, stickers and tote bags of Build Week, as worn by the people who earned them.</p>
+      <div class="gallery g-swag" id="swagGallery"></div>
+      <div class="tag-cta"><span>Wearing something good? Post a photo with <b>#buildswag</b> and it shows up here.</span><a class="btn" href="#artifacts">Submit a fit</a></div>
+    </section>
+
+    <section class="band" id="brunch">
+      <div class="kicker">Food · #brunchlife</div>
+      <h2 class="banner">Brunch Is a Meeting</h2>
+      <p class="lede">Weekend tables, hackathon breakfasts, and the coffee that fueled the demo. Everything tagged #brunchlife and #buildweek.</p>
+      <div class="gallery g-brunch" id="brunchGallery"></div>
+      <div class="tag-cta"><span>Post with <b>#brunchlife</b> and <b>#buildweek</b> to get your table in the paper.</span><a class="btn" href="#artifacts">Submit a brunch</a></div>
     </section>
 
     <section class="band rv" id="artifacts">
@@ -510,7 +631,8 @@ function searchCredits(q) {
 
 function renderListings() {
   const today = isoLocal(new Date());
-  let up = EVENTS.filter(e => e.date >= today);
+  const last = isoLocal(new Date(Date.now() + 9 * 864e5));
+  let up = EVENTS.filter(e => e.date >= today && e.date <= last);
   if (!up.length) up = EVENTS;
   const opts = [["all", "Everything"], ["hack", "Hackathons"], ["demo", "Demo & Pitch"], ["talk", "Talks & Meetups"]];
   $("#filters").innerHTML = opts.map(([k, l]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${filter === k}">${l} <span style="opacity:.6">${k === "all" ? up.length : up.filter(e => e.k === k).length}</span></button>`).join("");
@@ -520,6 +642,105 @@ function renderListings() {
   $("#listings-body").innerHTML = Object.entries(days).map(([d, es]) => `<div class="day"><h3>${esc(fmtDay(d))}</h3>${es.map(rowHtml).join("")}</div>`).join("");
   $("#listLede").textContent = `${up.length} Bay Area events from ${fmtShort(up[0]?.date || today)} to ${fmtShort(up.at(-1)?.date || today)}. Filter by what you came for.`;
 }
+
+// ── Today ──
+function renderToday() {
+  const now = new Date(), today = isoLocal(now);
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const todays = EVENTS.filter(e => e.date === today);
+  $("#todayHl").textContent = todays.length ? `${todays.length} Things Happening in San Francisco Today` : "A Quiet Day in San Francisco";
+  $("#todayLede").textContent = todays.length
+    ? `${todays.filter(e => e.k === "hack").length} hackathons, ${todays.filter(e => e.k === "demo").length} demo and pitch nights, and ${todays.filter(e => e.k === "talk").length} talks on ${fmtDay(today)}.`
+    : "Nothing on the calendar today. Good day to build, or to brunch.";
+  $("#todayList").innerHTML = todays.map(e => {
+    const live = Math.abs(evMins(e.time) - mins) < 90 && evMins(e.time) <= mins;
+    return rowHtml(e).replace('<span class="t">', `<span class="t">${live ? '<span class="now-tag">NOW</span><br>' : ""}`);
+  }).join("");
+}
+const evMins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
+
+// ── Weather (Open-Meteo, no key) ──
+const WMO = c => c === 0 ? ["☀️", "Clear"] : c <= 2 ? ["🌤️", "Partly cloudy"] : c === 3 ? ["☁️", "Overcast"]
+  : c <= 48 ? ["🌫️", "Fog"] : c <= 57 ? ["🌦️", "Drizzle"] : c <= 67 ? ["🌧️", "Rain"] : c <= 77 ? ["🌨️", "Snow"]
+  : c <= 82 ? ["🌦️", "Showers"] : ["⛈️", "Thunderstorms"];
+const hhmm = s => new Date(s).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+async function loadWeather() {
+  const url = "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194"
+    + "&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m"
+    + "&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max"
+    + "&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FLos_Angeles&forecast_days=10";
+  try {
+    const w = await (await fetch(url)).json();
+    const c = w.current, d = w.daily;
+    const [ico, cond] = WMO(c.weather_code);
+    const t = Math.round(c.temperature_2m);
+    $("#wxNow").textContent = `${ico} ${t}°F ${cond}`;
+    $("#wxSun").textContent = `☀︎ ${hhmm(d.sunrise[0])} · ☾ ${hhmm(d.sunset[0])}`;
+    const dayLen = (new Date(d.sunset[0]) - new Date(d.sunrise[0])) / 6e4;
+    $("#wxToday").innerHTML = `
+      <div class="wx-temp"><span class="ico">${ico}</span>${t}°</div>
+      <div class="wx-cond">${esc(cond)}, feels like ${Math.round(c.apparent_temperature)}°</div>
+      <dl class="wx-facts">
+        <dt>High / Low</dt><dd>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°</dd>
+        <dt>Sunrise</dt><dd>${hhmm(d.sunrise[0])}</dd>
+        <dt>Sunset</dt><dd>${hhmm(d.sunset[0])}</dd>
+        <dt>Daylight</dt><dd>${Math.floor(dayLen / 60)}h ${Math.round(dayLen % 60)}m</dd>
+        <dt>Wind</dt><dd>${Math.round(c.wind_speed_10m)} mph</dd>
+        <dt>Humidity</dt><dd>${c.relative_humidity_2m}%</dd>
+      </dl>`;
+    const today = isoLocal(new Date());
+    $("#wxDays").innerHTML = d.time.map((day, i) => {
+      const [di, dc] = WMO(d.weather_code[i]);
+      const n = EVENTS.filter(e => e.date === day).length;
+      const p = d.precipitation_probability_max[i];
+      return `<div class="dcell${day === today ? " is-today" : ""}" title="${esc(dc)}">
+        <span class="dn">${i === 0 ? "Today" : parseDay(day).toLocaleDateString("en-US", { weekday: "short" })}</span>
+        <span class="dd">${parseDay(day).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+        <span class="di" aria-label="${esc(dc)}">${di}</span>
+        <span class="hi">${Math.round(d.temperature_2m_max[i])}°</span>
+        <span class="lo">${Math.round(d.temperature_2m_min[i])}°</span>
+        <span class="rain">${p >= 20 ? "💧 " + p + "%" : ""}</span>
+        <span class="dd">↑${hhmm(d.sunrise[i]).replace(" AM", "")} ↓${hhmm(d.sunset[i]).replace(" PM", "")}</span>
+        ${n ? `<a class="ev" href="#listings">${n} event${n > 1 ? "s" : ""}</a>` : ""}
+      </div>`;
+    }).join("");
+  } catch (err) {
+    $("#wxToday").innerHTML = `<div style="font-style:italic;color:var(--mute)">Weather is unavailable right now.</div>`;
+  }
+}
+
+// ── #buildswag / #brunchlife galleries (public/social.json, filled by a scraper) ──
+const OPEN_SLOTS = {
+  swag: [["🧥", "The hoodie you won at the boat hackathon"], ["🧢", "Sponsor caps, ranked"], ["👟", "Conference-floor sneakers"], ["🎒", "The tote bag stack"], ["🕶️", "Demo-day sunglasses"]],
+  brunch: [["🥞", "The Saturday table before the hackathon"], ["☕", "The coffee that shipped the demo"], ["🥑", "Avocado toast with a pitch deck"], ["🍳", "Hackathon breakfast spreads"], ["🥐", "Croissants at the co-working space"]],
+};
+function renderGallery(el, items, slots, tag) {
+  const tiles = items.slice(0, 5).map(p => `<a class="tile" href="${esc(p.url)}" target="_blank" rel="noopener">
+      ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.caption || tag)}" loading="lazy">` : ""}
+      <span class="cap">${esc(p.caption || "")}</span><span class="by">${esc(p.author || "")} · ${esc(tag)}</span></a>`);
+  for (const [emo, cap] of slots.slice(tiles.length)) {
+    tiles.push(`<a class="tile" href="#artifacts"><span class="emoji" aria-hidden="true">${emo}</span>
+      <span class="cap">${esc(cap)}</span><span class="by">Open slot · post with ${esc(tag)}</span></a>`);
+  }
+  el.innerHTML = tiles.slice(0, 5).join("");
+}
+async function loadSocial() {
+  let posts = [];
+  try { posts = await (await fetch("social.json")).json(); } catch (e) {}
+  const has = (p, t) => (p.tags || []).map(x => x.toLowerCase()).includes(t);
+  renderGallery($("#swagGallery"), posts.filter(p => has(p, "buildswag")), OPEN_SLOTS.swag, "#buildswag");
+  renderGallery($("#brunchGallery"), posts.filter(p => has(p, "brunchlife") || (has(p, "buildweek") && has(p, "brunch"))), OPEN_SLOTS.brunch, "#brunchlife");
+}
+
+// ── Theme: light / dark / system ──
+function applyTheme(mode) {
+  if (mode === "light" || mode === "dark") document.documentElement.dataset.theme = mode;
+  else delete document.documentElement.dataset.theme;
+  try { mode === "system" ? localStorage.removeItem("theme") : localStorage.setItem("theme", mode); } catch (e) {}
+  document.querySelectorAll("[data-theme-set]").forEach(b => b.setAttribute("aria-pressed", b.dataset.themeSet === mode));
+}
+applyTheme(document.documentElement.dataset.theme || "system");
+document.querySelectorAll("[data-theme-set]").forEach(b => b.addEventListener("click", () => applyTheme(b.dataset.themeSet)));
 
 // Interactions
 document.addEventListener("click", ev => {
@@ -542,7 +763,10 @@ fetch("events.json").then(r => r.json()).then(rows => {
   const mins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
   EVENTS = rows.map(e => ({ ...e, k: classify(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
   render();
-}).catch(() => { $("#leadDek").textContent = "Events are loading slowly. Refresh in a moment."; });
+  renderToday();
+}).catch(() => { $("#leadDek").textContent = "Events are loading slowly. Refresh in a moment."; })
+  .finally(loadWeather);
+loadSocial();
 </script>
 </body>
 </html>
