@@ -128,8 +128,8 @@ nav.sections a:hover { text-decoration: underline; }
 .byline { font-family: var(--sans); font-size: 11px; color: var(--mute); margin-top: 6px; letter-spacing: .02em; }
 .story { padding: 14px 0; border-bottom: 1px solid var(--hair); }
 .story:last-child { border-bottom: 0; }
-.story .flyer { display: block; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--hair); background: var(--chip); margin: 2px 0 12px; }
-.story .flyer img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.92); transition: transform .3s; }
+.story .flyer { display: block; overflow: hidden; border: 1px solid var(--hair); background: var(--chip); margin: 2px 0 12px; }
+.story .flyer img { width: 100%; height: auto; max-height: 360px; object-fit: contain; display: block; filter: saturate(.92); transition: transform .3s; }  /* whole flyer, never cropped */
 .story:hover .flyer img { transform: scale(1.04); }
 .story .hl { font-size: 19px; }
 .sec-title { font-family: var(--sans); font-weight: 800; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; border-top: 2px solid var(--rule); padding-top: 8px; margin: 0 0 4px; display: flex; justify-content: space-between; align-items: baseline; }
@@ -673,8 +673,8 @@ let EVENTS = [];
 let filter = "all";
 
 // Event flyer, resized by Luma's image CDN when it's a Luma cover.
-const flyer = (u, w = 240, h = Math.round(w * 9 / 16)) => !u ? "" : /^https:\/\/images\.lumacdn\.com\//.test(u) && !/cdn-cgi/.test(u)
-  ? u.replace("https://images.lumacdn.com/", `https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,quality=80,width=${w},height=${h}/`) : u;
+const flyer = (u, w = 640) => !u ? "" : /^https:\/\/images\.lumacdn\.com\//.test(u) && !/cdn-cgi/.test(u)
+  ? u.replace("https://images.lumacdn.com/", `https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=scale-down,quality=80,width=${w}/`) : u;
 function storyHtml(e) {
   const hosts = e.hosts?.length ? e.hosts.slice(0, 2).join(", ") : e.source;
   return `<article class="story${e.image ? " has-flyer" : ""}">
@@ -726,7 +726,7 @@ function render() {
   $("#leadDek").textContent = `${c.hack} hackathons, ${c.demo} demo days and pitch nights, and ${c.talk} talks across the Bay, pulled from Luma and ranked by eventhunt. Pick your persona and we'll tell you which rooms you'll like and actually get into.`;
 
   // Columns
-  $("#hackList").innerHTML = by("hack").slice(0, 4).map(storyHtml).join("");
+  $("#hackList").innerHTML = by("hack").slice(0, 3).map(storyHtml).join("");
   $("#demoList").innerHTML = by("demo").slice(0, 3).map(storyHtml).join("");
 
   const broke = up.filter(e => (e.k === "hack" && /AM/.test(e.time || "")) || /🍕|pizza|dinner|coffee/i.test(e.name)).slice(0, 5);
