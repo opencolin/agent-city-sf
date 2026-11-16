@@ -55,6 +55,9 @@ TAVILY_QUERIES = [
     f"builder events SoMa San Francisco {MONTH} luma",
     f"agents hackathon Palo Alto OR Berkeley OR Oakland {MONTH}",
     "#buildweek San Francisco",
+    "Cafe Compute San Francisco luma",
+    "Cursor Cafe San Francisco",
+    f"founder brunch OR builders breakfast San Francisco {MONTH}",
 ]
 X_QUERIES = [
     ("#buildweek", "social"),

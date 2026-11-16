@@ -287,6 +287,11 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
 .wire .story .hl { font-size: 17px; }
 
 /* Galleries: #buildswag and #brunchlife */
+.food-wrap { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 28px; align-items: start; margin-bottom: 8px; }
+.food-wrap .food-events .mini { margin: 0; }
+.cafes .venue .ph { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: 4px 0 10px; filter: sepia(.15) saturate(.9); }
+.cafes .venue .addr { font-family: var(--sans); font-size: 12px; color: var(--mute); margin: 2px 0 6px; }
+@media (max-width: 800px) { .food-wrap { grid-template-columns: 1fr; } }
 .gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 200px; gap: 12px; }
 .gallery .tile { position: relative; overflow: hidden; border-radius: 2px; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; color: #fff; text-decoration: none; isolation: isolate; }
 .gallery .tile:first-child { grid-row: span 2; }
@@ -583,7 +588,12 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
     <section class="band" id="brunch">
       <div class="kicker">Food · #brunchlife</div>
       <h2 class="banner">Brunch Is a Meeting</h2>
-      <p class="lede">Weekend tables, hackathon breakfasts, and the coffee that fueled the demo. Everything tagged #brunchlife and #buildweek.</p>
+      <p class="lede">Weekend tables, hackathon breakfasts, and the coffee that fueled the demo. The cafés builders work from and host in, picked from <a href="https://www.computecafe.com/san-francisco/" target="_blank" rel="noopener" style="text-decoration:underline">ComputeCafe</a>, and every event on the calendar with good food.</p>
+      <div class="food-wrap">
+        <div class="food-events"><h3 class="sec-title">On the Menu</h3><ul class="mini" id="foodEvents"></ul></div>
+        <div class="venues cafes" id="cafeGrid"></div>
+      </div>
+      <h3 class="sec-title" style="margin-top:28px">#brunchlife</h3>
       <div class="gallery g-brunch" id="brunchGallery"></div>
       <div class="tag-cta"><span>Post with <b>#brunchlife</b> and <b>#buildweek</b> to get your table in the paper.</span><a class="btn" href="#artifacts">Submit a brunch</a></div>
     </section>
@@ -718,6 +728,21 @@ function render() {
       ? `<ul class="mini">${evs.slice(0, 3).map(miniHtml).join("")}</ul><div class="byline">${evs.length} upcoming event${evs.length > 1 ? "s" : ""} here</div>`
       : `<div class="byline">No events on the calendar here yet</div>`; })()}
   </article>`).join("");
+
+
+  // Brunch: food events and cafés
+  const atCafe = e => CAFES.some(c => c.match.test([e.venue, e.address, e.name].join(" ")));
+  const food = up.filter(e => FOOD.test([e.name, e.venue].join(" ")) || atCafe(e)).slice(0, 8);
+  $("#foodEvents").innerHTML = food.length ? food.map(miniHtml).join("") : `<li class="empty">No food events on the calendar yet.</li>`;
+  $("#cafeGrid").innerHTML = CAFES.map(c => { const evs = up.filter(e => c.match.test([e.venue, e.address, e.name, ...(e.hosts || [])].join(" "))); return `<article class="venue">
+    <div class="kicker">${esc(c.where)}</div>
+    <a href="${esc(c.url)}" target="_blank" rel="noopener"><h3 class="hl">${esc(c.name)} ↗</h3></a>
+    <div class="addr">${esc(c.addr)}</div>
+    ${c.img ? `<img class="ph" src="${esc(c.img)}" alt="${esc(c.name)}" loading="lazy" onerror="this.remove()">` : ""}
+    <p class="dek">${esc(c.note)}</p>
+    <div class="tags">${c.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    ${evs.length ? `<ul class="mini">${evs.slice(0, 2).map(miniHtml).join("")}</ul>` : ""}
+  </article>`; }).join("");
 
   // Credits chips: most frequent named hosts/companies
   const counts = {};
@@ -907,6 +932,20 @@ async function loadNews() {
 }
 
 // ── #buildswag / #brunchlife galleries (public/social.json, filled by a scraper) ──
+// Cafés for builders, picked from ComputeCafe's SF venue guide (computecafe.com/san-francisco).
+const CC = "https://www.computecafe.com";
+const CAFES = [
+  { name: "ComputeCafe", where: "SoMa", addr: "590 Howard St, at 2nd", url: `${CC}/san-francisco/computecafe/`, img: `${CC}/san-francisco/computecafe/photos/web/IMG_1704.JPG`, match: /computecafe|compute caf[eé]|590 howard/i, tags: ["Café lounge", "Kitchen", "Gallery"], note: "A brick loft at Howard & 2nd with a café lounge, a full kitchen, a glass conference room and walls that turn into a gallery. Home base for SF Tech Week; books offsites, launches and dinners." },
+  { name: "SOHN", where: "Dogpatch", addr: "2535 3rd St", url: "https://www.sohnsf.com/privateevents", match: /\bsohn\b|2535 3rd/i, tags: ["Late-night cowork", "Up to 160"], note: "Deuki Hong's Korean-American café, made for late-night coworking and full buyouts. Where Cafe Compute and Cursor Cafe nights pour coffee till late." },
+  { name: "Corgi Cafe", where: "FiDi", addr: "9 Claude Ln", url: "https://www.corgicafe.com/host", match: /corgi caf|claude ln/i, tags: ["Open 24/7", "Free to host"], note: "SF's first 24/7 café, built for founders. No venue fee: guests buy coffee, or you set a food budget." },
+  { name: "Delah Coffee", where: "SoMa", addr: "370 4th St", url: "https://delahcoffee.com/contact/", match: /delah/i, tags: ["6 AM–11 PM", "Yemeni coffee"], note: "A big Yemeni coffeehouse with the longest hours in SoMa, so breakfast meetings can run straight into the evening." },
+  { name: "Sightglass Coffee", where: "SoMa", addr: "270 7th St", url: "https://sightglasscoffee.com/pages/host-your-next-event-at-sightglass", match: /sightglass/i, tags: ["Roastery", "Upstairs room"], note: "The two-story roastery flagship, with the roaster running downstairs and a community room up top." },
+  { name: "SOMA Eats", where: "SoMa", addr: "186 2nd St", url: "https://somaeatssf.com/event-space/", match: /soma eats|186 2nd/i, tags: ["Catering", "Bottle shop"], note: "A café and bottle shop on the 2nd St corridor pouring Sightglass, with weekday buyouts and in-house catering for up to 100." },
+  { name: "Andytown Coffee", where: "FiDi", addr: "66 Kearny St", url: "https://andytownsf.com/pages/events", match: /andytown/i, tags: ["Small takeovers", "Event coffee"], note: "Andytown's newest downtown café, sized for a small takeover. They'll also bring the coffee to your event." },
+  { name: "Bluestone Lane", where: "SoMa & FiDi", addr: "55 2nd St · 227 Front St · 420 Folsom St", url: "https://bluestonelane.com/private-events/", match: /bluestone/i, tags: ["Three cafés", "~50 each"], note: "Australian cafés along 2nd St, Front St and Folsom, with a patio at the Avery. Each room fits about 50." },
+  { name: "The Motoring Club", where: "Cow Hollow", addr: "1525 Union St", url: "https://themotoringclub.com/host-an-event", match: /motoring/i, tags: ["Car-club warehouse", "Fits 150"], note: "Coffee up front and an art-deco car-club warehouse out back, with a 20-foot bar and cars on the floor." },
+];
+const FOOD = /brunch|breakfast|coffee|caf[eé]|bagel|pancake|matcha|espresso|dinner|lunch|supper|pizza|taco|dumpling|bbq|picnic|friendsgiving|potluck|cafe compute|cursor cafe/i;
 const OPEN_SLOTS = {
   swag: [["🧥", "The hoodie you won at the boat hackathon"], ["🧢", "Sponsor caps, ranked"], ["👟", "Conference-floor sneakers"], ["🎒", "The tote bag stack"], ["🕶️", "Demo-day sunglasses"]],
   brunch: [["🥞", "The Saturday table before the hackathon"], ["☕", "The coffee that shipped the demo"], ["🥑", "Avocado toast with a pitch deck"], ["🍳", "Hackathon breakfast spreads"], ["🥐", "Croissants at the co-working space"]],

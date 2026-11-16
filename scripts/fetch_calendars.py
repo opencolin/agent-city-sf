@@ -28,6 +28,7 @@ CALENDARS = {
     "genai-collective": "The AI Collective",
     "genai-sf": "Bond AI SF",
     "accelr8": "Accelr8",
+    "cerebras": "Cerebras",  # hosts Cafe Compute
 }
 
 
