@@ -412,7 +412,7 @@ document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
 fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
   EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
   renderWeek();
-  const start = () => { placeAll(); onZoom(); if (location.hash !== "#bay" && map.getZoom() < 11.6) map.jumpTo({ center: [-122.425, 37.772], zoom: 11.6 }); /* close enough for landmarks on narrow screens */ declutterSoon(); };
+  const start = () => { placeAll(); onZoom(); if (location.hash !== "#bay") map.jumpTo({ center: [-122.418, 37.776], zoom: Math.max(12.2, map.getZoom() + 0.7) }); /* a little closer than the whole city, so landmarks and venues show */ declutterSoon(); };
   start(); // markers don't need tiles, so don't wait for them
 });
 </script>
