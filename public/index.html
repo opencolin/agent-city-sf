@@ -444,6 +444,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
     <a href="#venues">Where to Work</a>
     <a href="#weather">Weather</a>
     <a href="#todayBand">Today</a>
+    <a href="#tonightBand">Tonight</a>
     <a href="#news">Tech News</a>
     <a href="#listings">Next 10 Days</a>
     <a href="#style">Style</a>
@@ -521,6 +522,13 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
       <h2 class="banner" id="todayHl">Today in San Francisco</h2>
       <p class="lede" id="todayLede"></p>
       <div class="today-grid" id="todayList"></div>
+    </section>
+
+    <section class="band" id="tonightBand">
+      <div class="kicker">Tonight</div>
+      <h2 class="banner" id="tonightHl">Tonight in San Francisco</h2>
+      <p class="lede" id="tonightLede"></p>
+      <div class="today-grid" id="tonightList"></div>
     </section>
 
     <section class="band" id="news">
@@ -830,14 +838,24 @@ function renderToday() {
   const todays = EVENTS.filter(e => e.date === today);
   $("#earTodayN").textContent = todays.length;
   $("#earTodayTxt").textContent = todays.length === 1 ? "event in the Bay today" : "events in the Bay today";
-  $("#todayHl").textContent = todays.length ? `${todays.length} Things Happening in San Francisco Today` : "A Quiet Day in San Francisco";
-  $("#todayLede").textContent = todays.length
-    ? `${todays.filter(e => e.k === "hack").length} hackathons, ${todays.filter(e => e.k === "demo").length} demo and pitch nights, and ${todays.filter(e => e.k === "talk").length} talks on ${fmtDay(today)}.`
-    : "Nothing on the calendar today. Good day to build, or to brunch.";
-  $("#todayList").innerHTML = todays.map(e => {
+  const EVE = 17 * 60, day = todays.filter(e => evMins(e.time) < EVE), eve = todays.filter(e => evMins(e.time) >= EVE);
+  const n = (es, k, one, many) => { const c = es.filter(e => e.k === k).length; return `${c} ${c === 1 ? one : many}`; };
+  const counts = es => `${n(es, "hack", "hackathon", "hackathons")}, ${n(es, "demo", "demo or pitch night", "demo and pitch nights")}, and ${n(es, "talk", "talk", "talks")}`;
+  const rows = es => es.map(e => {
     const live = Math.abs(evMins(e.time) - mins) < 90 && evMins(e.time) <= mins;
     return rowHtml(e).replace('<span class="t">', `<span class="t">${live ? '<span class="now-tag">NOW</span><br>' : ""}`);
   }).join("");
+  $("#todayHl").textContent = day.length ? `${day.length} Things Happening in San Francisco Today` : "A Quiet Day in San Francisco";
+  $("#todayLede").textContent = day.length
+    ? `${counts(day)} before 5 PM on ${fmtDay(today)}.`
+    : eve.length ? "Nothing on the calendar before 5 PM. The action starts tonight." : "Nothing on the calendar today. Good day to build, or to brunch.";
+  $("#todayList").innerHTML = rows(day);
+  const tmr = new Date(now); tmr.setDate(tmr.getDate() + 1);
+  const nTmr = EVENTS.filter(e => e.date === isoLocal(tmr)).length;
+  $("#tonightHl").textContent = eve.length ? `${eve.length} Thing${eve.length === 1 ? "" : "s"} to Do Tonight` : "A Quiet Night in San Francisco";
+  $("#tonightLede").textContent = eve.length ? `${counts(eve)} from 5 PM on.`
+    : `Nothing on the calendar after 5 PM.${nTmr ? ` Tomorrow has ${nTmr} event${nTmr === 1 ? "" : "s"}: see the Next 10 Days.` : ""}`;
+  $("#tonightList").innerHTML = rows(eve);
 }
 const evMins = t => { const m = /(\d+):(\d+)\s*(AM|PM)/i.exec(t || ""); return m ? (+m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2] : 0; };
 
@@ -1122,7 +1140,7 @@ fetch("agent.json").then(r => r.ok ? r.json() : null).then(a => {
 }).catch(() => {});
 // ── Page button: current page and section, with a menu of all sections ──
 (function () {
-  const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["news", "Tech News"], ["credits", "Free Credits"], ["accelerators", "Accelerators"],
+  const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["tonightBand", "Tonight"], ["news", "Tech News"], ["credits", "Free Credits"], ["accelerators", "Accelerators"],
     ["personas", "Sign Up"], ["venues", "Where to Work"], ["listings", "Next 10 Days"], ["style", "Style"], ["demos", "Demo Days"], ["brunch", "Brunch"], ["artifacts", "#buildweek"]]
     .filter(([id]) => document.getElementById(id)).map(([id, name], i) => ({ id, name, n: "A" + (i + 1), el: document.getElementById(id) }));
   const box = $("#pager"), btn = box.querySelector("button"), menu = $("#pagerMenu");
@@ -1132,7 +1150,7 @@ fetch("agent.json").then(r => r.ok ? r.json() : null).then(a => {
   function update() {
     const y = innerHeight * 0.35;
     let p = PAGES[0];
-    for (const q of PAGES) if (q.el.getBoundingClientRect().top <= y) p = q;
+    for (const q of PAGES) if (!q.el.hidden && q.el.getBoundingClientRect().top <= y) p = q;
     if (p === cur) return;
     cur = p;
     $("#pagerN").textContent = p.n; $("#pagerS").textContent = p.name;
