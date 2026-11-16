@@ -75,6 +75,28 @@ button, input { font: inherit; color: inherit; }
 .ear .big { display: block; font-family: var(--head); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--ink); margin: 2px 0; }
 .ear .big .ico { font-size: 20px; margin-right: 6px; vertical-align: 3px; }
 .mast .mid h1 { font-size: clamp(46px, 6.4vw, 96px); }
+/* Page button: shows the current page and section, opens a menu of every section */
+.pager { position: fixed; right: 16px; bottom: 16px; z-index: 50; font-family: var(--sans); }
+.pager > button { display: flex; align-items: center; gap: 10px; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 8px 12px; font: 600 12px/1.2 var(--sans); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+.pager > button:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+.pager > button .pg { font-family: var(--head); font-size: 16px; font-weight: 700; text-transform: none; letter-spacing: 0; }
+.pager > button .sep { width: 1px; align-self: stretch; background: var(--hair); }
+.pager > button .car { font-size: 10px; transition: transform .15s; }
+.pager.open > button .car { transform: rotate(180deg); }
+.pager ol { display: none; position: absolute; right: 0; bottom: calc(100% + 10px); margin: 0; padding: 6px 0; list-style: none; background: var(--paper); border: 1px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); min-width: 250px; max-height: 70vh; overflow: auto; }
+.pager.open ol { display: block; }
+.pager li a { display: flex; gap: 12px; align-items: baseline; padding: 7px 14px; color: var(--ink); text-decoration: none; font-size: 14px; }
+.pager li a:hover, .pager li a:focus-visible { background: var(--chip); outline: none; }
+.pager li a .n { font-family: var(--head); font-weight: 700; width: 28px; color: var(--mute); }
+.pager li a[aria-current="true"] { font-weight: 700; }
+.pager li a[aria-current="true"] .n { color: var(--ink); }
+.pager li.rule { border-top: 1px solid var(--hair); margin: 6px 0; }
+@media print { .pager { display: none; } }
+.home-btn { position: fixed; top: 16px; right: 16px; z-index: 50; display: flex; align-items: center; gap: 8px; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 8px 12px; font: 600 12px/1.2 var(--sans); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+.home-btn.on { opacity: 1; transform: none; pointer-events: auto; }
+.home-btn:hover { box-shadow: 4px 4px 0 var(--ink); }
+.home-btn b { font-family: var(--head); font-size: 15px; text-transform: none; letter-spacing: 0; }
+@media print { .home-btn { display: none; } }
 @media (min-width: 1001px) { .util .wx-now, .util .wx-sun { display: none; } }  /* the right ear carries the weather */
 @media (max-width: 1000px) { .mast { display: block; } .ear { display: none; } .mast .mid h1 { font-size: clamp(46px, 8.6vw, 104px); } }
 .mast h1 { font-family: var(--mast); font-weight: 400; font-size: clamp(46px, 8.6vw, 104px); line-height: 1; margin: 6px 0 4px; letter-spacing: 0; }
@@ -337,6 +359,11 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
 </style>
 </head>
 <body>
+<a class="home-btn" id="homeBtn" href="/" aria-label="Back to the front page"><span aria-hidden="true">↑</span><b>SF Build Week</b> · Front Page</a>
+<div class="pager" id="pager">
+  <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="pagerMenu"><span class="pg" id="pagerN">A1</span><span class="sep"></span><span id="pagerS">Front Page</span><span class="car" aria-hidden="true">▲</span></button>
+  <ol id="pagerMenu" aria-label="Sections"></ol>
+</div>
 <div class="wrap">
 
   <div class="util">
@@ -940,6 +967,42 @@ fetch("events.json").then(r => r.json()).then(rows => {
   .finally(loadWeather);
 loadSocial();
 loadNews();
+// ── Page button: current page and section, with a menu of all sections ──
+(function () {
+  const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["news", "Tech News"], ["credits", "Free Credits"],
+    ["personas", "Sign Up"], ["venues", "Where to Work"], ["listings", "Next 10 Days"], ["style", "Style"], ["brunch", "Brunch"], ["artifacts", "#buildweek"]]
+    .filter(([id]) => document.getElementById(id)).map(([id, name], i) => ({ id, name, n: "A" + (i + 1), el: document.getElementById(id) }));
+  const box = $("#pager"), btn = box.querySelector("button"), menu = $("#pagerMenu");
+  menu.innerHTML = PAGES.map(p => `<li><a href="#${p.id}" data-id="${p.id}"><span class="n">${p.n}</span>${esc(p.name)}</a></li>`).join("")
+    + `<li class="rule" role="separator"></li><li><a href="map.html"><span class="n">↗</span>The Map</a></li>`;
+  let cur = null;
+  function update() {
+    const y = innerHeight * 0.35;
+    let p = PAGES[0];
+    for (const q of PAGES) if (q.el.getBoundingClientRect().top <= y) p = q;
+    if (p === cur) return;
+    cur = p;
+    $("#pagerN").textContent = p.n; $("#pagerS").textContent = p.name;
+    btn.setAttribute("aria-label", `Page ${p.n}, ${p.name}. Open the section menu`);
+    menu.querySelectorAll("a[data-id]").forEach(a => a.setAttribute("aria-current", a.dataset.id === p.id));
+  }
+  const toggle = open => { box.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); if (open) menu.querySelector('[aria-current="true"]')?.focus(); };
+  btn.addEventListener("click", () => toggle(!box.classList.contains("open")));
+  menu.addEventListener("click", ev => { if (ev.target.closest("a")) toggle(false); });
+  document.addEventListener("click", ev => { if (!box.contains(ev.target)) toggle(false); });
+  document.addEventListener("keydown", ev => { if (ev.key === "Escape" && box.classList.contains("open")) { toggle(false); btn.focus(); } });
+  addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  addEventListener("resize", update);
+  update();
+})();
+// ── Front page button: appears top right once the masthead scrolls away ──
+(function () {
+  const b = $("#homeBtn"), mast = document.querySelector(".mast");
+  const show = () => b.classList.toggle("on", (mast?.getBoundingClientRect().bottom ?? 0) < 0);
+  b.addEventListener("click", ev => { ev.preventDefault(); history.replaceState(null, "", location.pathname); scrollTo({ top: 0, behavior: "smooth" }); });
+  addEventListener("scroll", () => requestAnimationFrame(show), { passive: true });
+  show();
+})();
 </script>
 </body>
 </html>
