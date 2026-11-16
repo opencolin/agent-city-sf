@@ -138,6 +138,12 @@ nav.sections a:hover { text-decoration: underline; }
 .front > section:first-child { padding-left: 0; }
 .front > section:last-child { padding-right: 0; }
 .front > section + section { border-left: 1px solid var(--hair); }
+/* Side columns run the full height of the lead story: the stories spread out, so the gaps sit between them instead of under them. */
+@media (min-width: 1001px) {
+  #hackathons, #demos { display: flex; flex-direction: column; }
+  #hackList, #demoList { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  #demos .ad { margin-top: 18px; }
+}
 .lead .hl { font-size: clamp(30px, 3.6vw, 46px); font-weight: 800; letter-spacing: -.01em; line-height: 1.06; }
 .lead .dek { font-size: 18px; margin-top: 10px; }
 .figure { display: block; margin: 16px 0 6px; position: relative; overflow: hidden; background: #2e93dc; aspect-ratio: 16 / 9; }
