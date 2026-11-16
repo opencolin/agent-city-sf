@@ -176,6 +176,8 @@ nav.sections a:hover { text-decoration: underline; }
 /* ── Bands ── */
 .band { border-top: 3px double var(--rule); padding: 22px 0 30px; }
 .band h2.banner { font-family: var(--head); font-weight: 900; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 4px; letter-spacing: -.01em; }
+.lede, .dek, .band p, .motto { text-wrap: pretty; }  /* no one-word last lines */
+.hl, .banner, h1, h2, h3 { text-wrap: balance; }
 .band .lede { font-size: 16px; color: var(--ink-2); max-width: 720px; margin: 0 0 18px; }
 
 /* Credits desk */
@@ -605,7 +607,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
     <section class="band" id="brunch">
       <div class="kicker">Food · #brunchlife</div>
       <h2 class="banner">Brunch Is a Business Meeting</h2>
-      <p class="lede">Weekend tables, hackathon breakfasts, and the coffee that fueled the demo. The cafés builders work from and host in, picked from <a href="https://www.computecafe.com/san-francisco/" target="_blank" rel="noopener" style="text-decoration:underline">ComputeCafe</a>, and every event on the calendar with good food.</p>
+      <p class="lede">Weekend tables, hackathon breakfasts, and the coffee that fueled the demo. The cafés builders work from and host in, picked from <a href="https://www.computecafe.com/san-francisco/" target="_blank" rel="noopener" style="text-decoration:underline">ComputeCafe</a>, and every event on the calendar with good&nbsp;food.</p>
       <div class="food-wrap">
         <div class="food-events"><h3 class="sec-title">On the Menu</h3><ul class="mini" id="foodEvents"></ul></div>
         <div class="venues cafes" id="cafeGrid"></div>
