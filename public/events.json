@@ -12,7 +12,8 @@
   "city": "San Francisco",
   "lat": 37.77557993817077,
   "lng": -122.41784598318367,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/uc/cfea2bb2-f64f-45a1-89be-e5627edce8ec.jpg"
  },
  {
   "name": "Berkeley x DeepMind Hackathon: Build. Ship. Pitch. Win.",
@@ -31,7 +32,8 @@
   "city": "Berkeley",
   "lat": 37.87552258582758,
   "lng": -122.26586354747,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/sb/5732f01e-af38-46fc-ab8d-a60a5fc99186.png"
  },
  {
   "name": "Hive Mind: Building Agent Teams",
@@ -52,7 +54,8 @@
   "city": "San Francisco",
   "lat": 37.765084351517444,
   "lng": -122.41798280583596,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/o3/982473d6-53b9-4fcd-86ba-c0bd4de50c2a.png"
  },
  {
   "name": "SearchHack: Build the next layer of AI search",
@@ -73,7 +76,8 @@
   "city": "Sunnyvale",
   "lat": 37.38966435669871,
   "lng": -122.03643137496734,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ge/320e1f6b-44ec-4976-9941-3913f22f26bf.png"
  },
  {
   "name": "She Builds: A Women in AI × Lovable Hackathon",
@@ -89,7 +93,8 @@
   "city": "San Francisco",
   "lat": 37.786341571473166,
   "lng": -122.3932589631275,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/lx/7815f649-f93d-42c0-9dc2-4dc3131627f1.png"
  },
  {
   "name": "Boat Hackathon Code Aboard The Historic Klamath",
@@ -114,7 +119,8 @@
   "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
   "lat": 37.8000361,
   "lng": -122.39758849999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/ja/c7540e2b-4943-4960-8a30-78b36ac4242e.jpg"
  },
  {
   "name": "Boat Hackathon Christening & Kickoff",
@@ -134,7 +140,8 @@
   "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
   "lat": 37.8000361,
   "lng": -122.39758849999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/mu/bc2acc86-f9c2-4a50-bbf6-edb5c90b59cf.jpg"
  },
  {
   "name": "AI Research Hackathon",
@@ -150,7 +157,8 @@
   "city": "San Francisco",
   "lat": 37.76792150696761,
   "lng": -122.4208402300517,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/b7/1cd74be3-89ef-4f2c-bfe6-6960fb2200d6.gif"
  },
  {
   "name": "DNAForge & MTC Berkeley: AI × Biology Hackathon",
@@ -171,7 +179,8 @@
   "city": "Berkeley",
   "lat": 37.86210035241771,
   "lng": -122.2640920714793,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/m5/12767790-4db6-46dc-a7c6-757f8b311ed6.png"
  },
  {
   "name": "VexoHacks: An AI Wearables Hackathon",
@@ -187,7 +196,8 @@
   "city": "San Francisco",
   "lat": 37.76304565335417,
   "lng": -122.38611887296597,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/qt/54ab7582-5904-437e-b748-3465e91bebe9.png"
  },
  {
   "name": "2026 Epic AI MegaJam | in-person event",
@@ -203,7 +213,8 @@
   "venue": "Digital Jungle SF",
   "lat": 37.77493,
   "lng": -122.41942,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1196295682%252F326365116087%252F1%252Foriginal.20261021-171509%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.5%26fp-y%3D0.5%26s%3D165d27bfa8674138707e779fc39372ab&w=940&q=75"
  },
  {
   "name": "Drexathon: Nace AI's Decision Model Hackathon x Adobe EDU (win Mac Mini!!)",
@@ -222,7 +233,8 @@
   "city": "San Francisco",
   "lat": 37.78088588907551,
   "lng": -122.40899590795978,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/yc/3d828a0f-9e8c-4c0f-822b-e21bfac44e32.png"
  },
  {
   "name": "Stanford vs Berkeley · The Big Hack Game · Up to $10,000 in Cash Prizes · Kickoffs on Both Campuses",
@@ -242,7 +254,8 @@
   "city": "Berkeley",
   "lat": 37.87134037905941,
   "lng": -122.25973066014615,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/d9/663cfd6c-5c95-4f1a-93da-a4485fa50e86.png"
  },
  {
   "name": "n8n Buildathon at Santa Clara University with AIC Club",
@@ -261,7 +274,8 @@
   "place_id": "ChIJ6-dxVwDLj4ARSVghYlEBuYg",
   "lat": 37.34865,
   "lng": -121.9393453,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/er/403a86bb-fe66-4f4f-83ac-525332f37a6a.png"
  },
  {
   "name": "SF AI Code and Coffee Sunday November 15th 2026 @Salesforce Park!",
@@ -277,7 +291,8 @@
   "venue": "Salesforce Park",
   "lat": 37.79047,
   "lng": -122.39693,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/5/c/0/0/600_534203552.jpeg"
  },
  {
   "name": "Top AI Researchers Roundtable & BBQ Party in Los Altos Hills",
@@ -292,7 +307,8 @@
   "city": "Los Altos Hills",
   "lat": 37.356046730906726,
   "lng": -122.13275170535663,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ah/170a01e9-4ca7-4b48-a14c-dbd4b0b0c182.png"
  },
  {
   "name": "Christopher Ong | Research Acceleration: The View Inside OpenAI",
@@ -308,7 +324,8 @@
   "venue": "Gates Computer Science",
   "lat": 37.424107,
   "lng": -122.16608,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1196804810%252F2697843955261%252F1%252Foriginal.20261028-204306%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.729%26fp-y%3D0.929%26s%3Dd4dc3284f5ec9d6f47d94ddfa897b494&w=940&q=75"
  },
  {
   "name": "Building the Resilient Enterprise: Data, Cloud, and AI in the Next Era",
@@ -327,7 +344,8 @@
   "place_id": "ChIJm5miZFq3j4ARMbTRnuW4uFQ",
   "lat": 37.4115931,
   "lng": -122.07161149999999,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/d9/252bb6d4-97f1-441e-9587-ca29a0b8db73.png"
  },
  {
   "name": "Practical AI Workflow Lab",
@@ -343,7 +361,8 @@
   "venue": "DesignMap",
   "lat": 37.77493,
   "lng": -122.41942,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1196838967%252F3013224080938%252F1%252Foriginal.20261029-093115%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.5%26fp-y%3D0.5%26s%3D669b8ae90dc2110b3b94a78f1660bd8b&w=940&q=75"
  },
  {
   "name": "Claude for Wealth Managers & Family Offices",
@@ -359,7 +378,8 @@
   "neighborhood": "Financial District",
   "lat": 37.79321909742306,
   "lng": -122.39968109829168,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/hj/7853c2c1-fbbe-44be-9b5f-19f0ddd30440.png"
  },
  {
   "name": "Clips & Cocktails: AI Marketing Happy Hour with OpusClip & Marina Mogilko (aka Silicon Valley Girl)",
@@ -381,7 +401,8 @@
   "place_id": "ChIJl1L3AAqBhYARfrEds4G_pEU",
   "lat": 37.7870655,
   "lng": -122.39749160000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/mg/77ae2bb3-c146-499f-9b00-c922900f88d5.png"
  },
  {
   "name": "Agentic Web #02 — The Browser as an Agent Runtime",
@@ -405,7 +426,8 @@
   "place_id": "ChIJSXZKEXiAhYARFJlgQCdiLP0",
   "lat": 37.7816889,
   "lng": -122.3908867,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/0a/62a9da5d-9ffb-45fc-9281-e37838e2bed6.png"
  },
  {
   "name": "Women in GTM - Transitioning into an AI-native company",
@@ -421,7 +443,8 @@
   "neighborhood": "Union Street",
   "lat": 37.80013200939919,
   "lng": -122.43354314701897,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ot/42acfc72-8985-40c3-885d-b1dad642b890.png"
  },
  {
   "name": "Pear VC | Founders at the Table 创客圆桌",
@@ -437,7 +460,8 @@
   "neighborhood": "Allied Arts",
   "lat": 37.447022547446196,
   "lng": -122.17563109406264,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/4d/f3715a5e-388b-4dd0-8cd4-a5a273948b9d.png"
  },
  {
   "name": "Exploring the Future of Generative AI in Engineering and Science",
@@ -453,7 +477,8 @@
   "venue": "MathWorks",
   "lat": 37.33874,
   "lng": -121.885254,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1197747593%252F161408979797%252F1%252Foriginal.20261111-064620%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.04%26fp-y%3D0.051%26s%3D43e58d0e409beb13261ad7cf4ae5418d&w=940&q=75"
  },
  {
   "name": "Who's Watching the Agents?",
@@ -473,7 +498,8 @@
   "place_id": "ChIJ6VB1eCR-j4ARxMVVkBiazeA",
   "lat": 37.8033528,
   "lng": -122.41429289999999,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/ni/3a26f7e4-8436-4e74-b05e-c9f4a55cf79f.png"
  },
  {
   "name": "Builders Night",
@@ -487,7 +513,8 @@
   "kind": "talk",
   "city": "San Francisco",
   "venue": "540 Laguna St, San Francisco + 540 Cafe",
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/event-covers/fh/5bafbbc7-af15-46f0-a764-340aa1e5ba66.jpg"
  },
  {
   "name": "Women & Non Binary Hack and do whatever night",
@@ -505,7 +532,8 @@
   "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
   "lat": 37.8350548,
   "lng": -122.2642563,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/event-covers/kr/8071c8dc-6a0d-4008-84be-4e5f6385ea35.jpg"
  },
  {
   "name": "Women in Tech, Fintech, AI, Startups, Networking Event & Elevator Pitch SF",
@@ -521,7 +549,8 @@
   "venue": "The Willows",
   "lat": 37.771133,
   "lng": -122.41502,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/5/3/7/600_532410007.jpeg"
  },
  {
   "name": "Theranos of AI industry? YCSE Debrief & AI Chat",
@@ -539,7 +568,8 @@
   "city": "San Francisco",
   "lat": 37.7714594998333,
   "lng": -122.42225994367449,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/o4/fc6a2886-5b12-4833-980b-da666925c271.png"
  },
  {
   "name": "INFER/CON",
@@ -555,7 +585,8 @@
   "neighborhood": "Union Square",
   "lat": 37.78626904884239,
   "lng": -122.40459055496112,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/7q/d6343a38-150f-4832-aff6-4ee8a57516b7.gif"
  },
  {
   "name": "QCon 2026: Senior Software Engineering Conference",
@@ -571,7 +602,8 @@
   "venue": "Hyatt Regency",
   "lat": 37.77493,
   "lng": -122.41942,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://qconsf.com/modules/custom/qcon_common/images/og/og-sf-2026.jpg"
  },
  {
   "name": "2026 Super Demo Day",
@@ -589,7 +621,8 @@
   "city": "San Francisco",
   "lat": 37.79174258712631,
   "lng": -122.39818620997549,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ak/45d6f5e3-eeb4-42bb-afa4-a6a3584ea329.png"
  },
  {
   "name": "PortCon 2026 | The AI Software Factory Summit",
@@ -607,7 +640,8 @@
   "city": "San Francisco",
   "lat": 37.79447024095587,
   "lng": -122.39342102783151,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ts/e73b6651-d0fb-48e4-9b0b-b4e248322d4f.gif"
  },
  {
   "name": "Zero to Hundred: GTM Vibe Coding Hackathon",
@@ -623,7 +657,8 @@
   "city": "San Francisco",
   "lat": 37.7869973717594,
   "lng": -122.40051152054495,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/6n/611d0d6e-5660-486d-8157-a89267949ba1.png"
  },
  {
   "name": "Girls in Growth: Spa Day! 🧖‍♀️ (By Appointment Only)",
@@ -648,7 +683,8 @@
   "place_id": "ChIJzWMEoXuAhYARc7NG-AXtwsU",
   "lat": 37.7868229,
   "lng": -122.3942058,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/bi/c5cf4c68-30e4-489e-90db-b6e937b32776.png"
  },
  {
   "name": "AI Infrastructure Night",
@@ -669,7 +705,8 @@
   "city": "San Francisco",
   "lat": 37.79173524308819,
   "lng": -122.40059896335711,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/yw/0be5f8b7-4b80-47ed-ab5a-fdf0406b7802.png"
  },
  {
   "name": "Builder Night San Francisco | n8n x Vercel x Arize AI",
@@ -690,7 +727,8 @@
   "city": "San Francisco",
   "lat": 37.79289220174035,
   "lng": -122.3959284205836,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/19/2b366f8d-f743-4dd8-83eb-39363509262d.png"
  },
  {
   "name": "ElevenCreative After Hours: San Francisco",
@@ -708,7 +746,8 @@
   "city": "San Francisco",
   "lat": 37.79303096875511,
   "lng": -122.40342464952315,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ov/c03e6bd6-54a1-4938-8bf2-f2258953e240.png"
  },
  {
   "name": "San Francisco Data Engineering Meetup with ClickHouse",
@@ -724,7 +763,8 @@
   "venue": "CANOPY Jackson Square",
   "lat": 37.79698,
   "lng": -122.40488,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/4/7/1/600_536510289.jpeg"
  },
  {
   "name": "Product & AI - The Un-Conference",
@@ -745,7 +785,8 @@
   "place_id": "ChIJ84Ok5-W6j4AROlY2H7PCdR0",
   "lat": 37.421174799999996,
   "lng": -122.1480823,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/gallery-images/75/75d79659-77e8-415f-aafd-a6c63d243d2b.png"
  },
  {
   "name": "In Production: OpenRouter x ElevenLabs",
@@ -765,7 +806,8 @@
   "city": "San Francisco",
   "lat": 37.788622311472785,
   "lng": -122.40552851084097,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ia/1f0a396c-7b62-43b5-a915-c510c604ee64.png"
  },
  {
   "name": "AI Builders Night with Convex, Daytona, Photon & CopilotKit",
@@ -790,7 +832,8 @@
   "place_id": "ChIJa2KUfb5_j4AR4dlHTEnoXN0",
   "lat": 37.764288900000004,
   "lng": -122.40174909999999,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/1h/0369db56-e2d3-4476-add9-dbf7dc9c676d.png"
  },
  {
   "name": "Build Night: Parallel x AssemblyAI",
@@ -810,7 +853,8 @@
   "city": "San Francisco",
   "lat": 37.80054049184829,
   "lng": -122.39853353365538,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/0a/49889777-b49a-43b0-854f-817032d0be1f.png"
  },
  {
   "name": "Physical AI Industry Night: San Francisco",
@@ -831,7 +875,8 @@
   "city": "San Francisco",
   "lat": 37.78310689688452,
   "lng": -122.39964231363619,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/jv/65887b3d-8578-4096-9949-f29e912bd1f9.png"
  },
  {
   "name": "The Build Boutique: Base44 x AI Valley Women's Build Night",
@@ -852,7 +897,8 @@
   "city": "San Francisco",
   "lat": 37.792857999900086,
   "lng": -122.40848054497742,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/api-uploads/rd/3327fa1f-3a04-4179-aabb-9068cddc032f.png"
  },
  {
   "name": "San Francisco | Claude Impact Lab: AI Trust & Safety",
@@ -868,7 +914,8 @@
   "city": "San Francisco",
   "lat": 37.78110918399043,
   "lng": -122.3942914667079,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/api-uploads/09/67fc6548-fca3-475f-9187-94d27c3dca9a.png"
  },
  {
   "name": "Agent Night Out: Full Stack, Real Costs 🔥 StepFun × TinyFish × Featherless × Monid × MatrAIx",
@@ -889,7 +936,8 @@
   "city": "San Francisco",
   "lat": 37.77596537326936,
   "lng": -122.40442001203253,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/dw/abd61a68-c03d-4bce-af2c-16e3c352c2ed.png"
  },
  {
   "name": "Build Your First Phone Voice Agent — Deepgram × Vapi Workshop",
@@ -914,7 +962,8 @@
   "place_id": "ChIJKaK-s2OAhYARFRfYhG5JE3o",
   "lat": 37.7882676,
   "lng": -122.3961811,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/w1/3c423a32-d1ae-4070-b4d6-1280f3a94d4a.png"
  },
  {
   "name": "🧠 AI Founders Roundtable with The AI Collective SF x Avahi",
@@ -943,7 +992,8 @@
   "venue": "O’Reilly’s Pub",
   "lat": 37.769516,
   "lng": -122.452614,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/e/7/f/c/600_536819388.jpeg"
  },
  {
   "name": "Rust Hacking in Person",
@@ -959,7 +1009,8 @@
   "venue": "1417 15th St",
   "lat": 37.766666,
   "lng": -122.41615,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/2/8/b/c/600_518470428.jpeg"
  },
  {
   "name": "San Francisco Tech Connect: Startups, Investors, Professionals Networking",
@@ -975,7 +1026,8 @@
   "venue": "LOCATION: Hawthorn Lounge, 46 Geary (between Kearny & Grant) near Market Street and Union Square, San Francisco CA 94101. Conven",
   "lat": 37.78807,
   "lng": -122.404274,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/d/9/b/d/600_530635741.jpeg"
  },
  {
   "name": "Hardware Hack Night & Fixit Clinic",
@@ -995,7 +1047,8 @@
   "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
   "lat": 37.8350548,
   "lng": -122.2642563,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/aw/2e444af2-fb79-488b-8825-4d8be94b658f.jpg"
  },
  {
   "name": "Backprop Summit",
@@ -1016,7 +1069,8 @@
   "city": "San Francisco",
   "lat": 37.78824620820655,
   "lng": -122.39824489684986,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/vu/65f64c47-dfe5-4d5f-890e-6565c2dfcc4d.gif"
  },
  {
   "name": "Bay Area Search 2026",
@@ -1038,7 +1092,8 @@
   "place_id": "ChIJUyUsp7x_j4ARKw-v8RRNaqI",
   "lat": 37.7650923,
   "lng": -122.42170440000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/hw/4610dc10-b78f-4455-b558-4f6c959a9afa.jpg"
  },
  {
   "name": "Accelr8 | Cowork Club",
@@ -1063,7 +1118,8 @@
   "place_id": "ChIJLfn9L5eAhYARLDxMHqPYewY",
   "lat": 37.783536999999995,
   "lng": -122.4190668,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/api-uploads/9t/27e694a4-1e6a-40fa-a5df-9ac790cacd41.png"
  },
  {
   "name": "SPC Energy Forum: Fireside with Garth Sheldon-Coulson, Co-Founder and CEO of Panthalassa",
@@ -1082,7 +1138,8 @@
   "city": "San Francisco",
   "lat": 37.781563368580755,
   "lng": -122.39599093390414,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ny/18b7e122-8cf4-4ed2-b5a7-06bae34545a7.png"
  },
  {
   "name": "Food Biz + AI Coworking Day",
@@ -1103,7 +1160,8 @@
   "city": "Oakland",
   "lat": 37.81110446271188,
   "lng": -122.26445314036563,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/5d/f67809f2-68a8-4f53-9d67-29737a87f002.jpg"
  },
  {
   "name": "DevRev Leadership Circle Bay Area 2026",
@@ -1122,7 +1180,8 @@
   "city": "San Francisco",
   "lat": 37.78379638609611,
   "lng": -122.40907753961143,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/rw/58144046-4474-4b0f-b1d1-0b79c153a8be.png"
  },
  {
   "name": "Fireside Chat with Abhinav Gupta, Skild.ai",
@@ -1140,7 +1199,8 @@
   "city": "San Francisco",
   "lat": 37.78149965996673,
   "lng": -122.39149629029,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/bh/5e38247a-56e3-4332-8b40-523e10cc3c7e.png"
  },
  {
   "name": "Reading Group (+🍕): Reimagining Research Papers As Interactive and Reliable AI Agents",
@@ -1159,7 +1219,8 @@
   "city": "San Francisco",
   "lat": 37.78888269628286,
   "lng": -122.40020558708106,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/k9/de68fef4-1c9d-4604-810d-3ae6cdef6220.png"
  },
  {
   "name": "Ignite Your Network: Tech & AI Social",
@@ -1175,7 +1236,8 @@
   "venue": "Bella lounge and bar SF",
   "lat": 37.771336,
   "lng": -122.413765,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/e/8/e/5/600_535199621.jpeg"
  },
  {
   "name": "AI Demo Series: November Edition - Startup Grind",
@@ -1195,7 +1257,8 @@
   "city": "Menlo Park",
   "lat": 37.486516807127146,
   "lng": -122.17503180815598,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/event-covers/kj/f0cff057-a216-4785-bb37-a2c38a2b3ad0.jpg"
  },
  {
   "name": "Founder's Table : A Candlelight Dinner",
@@ -1215,7 +1278,8 @@
   "city": "San Francisco",
   "lat": 37.794765506723145,
   "lng": -122.40062863886862,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/1s/a40e3511-e2db-44ee-9144-5e552d6aa208.png"
  },
  {
   "name": "SOTA BOTS: Personal Agents Demo Night by OpenBot",
@@ -1237,7 +1301,8 @@
   "place_id": "ChIJdUo7FH2BhYARn7O5AHBcILk",
   "lat": 37.788385399999996,
   "lng": -122.4029183,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/yl/f9e2840b-cad2-4d66-baf3-4c7d482fdc30.png"
  },
  {
   "name": "GTM Workflows in Practice: Roundtable Discussion & Dinner",
@@ -1258,7 +1323,8 @@
   "city": "San Francisco",
   "lat": 37.78821524513466,
   "lng": -122.40096770595594,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/3e/74d8d95e-01ff-416d-92ce-5d9dcbdab51f.png"
  },
  {
   "name": "Agents You Can Verify - Infrastructure and standards for sovereign enterprise AI",
@@ -1283,7 +1349,8 @@
   "place_id": "ChIJD-06tHyAhYARmdxj7hO2v5c",
   "lat": 37.7879261,
   "lng": -122.39727500000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/1i/d6949e2f-861b-4532-93e5-ae5d6b753b19.jpg"
  },
  {
   "name": "Fireside chat with You Liang, Co-Founder of Dream Labs",
@@ -1303,7 +1370,8 @@
   "city": "San Francisco",
   "lat": 37.76200272174205,
   "lng": -122.41031352037572,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/qz/1233d86f-674e-43a0-8325-9793cd512a94.png"
  },
  {
   "name": "On-Device Agents with Liquid AI x AI Socratic",
@@ -1322,7 +1390,8 @@
   "city": "San Francisco",
   "lat": 37.78714704842624,
   "lng": -122.3977175976322,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/om/3b1293da-0d76-41ce-8378-3eebfddb6d45.png"
  },
  {
   "name": "Walk Out With a Working AI Tool: SF Founders Build Night w/ Michael Tiffany.",
@@ -1345,7 +1414,8 @@
   "place_id": "ChIJQ0Ql54OAhYAR7LTxqx6YJiE",
   "lat": 37.7792847,
   "lng": -122.40739459999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/74/307a2fbc-9d99-44e1-9735-58e0bf1f4058.png"
  },
  {
   "name": "In-person (Hybrid) Civic Hack Night & MapTime GIS Day Map-a-thon",
@@ -1365,7 +1435,8 @@
   "place_id": "ChIJ_Xnp5iN-j4ARvdyHCcNDgNI",
   "lat": 37.766869,
   "lng": -122.4196054,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/65/2d5e2e3f-0f05-4c01-a1e5-4033f6c7310d.png"
  },
  {
   "name": "Vertical Agent Meetup",
@@ -1384,7 +1455,8 @@
   "city": "San Francisco",
   "lat": 37.77369585279047,
   "lng": -122.41147552287642,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/d3/3e96e942-586a-4d5d-a226-76aa1465251e.jpg"
  },
  {
   "name": "Ban Super AI?",
@@ -1400,7 +1472,8 @@
   "venue": "1924 Cedar Street",
   "lat": 37.87779,
   "lng": -122.27278,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/2/d/4/600_537109876.jpeg"
  },
  {
   "name": "Startup Pitch Events San Francisco: 5 Founders on Stage",
@@ -1416,7 +1489,8 @@
   "venue": "Toy Soldier",
   "lat": 37.79143,
   "lng": -122.4037,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/9/d/7/600_536971191.jpeg"
  },
  {
   "name": "Founders, Investors & Talent Networking Mixer | San Francisco",
@@ -1432,7 +1506,8 @@
   "venue": "Toy Soldier",
   "lat": 37.79143,
   "lng": -122.4037,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/4/3/6/e/600_534437262.jpeg"
  },
  {
   "name": "Startup Pitch & Themed Networking San Francisco | Unlock Your Idea",
@@ -1448,7 +1523,8 @@
   "venue": "Toy Soldier",
   "lat": 37.79143,
   "lng": -122.4037,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/a/6/4/f/600_535962575.jpeg"
  },
  {
   "name": "AI & Tech Networking Event in San Francisco by Ascent Valley",
@@ -1464,7 +1540,8 @@
   "venue": "Toy Soldier",
   "lat": 37.79143,
   "lng": -122.4037,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/a/6/4/b/600_535962571.jpeg"
  },
  {
   "name": "A Short Run for Long-Running Agents (Fort Mason)",
@@ -1484,7 +1561,8 @@
   "place_id": "ChIJA_rvjdiAhYARb0vVE-Pyauk",
   "lat": 37.8053187,
   "lng": -122.4318777,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/ob/d2abe98a-6060-4895-a1b9-13b9371de656.png"
  },
  {
   "name": "AI and the New Abundance and Scarcity, with Mustafa Suleyman, Sarah Guo and Aaron Bastani",
@@ -1509,7 +1587,8 @@
   "place_id": "ChIJ75fLhWKAhYARDxivfRW3Vr4",
   "lat": 37.7933452,
   "lng": -122.3925028,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/bt/2d64e475-89f5-4d9f-9016-6428ab0a0e5c.png"
  },
  {
   "name": "Notion Build Bar SF",
@@ -1527,7 +1606,8 @@
   "city": "San Francisco",
   "lat": 37.78823869431504,
   "lng": -122.40457513238286,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ta/25d8fb1b-2e8d-4af7-9127-a2ec8ba71087.png"
  },
  {
   "name": "Agentic + AI Night: AI Agents Across the App Stack",
@@ -1552,7 +1632,8 @@
   "place_id": "ChIJN7hCzHuAhYARq5V3nMtb-_U",
   "lat": 37.785673599999996,
   "lng": -122.3932373,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/dx/e3c51408-fb1a-4e40-863d-7923e7362530.jpg"
  },
  {
   "name": "Airwallex AI Meetup: Agentic Banking Hackathon Demo Day",
@@ -1572,7 +1653,8 @@
   "place_id": "ChIJB2BdKEqBhYARIuoRMgCGpwQ",
   "lat": 37.7914037,
   "lng": -122.3929787,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/qh/3b8e1527-305b-4866-a344-d2de0df3c102.png"
  },
  {
   "name": "Multiplayer AI for HR: Show-and-Tell + MIXER",
@@ -1594,7 +1676,8 @@
   "place_id": "EjM1NzYgRm9sc29tIFN0IGZsb29yIDMsIFNhbiBGcmFuY2lzY28sIENBIDk0MTA1LCBVU0EiIxohChYKFAoSCXu78Hx8gIWAEZLPBcng02hKEgdmbG9vciAz",
   "lat": 37.7861654,
   "lng": -122.39626829999999,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/5b/4d6fd10f-a919-4df0-ba15-50ba394865a8.png"
  },
  {
   "name": "Coffeehouse by Ode with Anthropic",
@@ -1618,7 +1701,8 @@
   "place_id": "ChIJbwnGIm2BhYARSfZaonob-q4",
   "lat": 37.7962299,
   "lng": -122.39413929999999,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/uj/88eb9b3e-bf4a-4ae6-b48c-fd48631df70c.png"
  },
  {
   "name": "Edge Cases by AGI, Inc. #004 with Coleman Hooper @ UC Berkeley (BAIR)",
@@ -1639,7 +1723,8 @@
   "city": "San Francisco",
   "lat": 37.757681915498324,
   "lng": -122.43441951517282,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/qs/9c9bbea2-9b5e-4802-8890-38d16a2d8add.png"
  },
  {
   "name": "Hydrogen, Reimagined: From Critical Missions to Global Markets",
@@ -1660,7 +1745,8 @@
   "city": "Berkeley",
   "lat": 37.87165002116429,
   "lng": -122.26965691560355,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/un/c4b9ae70-beb1-4396-b668-81cc53c8a2ab.png"
  },
  {
   "name": "AI Summit 2027: A Conversation Before Geneva",
@@ -1683,7 +1769,8 @@
   "place_id": "ChIJW2d9v5B_j4ARRUKYIZBKZx8",
   "lat": 37.774522999999995,
   "lng": -122.40312300000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/xs/62c86526-dd8f-435f-9263-0bbf9b10477e.png"
  },
  {
   "name": "AI Infra for Physical AI: Mind Robotics x Anyscale",
@@ -1708,7 +1795,8 @@
   "place_id": "ChIJUY3cSzeBhYAREICXprT7fKw",
   "lat": 37.7841915,
   "lng": -122.39589810000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/y1/6b41118a-c8ce-4d2d-b5af-4f07df31b3e3.png"
  },
  {
   "name": "GTM Series #04: Tomer Chernia (x-Head of GTM at Cursor)",
@@ -1727,7 +1815,8 @@
   "city": "San Francisco",
   "lat": 37.78215678533239,
   "lng": -122.40446536563044,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/w3/99e777ff-779f-4f52-9806-b8a6fec5932a.png"
  },
  {
   "name": "How can AI kill us all? Eight existential risk scenarios with Prof. Geoffrey Hinton",
@@ -1749,7 +1838,8 @@
   "place_id": "ChIJ75fLhWKAhYARDxivfRW3Vr4",
   "lat": 37.7933452,
   "lng": -122.3925028,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/oc/7e84d152-5f31-4252-ac14-32a69336f92a.png"
  },
  {
   "name": "GTM & AI Dinner",
@@ -1774,7 +1864,8 @@
   "place_id": "ChIJkdko-oqAhYARt4ZpvCrKkao",
   "lat": 37.7938689,
   "lng": -122.40367440000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/b0/f527b18b-a59c-46ab-bd4b-edacb9fd8ac5.png"
  },
  {
   "name": "Rethinking Documentation in the AI Era",
@@ -1790,7 +1881,8 @@
   "venue": "Mintlify",
   "lat": 37.788765,
   "lng": -122.402596,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/a/4/8/5/600_536802117.jpeg"
  },
  {
   "name": "Agent Builders Breakfast with Agent37",
@@ -1813,7 +1905,8 @@
   "place_id": "ChIJIQBpAG2ahYAR_6128GcTUEo",
   "lat": 37.7749295,
   "lng": -122.41941550000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/14/aec18bb6-eaf0-46f2-8290-006912a904e5.png"
  },
  {
   "name": "FOUNDERS GATHERINGS  (💡Read description)",
@@ -1829,7 +1922,8 @@
   "venue": "Post Street & Kearny Street",
   "lat": 37.788906,
   "lng": -122.40369,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/4/2/2/5/600_521896933.jpeg"
  },
  {
   "name": "Founder's Meetup in South SFO",
@@ -1845,7 +1939,8 @@
   "venue": "South San Francisco",
   "lat": 37.654655,
   "lng": -122.40775,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/6/e/c/4/600_529708356.jpeg"
  },
  {
   "name": "Open House / Open Build / Open Repair Projects Workshop",
@@ -1861,7 +1956,8 @@
   "venue": "Circuit Launch",
   "lat": 37.74058,
   "lng": -122.20129,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/5/1/f/8/600_532580984.jpeg"
  },
  {
   "name": "Speech to Ship Hackathon: Speak It, Build It, Ship It.",
@@ -1882,7 +1978,8 @@
   "city": "San Francisco",
   "lat": 37.79375381533998,
   "lng": -122.4016319173363,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/m8/7594ee8b-5a51-4324-9dac-488281969711.png"
  },
  {
   "name": "Personal Agents Hackathon",
@@ -1898,7 +1995,8 @@
   "city": "San Francisco",
   "lat": 37.79042969139524,
   "lng": -122.39653989351216,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/cp/60b8813e-4185-47ca-8f28-523c34bb4fb5.png"
  },
  {
   "name": "Embodied AI Hackathon 🦾 [with X Square Robot]",
@@ -1918,7 +2016,8 @@
   "city": "San Francisco",
   "lat": 37.75800159925836,
   "lng": -122.45343475210592,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/05/92bdfa25-568f-45f4-8838-658666b7eebb.png"
  },
  {
   "name": "Bay Area AI War Room - SF Edition - Saturday, 10:00 AM",
@@ -1934,7 +2033,8 @@
   "venue": "JOE & THE JUICE",
   "lat": 37.790485,
   "lng": -122.39953,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/9/2/d/8/600_526117592.jpeg"
  },
  {
   "name": "Startup Barn Raising for Designers",
@@ -1950,7 +2050,8 @@
   "venue": "Muddy Waters Coffee House",
   "lat": 37.764523,
   "lng": -122.42168,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/5/0/5/5/600_536000565.jpeg"
  },
  {
   "name": "Boat Hackathon - Show Boat Demo Day",
@@ -1970,7 +2071,8 @@
   "place_id": "ChIJkaG65O6BhYARFeFoNY9ZRiM",
   "lat": 37.8000361,
   "lng": -122.39758849999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/8s/5b31a0cd-9023-4fec-a5df-f951aece9f92.png"
  },
  {
   "name": "Durable AI Meetup (November Edition)",
@@ -1991,7 +2093,8 @@
   "city": "San Francisco",
   "lat": 37.78917685954514,
   "lng": -122.40971094760691,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/yq/b4668660-e087-4bd4-a063-4b8b813fb465.jpg"
  },
  {
   "name": "Founder Friendsgiving Dinner",
@@ -2011,7 +2114,8 @@
   "city": "San Francisco",
   "lat": 37.75902990182298,
   "lng": -122.38683419216935,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/zc/33bab73d-b6d0-4b8b-8512-49ce8b336ce5.png"
  },
  {
   "name": "Women & Non Binary Hack and do whatever night",
@@ -2029,7 +2133,8 @@
   "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
   "lat": 37.8350548,
   "lng": -122.2642563,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/event-covers/kr/8071c8dc-6a0d-4008-84be-4e5f6385ea35.jpg"
  },
  {
   "name": "BioTech and Pharma Startups, Investors & Professionals Networking Event",
@@ -2045,7 +2150,8 @@
   "venue": "Last Drop Tavern",
   "lat": 37.78996,
   "lng": -122.40853,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/8/6/0/a/600_536194314.jpeg"
  },
  {
   "name": "Multiplayer AI Hackathon (Thanksgiving Special) | 2K+ Prizes",
@@ -2070,7 +2176,8 @@
   "place_id": "ChIJYU1rSACBhYAR8gX_suu-tiA",
   "lat": 37.7904122,
   "lng": -122.39934480000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/ul/2a8606ea-b7a0-4ea7-904f-c6b523d2f89f.png"
  },
  {
   "name": "Festiverse 2026: Diwali Hackathon",
@@ -2090,7 +2197,8 @@
   "place_id": "ChIJYU1rSACBhYAR8gX_suu-tiA",
   "lat": 37.7904122,
   "lng": -122.39934480000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/67/affce110-9f2d-4ed7-8a62-6f263331821a.png"
  },
  {
   "name": "GGW Sharks. Startup Pitch & Networking",
@@ -2111,7 +2219,8 @@
   "city": "Menlo Park",
   "lat": 37.45410730129746,
   "lng": -122.18523309319751,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/xe/29a3f1f9-8a38-4e27-9642-72e1315d6bfa.jpg"
  },
  {
   "name": "SF Non-Slop Hackathon | Pangram x Kino x Capy x Paper",
@@ -2132,7 +2241,8 @@
   "city": "San Francisco",
   "lat": 37.772757154685664,
   "lng": -122.40875815431436,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ae/f33ffbf4-2c81-4e3a-817a-52f8bac41432.png"
  },
  {
   "name": "ITCH - Businesses share what needs to be built (Waste Industry)",
@@ -2157,7 +2267,8 @@
   "place_id": "ChIJo_EkkOqBhYAR4Lh5mt5syWY",
   "lat": 37.7819145,
   "lng": -122.39486069999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/iv/11db6be5-0de7-4972-ae5f-7fc1e9a8516c.png"
  },
  {
   "name": "Agents: AI's Killer App?",
@@ -2173,7 +2284,8 @@
   "venue": "O’Reilly’s Pub",
   "lat": 37.769516,
   "lng": -122.452614,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/e/8/8/4/600_536819524.jpeg"
  },
  {
   "name": "SF Real Estate & Construction Business and Startups Networking Event",
@@ -2189,7 +2301,8 @@
   "venue": "Hawthorn SF Nightclub and Lounge",
   "lat": 37.78799,
   "lng": -122.4043,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/5/1/9/600_532409977.jpeg"
  },
  {
   "name": "Hardware Hack Night & Fixit Clinic",
@@ -2209,7 +2322,8 @@
   "place_id": "ChIJNazAD62Aj4ARs1yRjm9-RKg",
   "lat": 37.8350548,
   "lng": -122.2642563,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/aw/2e444af2-fb79-488b-8825-4d8be94b658f.jpg"
  },
  {
   "name": "HackwithBay 4.0",
@@ -2225,7 +2339,8 @@
   "city": "San Francisco",
   "lat": 37.78827971708466,
   "lng": -122.39808551982846,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/by/c2d71b2b-4ba8-4b8f-9ab2-bb79ef9032f4.jpg"
  },
  {
   "name": "Accelr8 | Cowork Club",
@@ -2250,7 +2365,8 @@
   "place_id": "ChIJLfn9L5eAhYARLDxMHqPYewY",
   "lat": 37.783536999999995,
   "lng": -122.4190668,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/api-uploads/9t/27e694a4-1e6a-40fa-a5df-9ac790cacd41.png"
  },
  {
   "name": "Wiki3: Own Your Own AI Workshop",
@@ -2266,7 +2382,8 @@
   "venue": "Hacker Dojo",
   "lat": 37.395626,
   "lng": -121.985374,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/a/7/3/6/600_534822806.jpeg"
  },
  {
   "name": "🧙🏼Build & Chill Project Jam🧙🏾‍♂️:Bring Your Project, Ideas, or Advice🧙🏻‍♂️",
@@ -2282,7 +2399,8 @@
   "venue": "Hacker Dojo",
   "lat": 37.395817,
   "lng": -121.98579,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/3/d/7/9/600_530115737.jpeg"
  },
  {
   "name": "Tech Networking Event by Startup Valley in San Francisco",
@@ -2298,7 +2416,8 @@
   "venue": "AI Start Academy",
   "lat": 37.766293,
   "lng": -122.42357,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/9/1/6/600_536631478.jpeg"
  },
  {
   "name": "Physical AI Hack",
@@ -2314,7 +2433,8 @@
   "city": "San Francisco",
   "lat": 37.765364743656264,
   "lng": -122.3910022078558,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/on/d6990f90-5f1a-4941-abc0-d1bf68cc2050.png"
  },
  {
   "name": "Founders Running Club :: Easy 5-10km Run + Talks",
@@ -2330,7 +2450,8 @@
   "venue": "Murphy Windmill",
   "lat": 37.764908,
   "lng": -122.508705,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/9/1/8/8/600_536977256.jpeg"
  },
  {
   "name": "SF × MIT Hack Day: Peptides",
@@ -2346,7 +2467,8 @@
   "city": "San Francisco",
   "lat": 37.757203148151845,
   "lng": -122.44900618972218,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/th/1752132e-e3bc-4b4d-a2a3-0396b59ea5cb.png"
  },
  {
   "name": "SF Startups, Investors and Professionals Pitch and Networking Event",
@@ -2362,7 +2484,8 @@
   "venue": "Fahy's Fog & Barrel",
   "lat": 37.79418,
   "lng": -122.404396,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/3/7/0/600_532010032.jpeg"
  },
  {
   "name": "Agentics Foundation Meetup - San Francisco",
@@ -2378,7 +2501,8 @@
   "venue": "199 Museum Way",
   "lat": 37.764133,
   "lng": -122.43835,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/a/b/9/600_536991897.jpeg"
  },
  {
   "name": "How to train LLMs to beat frontier models",
@@ -2402,7 +2526,8 @@
   "place_id": "ChIJYU1rSACBhYAR8gX_suu-tiA",
   "lat": 37.7904122,
   "lng": -122.39934480000001,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/gf/a792af97-a6b9-4f26-8957-04047ec2e7a4.png"
  },
  {
   "name": "OpenOakland - Civic Tech for the Community December Meeting!",
@@ -2418,7 +2543,8 @@
   "venue": "City Hall, Hearing Room 3",
   "lat": 37.80532,
   "lng": -122.272545,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/6/1/9/b/600_525984987.jpeg"
  },
  {
   "name": "San Francisco HealthTech Connect: Networking for Startups, Investors, Innovators",
@@ -2434,7 +2560,8 @@
   "venue": "Hawthorn SF Nightclub and Lounge",
   "lat": 37.78799,
   "lng": -122.4043,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/c/8/9/5/600_536991349.jpeg"
  },
  {
   "name": "UXNight: How Teams Design AI Tools",
@@ -2450,7 +2577,8 @@
   "venue": "Superhuman",
   "lat": 37.794685,
   "lng": -122.40171,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/d/5/5/600_536852085.jpeg"
  },
  {
   "name": "Fund or Fold: How VCs Actually Decide",
@@ -2470,7 +2598,8 @@
   "city": "San Francisco",
   "lat": 37.79170495537573,
   "lng": -122.39802501722016,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/7g/46c05e87-ccd4-40b5-a1fa-fa9467dea2c3.png"
  },
  {
   "name": "Asymmetric SF: AI Leaders and Experts",
@@ -2488,7 +2617,8 @@
   "city": "San Francisco",
   "lat": 37.761786616867276,
   "lng": -122.41401265147375,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/api-uploads/ql/43969902-7865-4705-8b38-da505d83d416.png"
  },
  {
   "name": "Batter Up San Francisco!",
@@ -2506,7 +2636,8 @@
   "city": "San Francisco",
   "lat": 37.76720645054898,
   "lng": -122.41807308168401,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/tx/01169f28-6f1b-44db-b0fe-af2a3f29dae9.png"
  },
  {
   "name": "YC Mixer: Demo Day Afterparty 🕺",
@@ -2524,7 +2655,8 @@
   "city": "San Francisco",
   "lat": 37.788902124436106,
   "lng": -122.40601781532138,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ao/57c38702-e534-47f5-b195-de626cec456e.gif"
  },
  {
   "name": "AI & Tech Networking Event in San Francisco by Ascent Valley",
@@ -2540,7 +2672,8 @@
   "venue": "Toy Soldier",
   "lat": 37.79143,
   "lng": -122.4037,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/9/c/b/600_536971179.jpeg"
  },
  {
   "name": "From AI Ideas to Impact: Stories, Growth & a Year-End Celebration (w/ The AI Collective)",
@@ -2555,7 +2688,8 @@
   "city": "San Ramon",
   "lat": 37.769089229895364,
   "lng": -121.9576844779481,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/gf/59bd0f7c-136c-4f39-ac30-28bfed9380de.png"
  },
  {
   "name": "ITCHATHON - Solve actual problems (Waste Industry)",
@@ -2578,7 +2712,8 @@
   "place_id": "ChIJo_EkkOqBhYAR4Lh5mt5syWY",
   "lat": 37.7819145,
   "lng": -122.39486069999998,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/ly/c75684c1-b230-4645-890f-cb0d50af5f89.png"
  },
  {
   "name": "Bay Area AI War Room - Berkeley Edition - Saturday, 10:00 AM",
@@ -2594,7 +2729,8 @@
   "venue": "Victory Point Cafe",
   "lat": 37.875175,
   "lng": -122.26846,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/9/2/d/8/600_526117592.jpeg"
  },
  {
   "name": "San Francisco AI & ML Professionals, Investors and Start-Ups Networking",
@@ -2610,7 +2746,8 @@
   "venue": "Hawthorn SF Nightclub and Lounge",
   "lat": 37.78799,
   "lng": -122.4043,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/d/9/d/2/600_530635762.jpeg"
  },
  {
   "name": "Edge Cases by AGI, Inc. #005 with Shuo Yang @ UC Berkeley: FreeToken",
@@ -2631,7 +2768,8 @@
   "city": "San Francisco",
   "lat": 37.76001896075202,
   "lng": -122.43463767424862,
-  "venue_visibility": "guests-only"
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/02/17897303-64ba-4c8e-ad8c-039a00481592.png"
  },
  {
   "name": "Women in Tech, Fintech, AI, Startups, Networking Event & Elevator Pitch SF",
@@ -2647,6 +2785,7 @@
   "venue": "Fahy's Fog & Barrel",
   "lat": 37.79418,
   "lng": -122.404396,
-  "venue_visibility": "public"
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/5/3/7/600_532410007.jpeg"
  }
 ]

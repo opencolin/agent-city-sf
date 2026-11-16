@@ -128,6 +128,10 @@ nav.sections a:hover { text-decoration: underline; }
 .byline { font-family: var(--sans); font-size: 11px; color: var(--mute); margin-top: 6px; letter-spacing: .02em; }
 .story { padding: 14px 0; border-bottom: 1px solid var(--hair); }
 .story:last-child { border-bottom: 0; }
+.story.has-flyer { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: start; }
+.story .flyer { display: block; width: 72px; aspect-ratio: 1; overflow: hidden; border: 1px solid var(--hair); background: var(--chip); }
+.story .flyer img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.92); transition: transform .3s; }
+.story:hover .flyer img { transform: scale(1.04); }
 .story .hl { font-size: 19px; }
 .sec-title { font-family: var(--sans); font-weight: 800; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; border-top: 2px solid var(--rule); padding-top: 8px; margin: 0 0 4px; display: flex; justify-content: space-between; align-items: baseline; }
 .sec-title a { font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--accent); font-size: 12px; }
@@ -669,12 +673,18 @@ const VENUES = [
 let EVENTS = [];
 let filter = "all";
 
+// Event flyer, resized by Luma's image CDN when it's a Luma cover.
+const flyer = (u, w = 240) => !u ? "" : /^https:\/\/images\.lumacdn\.com\//.test(u) && !/cdn-cgi/.test(u)
+  ? u.replace("https://images.lumacdn.com/", `https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=80,width=${w},height=${w}/`) : u;
 function storyHtml(e) {
   const hosts = e.hosts?.length ? e.hosts.slice(0, 2).join(", ") : e.source;
-  return `<article class="story">
-    <div class="kicker">${esc(fmtShort(e.date))} · ${esc(e.time || "")}</div>
-    <a href="${esc(e.link)}" target="_blank" rel="noopener"><h3 class="hl">${esc(e.name)}</h3></a>
-    <div class="byline">${esc(city(e.location))}${hosts ? " · By " + esc(hosts) : ""}</div>
+  return `<article class="story${e.image ? " has-flyer" : ""}">
+    ${e.image ? `<a class="flyer" href="${esc(e.link)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="${esc(flyer(e.image))}" alt="" loading="lazy" onerror="this.closest('.story').classList.remove('has-flyer');this.parentNode.remove()"></a>` : ""}
+    <div class="txt">
+      <div class="kicker">${esc(fmtShort(e.date))} · ${esc(e.time || "")}</div>
+      <a href="${esc(e.link)}" target="_blank" rel="noopener"><h3 class="hl">${esc(e.name)}</h3></a>
+      <div class="byline">${esc(city(e.location))}${hosts ? " · By " + esc(hosts) : ""}</div>
+    </div>
   </article>`;
 }
 function miniHtml(e) {

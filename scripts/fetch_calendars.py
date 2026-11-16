@@ -72,6 +72,7 @@ def row(entry, source):
         "lat": coord.get("latitude"),
         "lng": coord.get("longitude"),
         "venue_visibility": ev.get("geo_address_visibility"),
+        "image": ev.get("cover_url"),
     }
     return {k: v for k, v in out.items() if v is not None}
 

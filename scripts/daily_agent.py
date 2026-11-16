@@ -9,7 +9,7 @@ which redeploys buildweek.ai. Steps:
   3. Read each new event link. Luma pages are parsed directly; other pages go to an LLM that
      pulls out the name, date, time and place. Only Bay Area events in the next 30 days are kept.
   4. Pick the Bay Area posts tagged #buildweek, #buildswag or #brunchlife for public/social.json.
-  5. Drop past events, add venues, and write public/agent.json (what ran, what was added).
+  5. Drop past events, add venues and flyers, and write public/agent.json (what ran, what was added).
 
 Environment:
   TAVILY_API_KEY     web search (tavily.com)
@@ -340,6 +340,7 @@ def main():
     SOCIAL.write_text(json.dumps(social, indent=1, ensure_ascii=False))
     if added:
         subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_venues.py")], timeout=900)
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_covers.py")], timeout=900)  # flyers for anything new
     REPORT.write_text(json.dumps({
         "ran_at": started.isoformat(timespec="minutes"), "events": len(rows), "added": [
             {k: e.get(k) for k in ("name", "date", "link", "source")} for e in added],
