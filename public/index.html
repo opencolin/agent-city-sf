@@ -109,14 +109,21 @@ nav.sections a { white-space: nowrap; }
 nav.sections a:hover { text-decoration: underline; }
 
 /* ── Ticker ── */
-.ticker { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--hair); font-family: var(--sans); font-size: 12px; scrollbar-width: none; }
-.ticker::-webkit-scrollbar { display: none; }
-.ticker div { padding: 9px 18px; border-right: 1px solid var(--hair); white-space: nowrap; }
-.ticker div:first-child { padding-left: 0; }
-.ticker b { font-weight: 800; }
-.ticker .up { color: #2e7d32; font-weight: 700; }
+.ticker { overflow: hidden; border-bottom: 1px solid var(--hair); font-family: var(--sans); font-size: 12px; min-height: 35px; position: relative; }
+.ticker .tape { display: flex; width: max-content; animation: tape 90s linear infinite; }
+.ticker:hover .tape { animation-play-state: paused; }
+.ticker .q { display: flex; gap: 6px; align-items: baseline; padding: 9px 16px; border-right: 1px solid var(--hair); white-space: nowrap; color: var(--ink); text-decoration: none; }
+.ticker .q:hover .nm { text-decoration: underline; }
+.ticker .nm { color: var(--ink-2); }
+.ticker b { font-weight: 800; letter-spacing: .02em; }
+.ticker .px { font-variant-numeric: tabular-nums; }
+.ticker .up { color: #2e7d32; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ticker .dn { color: #b3261e; font-weight: 700; font-variant-numeric: tabular-nums; }
 :root[data-theme="dark"] .ticker .up { color: #7cc882; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ticker .up { color: #7cc882; } }
+:root[data-theme="dark"] .ticker .dn { color: #f08a80; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ticker .up { color: #7cc882; } :root:not([data-theme="light"]) .ticker .dn { color: #f08a80; } }
+@keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; scrollbar-width: none; } .ticker .tape { animation: none; } }
 
 /* ── Story primitives ── */
 .kicker { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
@@ -429,7 +436,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
     <a href="map.html">The Map</a>
   </nav>
 
-  <div class="ticker" id="ticker" aria-label="This week in numbers"></div>
+  <div class="ticker" id="ticker" aria-label="Markets"><div class="tape" id="tape"></div></div>
 
   <main id="front">
     <div class="front">
@@ -710,15 +717,7 @@ function render() {
 
   // Ticker
   const c = { hack: by("hack").length, demo: by("demo").length, talk: by("talk").length };
-  const free = up.filter(e => /🍕|pizza|dinner|happy hour|cocktail|coffee|mixer|after ?hours|social/i.test(e.name)).length;
-  $("#ticker").innerHTML = [
-    `<b>${c.hack}</b> hackathons <span class="up">▲</span>`,
-    `<b>${c.demo}</b> demo &amp; pitch nights`,
-    `<b>${c.talk}</b> talks &amp; meetups`,
-    `<b>${free}</b> with dinner or drinks <span class="up">▲</span>`,
-    `<b>${VENUES.length}</b> builder venues`,
-    `<b>${new Set(up.flatMap(e => e.hosts || [])).size}</b> hosts &amp; sponsors`,
-  ].map(s => `<div>${s}</div>`).join("");
+
 
   // Lead
   const n = (week.length || up.length);
@@ -1036,6 +1035,21 @@ fetch("events.json").then(r => r.json()).then(rows => {
   .finally(loadWeather);
 loadSocial();
 loadNews();
+loadTickers();
+// ── Markets tape: NVIDIA, AMD, Meta, SpaceX and friends ──
+async function loadTickers() {
+  let quotes = [];
+  try { const r = await withTimeout(fetch("/api/tickers"), 10000); if (r.ok) quotes = (await r.json()).quotes || []; } catch (e) {}
+  if (!quotes.length) { $("#ticker").hidden = true; return; }
+  const fmt = (n, d = 2) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const item = q => {
+    const ch = q.change == null ? "" : `<span class="${q.change >= 0 ? "up" : "dn"}">${q.change >= 0 ? "▲" : "▼"} ${fmt(Math.abs(q.change))}%</span>`;
+    const yf = q.symbol === "BTC" ? "BTC-USD" : /^(IXIC|GSPC)$/.test(q.symbol) ? "^" + q.symbol : q.symbol;
+    return `<a class="q" href="https://finance.yahoo.com/quote/${encodeURIComponent(yf)}" target="_blank" rel="noopener"><span class="nm">${esc(q.name)}</span><b>${esc(q.symbol)}</b><span class="px">${fmt(q.price, q.price >= 1000 ? 0 : 2)}</span>${ch}</a>`;
+  };
+  const row = quotes.map(item).join("");
+  $("#tape").innerHTML = row + row.replace(/<a /g, '<a aria-hidden="true" tabindex="-1" ');  // twice, for a seamless loop
+}
 // ── Daily agent: when it last updated the paper ──
 fetch("agent.json").then(r => r.ok ? r.json() : null).then(a => {
   if (!a?.ran_at) return;
