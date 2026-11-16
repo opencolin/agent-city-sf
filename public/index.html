@@ -270,7 +270,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
 .fog .more, .fog .credit { display: block; margin-top: 10px; font-family: var(--sans); font-size: 12px; }
 .fog .credit { color: var(--mute); }
 @media (max-width: 720px) { .fog { grid-template-columns: 1fr; } }
-.days { display: grid; grid-template-columns: repeat(10, minmax(74px, 1fr)); overflow-x: auto; scrollbar-width: thin; }
+.days { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(74px, 1fr); overflow-x: auto; scrollbar-width: thin; }
 .dcell { padding: 6px 8px 10px; border-left: 1px solid var(--hair); text-align: center; font-family: var(--sans); font-size: 12px; display: flex; flex-direction: column; gap: 3px; align-items: center; }
 .dcell:first-child { border-left: 0; }
 .dcell .dn { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
