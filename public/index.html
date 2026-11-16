@@ -480,7 +480,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
           </div>
           <div class="story">
             <div class="kicker">For the Busy Founder</div>
-            <h3 class="hl">Three Rooms Worth Your Evening</h3>
+            <h3 class="hl">Eight Rooms Worth Your Evening</h3>
             <p class="dek">The highest-ranked nights on eventhunt's radar, so you skip the 10%-turnout events.</p>
             <ul class="mini" id="founderList"></ul>
           </div>
@@ -756,9 +756,9 @@ function render() {
   $("#hackList").innerHTML = by("hack").slice(0, 3).map(storyHtml).join("");
   $("#demoList").innerHTML = by("demo").slice(0, 8).map(storyHtml).join("");
 
-  const broke = up.filter(e => (e.k === "hack" && /AM/.test(e.time || "")) || /🍕|pizza|dinner|coffee/i.test(e.name)).slice(0, 5);
+  const broke = up.filter(e => (e.k === "hack" && /AM/.test(e.time || "")) || /🍕|pizza|dinner|lunch|breakfast|brunch|coffee|croissant|bbq|happy hour|drinks|cocktail|taco|free food/i.test(e.name)).slice(0, 8);
   $("#brokeList").innerHTML = broke.map(miniHtml).join("");
-  const founder = [...up].filter(e => e.k !== "hack").sort((a, b) => (b.score || 0) - (a.score || 0) || a.date.localeCompare(b.date)).slice(0, 3);
+  const founder = [...up].filter(e => e.k !== "hack" && !broke.includes(e)).sort((a, b) => (b.score || 0) - (a.score || 0) || a.date.localeCompare(b.date)).slice(0, 8);
   $("#founderList").innerHTML = founder.map(miniHtml).join("");
 
   // Venues
