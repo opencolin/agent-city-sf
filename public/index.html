@@ -75,6 +75,7 @@ button, input { font: inherit; color: inherit; }
 .ear .big { display: block; font-family: var(--head); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--ink); margin: 2px 0; }
 .ear .big .ico { font-size: 20px; margin-right: 6px; vertical-align: 3px; }
 .mast .mid h1 { font-size: clamp(46px, 6.4vw, 96px); }
+@media (min-width: 1001px) { .util .wx-now, .util .wx-sun { display: none; } }  /* the right ear carries the weather */
 @media (max-width: 1000px) { .mast { display: block; } .ear { display: none; } .mast .mid h1 { font-size: clamp(46px, 8.6vw, 104px); } }
 .mast h1 { font-family: var(--mast); font-weight: 400; font-size: clamp(46px, 8.6vw, 104px); line-height: 1; margin: 6px 0 4px; letter-spacing: 0; }
 .mast .motto { font-family: var(--body); font-style: italic; font-size: 14px; color: var(--ink-2); }
