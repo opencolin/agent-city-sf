@@ -305,6 +305,19 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
 .wire .story .hl { font-size: 17px; }
 
 /* Galleries: #buildswag and #brunchlife */
+.accel { border-top: 2px solid var(--ink); text-align: left; }
+.accel .prog { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .7fr) minmax(0, 2.4fr) 132px; gap: 18px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--hair); }
+.accel .prog h3 { font-family: var(--head); font-size: 21px; line-height: 1.15; margin: 0; }
+.accel .prog h3 a { color: inherit; text-decoration: none; }
+.accel .prog h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.accel .where { display: block; font-family: var(--sans); font-size: 12px; color: var(--mute); margin-top: 3px; }
+.accel .check { font-family: var(--head); font-weight: 700; font-size: 17px; }
+.accel .terms { font-size: 15px; color: var(--ink-2); line-height: 1.45; }
+.accel .when { justify-self: end; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 8px; border: 1px solid var(--ink); white-space: nowrap; }
+.accel .when.soon { background: var(--ink); color: var(--paper); }
+.accel-src { font-family: var(--sans); font-size: 12px; color: var(--mute); margin-top: 12px; }
+.accel-src a { color: inherit; text-decoration: underline; }
+@media (max-width: 800px) { .accel .prog { grid-template-columns: 1fr auto; gap: 6px 14px; } .accel .prog .check, .accel .prog .terms { grid-column: 1 / -1; } .accel .prog .when { grid-row: 1; grid-column: 2; } }
 .flyer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 24px; border-top: 1px solid var(--hair); }
 .flyer-grid .story { border-bottom: 1px solid var(--hair); }
 .flyer-grid .story:last-child { border-bottom: 1px solid var(--hair); }
@@ -427,6 +440,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
     <a href="#hackathons">Hackathons</a>
     <a href="#demos">Demo Days &amp; Pitch Nights</a>
     <a href="#credits">Free Credits</a>
+    <a href="#accelerators">Accelerators</a>
     <a href="#venues">Where to Work</a>
     <a href="#weather">Weather</a>
     <a href="#todayBand">Today</a>
@@ -543,6 +557,14 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
         </div>
         <div class="results" id="creditResults" aria-live="polite"></div>
       </div>
+    </section>
+
+    <section class="band rv" id="accelerators">
+      <div class="kicker">Money · Applications Open</div>
+      <h2 class="banner">The Late-Application Season</h2>
+      <p class="lede">YC still takes late applications for two or three weeks after the deadline, and plenty of founder programs read applications all year. Here's who's open right now, and what they write the check&nbsp;for.</p>
+      <div class="accel" id="accelList"></div>
+      <p class="accel-src">Terms as each program states them; check the program's own page before you apply. List via <a href="https://x.com/AroraBhavyam/status/2121619824564752420" target="_blank" rel="noopener">Bhavyam Arora</a>.</p>
     </section>
 
     <section class="band rv" id="personas">
@@ -1044,6 +1066,38 @@ fetch("events.json").then(r => r.json()).then(rows => {
 loadSocial();
 loadNews();
 loadTickers();
+// Accelerators and residencies taking applications now (terms as each program states them, Nov 2026).
+// deadline: a date for a hard cutoff; open: what to show otherwise.
+const ACCELERATORS = [
+  { name: "Y Combinator", where: "San Francisco", url: "https://www.ycombinator.com/apply", check: "$500K", terms: "$125K for 7%, plus $375K on an uncapped MFN SAFE. W27 late applications are still being accepted for a few more weeks.", open: "Late apps open" },
+  { name: "Techstars", where: "New York City", url: "https://www.techstars.com/accelerators", check: "$220K", terms: "For 5% common, plus a $200K uncapped MFN SAFE.", deadline: "2026-11-18" },
+  { name: "speedrun", where: "a16z · San Francisco", url: "https://speedrun.a16z.com/apply", check: "Up to $1M", terms: "Applications sent after Nov 1 are considered for the cohort after SR008.", open: "Next cohort" },
+  { name: "Neo Residency", where: "San Francisco · 3 months", url: "https://neo.com/residency", check: "$750K", terms: "On an uncapped SAFE, for a three-month residency in SF.", open: "Open" },
+  { name: "Afore Founders-in-Residence", where: "San Francisco · 2 months", url: "https://www.afore.vc/", check: "$250K–$750K", terms: "Two months in SF. Afore invests year-round.", open: "Year-round" },
+  { name: "HF0", where: "San Francisco · live-in", url: "https://www.hf0.com/", check: "Residency", terms: "A live-in residency in SF for repeat technical founders.", open: "Open" },
+  { name: "Antler", where: "SF · Austin · NYC", url: "https://www.antler.co/apply", check: "$500K–$1M", terms: "US initial commitment. Residency applications are reviewed year-round, with rolling intake in SF, Austin and NYC.", open: "Rolling" },
+  { name: "Southbound Residency", where: "focal · Miami · Jan 11–Apr 11", url: "https://focal.vc/residency", check: "Uncapped MFN SAFE", terms: "Twelve weeks in Miami for 10 technical teams, seven days a week.", open: "W27 open" },
+  { name: "Orange DAO", where: "Remote", url: "https://www.orangedao.xyz/", check: "$100K", terms: "On an uncapped MFN SAFE, plus a separate 2% program fee. Rolling applications, with a reply within a month.", open: "Rolling" },
+  { name: "Z Fellows", where: "One week", url: "https://www.zfellows.com/", check: "$10K", terms: "Optional, at a $1B cap, for one week of building.", open: "Rolling" },
+  { name: "Colosseum", where: "Crypto · hackathon winners", url: "https://colosseum.com/", check: "$250K", terms: "Only Colosseum hackathon winners can interview.", open: "Win a hackathon" },
+];
+function renderAccelerators() {
+  const today = new Date(new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" }));
+  const rows = ACCELERATORS.map(a => {
+    if (!a.deadline) return { ...a, sort: 1, label: a.open, soon: false };
+    const days = Math.round((new Date(a.deadline) - today) / 864e5);
+    if (days < 0) return null;
+    const d = new Date(a.deadline + "T12:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    return { ...a, sort: 0, label: days === 0 ? "Due today" : days === 1 ? "Due tomorrow" : `Due ${d}`, soon: days <= 7 };
+  }).filter(Boolean).sort((a, b) => a.sort - b.sort);
+  $("#accelList").innerHTML = rows.map(a => `<div class="prog">
+    <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.name)} ↗</a><span class="where">${esc(a.where)}</span></h3>
+    <div class="check">${esc(a.check)}</div>
+    <div class="terms">${esc(a.terms)}</div>
+    <span class="when${a.soon ? " soon" : ""}">${esc(a.label)}</span>
+  </div>`).join("");
+}
+renderAccelerators();
 // ── Markets tape: NVIDIA, AMD, Meta, SpaceX and friends ──
 async function loadTickers() {
   let quotes = [];
@@ -1068,7 +1122,7 @@ fetch("agent.json").then(r => r.ok ? r.json() : null).then(a => {
 }).catch(() => {});
 // ── Page button: current page and section, with a menu of all sections ──
 (function () {
-  const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["news", "Tech News"], ["credits", "Free Credits"],
+  const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["news", "Tech News"], ["credits", "Free Credits"], ["accelerators", "Accelerators"],
     ["personas", "Sign Up"], ["venues", "Where to Work"], ["listings", "Next 10 Days"], ["style", "Style"], ["demos", "Demo Days"], ["brunch", "Brunch"], ["artifacts", "#buildweek"]]
     .filter(([id]) => document.getElementById(id)).map(([id, name], i) => ({ id, name, n: "A" + (i + 1), el: document.getElementById(id) }));
   const box = $("#pager"), btn = box.querySelector("button"), menu = $("#pagerMenu");
