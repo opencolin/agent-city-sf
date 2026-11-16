@@ -212,7 +212,7 @@ let EVENTS = [];
 const map = new maplibregl.Map({
   container: "map",
   style: "https://tiles.openfreemap.org/styles/liberty",
-  bounds: VIEWS.bay, fitBoundsOptions: { padding: 30 },
+  bounds: location.hash === "#bay" ? VIEWS.bay : VIEWS.sf, fitBoundsOptions: { padding: 30 },  // opens on San Francisco; #bay for the whole Bay
   pitch: 45, bearing: 0, maxPitch: 65, minZoom: 8, maxZoom: 18.5,
   attributionControl: { compact: true },
 });
@@ -412,7 +412,7 @@ document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => {
 fetch("events.json").then(r => r.json()).catch(() => []).then(rows => {
   EVENTS = rows.map(e => ({ ...e, k: kindOf(e) })).sort((a, b) => a.date.localeCompare(b.date) || mins(a.time) - mins(b.time));
   renderWeek();
-  const start = () => { placeAll(); onZoom(); if (location.hash === "#sf") map.jumpTo(map.cameraForBounds(VIEWS.sf, { padding: 40 })); declutterSoon(); };
+  const start = () => { placeAll(); onZoom(); if (location.hash !== "#bay" && map.getZoom() < 11.6) map.jumpTo({ center: [-122.425, 37.772], zoom: 11.6 }); /* close enough for landmarks on narrow screens */ declutterSoon(); };
   start(); // markers don't need tiles, so don't wait for them
 });
 </script>
