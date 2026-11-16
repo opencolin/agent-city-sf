@@ -39,4 +39,4 @@ The `scripts/` and `data/` folders still hold the pipeline for the original isom
 
 ## Credits
 
-Map data © OpenStreetMap contributors, tiles by OpenFreeMap. Events: [eventhunt.ai](https://eventhunt.ai), originally listed on Luma. Weather: Open-Meteo and the National Weather Service. News: Hacker News and HackerNoon.
+Map data © OpenStreetMap contributors, tiles by OpenFreeMap. Events: [eventhunt.ai](https://eventhunt.ai), originally listed on Luma. Weather: Open-Meteo and the National Weather Service. News: Hacker News and HackerNoon. Swag photos in `public/swag/` are Build Week's own, plus three from Wikimedia Commons (Mind Booster Noori, CC0; Ainali, CC BY 4.0; Prtksxna, CC BY-SA 4.0), credited on each tile.

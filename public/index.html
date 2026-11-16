@@ -956,26 +956,38 @@ const OPEN_SLOTS = {
   swag: [["🧥", "The hoodie you won at the boat hackathon"], ["🧢", "Sponsor caps, ranked"], ["👟", "Conference-floor sneakers"], ["🎒", "The tote bag stack"], ["🕶️", "Demo-day sunglasses"]],
   brunch: [["🥞", "The Saturday table before the hackathon"], ["☕", "The coffee that shipped the demo"], ["🥑", "Avocado toast with a pitch deck"], ["🍳", "Hackathon breakfast spreads"], ["🥐", "Croissants at the co-working space"]],
 };
-function renderGallery(el, items, slots, tag) {
+// Swag photographed by Build Week, plus openly licensed photos from Wikimedia Commons (credited per license).
+const COMMONS = f => `https://commons.wikimedia.org/wiki/File:${f}`;
+const SWAG_PHOTOS = [
+  { image: "swag/let-them-cook.webp", caption: "Let Them Cook", author: "Build Week", tags: ["buildswag"] },
+  { image: "swag/builderstage.webp", caption: "The BuilderStage tie-dye", author: "Build Week", tags: ["buildswag"] },
+  { image: "swag/laptop-stickers.webp", caption: "A laptop lid, fully stickered", author: "Photo: Mind Booster Noori, CC0", url: COMMONS("Laptop_full_of_stickers.jpg"), tags: ["buildswag"] },
+  { image: "swag/polygon-tote.webp", caption: "The Polygon tote", author: "Build Week", tags: ["buildswag"] },
+  { image: "swag/dropped-this.webp", caption: "“Hey, you dropped this”", author: "Build Week", tags: ["buildswag"] },
+  { image: "swag/swag-table.webp", caption: "The swag table, before the rush", author: "Photo: Ainali, CC BY 4.0", url: COMMONS("Swag_table_2025_NL_mini_hackathon.jpg"), tags: ["buildswag"] },
+  { image: "swag/dang-cap.webp", caption: "The Dang cap", author: "Build Week", tags: ["buildswag"] },
+  { image: "swag/laptop-stickers-2.webp", caption: "Stickers from every stack", author: "Photo: Prtksxna, CC BY-SA 4.0", url: COMMONS("Laptop_with_stickers.jpg"), tags: ["buildswag"] },
+];
+function renderGallery(el, items, slots, tag, max = 5) {
   // No real posts yet: show nothing rather than placeholder tiles (the CTA below the gallery stays).
   const head = el.previousElementSibling?.matches("h3.sec-title") ? el.previousElementSibling : null;
   el.hidden = !items.length; if (head) head.hidden = !items.length;
   if (!items.length) { el.innerHTML = ""; return; }
   slots = [];
-  const tiles = items.slice(0, 5).map(p => `<a class="tile" href="${esc(p.url)}" target="_blank" rel="noopener">
+  const tiles = items.slice(0, max).map(p => `<a class="tile" href="${esc(p.url || p.image)}" target="_blank" rel="noopener">
       ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.caption || tag)}" loading="lazy">` : ""}
       <span class="cap">${esc(p.caption || "")}</span><span class="by">${esc(p.author || "")} · ${esc(tag)}</span></a>`);
   for (const [emo, cap] of slots.slice(tiles.length)) {
     tiles.push(`<a class="tile" href="#artifacts"><span class="emoji" aria-hidden="true">${emo}</span>
       <span class="cap">${esc(cap)}</span><span class="by">Open slot · post with ${esc(tag)}</span></a>`);
   }
-  el.innerHTML = tiles.slice(0, 5).join("");
+  el.innerHTML = tiles.slice(0, max).join("");
 }
 async function loadSocial() {
   let posts = [];
   try { posts = await (await fetch("social.json")).json(); } catch (e) {}
   const has = (p, t) => (p.tags || []).map(x => x.toLowerCase()).includes(t);
-  renderGallery($("#swagGallery"), posts.filter(p => has(p, "buildswag")), OPEN_SLOTS.swag, "#buildswag");
+  renderGallery($("#swagGallery"), [...posts.filter(p => has(p, "buildswag")), ...SWAG_PHOTOS], OPEN_SLOTS.swag, "#buildswag", 8);
   renderGallery($("#brunchGallery"), posts.filter(p => has(p, "brunchlife") || (has(p, "buildweek") && has(p, "brunch"))), OPEN_SLOTS.brunch, "#brunchlife");
 }
 
