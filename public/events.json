@@ -1051,6 +1051,32 @@
   "image": "https://images.lumacdn.com/uploads/aw/2e444af2-fb79-488b-8825-4d8be94b658f.jpg"
  },
  {
+  "name": "Coffee & Croissants with Trigger.dev",
+  "date": "2026-11-17",
+  "time": "8:30 AM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Trigger.dev",
+   "James Ritchie",
+   "Matt Aitken",
+   "Dan Patel"
+  ],
+  "link": "https://luma.com/rryq4yo7",
+  "source": "Trigger.dev SF",
+  "score": 0,
+  "kind": "talk",
+  "venue": "Equator Coffees",
+  "address": "Equator Coffees, 222 2nd St, San Francisco, CA 94105, USA",
+  "short_address": "222 2nd St, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJgXCr_HyAhYARwuh0KYbwaMc",
+  "lat": 37.7866193,
+  "lng": -122.39827539999999,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/29/479e6412-6c55-4b7c-8967-fe1279ced0b7.jpg"
+ },
+ {
   "name": "Backprop Summit",
   "date": "2026-11-17",
   "time": "9:00 AM",
