@@ -395,7 +395,7 @@ footer .fm { font-family: var(--mast); font-weight: 400; font-size: 26px; color:
   <div class="dateline">
     <span class="l" id="vol">Vol. I · No. 1</span>
     <span class="c" id="today"></span>
-    <span class="r">Events by <a href="https://eventhunt.ai" style="text-decoration:underline">eventhunt.ai</a></span>
+    <span class="r"><span id="agentNote"></span>Events by <a href="https://eventhunt.ai" style="text-decoration:underline">eventhunt.ai</a></span>
   </div>
 
   <nav class="sections" aria-label="Sections">
@@ -965,6 +965,14 @@ fetch("events.json").then(r => r.json()).then(rows => {
   .finally(loadWeather);
 loadSocial();
 loadNews();
+// ── Daily agent: when it last updated the paper ──
+fetch("agent.json").then(r => r.ok ? r.json() : null).then(a => {
+  if (!a?.ran_at) return;
+  const t = new Date(a.ran_at), today = new Date().toDateString() === t.toDateString();
+  const when = (today ? "" : t.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + ", ") + t.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles" });
+  $("#agentNote").textContent = `Updated ${when}${a.added?.length ? ` · ${a.added.length} new` : ""} · `;
+  $("#agentNote").title = (a.added || []).map(e => `${e.date} ${e.name}`).join("\n") || "No new events on the last run";
+}).catch(() => {});
 // ── Page button: current page and section, with a menu of all sections ──
 (function () {
   const PAGES = [["front", "Front Page"], ["weather", "Weather"], ["todayBand", "Today"], ["news", "Tech News"], ["credits", "Free Credits"],

@@ -12,6 +12,21 @@ python3 scripts/fetch_venues.py   # adds venue, address, neighborhood and coordi
 python3 scripts/fetch_calendars.py  # adds events from host Luma calendars (South Park Commons, AI Collective, Bond AI, Accelr8) and the aicollective.com/events feed; re-run fetch_venues.py after
 ```
 
+## Daily agent
+
+`scripts/daily_agent.py` runs every morning at 6 AM Pacific on a Tenki runner (`.github/workflows/daily-agent.yml`) and commits what changed, which redeploys the site. It:
+
+1. reruns the event fetchers above;
+2. searches the web with [Tavily](https://tavily.com), and X with [AIsa](https://aisa.one), for Bay Area hackathons, demo days and meetups we're missing, and for posts tagged #buildweek, #buildswag and #brunchlife;
+3. adds new Bay Area events in the next 30 days, reading Luma pages directly and other pages with Claude;
+4. puts Bay Area posts in `public/social.json` for the Style and Brunch sections, drops past events, and writes a run report to `public/agent.json`, which the front page shows in the dateline.
+
+Setup: install the Tenki GitHub App on this repo, then add the repo secrets `TAVILY_API_KEY`, `AISA_API_KEY` and `ANTHROPIC_API_KEY`. Run it from the Actions tab ("Daily agent", with "dry run" to only log), or locally:
+
+```bash
+python3 scripts/daily_agent.py --dry-run
+```
+
 ## Run locally
 
 ```bash

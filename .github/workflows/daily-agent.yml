@@ -1,0 +1,55 @@
+# The Build Week daily agent: refreshes events, finds missing ones with Tavily and AIsa,
+# and commits the changes, which redeploys buildweek.ai. Runs on a Tenki runner.
+name: Daily agent
+
+on:
+  schedule:
+    - cron: "0 14 * * *"   # 6:00 AM Pacific in winter (7:00 AM in summer)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Discover and log only, commit nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-agent
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: tenki-standard-small-2c-4g
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run the agent
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          AISA_API_KEY: ${{ secrets.AISA_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/daily_agent.py ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Commit and push
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name "buildweek-agent"
+          git config user.email "buildweek-agent@users.noreply.github.com"
+          git add public/events.json public/social.json public/agent.json
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          added=$(python3 -c "import json;print(len(json.load(open('public/agent.json'))['added']))")
+          git commit -m "Daily agent: $added new events ($(TZ=America/Los_Angeles date +%Y-%m-%d))"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Summary
+        if: always()
+        run: |
+          [ -f public/agent.json ] && python3 -c "import json;print('\n'.join(json.load(open('public/agent.json'))['log']))" >> "$GITHUB_STEP_SUMMARY" || true
