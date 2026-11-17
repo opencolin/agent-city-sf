@@ -1,5 +1,47 @@
 {
   "buildCommand": "",
   "outputDirectory": "public",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/klamath",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/aws",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/alamosquare",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/accelr8",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/hf0",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/foundersinc",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/frontiertower",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/github",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/cloudflare",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/webdataloft",
+      "destination": "/map.html"
+    }
+  ]
 }
