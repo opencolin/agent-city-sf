@@ -1873,13 +1873,20 @@
   "name": "Boat Hackathon - Show Boat Demo Day",
   "date": "2026-11-21",
   "time": "1:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
+  "location": "Pier 9, San Francisco, CA 94111",
+  "hosts": [
+   "Boat Hackathon"
+  ],
   "link": "https://luma.com/BoatHackathonDemos",
   "source": "HackList SF",
   "score": 0,
-  "kind": "hackathon",
-  "image": "https://images.lumacdn.com/uploads/8s/5b31a0cd-9023-4fec-a5df-f951aece9f92.png"
+  "kind": "demo",
+  "image": "https://images.lumacdn.com/uploads/8s/5b31a0cd-9023-4fec-a5df-f951aece9f92.png",
+  "venue": "The Historic Klamath",
+  "city": "San Francisco",
+  "lat": 37.8007,
+  "lng": -122.3984,
+  "venue_visibility": "public"
  },
  {
   "name": "Acalanes Data Fest hosted by BRIDGEGOOD ( $10000+ in Prizes )",
