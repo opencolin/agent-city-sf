@@ -1,17 +1,17 @@
 {
- "ran_at": "2026-11-16T06:16-08:00",
- "events": 145,
+ "ran_at": "2026-11-17T06:06-08:00",
+ "events": 177,
  "added": [],
- "dropped": 12,
+ "dropped": 6,
  "posts_added": 0,
  "log": [
-  "Build Week agent, Mon Nov 16 2026 6:16 AM PT",
+  "Build Week agent, Tue Nov 17 2026 6:06 AM PT",
   "note: TAVILY_API_KEY is not set; that step is skipped",
   "note: AISA_API_KEY is not set; that step is skipped",
   "note: ANTHROPIC_API_KEY is not set; that step is skipped",
-  "fetch_events.py: 147 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
-  "fetch_calendars.py: 157 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
+  "fetch_events.py: 157 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
+  "fetch_calendars.py: 183 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
   "0 event links found, 0 not on the site yet",
-  "0 events added, 12 past events dropped, 145 on the site; 0 new posts, 0 in social.json"
+  "0 events added, 6 past events dropped, 177 on the site; 0 new posts, 0 in social.json"
  ]
 }
