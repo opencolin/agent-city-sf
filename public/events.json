@@ -1,526 +1,5 @@
 [
  {
-  "name": "Agent Builders Breakfast with Agent37",
-  "date": "2026-11-19",
-  "time": "11:00 AM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Agent37",
-   "Amarachi Amaechi",
-   "Vishnu Krishnaprasad",
-   "Sahar Mor (Bond AI)"
-  ],
-  "link": "https://luma.com/b9cippxg",
-  "source": "Bond AI SF",
-  "score": 0,
-  "kind": "talk",
-  "neighborhood": "SoMa",
-  "city": "San Francisco",
-  "lat": 37.78992245254916,
-  "lng": -122.39147610755725,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/14/aec18bb6-eaf0-46f2-8290-006912a904e5.png"
- },
- {
-  "name": "Diwali Festiverse Agent to Agent Hackathon (SF Edition)",
-  "date": "2026-11-19",
-  "time": "12:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Deepak Chawla",
-   "Rakesh Kumar",
-   "AdaL",
-   "Agent37"
-  ],
-  "link": "https://luma.com/bc8etq9q",
-  "source": "Bond AI SF",
-  "score": 0,
-  "kind": "hackathon",
-  "neighborhood": "Mission District",
-  "city": "San Francisco",
-  "lat": 37.7657596801249,
-  "lng": -122.41182471948929,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/uc/cfea2bb2-f64f-45a1-89be-e5627edce8ec.jpg"
- },
- {
-  "name": "How to Use AI Safely",
-  "date": "2026-11-19",
-  "time": "1:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://www.eventbrite.com/e/tickets-2004262194176",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "San Francisco",
-  "venue": "Mechanics' Institute",
-  "lat": 37.77493,
-  "lng": -122.41942,
-  "venue_visibility": "public",
-  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1197127710%252F303211016051%252F1%252Foriginal.20261102-225409%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.32%26fp-y%3D0.51%26s%3D9266a7021348786617f2400307dc2088&w=940&q=75"
- },
- {
-  "name": "Practical AI Workflow Lab",
-  "date": "2026-11-19",
-  "time": "1:30 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://www.eventbrite.com/e/tickets-2004209726243",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "San Francisco",
-  "venue": "Pacific Workplaces - Office Space San Francisco",
-  "lat": 37.77493,
-  "lng": -122.41942,
-  "venue_visibility": "public",
-  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1197059261%252F3020022223140%252F1%252Foriginal.20261102-065135%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.958%26fp-y%3D0.782%26s%3D46404070a14cc117fa54ef19785a8f96&w=940&q=75"
- },
- {
-  "name": "Notion Build Bar SF",
-  "date": "2026-11-19",
-  "time": "2:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Richelle Stewart"
-  ],
-  "link": "https://luma.com/buildbar-sf-nov",
-  "source": "Notion",
-  "score": 100,
-  "kind": "talk",
-  "neighborhood": "Yerba Buena",
-  "city": "San Francisco",
-  "lat": 37.78823869431504,
-  "lng": -122.40457513238286,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/ta/25d8fb1b-2e8d-4af7-9127-a2ec8ba71087.png"
- },
- {
-  "name": "AWS Student Builder Group at SFSU Kickoff 2026",
-  "date": "2026-11-19",
-  "time": "3:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://www.meetup.com/aws-sbg-at-san-francisco-state-university/events/317492858/",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "San Francisco",
-  "venue": "San Francisco State University",
-  "lat": 37.724148,
-  "lng": -122.47994,
-  "venue_visibility": "public",
-  "image": "https://secure.meetupstatic.com/photos/event/5/f/5/c/600_537204412.jpeg"
- },
- {
-  "name": "Agentic + AI Night: AI Agents Across the App Stack",
-  "date": "2026-11-19",
-  "time": "4:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Brooke Contreras",
-   "Lizzie S",
-   "Yufa Li",
-   "Daniel Liden"
-  ],
-  "link": "https://luma.com/Agentic_AI_Night-11-19",
-  "source": "Bond AI SF",
-  "score": 100,
-  "kind": "talk",
-  "venue": "Terra Gallery & Event Venue",
-  "address": "Terra Gallery & Event Venue, 511 Harrison St, San Francisco, CA 94105, USA",
-  "short_address": "511 Harrison St, San Francisco",
-  "neighborhood": "Rincon Hill",
-  "city": "San Francisco",
-  "place_id": "ChIJN7hCzHuAhYARq5V3nMtb-_U",
-  "lat": 37.785673599999996,
-  "lng": -122.3932373,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/dx/e3c51408-fb1a-4e40-863d-7923e7362530.jpg"
- },
- {
-  "name": "Airwallex AI Meetup: Agentic Banking Hackathon Demo Day",
-  "date": "2026-11-19",
-  "time": "5:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://luma.com/0h2spivq",
-  "source": "HackList SF",
-  "score": 50,
-  "kind": "demo",
-  "image": "https://images.lumacdn.com/uploads/qh/3b8e1527-305b-4866-a344-d2de0df3c102.png"
- },
- {
-  "name": "Multiplayer AI for HR: Show-and-Tell + MIXER",
-  "date": "2026-11-19",
-  "time": "5:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Laura Cruickshanks",
-   "Shubham Srivastava"
-  ],
-  "link": "https://luma.com/promptql-HR-showandtell",
-  "source": "Bond AI SF",
-  "score": 50,
-  "kind": "demo",
-  "venue": "576 Folsom St floor 3",
-  "address": "576 Folsom St floor 3, San Francisco, CA 94105, USA",
-  "short_address": "576 Folsom St floor 3, San Francisco",
-  "neighborhood": "SoMa",
-  "city": "San Francisco",
-  "place_id": "EjM1NzYgRm9sc29tIFN0IGZsb29yIDMsIFNhbiBGcmFuY2lzY28sIENBIDk0MTA1LCBVU0EiIxohChYKFAoSCXu78Hx8gIWAEZLPBcng02hKEgdmbG9vciAz",
-  "lat": 37.7861654,
-  "lng": -122.39626829999999,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/api-uploads/5q/0d123a0f-37c5-4e3f-931b-cab29fdb0d19.png"
- },
- {
-  "name": "FOUNDERSGIVING 🍁 Find Your Next Customer with Okou",
-  "date": "2026-11-19",
-  "time": "5:00 PM",
-  "location": "Mountain View, CA",
-  "hosts": [
-   "Mia",
-   "SEAMATE.",
-   "Scarlett"
-  ],
-  "link": "https://luma.com/seamate-ci8f",
-  "source": "Bond AI SF",
-  "score": 0,
-  "kind": "hackathon",
-  "venue": "883 N Shoreline Blvd",
-  "address": "883 N Shoreline Blvd, Mountain View, CA 94043, USA",
-  "short_address": "883 N Shoreline Blvd, Mountain View",
-  "city": "Mountain View",
-  "place_id": "ChIJ1XSmBU63j4AR4PkpnIPCPTE",
-  "lat": 37.4071594,
-  "lng": -122.0775312,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/d1/c193dcbb-bc87-4890-8acd-ac8dfc40c7cb.jpg"
- },
- {
-  "name": "Coffeehouse by Ode with Anthropic",
-  "date": "2026-11-19",
-  "time": "5:30 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Jake Schaeffer",
-   "Eddie Siegel",
-   "Hugh Wimberly"
-  ],
-  "link": "https://luma.com/ode-coffeehouse",
-  "source": "Bond AI SF",
-  "score": 54,
-  "kind": "demo",
-  "venue": "Shack15",
-  "address": "Shack15, 1, Ferry Building, Ste 201, San Francisco, CA 94111, USA",
-  "short_address": "Ferry Building, 1, Ste 201, San Francisco",
-  "neighborhood": "Embarcadero",
-  "city": "San Francisco",
-  "place_id": "ChIJbwnGIm2BhYARSfZaonob-q4",
-  "lat": 37.7962299,
-  "lng": -122.39413929999999,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/uj/88eb9b3e-bf4a-4ae6-b48c-fd48631df70c.png"
- },
- {
-  "name": "Edge Cases by AGI, Inc. #004 with Coleman Hooper @ UC Berkeley (BAIR)",
-  "date": "2026-11-19",
-  "time": "5:30 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Juliana C",
-   "C K",
-   "Div Garg",
-   "Steve Frey"
-  ],
-  "link": "https://luma.com/edge-cases-004",
-  "source": "Bond AI SF",
-  "score": 100,
-  "kind": "talk",
-  "neighborhood": "Eureka Valley",
-  "city": "San Francisco",
-  "lat": 37.757681915498324,
-  "lng": -122.43441951517282,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/qs/9c9bbea2-9b5e-4802-8890-38d16a2d8add.png"
- },
- {
-  "name": "Hydrogen, Reimagined: From Critical Missions to Global Markets",
-  "date": "2026-11-19",
-  "time": "5:30 PM",
-  "location": "Berkeley, CA",
-  "hosts": [
-   "berkeley gateway accelerator",
-   "Michael McNeely",
-   "Matt Rappaport",
-   "Kurtis"
-  ],
-  "link": "https://luma.com/hzj3bnuw",
-  "source": "Berkeley Gateway Accelerator",
-  "score": 100,
-  "kind": "talk",
-  "neighborhood": "Downtown Berkeley",
-  "city": "Berkeley",
-  "lat": 37.87165002116429,
-  "lng": -122.26965691560355,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/un/c4b9ae70-beb1-4396-b668-81cc53c8a2ab.png"
- },
- {
-  "name": "AI Summit 2027: A Conversation Before Geneva",
-  "date": "2026-11-19",
-  "time": "6:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Swissnex in San Francisco",
-   "Maulde Cuerel"
-  ],
-  "link": "https://luma.com/fy8teprf",
-  "source": "Swissnex in San Francisco",
-  "score": 50,
-  "kind": "demo",
-  "image": "https://images.lumacdn.com/uploads/xs/62c86526-dd8f-435f-9263-0bbf9b10477e.png"
- },
- {
-  "name": "AI Infra for Physical AI: Mind Robotics x Anyscale",
-  "date": "2026-11-19",
-  "time": "6:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Julian Forero",
-   "Sahar Mor (Bond AI)",
-   "Vini Enriquez",
-   "Colette Tay"
-  ],
-  "link": "https://luma.com/anyscale-gbln",
-  "source": "Bond AI SF",
-  "score": 100,
-  "kind": "talk",
-  "venue": "Anyscale",
-  "address": "Anyscale, 600 Harrison St, San Francisco, CA 94107, USA",
-  "short_address": "600 Harrison St, San Francisco",
-  "neighborhood": "Yerba Buena",
-  "city": "San Francisco",
-  "place_id": "ChIJUY3cSzeBhYAREICXprT7fKw",
-  "lat": 37.7841915,
-  "lng": -122.39589810000001,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/y1/6b41118a-c8ce-4d2d-b5af-4f07df31b3e3.png"
- },
- {
-  "name": "GTM Series #04: Tomer Chernia (x-Head of GTM at Cursor)",
-  "date": "2026-11-19",
-  "time": "6:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Bardia Shahali",
-   "Ava Ghilarducci"
-  ],
-  "link": "https://luma.com/gtm-series-tomer",
-  "source": "Granola",
-  "score": 100,
-  "kind": "talk",
-  "neighborhood": "Yerba Buena",
-  "city": "San Francisco",
-  "lat": 37.78215678533239,
-  "lng": -122.40446536563044,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/w3/99e777ff-779f-4f52-9806-b8a6fec5932a.png"
- },
- {
-  "name": "AE After Hours: Hyper-Growth AI Startups | SF",
-  "date": "2026-11-19",
-  "time": "6:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Alex Xiao",
-   "Jobright ai",
-   "Jenny Zhou",
-   "Yuanbo Jiang"
-  ],
-  "link": "https://luma.com/h1vwk0xk",
-  "source": "Bond AI SF",
-  "score": 0,
-  "kind": "talk",
-  "neighborhood": "China Basin",
-  "city": "San Francisco",
-  "lat": 37.77890268692591,
-  "lng": -122.39305313151462,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/0z/51f18b34-3380-4e38-b077-cfbaf80dbb79.png"
- },
- {
-  "name": "How can AI kill us all? Eight existential risk scenarios with Prof. Geoffrey Hinton",
-  "date": "2026-11-19",
-  "time": "6:15 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Existential Risk Observatory"
-  ],
-  "link": "https://luma.com/zcbrxhsr",
-  "source": "Personal",
-  "score": 100,
-  "kind": "talk",
-  "venue": "The Commonwealth Club",
-  "address": "The Commonwealth Club, 110 The Embarcadero, San Francisco, CA 94105, USA",
-  "short_address": "110 The Embarcadero, San Francisco",
-  "neighborhood": "Embarcadero",
-  "city": "San Francisco",
-  "place_id": "ChIJ75fLhWKAhYARDxivfRW3Vr4",
-  "lat": 37.7933452,
-  "lng": -122.3925028,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/oc/7e84d152-5f31-4252-ac14-32a69336f92a.png"
- },
- {
-  "name": "GTM & AI Dinner",
-  "date": "2026-11-19",
-  "time": "6:30 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "The AI Collective",
-   "Stephen Campbell",
-   "Xinchi Qi",
-   "Sunny Chauhan"
-  ],
-  "link": "https://luma.com/gtm-ai-sf",
-  "source": "The AI Collective",
-  "score": 54,
-  "kind": "demo",
-  "venue": "Palio",
-  "address": "Palio, 640 Sacramento St, San Francisco, CA 94111, USA",
-  "short_address": "640 Sacramento St, San Francisco",
-  "neighborhood": "Chinatown",
-  "city": "San Francisco",
-  "place_id": "ChIJkdko-oqAhYARt4ZpvCrKkao",
-  "lat": 37.7938689,
-  "lng": -122.40367440000001,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/b0/f527b18b-a59c-46ab-bd4b-edacb9fd8ac5.png"
- },
- {
-  "name": "Rethinking Documentation in the AI Era",
-  "date": "2026-11-19",
-  "time": "6:30 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://www.meetup.com/write-the-docs-bay-area/events/317137483/",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "San Francisco",
-  "venue": "Mintlify",
-  "lat": 37.788765,
-  "lng": -122.402596,
-  "venue_visibility": "public",
-  "image": "https://secure.meetupstatic.com/photos/event/a/4/8/5/600_536802117.jpeg"
- },
- {
-  "name": "Happy Hour at MS Ignite",
-  "date": "2026-11-19",
-  "time": "7:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Patrick McCluskey",
-   "Cerebras",
-   "Devin Valenciano"
-  ],
-  "link": "https://luma.com/ignitehh",
-  "source": "Cerebras",
-  "score": 0,
-  "kind": "talk",
-  "neighborhood": "China Basin",
-  "city": "San Francisco",
-  "lat": 37.778334566962535,
-  "lng": -122.39471413033463,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/gj/da60f361-9f19-4b3a-ae5d-2dbe6c6dbaeb.png"
- },
- {
-  "name": "Founder Breakfast",
-  "date": "2026-11-19",
-  "time": "9:00 AM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://luma.com/3ycs20lb",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "San Francisco",
-  "image": "https://images.lumacdn.com/uploads/j2/932406a9-55ec-4db7-b23f-7bd45b5f38b8.png"
- },
- {
-  "name": "Startup & VC Day at Tech Weekend — Deep Tech Pitch, Panels & Mixer",
-  "date": "2026-11-19",
-  "time": "9:00 AM",
-  "location": "Menlo Park, CA",
-  "hosts": [],
-  "link": "https://luma.com/cdvdetfi",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "demo",
-  "city": "Menlo Park",
-  "image": "https://images.lumacdn.com/uploads/vx/6cbd6a75-da05-4d95-a8a4-0d17176f082c.png"
- },
- {
-  "name": "LexTalk World San Francisco 2026",
-  "date": "2026-11-19",
-  "time": "9:00 AM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://lextalk.world/san-francisco-delegate-registration",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "hackathon",
-  "city": "San Francisco",
-  "venue": "South San Francisco Conference Center",
-  "lat": 37.77493,
-  "lng": -122.41942,
-  "venue_visibility": "public",
-  "image": "https://lextalk.world/wp-content/uploads/2026/10/SAN-FRANCISCO-2026-3.png"
- },
- {
-  "name": "Tech Weekend November 19-20, 2026",
-  "date": "2026-11-19",
-  "time": "9:00 AM",
-  "location": "Menlo Park, CA",
-  "hosts": [],
-  "link": "https://luma.com/ycgqy17s",
-  "source": "aicollective.com",
-  "score": 0,
-  "kind": "talk",
-  "city": "Menlo Park",
-  "image": "https://images.lumacdn.com/uploads/y5/dfa3b5ed-c54e-4304-b58e-a5ae2aecf14f.jpg"
- },
- {
-  "name": "Accelr8 | Founders Brew",
-  "date": "2026-11-19",
-  "time": "9:30 AM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Maryam",
-   "Daniel Morgan",
-   "Pat Santiago",
-   "Victoria"
-  ],
-  "link": "https://luma.com/accelr8-qibs",
-  "source": "Accelr8",
-  "score": 0,
-  "kind": "talk",
-  "venue": "Cafe Réveille",
-  "address": "Cafe Réveille, 1998 Polk St, San Francisco, CA 94109, USA",
-  "short_address": "1998 Polk St, San Francisco",
-  "neighborhood": "Polk Gulch",
-  "city": "San Francisco",
-  "place_id": "ChIJX9FnLOqAhYARMWD0m8kYud4",
-  "lat": 37.794945,
-  "lng": -122.42145330000001,
-  "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/api-uploads/lj/7d4edc3c-394b-4439-8d7f-387372c9332f.png"
- },
- {
   "name": "NANDA Human-Agent fLow (HAL) Kickoff @ Google Mountain View",
   "date": "2026-11-20",
   "time": "3:00 PM",
@@ -820,6 +299,19 @@
   "image": "https://secure.meetupstatic.com/photos/event/5/0/5/5/600_536000565.jpeg"
  },
  {
+  "name": "Weekly New Founders Meetup: Welcome to SF",
+  "date": "2026-11-21",
+  "time": "11:00 AM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/mzlpjlyy",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/53/5b61b783-f9d0-4d91-8193-76a560feaba2.jpg"
+ },
+ {
   "name": "Boat Hackathon - Show Boat Demo Day",
   "date": "2026-11-21",
   "time": "1:00 PM",
@@ -859,9 +351,12 @@
   "date": "2026-11-21",
   "time": "9:00 AM",
   "location": "Oakland, CA",
-  "hosts": [],
+  "hosts": [
+   "James Titus",
+   "Dillon Nagar"
+  ],
   "link": "https://luma.com/npjpgzhy",
-  "source": "HackList SF",
+  "source": "Personal",
   "score": 0,
   "kind": "hackathon",
   "image": "https://images.lumacdn.com/uploads/ju/e9f56cab-300f-4970-8571-89d79204f389.png"
@@ -881,6 +376,19 @@
   "lng": -122.08123,
   "venue_visibility": "guests-only",
   "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1197806736%252F3011685281217%252F1%252Foriginal.20261111-230256%3Fcrop%3Dfocalpoint%26fit%3Dcrop%26w%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26fp-x%3D0.5%26fp-y%3D0.5%26s%3Db99a1474eaddf00ea0ea530e7d3ed46f&w=940&q=75"
+ },
+ {
+  "name": "Friendsgiving Edition: DEMON HUNTER K-POP NIGHT Mandu Pop Celebration",
+  "date": "2026-11-21",
+  "time": "9:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/64alcg3v",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "demo",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/9z/5eac333e-099c-4549-8f66-0a660ed56072.png"
  },
  {
   "name": "Founders Running Club :: Easy 5-10km Run + Talks",
@@ -932,6 +440,46 @@
   "lng": -122.39693,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/5/c/0/0/600_534203552.jpeg"
+ },
+ {
+  "name": "SF AI Code & Coffee · Sunday November 22 + NVIDIA +Fireworks AI Backpack/Swag Giveaway 🎒",
+  "date": "2026-11-22",
+  "time": "2:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "John Komarnicki"
+  ],
+  "link": "https://luma.com/p9vzovjx",
+  "source": "San Francisco AI Code And Coffee",
+  "score": 0,
+  "kind": "hackathon",
+  "image": "https://images.lumacdn.com/uploads/56/78a2b2e9-e522-4308-b7ae-b9771fccf1ee.png"
+ },
+ {
+  "name": "Sundae Robotics 11: Beyond the Gripper — Teaching Robots Dexterity Through Touch, Vision, and Play",
+  "date": "2026-11-22",
+  "time": "2:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/nsqliiuv",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "demo",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/u5/87a10636-fb9e-4964-8818-b1c2ec8278b0.jpg"
+ },
+ {
+  "name": "Humanity in the Age of AI: A Reading of the Pope's Encyclical",
+  "date": "2026-11-22",
+  "time": "4:45 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/00jjgmkf",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/g6/8258dd89-57fe-4845-8b13-3616961ba565.png"
  },
  {
   "name": "Accelr8 | Dinner + Demo Night",
@@ -1004,7 +552,7 @@
   "lat": 37.78917685954514,
   "lng": -122.40971094760691,
   "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/yq/b4668660-e087-4bd4-a063-4b8b813fb465.jpg"
+  "image": "https://images.lumacdn.com/uploads/m2/ac19e0c4-9c54-438d-bb49-ce6bf5fa7ed0.jpg"
  },
  {
   "name": "Founder Friendsgiving Dinner",
@@ -1027,6 +575,49 @@
   "lng": -122.39881886460293,
   "venue_visibility": "guests-only",
   "image": "https://images.lumacdn.com/uploads/zc/33bab73d-b6d0-4b8b-8512-49ce8b336ce5.png"
+ },
+ {
+  "name": "Agent Night Out: Making Agents Worth It in Production",
+  "date": "2026-11-23",
+  "time": "6:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://ontown.app/e/je3qqbkj-agent-night-out-making-agents-worth-it-in-production",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "venue": "House of AI",
+  "lat": 37.77493,
+  "lng": -122.41942,
+  "venue_visibility": "public",
+  "image": "https://ontown.app/e/je3qqbkj/share.jpg?v=1794355220.2"
+ },
+ {
+  "name": "Healthcare AI Founder Roundtable",
+  "date": "2026-11-23",
+  "time": "6:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/b1alvuoh",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/ey/1bd8c60a-3455-42d0-9e3a-244bb7e13387.png"
+ },
+ {
+  "name": "Degrees of Freedom: Embodied AI Builders Night",
+  "date": "2026-11-23",
+  "time": "6:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/mission-u38j",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "image": "https://images.lumacdn.com/uploads/15/632fb965-a302-45ff-97eb-4e52bc6c2c33.png"
  },
  {
   "name": "Women & Non Binary Hack and do whatever night",
@@ -1159,7 +750,7 @@
   ],
   "link": "https://luma.com/qby4olpj",
   "source": "Bond AI SF",
-  "score": 100,
+  "score": 0,
   "kind": "hackathon",
   "venue": "European Startup Embassy",
   "address": "European Startup Embassy, 461 Bryant St, San Francisco, CA 94107, USA",
@@ -1223,9 +814,14 @@
   "date": "2026-11-24",
   "time": "9:30 AM",
   "location": "San Francisco, CA",
-  "hosts": [],
+  "hosts": [
+   "Aviral",
+   "AWS Builder Loft",
+   "Connie Lin",
+   "Teamily AI"
+  ],
   "link": "https://luma.com/x05cmrqh",
-  "source": "HackList SF",
+  "source": "Devnovate",
   "score": 0,
   "kind": "hackathon",
   "image": "https://images.lumacdn.com/uploads/by/c2d71b2b-4ba8-4b8f-9ab2-bb79ef9032f4.jpg"
@@ -1349,7 +945,7 @@
   "image": "https://secure.meetupstatic.com/photos/event/9/1/8/8/600_536977256.jpeg"
  },
  {
-  "name": "SF × MIT Hack Day: Peptides",
+  "name": "SF × MIT Hack Day: Peptides - Claims vs Evidence",
   "date": "2026-11-29",
   "time": "10:00 AM",
   "location": "San Francisco, CA",
@@ -1576,7 +1172,7 @@
   ],
   "link": "https://luma.com/fundorfold",
   "source": "The AI Collective",
-  "score": 50,
+  "score": 100,
   "kind": "demo",
   "neighborhood": "Financial District",
   "city": "San Francisco",
@@ -1603,6 +1199,21 @@
   "lng": -122.41401265147375,
   "venue_visibility": "guests-only",
   "image": "https://images.lumacdn.com/api-uploads/ql/43969902-7865-4705-8b38-da505d83d416.png"
+ },
+ {
+  "name": "Hardware Fireside Chat @ Flux | Make SF Better with Water, Energy, Waste Treatment, and Infra",
+  "date": "2026-12-02",
+  "time": "6:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Michael Raspuzzi",
+   "Nate Padgett"
+  ],
+  "link": "https://luma.com/lx81wh0i",
+  "source": "SF Hardware Meetup",
+  "score": 100,
+  "kind": "talk",
+  "image": "https://images.lumacdn.com/uploads/1b/6c0685b1-0335-4691-81aa-0bf383a239a0.png"
  },
  {
   "name": "YC Mixer: Demo Day Afterparty 🕺",
@@ -1675,6 +1286,18 @@
   "image": "https://secure.meetupstatic.com/photos/event/7/9/8/f/600_536971119.jpeg"
  },
  {
+  "name": "TVOT SF 2026",
+  "date": "2026-12-02",
+  "time": "8:30 AM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/157p7eem",
+  "source": "HackList SF",
+  "score": 0,
+  "kind": "hackathon",
+  "image": "https://images.lumacdn.com/uploads/1n/59c886eb-2a8e-4f05-b024-f19ae0f41613.png"
+ },
+ {
   "name": "Odoo AI Academy - San Francisco, CA",
   "date": "2026-12-02",
   "time": "9:00 AM",
@@ -1690,6 +1313,23 @@
   "lng": -122.384834,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/6/9/a/c/600_536967052.jpeg"
+ },
+ {
+  "name": "Blueprint II Demo Day",
+  "date": "2026-12-03",
+  "time": "12:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Mike Shin",
+   "Ruslan",
+   "Hubert Thieblot",
+   "Adrianna Lakatos"
+  ],
+  "link": "https://luma.com/finc-demoday",
+  "source": "Founders, Inc. Events",
+  "score": 100,
+  "kind": "talk",
+  "image": "https://images.lumacdn.com/uploads/6e/dd44edab-1061-4dd5-8810-254ac91e26c4.png"
  },
  {
   "name": "From AI Ideas to Impact: Stories, Growth & a Year-End Celebration (w/ The AI Collective)",
@@ -1729,7 +1369,7 @@
   "hosts": [],
   "link": "https://luma.com/8itaqp8x",
   "source": "HackList SF",
-  "score": 0,
+  "score": 100,
   "kind": "hackathon",
   "image": "https://images.lumacdn.com/uploads/44/7c5c8f41-75e7-4cda-bd02-022782a34a71.png"
  },
@@ -1741,7 +1381,7 @@
   "hosts": [],
   "link": "https://luma.com/superset-6lth",
   "source": "HackList SF",
-  "score": 0,
+  "score": 100,
   "kind": "hackathon",
   "image": "https://images.lumacdn.com/gallery-images/iz/715dd128-cc88-40e7-bf7d-6fb8f7242007"
  },
@@ -1769,7 +1409,7 @@
   ],
   "link": "https://luma.com/p2cjmz2s",
   "source": "Bond AI SF",
-  "score": 0,
+  "score": 100,
   "kind": "talk",
   "venue": "European Startup Embassy",
   "address": "European Startup Embassy, 461 Bryant St, San Francisco, CA 94107, USA",
@@ -1812,7 +1452,7 @@
   ],
   "link": "https://luma.com/vc1ingfl",
   "source": "Bond AI SF",
-  "score": 50,
+  "score": 100,
   "kind": "demo",
   "venue": "810 Hamilton St",
   "address": "810 Hamilton St, Redwood City, CA 94063, USA",
@@ -1850,7 +1490,7 @@
   "hosts": [],
   "link": "https://luma.com/utnutt5f",
   "source": "HackList SF",
-  "score": 0,
+  "score": 100,
   "kind": "hackathon",
   "image": "https://images.lumacdn.com/uploads/sh/60ac8aff-31a3-40e3-91de-5018f09dfa32.png"
  },
@@ -1877,6 +1517,21 @@
   "image": "https://images.lumacdn.com/api-uploads/ju/da80de54-400a-4719-8f8b-794596efeb64.png"
  },
  {
+  "name": "Demo Night @ WorkOS (December)",
+  "date": "2026-12-07",
+  "time": "5:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Michael Grinich",
+   "WorkOS"
+  ],
+  "link": "https://luma.com/demo-night-dec2026",
+  "source": "WorkOS Events",
+  "score": 100,
+  "kind": "demo",
+  "image": "https://images.lumacdn.com/uploads/3i/e07a8cb2-0d20-43cf-bff0-b1d0911a7656.png"
+ },
+ {
   "name": "Meet your VCs, Meet your startup teams: entrepreneurs' networking coffee time",
   "date": "2026-12-08",
   "time": "11:00 AM",
@@ -1894,7 +1549,7 @@
   "image": "https://secure.meetupstatic.com/photos/event/3/3/c/d/600_508573261.jpeg"
  },
  {
-  "name": "Foundry Live Year in Review",
+  "name": "Agentic AI Year in Review",
   "date": "2026-12-08",
   "time": "5:00 PM",
   "location": "San Francisco, CA",
@@ -1914,7 +1569,7 @@
   "lat": 37.7822664,
   "lng": -122.39116439999998,
   "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/kk/37bd4dbc-de87-4500-addb-a7b544583916.png"
+  "image": "https://images.lumacdn.com/uploads/fo/bb996252-1b06-4598-b468-c7bc668c58b4.png"
  },
  {
   "name": "Daytona AI Builders - SF, December 2026",
@@ -2101,7 +1756,7 @@
   "lat": 37.48186238578523,
   "lng": -122.17538059129058,
   "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/uploads/ez/002600dc-8c1e-4696-87cd-46cb6c30c93d.png"
+  "image": "https://images.lumacdn.com/uploads/96/d63a4ccc-672c-495e-8423-684e638018e5.png"
  },
  {
   "name": "Web Data for Startups #02 — Search, Research & Intelligence",
@@ -2174,6 +1829,28 @@
   "lng": -122.39735,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/4/4/5/7/600_537077495.jpeg"
+ },
+ {
+  "name": "Poker Night for B2B Founders",
+  "date": "2026-12-11",
+  "time": "6:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "The AI Collective",
+   "Melody Yang",
+   "Lily Yang",
+   "Adrika Guha"
+  ],
+  "link": "https://luma.com/b2b-founders-poker",
+  "source": "The AI Collective",
+  "score": 0,
+  "kind": "talk",
+  "neighborhood": "Rincon Hill",
+  "city": "San Francisco",
+  "lat": 37.787881932563444,
+  "lng": -122.39027597126874,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/41/ba21eda2-e1ef-4c75-b7ea-a63276bc8895.png"
  },
  {
   "name": "Edge Cases by AGI, Inc. #005 with Shuo Yang @ UC Berkeley: FreeToken",
@@ -2269,6 +1946,23 @@
   "lng": -122.407394,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/7/9/8/f/600_536971119.jpeg"
+ },
+ {
+  "name": "Startup Pitch Events San Francisco: 5 Founders on Stage",
+  "date": "2026-12-16",
+  "time": "7:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://www.meetup.com/san-francisco-startup-networking-founders-investors/events/317316121/",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "demo",
+  "city": "San Francisco",
+  "venue": "Little Raven Gallery",
+  "lat": 37.779285,
+  "lng": -122.407394,
+  "venue_visibility": "public",
+  "image": "https://secure.meetupstatic.com/photos/event/7/9/d/7/600_536971191.jpeg"
  },
  {
   "name": "Accelr8 | Dinner + Demo Night",
