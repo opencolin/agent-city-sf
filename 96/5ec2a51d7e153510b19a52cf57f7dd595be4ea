@@ -1,0 +1,19 @@
+scripts/daily_agent.py
+  s_5223872918bdc2::t_9b15f0a09b0155 262,264,266-270,274-276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "965ec2a51d7e153510b19a52cf57f7dd595be4ea",
+  "prompts": {},
+  "sessions": {
+    "s_5223872918bdc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3804b475-5484-43ec-8ccd-cc9c939c5c25",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "opencolin <colin@lowenberg.org>"
+    }
+  }
+}
