@@ -112,17 +112,37 @@ def aic_row(e, source):
     return {k: v for k, v in out.items() if v is not None}
 
 
+DATE_WORD = re.compile(
+    r"^(\d+(st|nd|rd|th)?|(mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|"
+    r"august|september|october|november|december|sept)$"
+)
+FILLER = {"francisco", "event", "events", "night", "demo", "networking", "startup", "startups", "meetup",
+          "with", "community", "tech", "business", "founders", "meeting", "social", "builders", "mixer"}
+
+
 def words(name):
     return {w for w in re.findall(r"[a-z0-9]+", name.lower()) if len(w) > 3}
 
 
+def core(ws):
+    """The words that say what the event is: no dates, weekdays or filler."""
+    return {w for w in ws if w not in FILLER and not DATE_WORD.match(w)}
+
+
+def overlap(a, b):
+    return len(a & b) / min(len(a), len(b)) if a and b else 0
+
+
 def is_dupe(r, events):
-    """Within a day and most of the shorter title's words in the other: one event listed twice."""
+    """Within a day and most of the shorter title's words in the other: one event listed twice.
+    At the same start time on the same day, half the core words is enough."""
     a, day = words(r["name"]), dt.date.fromisoformat(r["date"])
     for e in events.values():
         if abs((dt.date.fromisoformat(e["date"]) - day).days) <= 1:
             b = words(e["name"])
-            if a and b and len(a & b) / min(len(a), len(b)) >= 0.6:
+            if overlap(a, b) >= 0.6:
+                return True
+            if e["date"] == r["date"] and r.get("time") and e.get("time") == r["time"] and overlap(core(a), core(b)) >= 0.5:
                 return True
     return False
 
