@@ -46,6 +46,7 @@ UNTIL = TODAY + dt.timedelta(days=DAYS)
 MONTH = TODAY.strftime("%B %Y")
 
 EVENT_HOSTS = ("luma.com", "lu.ma", "partiful.com", "eventbrite.com", "meetup.com", "cerebralvalley.ai", "devpost.com")
+EVENT_PATH = {"eventbrite.com": r"^/e/", "partiful.com": r"^/e/", "meetup.com": r"/events/\d+"}
 TAVILY_QUERIES = [
     f"AI hackathon San Francisco {MONTH}",
     f"hackathon Bay Area this weekend {MONTH}",
@@ -132,6 +133,10 @@ def event_link(url):
             return None
         return "https://luma.com/" + slug
     if any(host == h or host.endswith("." + h) for h in EVENT_HOSTS):
+        # A single event, not a search or directory page (eventbrite.com/d/..., meetup.com/find/...).
+        shape = EVENT_PATH.get(host.split(".", host.count(".") - 1)[-1])
+        if shape and not re.search(shape, u.path):
+            return None
         return urllib.parse.urlunsplit(("https", host, u.path.rstrip("/"), "", ""))
     return None
 
