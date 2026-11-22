@@ -208,7 +208,12 @@
   "source": "Recursive Self Improvement",
   "score": 0,
   "kind": "hackathon",
-  "image": "https://images.lumacdn.com/uploads/z5/0dce90a2-f099-482f-b555-a24ecc204d8a.png"
+  "image": "https://images.lumacdn.com/uploads/z5/0dce90a2-f099-482f-b555-a24ecc204d8a.png",
+  "neighborhood": "China Basin",
+  "city": "San Francisco",
+  "lat": 37.78347246660751,
+  "lng": -122.39691446819482,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "SF AI Code & Coffee · Sunday November 22 + NVIDIA +Fireworks AI Backpack/Swag Giveaway 🎒",
@@ -222,7 +227,16 @@
   "source": "San Francisco AI Code And Coffee",
   "score": 0,
   "kind": "hackathon",
-  "image": "https://images.lumacdn.com/uploads/i5/3f8e2b44-4648-49d3-b5ba-c1ab0a69cf93.png"
+  "image": "https://images.lumacdn.com/uploads/i5/3f8e2b44-4648-49d3-b5ba-c1ab0a69cf93.png",
+  "venue": "Salesforce Park",
+  "address": "Salesforce Park, 425 Mission St, San Francisco, CA 94105, USA",
+  "short_address": "425 Mission St, San Francisco",
+  "neighborhood": "SoMa",
+  "city": "San Francisco",
+  "place_id": "ChIJC9y2SGOAhYARSaejL5ecgmg",
+  "lat": 37.789739499999996,
+  "lng": -122.39616559999999,
+  "venue_visibility": "public"
  },
  {
   "name": "Sundae Robotics 11: Beyond the Gripper — Teaching Robots Dexterity Through Touch, Vision, and Play",
@@ -552,7 +566,16 @@
   "source": "Personal",
   "score": 100,
   "kind": "talk",
-  "image": "https://images.lumacdn.com/uploads/05/f296b3df-898f-4477-8738-d34389211dbf.gif"
+  "image": "https://images.lumacdn.com/uploads/05/f296b3df-898f-4477-8738-d34389211dbf.gif",
+  "venue": "StartupHQ - 156 2nd St",
+  "address": "StartupHQ - 156 2nd St, 156 2nd St, San Francisco, CA 94105, USA",
+  "short_address": "156 2nd St, San Francisco",
+  "neighborhood": "Yerba Buena",
+  "city": "San Francisco",
+  "place_id": "ChIJN2hcEmKBhYARpTnEf4zJJYc",
+  "lat": 37.7872075,
+  "lng": -122.3990384,
+  "venue_visibility": "public"
  },
  {
   "name": "GGW Sharks. Startup Pitch & Networking",
@@ -631,7 +654,16 @@
   "source": "Startup Valley",
   "score": 100,
   "kind": "demo",
-  "image": "https://images.lumacdn.com/api-uploads/02/a31be85f-ca15-48de-b860-b494b04acf83"
+  "image": "https://images.lumacdn.com/api-uploads/02/a31be85f-ca15-48de-b860-b494b04acf83",
+  "venue": "JOE & THE JUICE",
+  "address": "JOE & THE JUICE, 508 University Ave, Palo Alto, CA 94301, USA",
+  "short_address": "508 University Ave, Palo Alto",
+  "neighborhood": "University South",
+  "city": "Palo Alto",
+  "place_id": "ChIJY_cc3Ti7j4AR_46J7zYVlWM",
+  "lat": 37.4483752,
+  "lng": -122.15890359999999,
+  "venue_visibility": "public"
  },
  {
   "name": "ITCH - Businesses share what needs to be built (Waste Industry)",
@@ -732,7 +764,12 @@
   "source": "Pebblebed Events",
   "score": 100,
   "kind": "talk",
-  "image": "https://images.lumacdn.com/uploads/dr/bc257aae-03c9-4be8-b684-2c46922d7bc7.png"
+  "image": "https://images.lumacdn.com/uploads/dr/bc257aae-03c9-4be8-b684-2c46922d7bc7.png",
+  "neighborhood": "Mission District",
+  "city": "San Francisco",
+  "lat": 37.765847663256494,
+  "lng": -122.41403237655135,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Hardware Hack Night & Fixit Clinic",
@@ -935,7 +972,12 @@
   "source": "HackList SF",
   "score": 100,
   "kind": "hackathon",
-  "image": "https://images.lumacdn.com/uploads/th/1752132e-e3bc-4b4d-a2a3-0396b59ea5cb.png"
+  "image": "https://images.lumacdn.com/uploads/th/1752132e-e3bc-4b4d-a2a3-0396b59ea5cb.png",
+  "neighborhood": "Clarendon Heights",
+  "city": "San Francisco",
+  "lat": 37.757203148151845,
+  "lng": -122.44900618972218,
+  "venue_visibility": "guests-only"
  },
  {
   "name": "Pulitzer Prize-winning artist and illustrator Mona Chalabi on her new book, Ten Lives, and wealth in America",
@@ -1762,7 +1804,8 @@
   "place_id": "ChIJk2vl5NSGhYARwPGvs_ubIws",
   "lat": 37.8016649,
   "lng": -122.397348,
-  "image": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6aeb3a5a094e852bcc7fba1e_OYI-og-image.jpg"
+  "image": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6aeb3a5a094e852bcc7fba1e_OYI-og-image.jpg",
+  "venue_status": "no-data"
  },
  {
   "name": "OpenOakland - Civic Tech for the Community December Meeting",

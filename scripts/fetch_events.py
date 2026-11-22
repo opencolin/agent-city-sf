@@ -52,6 +52,7 @@ def main():
                 continue
             n += 1
             events[e["link"]] = {
+                **events.get(e["link"], {}),  # keep the venue, map pin and flyer found earlier
                 "name": e["name"], "date": e["date"], "time": e.get("time"),
                 "location": e["location"], "hosts": e.get("hosts", [])[:4],
                 "link": e["link"], "source": e.get("source"), "score": e.get("score", 0),

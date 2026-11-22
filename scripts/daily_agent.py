@@ -351,8 +351,7 @@ def main():
         return
     EVENTS.write_text(json.dumps(rows, indent=1, ensure_ascii=False))
     SOCIAL.write_text(json.dumps(social, indent=1, ensure_ascii=False))
-    if added:
-        subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_venues.py")], timeout=900)
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_venues.py")], timeout=900)  # only reads events without one
     subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_covers.py")], timeout=900)  # flyers for anything new
     REPORT.write_text(json.dumps({
         "ran_at": started.isoformat(timespec="minutes"), "events": len(rows), "added": [
