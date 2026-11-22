@@ -1,0 +1,21 @@
+README.md
+  s_5223872918bdc2::t_eaef0c5ffe5f5f 25
+scripts/daily_agent.py
+  s_5223872918bdc2::t_eaef0c5ffe5f5f 16-18,199,202,213,298,326
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "526758df9c0d576346567ab0d5a60b3fcd9c6025",
+  "prompts": {},
+  "sessions": {
+    "s_5223872918bdc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3804b475-5484-43ec-8ccd-cc9c939c5c25",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "opencolin <colin@lowenberg.org>"
+    }
+  }
+}
