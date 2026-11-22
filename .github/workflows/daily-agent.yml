@@ -34,7 +34,6 @@ jobs:
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           AISA_API_KEY: ${{ secrets.AISA_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 scripts/daily_agent.py ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Commit and push

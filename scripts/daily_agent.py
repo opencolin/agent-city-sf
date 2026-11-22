@@ -13,9 +13,9 @@ which redeploys buildweek.ai. Steps:
 
 Environment:
   TAVILY_API_KEY     web search (tavily.com)
-  AISA_API_KEY       X search (aisa.one)
-  ANTHROPIC_API_KEY  reads non-Luma event pages and picks relevant posts (optional; without it
-                     only Luma links are added and posts are picked by keyword)
+  AISA_API_KEY       X search, and the model that reads non-Luma event pages and picks relevant
+                     posts (aisa.one; without it only Luma links are added and posts are picked by keyword)
+  AGENT_MODEL        model id on AIsa (default claude-sonnet-5-5)
 
   python3 scripts/daily_agent.py            # full run
   python3 scripts/daily_agent.py --dry-run  # discover and print, write nothing
@@ -196,10 +196,10 @@ def luma_event(link):
 
 
 def llm(prompt, max_tokens=4000):
-    key = os.environ.get("ANTHROPIC_API_KEY")
+    key = os.environ.get("AISA_API_KEY")
     if not key:
         return None
-    d = json.loads(http("https://api.anthropic.com/v1/messages", {
+    d = json.loads(http("https://api.aisa.one/v1/messages", {  # AIsa serves the Anthropic Messages API
         "model": os.environ.get("AGENT_MODEL", "claude-sonnet-5-5"), "max_tokens": max_tokens,
         "messages": [{"role": "user", "content": prompt}],
     }, {"x-api-key": key, "anthropic-version": "2023-06-01"}, timeout=180))
@@ -210,7 +210,7 @@ def llm(prompt, max_tokens=4000):
 
 def extract_events(pages):
     """LLM pass over non-Luma event pages. pages: {link: {title, text}} -> list of rows."""
-    if not pages or not os.environ.get("ANTHROPIC_API_KEY"):
+    if not pages or not os.environ.get("AISA_API_KEY"):
         return []
     items = [{"id": i, "url": u, "title": p["title"], "text": p["text"][:4000]} for i, (u, p) in enumerate(pages.items())]
     out = []
@@ -295,7 +295,7 @@ def pick_posts(tweets):
     posts = list(posts.values())
     if not posts:
         return []
-    if os.environ.get("ANTHROPIC_API_KEY"):
+    if os.environ.get("AISA_API_KEY"):
         keep = llm(f"""These X posts use #buildweek, #buildswag or #brunchlife. "Build Week" is also the name of unrelated
 programs in other cities and countries. Keep only posts about the San Francisco Bay Area builder scene: hackathons, demos,
 builders, swag, or brunch with builders in SF or the Bay Area. Drop spam, ads, crypto shilling, and anything elsewhere.
@@ -323,7 +323,7 @@ def merge_social(picked):
 def main():
     started = dt.datetime.now(PT)
     say(f"Build Week agent, {started:%a %b %-d %Y %-I:%M %p} PT{' (dry run)' if DRY else ''}")
-    for k in ["TAVILY_API_KEY", "AISA_API_KEY", "ANTHROPIC_API_KEY"]:
+    for k in ["TAVILY_API_KEY", "AISA_API_KEY"]:
         if not os.environ.get(k):
             say(f"note: {k} is not set; that step is skipped")
     refresh_known()

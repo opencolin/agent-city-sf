@@ -22,7 +22,7 @@ python3 scripts/fetch_calendars.py  # adds events from host Luma calendars (Sout
 3. adds new Bay Area events in the next 30 days, reading Luma pages directly and other pages with Claude;
 4. puts Bay Area posts in `public/social.json` for the Style and Brunch sections, drops past events, and writes a run report to `public/agent.json`, which the front page shows in the dateline.
 
-Setup: install the Tenki GitHub App on this repo, then add the repo secrets `TAVILY_API_KEY`, `AISA_API_KEY` and `ANTHROPIC_API_KEY`. Run it from the Actions tab ("Daily agent", with "dry run" to only log), or locally:
+Setup: install the Tenki GitHub App on this repo, then add the repo secrets `TAVILY_API_KEY` (web search) and `AISA_API_KEY` (X search and the model that reads event pages). Run it from the Actions tab ("Daily agent", with "dry run" to only log), or locally:
 
 ```bash
 python3 scripts/daily_agent.py --dry-run
