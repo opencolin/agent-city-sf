@@ -9,6 +9,8 @@ import re
 import urllib.error
 import urllib.request
 
+from fetch_calendars import is_dupe
+
 OUT = pathlib.Path(__file__).resolve().parent.parent / "public" / "events.json"
 API = "https://eventhunt.ai/api/ask/public"
 BAY = re.compile(r"San Francisco|Berkeley|Oakland|Palo Alto|Mountain View|Sunnyvale|San Jose|Menlo|Redwood|San Mateo", re.I)
@@ -30,6 +32,9 @@ def ask(q):
     except urllib.error.HTTPError as e:
         print(f"  {e.code} for {q!r}, skipped")
         return None
+    except (urllib.error.URLError, TimeoutError, OSError) as e:  # slow endpoint: skip this question, keep the rest
+        print(f"  {e} for {q!r}, skipped")
+        return None
 
 
 def main():
@@ -42,6 +47,8 @@ def main():
         n = 0
         for e in j.get("events", []):
             if not BAY.search(e.get("location") or ""):
+                continue
+            if e["link"] not in events and is_dupe(e, events):  # already listed from a host calendar
                 continue
             n += 1
             events[e["link"]] = {

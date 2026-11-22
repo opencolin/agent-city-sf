@@ -59,7 +59,7 @@ def row(entry, source):
         "time": start.strftime("%-I:%M %p"),
         "location": geo.get("city_state") or (city + ", CA"),
         "hosts": [h["name"] for h in entry.get("hosts") or [] if h.get("name")][:4],
-        "link": "https://luma.com/" + ev["url"],
+        "link": ev["url"] if ev["url"].startswith("http") else "https://luma.com/" + ev["url"],  # some list an outside page
         "source": source,
         "score": 0,
         "kind": kind_of(ev["name"]),
