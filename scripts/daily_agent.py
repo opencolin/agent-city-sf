@@ -259,13 +259,21 @@ def add_events(candidates):
         except Exception as err:
             say(f"  could not read {link}: {err}")
         time.sleep(0.5)
+    luma_rows = len(rows)
     rows += extract_events({u: c for u, c in new.items() if "luma.com/" not in u})
-    added = []
+    added, dated_out, dupes = [], 0, 0
     for r in rows:
-        if not (TODAY.isoformat() <= r["date"] <= UNTIL.isoformat()) or is_dupe(r, events):
+        if not (TODAY.isoformat() <= r["date"] <= UNTIL.isoformat()):
+            dated_out += 1
+            continue
+        if is_dupe(r, events):
+            dupes += 1
             continue
         events[r["link"]] = r
         added.append(r)
+    luma_new = sum("luma.com/" in u for u in new)
+    say(f"  {luma_new} Luma links -> {luma_rows} Bay Area events; {len(new) - luma_new} other pages -> {len(rows) - luma_rows} events; "
+        f"{dated_out} outside the next {DAYS} days, {dupes} already listed under another link")
     for r in added:
         say(f"  + {r['date']} {r['name'][:70]} ({r['link']})")
     return events, added
