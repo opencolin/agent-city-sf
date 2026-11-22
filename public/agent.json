@@ -1,31 +1,46 @@
 {
- "ran_at": "2026-11-22T02:36-08:00",
- "events": 113,
- "added": [],
+ "ran_at": "2026-11-22T06:05-08:00",
+ "events": 115,
+ "added": [
+  {
+   "name": "Claude Community x Apify | Claude Holiday Build Day",
+   "date": "2026-12-08",
+   "link": "https://luma.com/claudesf",
+   "source": "Claude Community Events"
+  },
+  {
+   "name": "Temporal AI Meetup",
+   "date": "2026-11-23",
+   "link": "https://luma.com/3pfsmcbz",
+   "source": "Aionic Labs"
+  }
+ ],
  "dropped": 0,
  "posts_added": 0,
  "log": [
-  "Build Week agent, Sun Nov 22 2026 2:36 AM PT",
+  "Build Week agent, Sun Nov 22 2026 6:05 AM PT",
   "fetch_events.py: 113 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
   "fetch_calendars.py: 113 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
-  "tavily 'AI hackathon San Francisco November 2026': 15 results, 3 event links",
+  "tavily 'AI hackathon San Francisco November 2026': 15 results, 1 event links",
   "tavily 'hackathon Bay Area this weekend November 2026': 15 results, 2 event links",
   "tavily 'demo day San Francisco November 2026 startups': 15 results, 1 event links",
-  "tavily 'pitch night San Francisco November 2026': 15 results, 4 event links",
-  "tavily 'AI meetup San Francisco this week November 2026': 15 results, 2 event links",
-  "tavily 'builder events SoMa San Francisco November 2026 luma': 15 results, 4 event links",
-  "tavily 'agents hackathon Palo Alto OR Berkeley OR Oakland November 2026': 15 results, 6 event links",
+  "tavily 'pitch night San Francisco November 2026': 15 results, 6 event links",
+  "tavily 'AI meetup San Francisco this week November 2026': 15 results, 3 event links",
+  "tavily 'builder events SoMa San Francisco November 2026 luma': 15 results, 7 event links",
+  "tavily 'agents hackathon Palo Alto OR Berkeley OR Oakland November 2026': 15 results, 1 event links",
   "tavily '#buildweek San Francisco': 15 results, 0 event links",
-  "tavily 'Cafe Compute San Francisco luma': 15 results, 5 event links",
+  "tavily 'Cafe Compute San Francisco luma': 15 results, 3 event links",
   "tavily 'Cursor Cafe San Francisco': 15 results, 0 event links",
   "tavily 'founder brunch OR builders breakfast San Francisco November 2026': 15 results, 0 event links",
   "aisa '#buildweek' failed: HTTP Error 503: Service Unavailable",
   "aisa '#buildswag' failed: HTTP Error 503: Service Unavailable",
   "aisa '#brunchlife (hackathon OR builders OR founders)' failed: HTTP Error 503: Service Unavailable",
   "aisa '(hackathon OR \"demo day\" OR \"pitch night\") (\"San Francisco\" OR SF) (url:lu.ma OR url:luma.com) -filter:replies' failed: HTTP Error 503: Service Unavailable",
-  "aisa '(\"AI meetup\" OR \"builders dinner\" OR hackathon) \"Bay Area\" (url:lu.ma OR url:luma.com OR url:partiful.com) -filter:replies' failed: HTTP Error 503: Service Unavailable",
-  "27 event links found, 27 not on the site yet",
-  "  12 Luma links -> 6 Bay Area events; 15 other pages -> 1 events; 6 outside the next 30 days, 1 already listed under another link",
-  "0 events added, 0 past events dropped, 113 on the site; 0 new posts, 0 in social.json"
+  "aisa '(\"AI meetup\" OR \"builders dinner\" OR hackathon) \"Bay Area\" (url:lu.ma OR url:luma.com OR url:partiful.com) -filter:replies': 20 posts, 23 event links",
+  "47 event links found, 47 not on the site yet",
+  "  33 Luma links -> 28 Bay Area events; 14 other pages -> 2 events; 26 outside the next 30 days, 2 already listed under another link",
+  "  + 2026-12-08 Claude Community x Apify | Claude Holiday Build Day (https://luma.com/claudesf)",
+  "  + 2026-11-23 Temporal AI Meetup (https://luma.com/3pfsmcbz)",
+  "2 events added, 0 past events dropped, 115 on the site; 0 new posts, 0 in social.json"
  ]
 }

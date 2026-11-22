@@ -471,6 +471,33 @@
   "venue_visibility": "guests-only"
  },
  {
+  "name": "Temporal AI Meetup",
+  "date": "2026-11-23",
+  "time": "6:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Martin Maritsch",
+   "Patrick Langer",
+   "Thomas Kaar",
+   "Robert Jakob"
+  ],
+  "link": "https://luma.com/3pfsmcbz",
+  "source": "Aionic Labs",
+  "score": 0,
+  "kind": "talk",
+  "venue": "Pillsbury Winthrop: Matsubara Kerne H O",
+  "address": "Pillsbury Winthrop: Matsubara Kerne H O, Four Embarcadero Center, 4 Embarcadero Ctr, San Francisco, CA 94111, USA",
+  "short_address": "Four Embarcadero Center, 4 Embarcadero Ctr, San Francisco",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "place_id": "ChIJTyjAdGOAhYARN4pqCFkH0bc",
+  "lat": 37.7952419,
+  "lng": -122.3962196,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/db/422f4161-ac56-4ee2-9005-5f727b305cfe.png",
+  "found_by": "agent"
+ },
+ {
   "name": "Women & Non Binary Hack and do whatever night",
   "date": "2026-11-23",
   "time": "7:00 PM",
@@ -1768,6 +1795,28 @@
   "image": "https://images.lumacdn.com/uploads/fo/bb996252-1b06-4598-b468-c7bc668c58b4.png"
  },
  {
+  "name": "Claude Community x Apify | Claude Holiday Build Day",
+  "date": "2026-12-08",
+  "time": "5:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Ricardo Lira de la Vega",
+   "Petros Hong",
+   "Dhruv Kanetkar"
+  ],
+  "link": "https://luma.com/claudesf",
+  "source": "Claude Community Events",
+  "score": 0,
+  "kind": "talk",
+  "neighborhood": "Lower Haight",
+  "city": "San Francisco",
+  "lat": 37.772127821974955,
+  "lng": -122.42276705742744,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/mm/7cbd28c9-8a04-40b4-b648-3f6f59981e56.png",
+  "found_by": "agent"
+ },
+ {
   "name": "Daytona AI Builders - SF, December 2026",
   "date": "2026-12-08",
   "time": "5:30 PM",
@@ -1804,8 +1853,8 @@
   "place_id": "ChIJk2vl5NSGhYARwPGvs_ubIws",
   "lat": 37.8016649,
   "lng": -122.397348,
-  "image": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6aeb3a5a094e852bcc7fba1e_OYI-og-image.jpg",
-  "venue_status": "no-data"
+  "venue_status": "no-data",
+  "image": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6aeb3a5a094e852bcc7fba1e_OYI-og-image.jpg"
  },
  {
   "name": "OpenOakland - Civic Tech for the Community December Meeting",
