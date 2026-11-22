@@ -1,0 +1,23 @@
+scripts/daily_agent.py
+  s_5223872918bdc2::t_8e34a73892eb54 354
+public/events.json
+  s_5223872918bdc2::t_8e34a73892eb54 211-216,230-239,569-578,657-666,767-772,975-980,1807-1808
+scripts/fetch_events.py
+  s_5223872918bdc2::t_8e34a73892eb54 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "49b70a3ac830f69989515631855e0a100a1f5b80",
+  "prompts": {},
+  "sessions": {
+    "s_5223872918bdc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3804b475-5484-43ec-8ccd-cc9c939c5c25",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "opencolin <colin@lowenberg.org>"
+    }
+  }
+}
