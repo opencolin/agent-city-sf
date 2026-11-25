@@ -15,7 +15,7 @@ python3 scripts/fetch_calendars.py  # adds events from host Luma calendars (Sout
 
 ## Daily agent
 
-`scripts/daily_agent.py` runs every morning at 6 AM Pacific on a Tenki runner (`.github/workflows/daily-agent.yml`) and commits what changed, which redeploys the site. It:
+`scripts/daily_agent.py` runs every morning at 4:20 AM Pacific on a Tenki runner (`.github/workflows/daily-agent.yml`) and commits what changed, which redeploys the site. It:
 
 1. reruns the event fetchers above;
 2. searches the web with [Tavily](https://tavily.com), and X with [AIsa](https://aisa.one), for Bay Area hackathons, demo days and meetups we're missing, and for posts tagged #buildweek, #buildswag and #brunchlife;

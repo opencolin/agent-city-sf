@@ -4,7 +4,7 @@ name: Daily agent
 
 on:
   schedule:
-    - cron: "0 14 * * *"   # 6:00 AM Pacific in winter (7:00 AM in summer)
+    - cron: "20 12 * * *"   # 4:20 AM Pacific in winter (5:20 AM in summer); GitHub cron is UTC
   workflow_dispatch:
     inputs:
       dry_run:
