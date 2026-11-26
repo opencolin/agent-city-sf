@@ -756,6 +756,25 @@
   "image": "https://images.lumacdn.com/uploads/aj/ef82b4eb-e509-452b-a823-7e0474f074ea.png"
  },
  {
+  "name": "Securing AI at Scale",
+  "date": "2026-12-03",
+  "time": "5:30 PM",
+  "location": "Bay Area",
+  "hosts": [
+   "Deepak Belani",
+   "Deepak Goel",
+   "Brian Laing",
+   "Ashwini Vasanth"
+  ],
+  "link": "https://luma.com/6kov6lpk",
+  "source": "Bond AI SF",
+  "score": 0,
+  "kind": "talk",
+  "venue": "1740 Technology Dr (Room: 120-Cranium)",
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/fj/4c5ccea1-1071-459a-9f60-8d1cef7b2a88.jpg"
+ },
+ {
   "name": "From AI Ideas to Impact: Stories, Growth & a Year-End Celebration (w/ The AI Collective)",
   "date": "2026-12-03",
   "time": "6:00 PM",
@@ -1217,27 +1236,6 @@
   "image": "https://images.lumacdn.com/uploads/t8/5b6ad824-a27e-4398-aacd-f97bc9fd1cfa.png"
  },
  {
-  "name": "LangChain Presents: Engineering Persistent Agents at the Exploratorium",
-  "date": "2026-12-08",
-  "time": "6:00 PM",
-  "location": "San Francisco, CA",
-  "hosts": [],
-  "link": "https://www.langchain.com/own-your-intelligence-exploratorium",
-  "source": "Bond AI SF",
-  "score": 0,
-  "kind": "talk",
-  "venue": "Exploratorium",
-  "address": "Exploratorium, Pier 15 Embarcadero at, Green St, San Francisco, CA 94111, USA",
-  "short_address": "Pier 15 Embarcadero at, Green St, San Francisco",
-  "neighborhood": "Embarcadero",
-  "city": "San Francisco",
-  "place_id": "ChIJk2vl5NSGhYARwPGvs_ubIws",
-  "lat": 37.8016649,
-  "lng": -122.397348,
-  "venue_status": "no-data",
-  "image": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6aeb3a5a094e852bcc7fba1e_OYI-og-image.jpg"
- },
- {
   "name": "Level Up Your Phone Agent",
   "date": "2026-12-08",
   "time": "6:00 PM",
@@ -1303,8 +1301,29 @@
   "place_id": "ChIJk2vl5NSGhYARwPGvs_ubIws",
   "lat": 37.8016649,
   "lng": -122.397348,
+  "venue_visibility": "public"
+ },
+ {
+  "name": "Modular Meetup: More Models, More Hardware",
+  "date": "2026-12-08",
+  "time": "6:00 PM",
+  "location": "Los Altos, CA",
+  "hosts": [
+   "Modular"
+  ],
+  "link": "https://luma.com/dec-meetup",
+  "source": "Bond AI SF",
+  "score": 0,
+  "kind": "talk",
+  "venue": "Los Altos",
+  "address": "Los Altos, CA, USA",
+  "short_address": "Los Altos",
+  "city": "Los Altos",
+  "place_id": "ChIJz0bVI-Gwj4AR_KZl1l0YBWU",
+  "lat": 37.3813639,
+  "lng": -122.11425779999999,
   "venue_visibility": "public",
-  "image": "https://images.lumacdn.com/uploads/x5/cd1537ee-e279-42d0-83b1-3007e0d596c7.gif"
+  "image": "https://images.lumacdn.com/uploads/3s/f9d7c1da-e6ac-4528-be36-c1369b86e0dc.png"
  },
  {
   "name": "OpenOakland - Civic Tech for the Community December Meeting",

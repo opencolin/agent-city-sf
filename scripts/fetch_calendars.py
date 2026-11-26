@@ -20,7 +20,7 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "public" / "events.json"
 UA = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
 PT = ZoneInfo("America/Los_Angeles")
 DAYS = 30
-BAY = re.compile(r"San Francisco|Berkeley|Oakland|Palo Alto|Mountain View|Sunnyvale|San Jose|Menlo|Redwood|San Mateo|Stanford|Cupertino|Santa Clara|Burlingame", re.I)
+BAY = re.compile(r"San Francisco|Berkeley|Oakland|Palo Alto|Mountain View|Sunnyvale|San Jose|Menlo|Redwood|San Mateo|Stanford|Cupertino|Santa Clara|Burlingame|Los Altos|Los Gatos|Fremont|Emeryville|Alameda|Saratoga|Milpitas|Foster City|Hayward|Walnut Creek", re.I)
 
 # Luma calendar slug -> the source name used on the site (matches eventhunt's naming where it overlaps).
 CALENDARS = {
@@ -30,6 +30,7 @@ CALENDARS = {
     "accelr8": "Accelr8",
     "cerebras": "Cerebras",  # hosts Cafe Compute
 }
+LOCAL = {"genai-sf"}  # Bay Area-only calendars: trust an in-person event even when its address has no city
 
 
 def get(url):
@@ -45,11 +46,12 @@ def kind_of(name):
     return "talk"
 
 
-def row(entry, source):
+def row(entry, source, local=False):
     ev = entry["event"]
     geo = ev.get("geo_address_info") or {}
     city = geo.get("city") or ""
-    if not BAY.search(" ".join([city, geo.get("full_address") or "", geo.get("city_state") or ""])):
+    where = " ".join([city, geo.get("full_address") or "", geo.get("city_state") or "", geo.get("address") or ""])
+    if not BAY.search(where) and not (local and ev.get("location_type") == "offline"):
         return None
     start = dt.datetime.fromisoformat(ev["start_at"].replace("Z", "+00:00")).astimezone(PT)
     coord = ev.get("coordinate") or geo.get("place_coordinate") or {}
@@ -57,7 +59,7 @@ def row(entry, source):
         "name": ev["name"].strip(),
         "date": start.strftime("%Y-%m-%d"),
         "time": start.strftime("%-I:%M %p"),
-        "location": geo.get("city_state") or (city + ", CA"),
+        "location": geo.get("city_state") or (city + ", CA" if city else "Bay Area"),
         "hosts": [h["name"] for h in entry.get("hosts") or [] if h.get("name")][:4],
         "link": ev["url"] if ev["url"].startswith("http") else "https://luma.com/" + ev["url"],  # some list an outside page
         "source": source,
@@ -158,8 +160,10 @@ def main():
         entries = json.loads(get(f"https://api.lu.ma/calendar/get-items?calendar_api_id={cal}&period=future&pagination_limit=100"))["entries"]
         n = 0
         for entry in entries:
-            r = row(entry, source)
+            r = row(entry, source, slug in LOCAL)
             if not r or r["date"] > until.isoformat():
+                continue
+            if r["link"] not in events and is_dupe(r, events):  # already listed under another link
                 continue
             old = events.get(r["link"], {})
             events[r["link"]] = {**r, "kind": old.get("kind", r["kind"]), "score": old.get("score", 0)}
