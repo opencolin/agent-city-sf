@@ -1,22 +1,29 @@
 {
- "ran_at": "2026-11-26T04:31-08:00",
- "events": 97,
- "added": [],
- "dropped": 15,
+ "ran_at": "2026-11-27T04:31-08:00",
+ "events": 101,
+ "added": [
+  {
+   "name": "Durable Agents Hack Day: Agents That Won’t Quit",
+   "date": "2026-12-11",
+   "link": "https://luma.com/sf-2pgv",
+   "source": "[SF] HackerSquad"
+  }
+ ],
+ "dropped": 6,
  "posts_added": 0,
  "log": [
-  "Build Week agent, Thu Nov 26 2026 4:31 AM PT",
-  "fetch_events.py: 108 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
-  "fetch_calendars.py: 112 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
-  "tavily 'AI hackathon San Francisco November 2026': 15 results, 4 event links",
-  "tavily 'hackathon Bay Area this weekend November 2026': 15 results, 0 event links",
+  "Build Week agent, Fri Nov 27 2026 4:31 AM PT",
+  "fetch_events.py: 101 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
+  "fetch_calendars.py: 106 events -> /home/tenki/actions-runner/_work/agent-city-sf/agent-city-sf/public/events.json",
+  "tavily 'AI hackathon San Francisco November 2026': 15 results, 2 event links",
+  "tavily 'hackathon Bay Area this weekend November 2026': 15 results, 1 event links",
   "tavily 'demo day San Francisco November 2026 startups': 15 results, 2 event links",
-  "tavily 'pitch night San Francisco November 2026': 15 results, 4 event links",
-  "tavily 'AI meetup San Francisco this week November 2026': 15 results, 3 event links",
-  "tavily 'builder events SoMa San Francisco November 2026 luma': 15 results, 8 event links",
-  "tavily 'agents hackathon Palo Alto OR Berkeley OR Oakland November 2026': 15 results, 3 event links",
+  "tavily 'pitch night San Francisco November 2026': 15 results, 3 event links",
+  "tavily 'AI meetup San Francisco this week November 2026': 15 results, 5 event links",
+  "tavily 'builder events SoMa San Francisco November 2026 luma': 15 results, 6 event links",
+  "tavily 'agents hackathon Palo Alto OR Berkeley OR Oakland November 2026': 15 results, 1 event links",
   "tavily '#buildweek San Francisco': 15 results, 0 event links",
-  "tavily 'Cafe Compute San Francisco luma': 15 results, 6 event links",
+  "tavily 'Cafe Compute San Francisco luma': 15 results, 1 event links",
   "tavily 'Cursor Cafe San Francisco': 15 results, 0 event links",
   "tavily 'founder brunch OR builders breakfast San Francisco November 2026': 15 results, 0 event links",
   "aisa '#buildweek': 20 posts, 0 event links",
@@ -24,9 +31,10 @@
   "aisa '#brunchlife (hackathon OR builders OR founders)': 1 posts, 0 event links",
   "aisa '(hackathon OR \"demo day\" OR \"pitch night\") (\"San Francisco\" OR SF) (url:lu.ma OR url:luma.com) -filter:replies': 20 posts, 46 event links",
   "aisa '(\"AI meetup\" OR \"builders dinner\" OR hackathon) \"Bay Area\" (url:lu.ma OR url:luma.com OR url:partiful.com) -filter:replies': 20 posts, 22 event links",
-  "98 event links found, 96 not on the site yet",
+  "89 event links found, 88 not on the site yet",
   "  could not read https://luma.com/pdcbjkq9: HTTP Error 404: Not Found",
-  "  81 Luma links -> 54 Bay Area events; 15 other pages -> 2 events; 54 outside the next 30 days, 2 already listed under another link",
-  "0 events added, 15 past events dropped, 97 on the site; 0 new posts, 0 in social.json"
+  "  77 Luma links -> 57 Bay Area events; 11 other pages -> 1 events; 56 outside the next 30 days, 1 already listed under another link",
+  "  + 2026-12-11 Durable Agents Hack Day: Agents That Won’t Quit (https://luma.com/sf-2pgv)",
+  "1 events added, 6 past events dropped, 101 on the site; 0 new posts, 0 in social.json"
  ]
 }
