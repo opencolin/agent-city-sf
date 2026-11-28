@@ -1,26 +1,5 @@
 [
  {
-  "name": "Accelr8 | Founders Brew",
-  "date": "2026-11-26",
-  "time": "9:30 AM",
-  "location": "San Francisco, CA",
-  "hosts": [
-   "Daniel Morgan",
-   "Pat Santiago",
-   "Victoria"
-  ],
-  "link": "https://luma.com/accelr8-founders-brew",
-  "source": "Accelr8",
-  "score": 0,
-  "kind": "talk",
-  "neighborhood": "Little Saigon",
-  "city": "San Francisco",
-  "lat": 37.78534391518183,
-  "lng": -122.41980449495287,
-  "venue_visibility": "guests-only",
-  "image": "https://images.lumacdn.com/api-uploads/lj/7d4edc3c-394b-4439-8d7f-387372c9332f.png"
- },
- {
   "name": "Build Tools for Good: An Afternoon of Giving Back",
   "date": "2026-11-27",
   "time": "12:30 PM",
@@ -53,6 +32,60 @@
   "lng": -122.40369,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/4/2/2/5/600_521896933.jpeg"
+ },
+ {
+  "name": "Weekly New Founders Meetup: Welcome to SF",
+  "date": "2026-11-28",
+  "time": "11:00 AM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/hxo9z2d3",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "neighborhood": "North Beach",
+  "lat": 37.798236481690054,
+  "lng": -122.40919766389038,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/53/5b61b783-f9d0-4d91-8193-76a560feaba2.jpg"
+ },
+ {
+  "name": "Breaking Models AI Security",
+  "date": "2026-11-28",
+  "time": "2:30 PM",
+  "location": "San Jose, CA",
+  "hosts": [],
+  "link": "https://luma.com/2hzy904w",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "demo",
+  "city": "Santa Clara",
+  "venue": "3200 Patrick Henry Dr suite 260",
+  "address": "3200 Patrick Henry Dr suite 260, Santa Clara, CA 95054, USA",
+  "short_address": "3200 Patrick Henry Dr suite 260, Santa Clara",
+  "place_id": "EjszMjAwIFBhdHJpY2sgSGVucnkgRHIgc3VpdGUgMjYwLCBTYW50YSBDbGFyYSwgQ0EgOTUwNTQsIFVTQSIlGiMKFgoUChIJYQATN7zIj4ARPKHL50NR1MsSCXN1aXRlIDI2MA",
+  "lat": 37.451017,
+  "lng": -121.9210195,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/fk/7ec2bf4f-cd5c-4050-9483-a7559f836a4c.jpg"
+ },
+ {
+  "name": "Padel x AI Founders #2",
+  "date": "2026-11-28",
+  "time": "8:30 AM",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://luma.com/e3iruq4k",
+  "source": "aicollective.com",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "neighborhood": "Central Waterfront",
+  "lat": 37.75698176700569,
+  "lng": -122.38416658068635,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ef/b5523d8d-3158-4d8d-bc89-3ef390888eaf.png"
  },
  {
   "name": "Physical AI Hack",
@@ -315,6 +348,20 @@
   "image": "https://images.lumacdn.com/uploads/aw/2e444af2-fb79-488b-8825-4d8be94b658f.jpg"
  },
  {
+  "name": "Tech Founders & Investors: Pitch & Connect I San Francisco",
+  "date": "2026-12-02",
+  "location": "San Francisco, CA",
+  "hosts": [],
+  "link": "https://eventbrite.com/e/tech-founders-investors-pitch-connect-i-san-francisco-tickets-2004864879825",
+  "source": "eventbrite.com",
+  "score": 0,
+  "kind": "demo",
+  "city": "San Francisco",
+  "venue_visibility": "guests-only",
+  "found_by": "agent",
+  "image": "https://www.eventbrite.com/_next/image?url=https%3A%2F%2Fimg.evbuc.com%2Fhttps%253A%252F%252Fcdn.evbuc.com%252Fimages%252F1192321449%252F3001223644819%252F1%252Foriginal.20260831-224200%3Fw%3D940%26auto%3Dformat%252Ccompress%26q%3D75%26sharp%3D10%26s%3D6086cd64102792c56b8013efaeeb7677&w=940&q=75"
+ },
+ {
   "name": "AI Tech & Startup Night — San Francisco",
   "date": "2026-12-02",
   "time": "3:00 PM",
@@ -444,7 +491,7 @@
   ],
   "link": "https://luma.com/fundorfold",
   "source": "The AI Collective",
-  "score": 100,
+  "score": 50,
   "kind": "demo",
   "neighborhood": "Financial District",
   "city": "San Francisco",
@@ -465,12 +512,55 @@
   "source": "Bond AI SF",
   "score": 0,
   "kind": "talk",
-  "neighborhood": "Mission District",
+  "neighborhood": "Financial District",
   "city": "San Francisco",
-  "lat": 37.761786616867276,
-  "lng": -122.41401265147375,
+  "lat": 37.794161695049326,
+  "lng": -122.39162887396786,
   "venue_visibility": "guests-only",
   "image": "https://images.lumacdn.com/api-uploads/ql/43969902-7865-4705-8b38-da505d83d416.png"
+ },
+ {
+  "name": "Why engineers should bet on healthcare AI in 2027 - What’s changed, what the work is actually like, and how to make the move",
+  "date": "2026-12-02",
+  "time": "5:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Charlotte Fron",
+   "Maria Cecilia Querrer Cabacungan",
+   "Tamir Shklaz",
+   "Sahar Mor (Bond AI)"
+  ],
+  "link": "https://luma.com/b60otn3e",
+  "source": "Bond AI SF",
+  "score": 0,
+  "kind": "talk",
+  "neighborhood": "North Beach",
+  "city": "San Francisco",
+  "lat": 37.796630121982076,
+  "lng": -122.40449233011367,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/6n/4c51dad2-34cd-4c28-8c7c-5294fed31042.png"
+ },
+ {
+  "name": "SF AI Startup Showcase in Dec",
+  "date": "2026-12-02",
+  "time": "6:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Anna Hong",
+   "Lenka Huang"
+  ],
+  "link": "https://luma.com/zome6moq",
+  "source": "B.E.L.L.E Community",
+  "score": 0,
+  "kind": "demo",
+  "neighborhood": "Financial District",
+  "city": "San Francisco",
+  "lat": 37.79048096535911,
+  "lng": -122.39780687351558,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/lc/bd36a7d1-e2e7-4f6d-a217-0b60ea8c0f9f.png",
+  "found_by": "agent"
  },
  {
   "name": "Hardware Fireside Chat @ Flux | Make SF Better with Water, Energy, Waste Treatment, and Infra",
@@ -642,6 +732,32 @@
   "lng": -122.39487608128945,
   "venue_visibility": "guests-only",
   "image": "https://images.lumacdn.com/uploads/hz/4a6ce7b5-ca98-4e97-8ccb-32784e3f7ee7.png"
+ },
+ {
+  "name": "BOTOPIA: Live Finale + Afterparty | Afore x Cognition",
+  "date": "2026-12-03",
+  "time": "5:00 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Yulia U",
+   "Afore Capital",
+   "Alex Starr",
+   "Cognition"
+  ],
+  "link": "https://luma.com/e2wotq5j",
+  "source": "Bond AI SF",
+  "score": 0,
+  "kind": "talk",
+  "venue": "680 2nd St",
+  "address": "680 2nd St, San Francisco, CA 94107, USA",
+  "short_address": "680 2nd St, San Francisco",
+  "neighborhood": "South Beach",
+  "city": "San Francisco",
+  "place_id": "ChIJD9CJCniAhYARmEr6gEuk3Ho",
+  "lat": 37.7806831,
+  "lng": -122.3913735,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/3q/3c57f6d2-96be-4fd9-ab92-e797cbf1d173.png"
  },
  {
   "name": "Agentic tools & evals night with Alpic + Apify",
@@ -904,7 +1020,7 @@
   ],
   "link": "https://luma.com/vc1ingfl",
   "source": "Bond AI SF",
-  "score": 100,
+  "score": 50,
   "kind": "demo",
   "venue": "810 Hamilton St",
   "address": "810 Hamilton St, Redwood City, CA 94063, USA",
@@ -1055,6 +1171,26 @@
   "lng": -122.44946,
   "venue_visibility": "public",
   "image": "https://secure.meetupstatic.com/photos/event/3/3/c/d/600_508573261.jpeg"
+ },
+ {
+  "name": "SPC Post Training Forum: Fireside w/ Harvey CRO, Adam Sadovsky",
+  "date": "2026-12-08",
+  "time": "2:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "South Park Commons",
+   "Nick Mecklenburg"
+  ],
+  "link": "https://luma.com/spc-post-training-harvey",
+  "source": "South Park Commons",
+  "score": 0,
+  "kind": "talk",
+  "neighborhood": "South Beach",
+  "city": "San Francisco",
+  "lat": 37.780202746925774,
+  "lng": -122.39560020468342,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/ai/d2df8577-f5c1-4ea6-a2dc-9d0179ab613f.png"
  },
  {
   "name": "Agentic AI Year in Review",
@@ -1378,7 +1514,7 @@
   ],
   "link": "https://luma.com/dec9thaixbiopitch",
   "source": "Bond AI SF",
-  "score": 54,
+  "score": 100,
   "kind": "demo",
   "venue": "AWS Builder Loft",
   "address": "AWS Builder Loft, 525 Market St, Courtyard Entrance, 525 Market St, San Francisco, CA 94105, USA",
@@ -1407,6 +1543,25 @@
   "lng": -122.40211984116411,
   "venue_visibility": "guests-only",
   "image": "https://images.lumacdn.com/uploads/4w/4fc2916e-67c3-41ba-8ad3-81167fd867f8.jpg"
+ },
+ {
+  "name": "Founders Dinner Club: San Francisco Chapter Launch!!",
+  "date": "2026-12-09",
+  "time": "6:15 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Jacklyn"
+  ],
+  "link": "https://luma.com/khi4l4mn",
+  "source": "Personal",
+  "score": 0,
+  "kind": "talk",
+  "city": "San Francisco",
+  "lat": 37.77365818254963,
+  "lng": -122.42151534929182,
+  "venue_visibility": "guests-only",
+  "image": "https://images.lumacdn.com/uploads/x3/de69be3b-2c7e-46b2-8b91-3b7f5c11eedb.png",
+  "found_by": "agent"
  },
  {
   "name": "December 9th SF Python @ Sentry",
@@ -1477,6 +1632,29 @@
   "image": "https://secure.meetupstatic.com/photos/event/c/f/8/2/600_537293122.jpeg"
  },
  {
+  "name": "Nordic Capitalism: Lessons for Silicon Valley and Beyond",
+  "date": "2026-12-10",
+  "time": "12:00 PM",
+  "location": "Palo Alto, CA",
+  "hosts": [
+   "Nordic Innovation House"
+  ],
+  "link": "https://luma.com/2kl3afj2",
+  "source": "Nordic Innovation House",
+  "score": 100,
+  "kind": "talk",
+  "venue": "Nordic Innovation House",
+  "address": "Nordic Innovation House, 470 Ramona St, Palo Alto, CA 94301, USA",
+  "short_address": "470 Ramona St, Palo Alto",
+  "neighborhood": "Downtown North",
+  "city": "Palo Alto",
+  "place_id": "ChIJ5cmj3Tm7j4ARPEQiMmNSEF8",
+  "lat": 37.445501,
+  "lng": -122.1627618,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/uploads/cz/5ee2d4ae-cb5a-4953-b944-eb607ac0f98f.png"
+ },
+ {
   "name": "Agent37: Agent Builder Demo Night",
   "date": "2026-12-10",
   "time": "5:00 PM",
@@ -1511,7 +1689,7 @@
   ],
   "link": "https://luma.com/hv2l9g51",
   "source": "Bond AI SF",
-  "score": 0,
+  "score": 100,
   "kind": "talk",
   "city": "Menlo Park",
   "lat": 37.48186238578523,
@@ -1527,7 +1705,7 @@
   "hosts": [],
   "link": "https://luma.com/web-data-startups-search-dec10-2026",
   "source": "[SF] HackerSquad",
-  "score": 50,
+  "score": 100,
   "kind": "demo",
   "venue": "625 2nd St",
   "address": "625 2nd St, San Francisco, CA 94107, USA",
@@ -1610,6 +1788,31 @@
   "image": "https://secure.meetupstatic.com/photos/event/4/6/2/0/600_533177952.jpeg"
  },
  {
+  "name": "Supabase Builder Day: San Francisco",
+  "date": "2026-12-10",
+  "time": "5:30 PM",
+  "location": "San Francisco, CA",
+  "hosts": [
+   "Tomas Pozo",
+   "Founders Cafe"
+  ],
+  "link": "https://luma.com/supabase-builder-day-san-francisco",
+  "source": "Supabase Community Events",
+  "score": 0,
+  "kind": "talk",
+  "venue": "90 Gold St",
+  "address": "90 Gold St, San Francisco, CA 94111, USA",
+  "short_address": "90 Gold St, San Francisco",
+  "neighborhood": "North Beach",
+  "city": "San Francisco",
+  "place_id": "ChIJKVbyOvWAhYARi1y39HjZsI0",
+  "lat": 37.7967619,
+  "lng": -122.4034015,
+  "venue_visibility": "public",
+  "image": "https://images.lumacdn.com/api-uploads/o8/7ca56947-8ef4-47b6-bec5-cb3c73c4fd7f.png",
+  "found_by": "agent"
+ },
+ {
   "name": "140th SF Hardware Meetup | Holiday Party @ Studio 45",
   "date": "2026-12-10",
   "time": "6:30 PM",
@@ -1661,7 +1864,7 @@
   ],
   "link": "https://luma.com/bakeoff",
   "source": "Theory Ventures",
-  "score": 0,
+  "score": 100,
   "kind": "hackathon",
   "neighborhood": "SoMa",
   "city": "San Francisco",
@@ -1941,7 +2144,8 @@
   "hosts": [
    "Finch ai",
    "Xiao",
-   "Glasser"
+   "Glasser",
+   "Lenka Huang"
   ],
   "link": "https://luma.com/finch-yeg0",
   "source": "Bond AI SF",
